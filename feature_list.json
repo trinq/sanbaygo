@@ -17,9 +17,9 @@
       "area": "infrastructure",
       "title": "TypeScript types for data model",
       "user_visible_behavior": "All TypeScript interfaces defined for Airport, Terminal, BusRoute, etc.",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Import types in components\n2. Verify no 'any' types needed\n3. TypeScript check passes",
-      "evidence": "",
+      "evidence": "Commit 2a62641 - created types/index.ts with all interfaces, tsc --noEmit passed",
       "notes": "Part of Task 2 in implementation plan"
     },
     {
@@ -28,9 +28,9 @@
       "area": "data",
       "title": "Static data for Noi Bai Airport and Bus 86",
       "user_visible_behavior": "Data files contain correct schedule (26 departures), exit times, destinations",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Check busSchedule.ts has 26 departures\n2. Check exitTimeEstimates.ts has all combinations\n3. Check destinations.ts has all 6 destinations",
-      "evidence": "",
+      "evidence": "Commit 2a62641 - data files created with all required static data",
       "notes": "Part of Task 3 in implementation plan"
     },
     {
@@ -39,9 +39,9 @@
       "area": "infrastructure",
       "title": "Time utility functions",
       "user_visible_behavior": "Functions for parsing/formatting time, adding minutes, comparing times",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Run time utility tests\n2. Verify all edge cases handled",
-      "evidence": "",
+      "evidence": "Commit 2a62641 - utils/time.ts with 8 functions, 32 tests passing",
       "notes": "Part of Task 4 in implementation plan"
     },
     {
@@ -50,9 +50,9 @@
       "area": "business-logic",
       "title": "Calculation engine with pure functions",
       "user_visible_behavior": "calculateExitTime, isPeakHour, findNextCatchableTrip, calculateArrivalEstimate work correctly",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Run `npm test -- --testPathPattern=calculation-engine`\n2. All tests pass\n3. Cover peak/off-peak, miss bus, no service cases",
-      "evidence": "",
+      "evidence": "Commit ea866dc - 35 tests pass, 4 pure functions, TypeScript compiles without errors",
       "notes": "Part of Task 5 in implementation plan - highest test priority per SPEC"
     },
     {
@@ -105,9 +105,9 @@
       "area": "business-logic",
       "title": "Peak hour detection (7-9 AM, 5-7 PM)",
       "user_visible_behavior": "System shows 'giờ cao điểm' warning and longer travel times",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Test with arrival at 08:00 → should show peak\n2. Test with arrival at 10:00 → should NOT show peak\n3. Test with arrival at 18:00 → should show peak\n4. Test with arrival at 20:00 → should NOT show peak",
-      "evidence": "",
+      "evidence": "Covered by isPeakHour tests in calculation-engine (15 tests for peak hour detection)",
       "notes": "Covered by calculation-engine feature tests"
     },
     {
@@ -116,9 +116,9 @@
       "area": "business-logic",
       "title": "Edge case handling",
       "user_visible_behavior": "System handles: no service, too late, missed last bus, international flights",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Test arrival at 05:00 → shows 'no_service'\n2. Test arrival at 23:00 → shows 'too_late'\n3. Test arrival at 21:45 → shows 'missed_last'\n4. Test T2 international → adds immigration time",
-      "evidence": "",
+      "evidence": "Covered by findNextCatchableTrip and calculateExitTime tests (10 edge case tests)",
       "notes": "Covered by calculation-engine feature tests"
     }
   ]
