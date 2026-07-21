@@ -62,28 +62,18 @@ export function calculateExitTime(
 }
 
 // Arrival estimate calculation
-const PEAK_SURCHARGE_MIN = 30;
+// Note: We don't add peak surcharge here because travelTime.peak
+// already accounts for peak hour delays (it's normal + 30 min)
 
 export function calculateArrivalEstimate(
   departureTime: string,
   travelTime: { min: number; max: number },
-  isPeak: boolean
+  _isPeak: boolean
 ): TimeRange {
-  let adjustedTravelTime: { min: number; max: number };
-  
-  if (isPeak) {
-    adjustedTravelTime = {
-      min: travelTime.min + PEAK_SURCHARGE_MIN,
-      max: travelTime.max + PEAK_SURCHARGE_MIN,
-    };
-  } else {
-    adjustedTravelTime = travelTime;
-  }
-  
   return {
-    early: addMinutes(departureTime, adjustedTravelTime.min),
-    late: addMinutes(departureTime, adjustedTravelTime.max),
-    minutesRange: adjustedTravelTime,
+    early: addMinutes(departureTime, travelTime.min),
+    late: addMinutes(departureTime, travelTime.max),
+    minutesRange: travelTime,
   };
 }
 
