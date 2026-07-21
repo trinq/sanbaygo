@@ -7,9 +7,10 @@ export const DESTINATIONS: DestinationPoint[] = [
     nearestBusStop: 'Đại lộ Thăng Long',
     walkingMinutes: 5,
     hasBusCoverage: true,
+    // Real-world from 162 Tran Quang Khai (end of Route 86)
     travelTime: {
-      normal: { min: 60, max: 90 },
-      peak: { min: 90, max: 120 },
+      normal: { min: 50, max: 55 },
+      peak: { min: 65, max: 75 },
     },
   },
   {
@@ -19,8 +20,8 @@ export const DESTINATIONS: DestinationPoint[] = [
     walkingMinutes: 5,
     hasBusCoverage: true,
     travelTime: {
-      normal: { min: 55, max: 85 },
-      peak: { min: 85, max: 115 },
+      normal: { min: 50, max: 55 },
+      peak: { min: 65, max: 75 },
     },
   },
   {
@@ -30,8 +31,8 @@ export const DESTINATIONS: DestinationPoint[] = [
     walkingMinutes: 5,
     hasBusCoverage: true,
     travelTime: {
-      normal: { min: 50, max: 75 },
-      peak: { min: 75, max: 105 },
+      normal: { min: 45, max: 50 },
+      peak: { min: 60, max: 70 },
     },
   },
   {
@@ -41,8 +42,8 @@ export const DESTINATIONS: DestinationPoint[] = [
     walkingMinutes: 5,
     hasBusCoverage: true,
     travelTime: {
-      normal: { min: 65, max: 95 },
-      peak: { min: 95, max: 125 },
+      normal: { min: 50, max: 55 },
+      peak: { min: 65, max: 75 },
     },
   },
   {
@@ -52,8 +53,8 @@ export const DESTINATIONS: DestinationPoint[] = [
     walkingMinutes: 5,
     hasBusCoverage: true,
     travelTime: {
-      normal: { min: 40, max: 60 },
-      peak: { min: 60, max: 90 },
+      normal: { min: 40, max: 45 },
+      peak: { min: 55, max: 65 },
     },
   },
   {
@@ -63,8 +64,8 @@ export const DESTINATIONS: DestinationPoint[] = [
     walkingMinutes: 5,
     hasBusCoverage: false,
     travelTime: {
-      normal: { min: 60, max: 90 },
-      peak: { min: 90, max: 120 },
+      normal: { min: 50, max: 55 },
+      peak: { min: 65, max: 75 },
     },
   },
 ];

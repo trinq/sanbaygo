@@ -16,9 +16,13 @@ export const BUS_86: BusRoute = {
   schedule: BUS_86_SCHEDULE,
   ticketPrice: 35000,
   operatingHours: { start: '06:40', end: '22:15' },
+  // Real-world travel time from Noi Bai to central Hanoi
+  // Source: user research (2026-07-21)
+  // Peak hours (7-9 AM, 5-7 PM): 65-75 min due to traffic on Vo Nguyen Giap + Nhat Tan bridge
+  // Normal hours: 50-55 min
   travelTime: {
-    normal: { min: 60, max: 90 },
-    peak: { min: 90, max: 120 },
+    normal: { min: 50, max: 55 },
+    peak: { min: 65, max: 75 },
   },
 };
 
@@ -29,9 +33,10 @@ export const DESTINATIONS: DestinationPoint[] = [
     nearestBusStop: 'Đại lộ Thăng Long',
     walkingMinutes: 5,
     hasBusCoverage: true,
+    // Approximate from 162 Tran Quang Khai (end of Route 86)
     travelTime: {
-      normal: { min: 60, max: 90 },
-      peak: { min: 90, max: 120 },
+      normal: { min: 50, max: 55 },
+      peak: { min: 65, max: 75 },
     },
   },
   {
@@ -40,9 +45,10 @@ export const DESTINATIONS: DestinationPoint[] = [
     nearestBusStop: 'Đại lộ Thăng Long',
     walkingMinutes: 5,
     hasBusCoverage: true,
+    // Similar to old quarter
     travelTime: {
-      normal: { min: 55, max: 85 },
-      peak: { min: 85, max: 115 },
+      normal: { min: 50, max: 55 },
+      peak: { min: 65, max: 75 },
     },
   },
   {
@@ -51,9 +57,10 @@ export const DESTINATIONS: DestinationPoint[] = [
     nearestBusStop: 'Đại lộ Thăng Long',
     walkingMinutes: 5,
     hasBusCoverage: true,
+    // Slightly closer to airport
     travelTime: {
-      normal: { min: 50, max: 75 },
-      peak: { min: 75, max: 105 },
+      normal: { min: 45, max: 50 },
+      peak: { min: 60, max: 70 },
     },
   },
   {
@@ -62,9 +69,10 @@ export const DESTINATIONS: DestinationPoint[] = [
     nearestBusStop: 'Đại lộ Thăng Long',
     walkingMinutes: 5,
     hasBusCoverage: true,
+    // Near old quarter
     travelTime: {
-      normal: { min: 65, max: 95 },
-      peak: { min: 95, max: 125 },
+      normal: { min: 50, max: 55 },
+      peak: { min: 65, max: 75 },
     },
   },
   {
@@ -73,9 +81,10 @@ export const DESTINATIONS: DestinationPoint[] = [
     nearestBusStop: 'Đại lộ Thăng Long',
     walkingMinutes: 5,
     hasBusCoverage: true,
+    // Closer to airport
     travelTime: {
-      normal: { min: 40, max: 60 },
-      peak: { min: 60, max: 90 },
+      normal: { min: 40, max: 45 },
+      peak: { min: 55, max: 65 },
     },
   },
 ];

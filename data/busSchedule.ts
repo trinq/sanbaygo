@@ -13,8 +13,12 @@ export const BUS_86: BusRoute = {
   schedule: BUS_86_SCHEDULE,
   ticketPrice: 35000, // VND
   operatingHours: { start: '06:40', end: '22:15' },
+  // Real-world travel time from Noi Bai to central Hanoi
+  // Source: user research (2026-07-21)
+  // Peak hours (7-9 AM, 5-7 PM): 65-75 min due to traffic on Vo Nguyen Giap + Nhat Tan bridge
+  // Normal hours: 50-55 min
   travelTime: {
-    normal: { min: 60, max: 90 },
-    peak: { min: 90, max: 120 },
+    normal: { min: 50, max: 55 },
+    peak: { min: 65, max: 75 },
   },
 };
