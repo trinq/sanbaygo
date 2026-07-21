@@ -10,7 +10,11 @@
 
 **All features:** COMPLETED
 
-**Current status:** MVP complete - all 10 tasks finished, pushed to GitHub
+**Current status:** MVP complete + bug fixes pushed to GitHub
+
+**Recent fixes:**
+- Fixed ResultDisplay wiring (was using stub file instead of index.tsx)
+- Fixed double peak surcharge bug (travelTime.peak was getting +30min surcharge on top)
 
 ---
 
