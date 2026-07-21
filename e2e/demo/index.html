@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SanBayGo - Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1E3A5F; }
+    
+    .container { max-width: 480px; margin: 0 auto; padding: 20px; min-height: 100vh; }
+    
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .header p { color: #6B7C8F; }
+    
+    .progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; }
+    .progress-dot { width: 8px; height: 8px; border-radius: 4px; background: #E8EEF4; }
+    .progress-dot.active { background: #1E3A5F; width: 24px; }
+    
+    .step-title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+    .step-subtitle { font-size: 16px; color: #6B7C8F; margin-bottom: 24px; }
+    
+    .time-picker { text-align: center; margin-bottom: 24px; }
+    .time-display { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .time-btn { width: 48px; height: 48px; border-radius: 50%; background: #E8EEF4; border: none; font-size: 24px; cursor: pointer; }
+    .time-btn:hover { background: #d0dbe5; }
+    .time-value { font-size: 32px; font-weight: 700; background: #1E3A5F; color: #fff; padding: 16px 32px; border-radius: 12px; }
+    
+    .options { display: flex; gap: 12px; margin-bottom: 24px; }
+    .option { flex: 1; padding: 20px; border-radius: 12px; background: #F5F7FA; border: 2px solid transparent; cursor: pointer; text-align: center; }
+    .option.selected { background: #E8F4F8; border-color: #1E3A5F; }
+    .option-title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+    .option-subtitle { font-size: 14px; color: #6B7C8F; }
+    
+    .destinations { display: flex; flex-direction: column; gap: 12px; }
+    .destination { padding: 16px; border-radius: 12px; background: #F5F7FA; border: 2px solid transparent; cursor: pointer; }
+    .destination.selected { background: #E8F4F8; border-color: #1E3A5F; }
+    .destination-name { font-weight: 600; margin-bottom: 4px; }
+    .destination-time { font-size: 14px; color: #6B7C8F; }
+    
+    .nav { display: flex; gap: 12px; margin-top: auto; padding-top: 24px; border-top: 1px solid #E8EEF4; }
+    .btn { padding: 16px 24px; border-radius: 12px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; }
+    .btn-back { background: transparent; color: #6B7C8F; }
+    .btn-next { flex: 1; background: #1E3A5F; color: #fff; }
+    .btn-next:disabled { background: #E8EEF4; color: #6B7C8F; cursor: not-allowed; }
+    
+    .result { margin-bottom: 24px; }
+    .result-card { padding: 20px; border-radius: 12px; margin-bottom: 16px; }
+    .result-card.bus { background: #E8F4F8; border-left: 4px solid #1E3A5F; }
+    .result-card.grab { background: #FFF9E6; border-left: 4px solid #F5A623; }
+    .result-card.direction { background: #F0F7F4; border-left: 4px solid #34C759; }
+    .result-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .result-content { color: #6B7C8F; font-size: 14px; line-height: 1.5; }
+    .result-highlight { font-weight: 600; color: #1E3A5F; }
+    
+    .peak-badge { background: #FFEBEE; color: #D32F2F; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🚌 SanBayGo</h1>
+      <p>Bus 86 vs Grab - Đến Hà Nội thế nào?</p>
+    </div>
+    
+    <div id="form-view">
+      <div class="progress">
+        <div class="progress-dot active" data-step="0"></div>
+        <div class="progress-dot" data-step="1"></div>
+        <div class="progress-dot" data-step="2"></div>
+        <div class="progress-dot" data-step="3"></div>
+      </div>
+      
+      <!-- Step 1: Time -->
+      <div id="step-0" class="step">
+        <div class="step-title">Giờ đáp</div>
+        <div class="step-subtitle">Máy bay đáp lúc mấy giờ?</div>
+        <div class="time-picker">
+          <div class="time-display">
+            <button class="time-btn" onclick="adjustTime(-15)">-</button>
+            <div class="time-value" id="time-value">12:00</div>
+            <button class="time-btn" onclick="adjustTime(15)">+</button>
+          </div>
+          <p style="color: #6B7C8F; font-size: 14px;">Điều chỉnh giờ đáp máy bay của bạn</p>
+        </div>
+      </div>
+      
+      <!-- Step 2: Terminal -->
+      <div id="step-1" class="step hidden">
+        <div class="step-title">Nhà ga</div>
+        <div class="step-subtitle">Bạn đáp ở nhà ga nào?</div>
+        <div class="options">
+          <div class="option" data-value="T1" onclick="selectTerminal('T1')">
+            <div class="option-title">T1</div>
+            <div class="option-subtitle">Chuyến bay nội địa</div>
+          </div>
+          <div class="option" data-value="T2" onclick="selectTerminal('T2')">
+            <div class="option-title">T2</div>
+            <div class="option-subtitle">Chuyến bay quốc tế</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Step 3: Baggage -->
+      <div id="step-2" class="step hidden">
+        <div class="step-title">Hành lý</div>
+        <div class="step-subtitle">Bạn mang loại hành lý gì?</div>
+        <div class="options">
+          <div class="option" data-value="carry_on" onclick="selectBaggage('carry_on')">
+            <div class="option-title">🧳</div>
+            <div class="option-subtitle">Xách tay</div>
+          </div>
+          <div class="option" data-value="checked" onclick="selectBaggage('checked')">
+            <div class="option-title">🛒</div>
+            <div class="option-subtitle">Ký gửi</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Step 4: Destination -->
+      <div id="step-3" class="step hidden">
+        <div class="step-title">Điểm đến</div>
+        <div class="step-subtitle">Bạn muốn đi đâu?</div>
+        <div class="destinations">
+          <div class="destination" data-value="old-quarter" onclick="selectDestination('old-quarter')">
+            <div class="destination-name">🏛️ Khu phố cổ Hà Nội</div>
+            <div class="destination-time">~60-70 phút</div>
+          </div>
+          <div class="destination" data-value="hoan-kiem" onclick="selectDestination('hoan-kiem')">
+            <div class="destination-name">🏛️ Quận Hoàn Kiếm</div>
+            <div class="destination-time">~55-65 phút</div>
+          </div>
+          <div class="destination" data-value="dong-da" onclick="selectDestination('dong-da')">
+            <div class="destination-name">📚 Quận Đống Đa</div>
+            <div class="destination-time">~50-60 phút</div>
+          </div>
+          <div class="destination" data-value="ba-dinh" onclick="selectDestination('ba-dinh')">
+            <div class="destination-name">🏛️ Quận Ba Đình</div>
+            <div class="destination-time">~45-55 phút</div>
+          </div>
+          <div class="destination" data-value="cau-giay" onclick="selectDestination('cau-giay')">
+            <div class="destination-name">🏢 Quận Cầu Giấy</div>
+            <div class="destination-time">~35-45 phút</div>
+          </div>
+          <div class="destination" data-value="other" onclick="selectDestination('other')">
+            <div class="destination-name">📍 Điểm khác</div>
+            <div class="destination-time">Tùy vị trí</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="nav">
+        <button class="btn btn-back hidden" id="back-btn" onclick="goBack()">← Quay lại</button>
+        <button class="btn btn-next" id="next-btn" onclick="goNext()" disabled>Tiếp tục →</button>
+      </div>
+    </div>
+    
+    <div id="result-view" class="hidden">
+      <div class="step-title">Kết quả</div>
+      <div class="step-subtitle">Dựa trên thông tin bạn cung cấp</div>
+      
+      <div id="result-content"></div>
+      
+      <div class="nav">
+        <button class="btn btn-back" onclick="showForm()">← Sửa lại</button>
+        <button class="btn btn-next" onclick="recalculate()">Tính lại</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // State
+    let currentStep = 0;
+    let formData = {
+      time: '12:00',
+      terminal: null,
+      baggage: null,
+      destination: null
+    };
+    
+    // Time utilities
+    function adjustTime(delta) {
+      const [h, m] = formData.time.split(':').map(Number);
+      const total = h * 60 + m + delta;
+      const newH = Math.floor(((total % 1440) + 1440) % 1440 / 60);
+      const newM = ((total % 1440) + 1440) % 60 % 60;
+      formData.time = `${String(newH).padStart(2, '0')}:${String(newM).padStart(2, '0')}`;
+      document.getElementById('time-value').textContent = formData.time;
+    }
+    
+    function selectTerminal(value) {
+      formData.terminal = value;
+      document.querySelectorAll('#step-1 .option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.value === value);
+      });
+      updateNextBtn();
+    }
+    
+    function selectBaggage(value) {
+      formData.baggage = value;
+      document.querySelectorAll('#step-2 .option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.value === value);
+      });
+      updateNextBtn();
+    }
+    
+    function selectDestination(value) {
+      formData.destination = value;
+      document.querySelectorAll('.destination').forEach(el => {
+        el.classList.toggle('selected', el.dataset.value === value);
+      });
+      updateNextBtn();
+    }
+    
+    function updateNextBtn() {
+      let canProceed = false;
+      switch(currentStep) {
+        case 0: canProceed = true; break;
+        case 1: canProceed = !!formData.terminal; break;
+        case 2: canProceed = !!formData.baggage; break;
+        case 3: canProceed = !!formData.destination; break;
+      }
+      document.getElementById('next-btn').disabled = !canProceed;
+    }
+    
+    function updateProgress() {
+      document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i <= currentStep);
+      });
+    }
+    
+    function showStep(step) {
+      document.querySelectorAll('.step').forEach((el, i) => {
+        el.classList.toggle('hidden', i !== step);
+      });
+      document.getElementById('back-btn').classList.toggle('hidden', step === 0);
+      document.getElementById('next-btn').textContent = step === 3 ? 'Xem kết quả →' : 'Tiếp tục →';
+      updateProgress();
+    }
+    
+    function goNext() {
+      if (currentStep < 3) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        showResults();
+      }
+    }
+    
+    function goBack() {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+    
+    function isPeakHour(time) {
+      const h = parseInt(time.split(':')[0]);
+      return (h >= 7 && h < 9) || (h >= 17 && h < 19);
+    }
+    
+    function calculateResults() {
+      const peak = isPeakHour(formData.time);
+      const exitTime = formData.terminal === 'T2' ? 45 : 30;
+      const baseTravel = {
+        'old-quarter': 60, 'hoan-kiem': 55, 'dong-da': 50,
+        'ba-dinh': 45, 'cau-giay': 40, 'other': 50
+      };
+      const travel = (baseTravel[formData.destination] || 50) + (peak ? 30 : 0);
+      const busArrival = exitTime + travel + 5;
+      const grabTravel = travel + 10;
+      
+      return { peak, exitTime, travel, busArrival, grabTravel };
+    }
+    
+    function showResults() {
+      const { peak, exitTime, travel, busArrival, grabTravel } = calculateResults();
+      const destNames = {
+        'old-quarter': 'Khu phố cổ Hà Nội', 'hoan-kiem': 'Quận Hoàn Kiếm',
+        'dong-da': 'Quận Đống Đa', 'ba-dinh': 'Quận Ba Đình',
+        'cau-giay': 'Quận Cầu Giấy', 'other': 'điểm đến của bạn'
+      };
+      
+      document.getElementById('form-view').classList.add('hidden');
+      document.getElementById('result-view').classList.remove('hidden');
+      
+      document.getElementById('result-content').innerHTML = `
+        <div class="result-card bus">
+          <div class="result-title">
+            🚌 Xe buýt 86 <span class="${peak ? 'peak-badge' : ''}">${peak ? 'Giờ cao điểm' : ''}</span>
+          </div>
+          <div class="result-content">
+            <p><span class="result-highlight">Khuyến nghị</span></p>
+            <p>⏱️ Ra khỏi cổng: khoảng <strong>${exitTime} phút</strong> sau khi hạ cánh</p>
+            <p>🚌 Đến ${destNames[formData.destination]}: khoảng <strong>${busArrival}-${busArrival + 10} phút</strong></p>
+            <p>💰 Giá vé: <strong>35.000₫</strong></p>
+            <p style="margin-top: 8px; color: #34C759;">✅ Tiết kiệm nhất - Nhanh hơn Grab ${peak ? '30' : '15'} phút trong giờ cao điểm</p>
+          </div>
+        </div>
+        
+        <div class="result-card grab">
+          <div class="result-title">🚗 Grab (tham khảo)</div>
+          <div class="result-content">
+            <p>⏱️ Thời gian: khoảng <strong>${grabTravel}-${grabTravel + 15} phút</strong></p>
+            <p>💰 Giá ước tính: <strong>250.000₫ - 350.000₫</strong></p>
+            <p>⚠️ Cộng thêm phí sân bay <strong>35.000₫</strong></p>
+            ${peak ? '<p style="color: #D32F2F; margin-top: 8px;">⚠️ Giờ cao điểm - Thời gian có thể dài hơn</p>' : ''}
+          </div>
+        </div>
+        
+        <div class="result-card direction">
+          <div class="result-title">🗺️ Chỉ dẫn</div>
+          <div class="result-content">
+            <p>Từ <strong>bến xe buýt 86</strong> đến ${destNames[formData.destination]}:</p>
+            <p>📍 Đi bộ khoảng <strong>5-10 phút</strong> từ cổng ra bến xe</p>
+            <p>🚌 Bắt xe buýt 86 tại <strong>cổng A (T1)</strong> hoặc <strong>cổng C (T2)</strong></p>
+          </div>
+        </div>
+      `;
+    }
+    
+    function showForm() {
+      document.getElementById('result-view').classList.add('hidden');
+      document.getElementById('form-view').classList.remove('hidden');
+    }
+    
+    function recalculate() {
+      currentStep = 0;
+      formData = { time: '12:00', terminal: null, baggage: null, destination: null };
+      document.getElementById('time-value').textContent = '12:00';
+      document.querySelectorAll('.option, .destination').forEach(el => el.classList.remove('selected'));
+      updateNextBtn();
+      showForm();
+      showStep(0);
+    }
+    
+    // Init
+    updateNextBtn();
+    updateProgress();
+  </script>
+</body>
+</html>
