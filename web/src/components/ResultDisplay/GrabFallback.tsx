@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { TimeRange } from '../../types';
 import styles from './GrabFallback.module.css';

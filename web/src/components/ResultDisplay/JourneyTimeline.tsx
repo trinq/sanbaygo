@@ -1,7 +1,6 @@
-import React from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ArrivalResult, ArrivalFormData } from '../../types';
-import { calculateExitTime, isPeakHour } from '../../lib/calculation-engine';
+import { calculateExitTime } from '../../lib/calculation-engine';
 import { NOI_BAI_AIRPORT } from '../../lib/data';
 import styles from './JourneyTimeline.module.css';
 
@@ -22,8 +21,7 @@ export function JourneyTimeline({ result, formData }: JourneyTimelineProps) {
 
   // Calculate timeline points
   const arrivalMinutes = timeToMinutes(formData.arrivalTime);
-  const exitMinutes = arrivalMinutes + exitTime.max + 5; // +5 for walking
-  const departureMinutes = timeToMinutes(result.bus.trip.departureTime);
+  const exitMinutes = arrivalMinutes + exitTime.maxMinutes + 5; // +5 for walking
 
   return (
     <div className={styles.container}>
