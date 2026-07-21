@@ -90,3 +90,77 @@ export interface FormData {
   baggage: Baggage;
   destination: Destination;
 }
+
+// ============================================
+// Vehicle Comparison Types
+// ============================================
+
+export type TransportType = 'bus' | 'motorbike' | 'car';
+export type SortOption = 'recommended' | 'cheapest' | 'fastest';
+
+export interface TransportOption {
+  id: string;
+  name: string;
+  nameVi: string;
+  type: TransportType;
+  basePrice: number;
+  priceUnit: 'per_trip' | 'per_person';
+  travelTime: {
+    normal: { min: number; max: number };
+    peak: { min: number; max: number };
+  };
+  luggageScore: number; // 1-5
+  comfortScore: number; // 1-5
+  ecoFriendly: boolean;
+  isRecommended: boolean;
+  notes: string;
+}
+
+export interface TransportComparison {
+  id: string;
+  name: string;
+  nameVi: string;
+  type: TransportType;
+  price: {
+    estimate: string;
+    value: number;
+    isEstimate: boolean;
+  };
+  travelTime: {
+    estimate: string;
+    minutesRange: { min: number; max: number };
+    arrivalEstimate: string;
+  };
+  waitTime?: {
+    minutes: number;
+    nextDeparture: string;
+  };
+  luggage: {
+    score: number;
+    label: string;
+  };
+  comfort: {
+    score: number;
+    label: string;
+  };
+  ecoFriendly: boolean;
+  notes: string;
+  isRecommended: boolean;
+}
+
+export interface TripCalculationRequest {
+  arrivalTime: string;
+  terminalId: 'T1' | 'T2';
+  baggageType: 'carry_on' | 'checked';
+  destinationId: string;
+  sortBy: SortOption;
+}
+
+export interface TripCalculationResponse {
+  comparison: TransportComparison[];
+  metadata: {
+    arrivalTime: string;
+    readyAt: string;
+    isPeakHour: boolean;
+  };
+}
