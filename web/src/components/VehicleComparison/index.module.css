@@ -1,0 +1,47 @@
+.container {
+  padding: 16px 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.peakBadge {
+  font-size: 12px;
+  padding: 4px 10px;
+  background: #FFF3E0;
+  color: #E65100;
+  border-radius: 8px;
+}
+
+.grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 16px 0;
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.grid::-webkit-scrollbar {
+  display: none;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,132 @@
+.card {
+  flex: 0 0 280px;
+  padding: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  position: relative;
+}
+
+.card.recommended {
+  border-color: var(--color-primary);
+  border-width: 2px;
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  padding: 4px 12px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.icon {
+  font-size: 32px;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameText {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nameEn {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.priceValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.estimateTag {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: var(--color-warning);
+  color: white;
+  border-radius: 4px;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  color: var(--color-text-secondary);
+}
+
+.wait, .arrival {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.waitLabel, .arrivalLabel {
+  color: var(--color-text-secondary);
+}
+
+.ratings {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ratingLabel {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.ratingBadge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.score5, .score4 { background: #E8F5E9; color: #2E7D32; }
+.score3 { background: #FFF3E0; color: #EF6C00; }
+.score2, .score1 { background: #FFEBEE; color: #C62828; }
+
+.eco {
+  font-size: 12px;
+  color: #2E7D32;
+  margin-bottom: 8px;
+}
+
+.notes {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
