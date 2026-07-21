@@ -4,6 +4,7 @@ import { isPeakHour } from '../../lib/calculation-engine';
 import { JourneyTimeline } from './JourneyTimeline';
 import { BusRecommendation } from './BusRecommendation';
 import { GrabFallback } from './GrabFallback';
+import { VehicleComparison } from '../VehicleComparison';
 import styles from './index.module.css';
 
 interface ResultDisplayProps {
@@ -49,6 +50,15 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
       <GrabFallback
         priceEstimate={result.grab.priceEstimate}
         travelTime={result.grab.travelTime}
+      />
+
+      <VehicleComparison
+        formData={{
+          arrivalTime: formData.arrivalTime,
+          terminalId: formData.terminal as 'T1' | 'T2',
+          baggageType: formData.baggage ?? 'carry_on',
+          destinationId: formData.destination || 'old-quarter',
+        }}
       />
 
       <div className={styles.actions}>
