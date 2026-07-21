@@ -83,9 +83,9 @@
       "area": "ui",
       "title": "Result display with recommendations",
       "user_visible_behavior": "User sees BusRecommendation, GrabFallback, DirectionGuide cards",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Complete form and see results\n2. Verify bus recommendation shows\n3. Verify grab fallback shows\n4. Verify direction guide shows",
-      "evidence": "",
+      "evidence": "Commit 2b65ab0 - BusRecommendation, GrabFallback, DirectionGuide components created",
       "notes": "Part of Task 8 in implementation plan"
     },
     {
@@ -94,9 +94,9 @@
       "area": "ui",
       "title": "Main app screen integration",
       "user_visible_behavior": "App shows form initially, then results after submission",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Start app\n2. See form wizard\n3. Complete form\n4. See results\n5. Tap 'Tính lại' to restart",
-      "evidence": "",
+      "evidence": "Commit 9487b00 - app/index.tsx and app/_layout.tsx created with expo-router layout",
       "notes": "Part of Task 9 in implementation plan"
     },
     {
