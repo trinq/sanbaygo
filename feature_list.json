@@ -1,0 +1,125 @@
+{
+  "features": [
+    {
+      "id": "project-scaffold",
+      "priority": 1,
+      "area": "infrastructure",
+      "title": "Project scaffold with Expo/React Native",
+      "user_visible_behavior": "Developer can run `npm start` and see Expo dev server start",
+      "status": "not_started",
+      "verification": "1. Run `cd sanbaygo-mvp && npm install`\n2. Run `cd sanbaygo-mvp && npx tsc --noEmit`\n3. Verify no TypeScript errors",
+      "evidence": "",
+      "notes": "Part of Task 1 in implementation plan"
+    },
+    {
+      "id": "typescript-types",
+      "priority": 2,
+      "area": "infrastructure",
+      "title": "TypeScript types for data model",
+      "user_visible_behavior": "All TypeScript interfaces defined for Airport, Terminal, BusRoute, etc.",
+      "status": "not_started",
+      "verification": "1. Import types in components\n2. Verify no 'any' types needed\n3. TypeScript check passes",
+      "evidence": "",
+      "notes": "Part of Task 2 in implementation plan"
+    },
+    {
+      "id": "static-data",
+      "priority": 3,
+      "area": "data",
+      "title": "Static data for Noi Bai Airport and Bus 86",
+      "user_visible_behavior": "Data files contain correct schedule (26 departures), exit times, destinations",
+      "status": "not_started",
+      "verification": "1. Check busSchedule.ts has 26 departures\n2. Check exitTimeEstimates.ts has all combinations\n3. Check destinations.ts has all 6 destinations",
+      "evidence": "",
+      "notes": "Part of Task 3 in implementation plan"
+    },
+    {
+      "id": "time-utilities",
+      "priority": 4,
+      "area": "infrastructure",
+      "title": "Time utility functions",
+      "user_visible_behavior": "Functions for parsing/formatting time, adding minutes, comparing times",
+      "status": "not_started",
+      "verification": "1. Run time utility tests\n2. Verify all edge cases handled",
+      "evidence": "",
+      "notes": "Part of Task 4 in implementation plan"
+    },
+    {
+      "id": "calculation-engine",
+      "priority": 5,
+      "area": "business-logic",
+      "title": "Calculation engine with pure functions",
+      "user_visible_behavior": "calculateExitTime, isPeakHour, findNextCatchableTrip, calculateArrivalEstimate work correctly",
+      "status": "not_started",
+      "verification": "1. Run `npm test -- --testPathPattern=calculation-engine`\n2. All tests pass\n3. Cover peak/off-peak, miss bus, no service cases",
+      "evidence": "",
+      "notes": "Part of Task 5 in implementation plan - highest test priority per SPEC"
+    },
+    {
+      "id": "form-state-hook",
+      "priority": 6,
+      "area": "state",
+      "title": "Form state management hook",
+      "user_visible_behavior": "useArrivalWizard manages all form state and triggers result calculation",
+      "status": "not_started",
+      "verification": "1. Test form state transitions\n2. Verify calculateResult returns correct type",
+      "evidence": "",
+      "notes": "Part of Task 6 in implementation plan"
+    },
+    {
+      "id": "form-components",
+      "priority": 7,
+      "area": "ui",
+      "title": "4-step form wizard UI",
+      "user_visible_behavior": "User sees TimeInput → TerminalSelector → BaggageSelector → DestinationPicker",
+      "status": "not_started",
+      "verification": "1. Navigate through all 4 steps\n2. Verify Vietnamese labels\n3. Verify step navigation works",
+      "evidence": "",
+      "notes": "Part of Task 7 in implementation plan"
+    },
+    {
+      "id": "result-display",
+      "priority": 8,
+      "area": "ui",
+      "title": "Result display with recommendations",
+      "user_visible_behavior": "User sees BusRecommendation, GrabFallback, DirectionGuide cards",
+      "status": "not_started",
+      "verification": "1. Complete form and see results\n2. Verify bus recommendation shows\n3. Verify grab fallback shows\n4. Verify direction guide shows",
+      "evidence": "",
+      "notes": "Part of Task 8 in implementation plan"
+    },
+    {
+      "id": "main-app-screen",
+      "priority": 9,
+      "area": "ui",
+      "title": "Main app screen integration",
+      "user_visible_behavior": "App shows form initially, then results after submission",
+      "status": "not_started",
+      "verification": "1. Start app\n2. See form wizard\n3. Complete form\n4. See results\n5. Tap 'Tính lại' to restart",
+      "evidence": "",
+      "notes": "Part of Task 9 in implementation plan"
+    },
+    {
+      "id": "peak-hour-detection",
+      "priority": 10,
+      "area": "business-logic",
+      "title": "Peak hour detection (7-9 AM, 5-7 PM)",
+      "user_visible_behavior": "System shows 'giờ cao điểm' warning and longer travel times",
+      "status": "not_started",
+      "verification": "1. Test with arrival at 08:00 → should show peak\n2. Test with arrival at 10:00 → should NOT show peak\n3. Test with arrival at 18:00 → should show peak\n4. Test with arrival at 20:00 → should NOT show peak",
+      "evidence": "",
+      "notes": "Covered by calculation-engine feature tests"
+    },
+    {
+      "id": "edge-cases",
+      "priority": 11,
+      "area": "business-logic",
+      "title": "Edge case handling",
+      "user_visible_behavior": "System handles: no service, too late, missed last bus, international flights",
+      "status": "not_started",
+      "verification": "1. Test arrival at 05:00 → shows 'no_service'\n2. Test arrival at 23:00 → shows 'too_late'\n3. Test arrival at 21:45 → shows 'missed_last'\n4. Test T2 international → adds immigration time",
+      "evidence": "",
+      "notes": "Covered by calculation-engine feature tests"
+    }
+  ]
+}
