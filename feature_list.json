@@ -72,9 +72,9 @@
       "area": "ui",
       "title": "4-step form wizard UI",
       "user_visible_behavior": "User sees TimeInput → TerminalSelector → BaggageSelector → DestinationPicker",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Navigate through all 4 steps\n2. Verify Vietnamese labels\n3. Verify step navigation works",
-      "evidence": "",
+      "evidence": "Commit f718f1d - 5 files created (TimeInput, TerminalSelector, BaggageSelector, DestinationPicker, index), TypeScript compiles, 67 tests pass",
       "notes": "Part of Task 7 in implementation plan"
     },
     {
