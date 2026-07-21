@@ -1,9 +1,10 @@
 {
   "features": [
     {
-      "id": "project-scaffold",
+      "id": "rn-project-scaffold",
       "priority": 1,
       "area": "infrastructure",
+      "platform": "react-native",
       "title": "Project scaffold with Expo/React Native",
       "user_visible_behavior": "Developer can run `npm start` and see Expo dev server start",
       "status": "completed",
@@ -12,9 +13,10 @@
       "notes": "Part of Task 1 in implementation plan"
     },
     {
-      "id": "typescript-types",
+      "id": "rn-typescript-types",
       "priority": 2,
       "area": "infrastructure",
+      "platform": "react-native",
       "title": "TypeScript types for data model",
       "user_visible_behavior": "All TypeScript interfaces defined for Airport, Terminal, BusRoute, etc.",
       "status": "completed",
@@ -23,9 +25,10 @@
       "notes": "Part of Task 2 in implementation plan"
     },
     {
-      "id": "static-data",
+      "id": "rn-static-data",
       "priority": 3,
       "area": "data",
+      "platform": "react-native",
       "title": "Static data for Noi Bai Airport and Bus 86",
       "user_visible_behavior": "Data files contain correct schedule (26 departures), exit times, destinations",
       "status": "completed",
@@ -34,9 +37,10 @@
       "notes": "Part of Task 3 in implementation plan"
     },
     {
-      "id": "time-utilities",
+      "id": "rn-time-utilities",
       "priority": 4,
       "area": "infrastructure",
+      "platform": "react-native",
       "title": "Time utility functions",
       "user_visible_behavior": "Functions for parsing/formatting time, adding minutes, comparing times",
       "status": "completed",
@@ -45,9 +49,10 @@
       "notes": "Part of Task 4 in implementation plan"
     },
     {
-      "id": "calculation-engine",
+      "id": "rn-calculation-engine",
       "priority": 5,
       "area": "business-logic",
+      "platform": "react-native",
       "title": "Calculation engine with pure functions",
       "user_visible_behavior": "calculateExitTime, isPeakHour, findNextCatchableTrip, calculateArrivalEstimate work correctly",
       "status": "completed",
@@ -56,9 +61,10 @@
       "notes": "Part of Task 5 in implementation plan - highest test priority per SPEC"
     },
     {
-      "id": "form-state-hook",
+      "id": "rn-form-state-hook",
       "priority": 6,
       "area": "state",
+      "platform": "react-native",
       "title": "Form state management hook",
       "user_visible_behavior": "useArrivalWizard manages all form state and triggers result calculation",
       "status": "completed",
@@ -67,9 +73,10 @@
       "notes": "Part of Task 6 in implementation plan"
     },
     {
-      "id": "form-components",
+      "id": "rn-form-components",
       "priority": 7,
       "area": "ui",
+      "platform": "react-native",
       "title": "4-step form wizard UI",
       "user_visible_behavior": "User sees TimeInput → TerminalSelector → BaggageSelector → DestinationPicker",
       "status": "completed",
@@ -78,9 +85,10 @@
       "notes": "Part of Task 7 in implementation plan"
     },
     {
-      "id": "result-display",
+      "id": "rn-result-display",
       "priority": 8,
       "area": "ui",
+      "platform": "react-native",
       "title": "Result display with recommendations",
       "user_visible_behavior": "User sees BusRecommendation, GrabFallback, DirectionGuide cards",
       "status": "completed",
@@ -89,9 +97,10 @@
       "notes": "Part of Task 8 in implementation plan"
     },
     {
-      "id": "main-app-screen",
+      "id": "rn-main-app-screen",
       "priority": 9,
       "area": "ui",
+      "platform": "react-native",
       "title": "Main app screen integration",
       "user_visible_behavior": "App shows form initially, then results after submission",
       "status": "completed",
@@ -100,9 +109,10 @@
       "notes": "Part of Task 9 in implementation plan"
     },
     {
-      "id": "peak-hour-detection",
+      "id": "rn-peak-hour-detection",
       "priority": 10,
       "area": "business-logic",
+      "platform": "react-native",
       "title": "Peak hour detection (7-9 AM, 5-7 PM)",
       "user_visible_behavior": "System shows 'giờ cao điểm' warning and longer travel times",
       "status": "completed",
@@ -111,15 +121,137 @@
       "notes": "Covered by calculation-engine feature tests"
     },
     {
-      "id": "edge-cases",
+      "id": "rn-edge-cases",
       "priority": 11,
       "area": "business-logic",
+      "platform": "react-native",
       "title": "Edge case handling",
       "user_visible_behavior": "System handles: no service, too late, missed last bus, international flights",
       "status": "completed",
       "verification": "1. Test arrival at 05:00 → shows 'no_service'\n2. Test arrival at 23:00 → shows 'too_late'\n3. Test arrival at 21:45 → shows 'missed_last'\n4. Test T2 international → adds immigration time",
       "evidence": "Covered by findNextCatchableTrip and calculateExitTime tests (10 edge case tests)",
       "notes": "Covered by calculation-engine feature tests"
+    },
+    {
+      "id": "web-project-scaffold",
+      "priority": 1,
+      "area": "infrastructure",
+      "platform": "web",
+      "title": "Web project scaffold with Vite + React",
+      "user_visible_behavior": "Developer can run `cd web && npm install && npm run dev` and see the app at localhost:5173",
+      "status": "pending",
+      "verification": "1. Run `cd web && npm install`\n2. Run `cd web && npm run dev`\n3. Verify dev server starts on port 5173",
+      "notes": "Part of Task 1 in web implementation plan"
+    },
+    {
+      "id": "web-header-language-toggle",
+      "priority": 2,
+      "area": "ui",
+      "platform": "web",
+      "title": "Minimal header with language toggle (vi/en)",
+      "user_visible_behavior": "Header shows logo 'SanBayGo' and 'English'/'Tiếng Việt' toggle button",
+      "status": "pending",
+      "verification": "1. Click toggle to switch between Vietnamese and English\n2. All UI text updates to selected language",
+      "notes": "Part of Task 2 in web implementation plan"
+    },
+    {
+      "id": "web-calculation-engine-bridge",
+      "priority": 3,
+      "area": "business-logic",
+      "platform": "web",
+      "title": "Web calculation engine bridge (replicated from RN)",
+      "user_visible_behavior": "Web app uses same calculation logic: isPeakHour, findNextCatchableTrip, calculateExitTime, calculateArrivalEstimate",
+      "status": "pending",
+      "verification": "1. Same test cases as RN calculation engine\n2. Results match between web and mobile",
+      "notes": "Part of Task 3 in web implementation plan"
+    },
+    {
+      "id": "web-side-by-side-layout",
+      "priority": 4,
+      "area": "ui",
+      "platform": "web",
+      "title": "Side-by-side form layout (desktop) / stacked (mobile)",
+      "user_visible_behavior": "Desktop shows form + schedule preview side-by-side. Mobile (<768px) stacks vertically.",
+      "status": "pending",
+      "verification": "1. Resize browser to test responsive breakpoints\n2. Verify layout switches at 768px",
+      "notes": "Part of Task 5 in web implementation plan"
+    },
+    {
+      "id": "web-time-picker",
+      "priority": 5,
+      "area": "ui",
+      "platform": "web",
+      "title": "Time picker for flight arrival",
+      "user_visible_behavior": "Large time input showing current time, clickable to change",
+      "status": "pending",
+      "verification": "1. Click time input\n2. Native time picker appears\n3. Select new time, form updates",
+      "notes": "Part of Task 6 in web implementation plan"
+    },
+    {
+      "id": "web-schedule-preview",
+      "priority": 6,
+      "area": "ui",
+      "platform": "web",
+      "title": "Bus 86 schedule preview with catchable highlighting",
+      "user_visible_behavior": "Shows all 26 departures. Green highlight = catchable after your arrival. Gray = already missed.",
+      "status": "pending",
+      "verification": "1. Select arrival time 08:00\n2. Schedule shows buses from 08:00 onwards in green\n3. Earlier buses shown in gray",
+      "notes": "Part of Task 5 in web implementation plan"
+    },
+    {
+      "id": "web-destination-cards",
+      "priority": 7,
+      "area": "ui",
+      "platform": "web",
+      "title": "5 destination cards grid",
+      "user_visible_behavior": "User selects from: Old Quarter, Hoan Kiem, Dong Da, Ba Dinh, Cau Giay",
+      "status": "pending",
+      "verification": "1. See 5 destination cards in grid\n2. Click to select, card highlights\n3. Only one can be selected at a time",
+      "notes": "Part of Task 9 in web implementation plan"
+    },
+    {
+      "id": "web-journey-timeline",
+      "priority": 8,
+      "area": "ui",
+      "platform": "web",
+      "title": "Journey timeline visualization",
+      "user_visible_behavior": "Visual timeline: Exit terminal → Walk to stop → Bus departs → Arrive destination",
+      "status": "pending",
+      "verification": "1. Complete form\n2. See horizontal timeline on desktop\n3. See vertical timeline on mobile",
+      "notes": "Part of Task 10 in web implementation plan"
+    },
+    {
+      "id": "web-bus-recommendation",
+      "priority": 9,
+      "area": "ui",
+      "platform": "web",
+      "title": "Bus recommendation card",
+      "user_visible_behavior": "Shows: Bus 86, departure time, wait minutes, ticket price (35,000 VND)",
+      "status": "pending",
+      "verification": "1. Complete form with catchable bus\n2. See green-bordered card with bus details",
+      "notes": "Part of Task 11 in web implementation plan"
+    },
+    {
+      "id": "web-grab-fallback",
+      "priority": 10,
+      "area": "ui",
+      "platform": "web",
+      "title": "Grab fallback card",
+      "user_visible_behavior": "Shows price estimate (250k-350k VND), travel time, and 'Open Grab' button",
+      "status": "pending",
+      "verification": "1. Complete form\n2. See Grab alternative card\n3. Click button opens grab.com in new tab",
+      "notes": "Part of Task 12 in web implementation plan"
+    },
+    {
+      "id": "web-no-bus-warning",
+      "priority": 11,
+      "area": "ui",
+      "platform": "web",
+      "title": "No bus available warning",
+      "user_visible_behavior": "Shows warning message when bus is not catchable, with Grab as fallback",
+      "status": "pending",
+      "verification": "1. Set arrival time to 23:00\n2. See warning: 'Không có chuyến xe phù hợp'\n3. Grab fallback still visible",
+      "notes": "Part of Task 10 in web implementation plan"
     }
   ]
 }
