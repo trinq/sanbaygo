@@ -2,8 +2,21 @@
 
 App giúp người đi từ sân bay về thành phố nắm rõ lịch trình xe buýt và chọn phương tiện phù hợp, ưu tiên xe buýt sân bay.
 
-**MVP**: Noi Bai Airport → Hanoi city, Express Bus 86
-**Future**: Mở rộng thêm nhiều sân bay khác
+**Current**: Noi Bai Airport → Hanoi city, Express Bus 86 + Vehicle Comparison
+**Future**: Mở rộng thêm nhiều sân bay khác, real-time traffic integration
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | Next.js (App Router) + React |
+| Backend | Next.js API Routes |
+| Database | Supabase (PostgreSQL) |
+| Deployment | Vercel |
+
+**Deferred**: Google Maps API (Directions/Distance Matrix) - can be added later
 
 ---
 
@@ -33,18 +46,43 @@ Thuộc tính của Destination Point, cho biết điểm đó có nằm trên l
 Phương án thay thế khi Bus 86 không phù hợp hoặc không coverage.
 _Avoid_: Alternative, other options
 
+**Vehicle Comparison**:
+Bảng so sánh chi tiết các phương tiện cho cùng 1 destination point.
+Mỗi phương tiện hiển thị: Giá ước tính, thời gian, giờ đến nơi, mức độ phù hợp hành lý, độ thoải mái, nhận xét ngắn.
+
+**Smart Sort Order**:
+Mặc định hiển thị Bus 86 đầu tiên (recommended first). User có thể đổi:
+- Cheapest first (theo giá tăng dần)
+- Fastest first (theo thời gian ngắn nhất)
+
 ---
 
 ## Rules
 
 - System luôn ưu tiên Bus 86 nếu Catchable Trip tồn tại và Destination Point có full coverage
 - System không tracking real-time flight delay
-- Grab comparison dùng static estimate (lookup table), không real-time API
 - User nhập Actual Arrival, system tính toán tất cả từ đó
+- Vehicle comparison hiển thị tất cả 5 providers: Bus 86, Grab Bike, Xanh SM Bike, Grab Car, Xanh SM, Be
+- Travel time estimates: kết hợp static data (Supabase DB) + real-time API (nếu có)
+- Google Maps API: deferred, sẽ add sau khi cần thiết
+- Grab integration: chỉ hiển thị estimate, không deep link đặt xe
 
 ---
 
 ## Data
+
+### Transport Options
+
+| ID | Name | Type | Base Price | Notes |
+|----|------|------|------------|-------|
+| BUS_86 | Bus 86 | Bus | 35,000 VND | Express airport bus |
+| GRAB_BIKE | Grab Bike | Motorbike | ~80,000 VND | Most affordable private |
+| XANH_SM_BIKE | Xanh SM Bike | Motorbike | ~80,000 VND | VinGroup electric bike |
+| GRAB_CAR | Grab Car | Car 4-seat | ~250,000 VND | Grab economy |
+| XANH_SM | Xanh SM | Electric Car | ~280,000 VND | VinGroup electric car |
+| BE | Be Car | Car | ~250,000 VND | Local Vietnam |
+
+Note: Prices are estimates, vary by demand/surge. Include airport toll (~15,000 VND).
 
 ### Bus 86 - Express Airport Bus
 
@@ -90,15 +128,6 @@ Sân bay Nội Bài (T1/T2)
 |---------|----------|
 | Normal | 50-70 min |
 | Peak (7-9 AM, 5-7 PM) | 60-90 min |
-
-### Grab Estimates (Static)
-
-| Route | Price Range | Time Range |
-|-------|-------------|------------|
-| Airport → Old Quarter / Ga Hà Nội | 250,000 - 350,000 VND | 40-60 min |
-| Peak hours surcharge | +20-30% | +20-30 min |
-
-Prices include airport toll (~15,000 VND).
 
 ### Destination Points
 
