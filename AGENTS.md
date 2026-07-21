@@ -52,7 +52,7 @@ A feature is complete when:
 ## Project Structure
 
 ```
-sanbaygo-mvp/
+sanbaygo/
 ├── app/                    # Expo Router pages
 ├── components/            # UI components
 ├── calculation-engine/    # Business logic

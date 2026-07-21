@@ -26,17 +26,17 @@
 
 ```bash
 # Setup & verify
-cd sanbaygo-mvp && npm install
-cd sanbaygo-mvp && npm test
+npm install
+npm test
 
 # TypeScript check
-cd sanbaygo-mvp && npx tsc --noEmit
+npx tsc --noEmit
 
 # Start dev server
-cd sanbaygo-mvp && npm start
+npm start
 
 # Run specific tests
-cd sanbaygo-mvp && npm test -- --testPathPattern="calculation-engine"
+npm test -- --testPathPattern="calculation-engine"
 ```
 
 ## Context

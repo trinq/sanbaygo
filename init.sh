@@ -4,7 +4,6 @@
 # =================================================
 
 # Configuration
-PROJECT_DIR="sanbaygo-mvp"
 INSTALL_CMD="npm install"
 VERIFY_CMD="npm test"
 START_CMD="npm start"
@@ -24,16 +23,12 @@ echo ""
 echo "Current directory: $(pwd)"
 echo ""
 
-# Verify we're in the right place
-if [ ! -d "$PROJECT_DIR" ]; then
-    echo -e "${YELLOW}Warning: $PROJECT_DIR not found in current directory${NC}"
-    echo "Please run this script from the project root or create $PROJECT_DIR first"
+# Verify package.json exists
+if [ ! -f "package.json" ]; then
+    echo -e "${RED}Error: package.json not found in current directory${NC}"
+    echo "Please run this script from the project root"
     exit 1
 fi
-
-cd "$PROJECT_DIR"
-echo "Working directory: $(pwd)"
-echo ""
 
 # Install dependencies
 echo "========================================"
@@ -72,9 +67,6 @@ echo "Available commands:"
 echo "  npm start       - Start development server"
 echo "  npm test        - Run tests"
 echo "  npx tsc --noEmit - TypeScript check"
-echo ""
-echo "To start development:"
-echo "  cd $PROJECT_DIR && npm start"
 echo ""
 
 # Optional: Start dev server

@@ -6,9 +6,9 @@
       "area": "infrastructure",
       "title": "Project scaffold with Expo/React Native",
       "user_visible_behavior": "Developer can run `npm start` and see Expo dev server start",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Run `cd sanbaygo-mvp && npm install`\n2. Run `cd sanbaygo-mvp && npx tsc --noEmit`\n3. Verify no TypeScript errors",
-      "evidence": "",
+      "evidence": "Commit a066b5c2a0ab65c3c0176b0232b960c5c0a4dd11 - npm install succeeded, tsc --noEmit passed",
       "notes": "Part of Task 1 in implementation plan"
     },
     {
