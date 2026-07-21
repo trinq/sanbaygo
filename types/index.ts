@@ -69,7 +69,7 @@ export interface BusRecommendation {
   trip?: {
     departureTime: string; // HH:mm
     waitMinutes: number;
-    arrivalEstimate: TimeRange;
+    arrivalEstimate?: TimeRange; // Optional - calculated separately with destination info
     ticketPrice: number;
   };
   reason?: 'no_service' | 'too_late' | 'missed_last';
