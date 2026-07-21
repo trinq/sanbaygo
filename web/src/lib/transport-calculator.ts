@@ -1,5 +1,6 @@
 import {
   TransportComparison,
+  TransportOption,
   TripCalculationRequest,
   TripCalculationResponse,
   SortOption,
@@ -31,7 +32,6 @@ function formatPrice(value: number): string {
 }
 
 function formatTimeRange(startTime: string, range: { min: number; max: number }): string {
-  const start = timeToMinutes(startTime);
   const early = addMinutes(startTime, range.min);
   const late = addMinutes(startTime, range.max);
   return `${early} - ${late}`;
