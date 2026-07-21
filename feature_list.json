@@ -61,9 +61,9 @@
       "area": "state",
       "title": "Form state management hook",
       "user_visible_behavior": "useArrivalWizard manages all form state and triggers result calculation",
-      "status": "not_started",
+      "status": "completed",
       "verification": "1. Test form state transitions\n2. Verify calculateResult returns correct type",
-      "evidence": "",
+      "evidence": "Commit c64cfd0 - useArrivalWizard hook created, 27 new tests (85 total), TypeScript compiles without errors",
       "notes": "Part of Task 6 in implementation plan"
     },
     {
