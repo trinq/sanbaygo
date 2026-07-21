@@ -90,18 +90,3 @@ export interface FormData {
   baggage: Baggage;
   destination: Destination;
 }
-
-// Simplified result type for existing components
-export interface SimpleArrivalResult {
-  canCatchBus: boolean;
-  exitTimeMinutes: number;
-  nextBusTime: string | null;
-  waitMinutes: number;
-  isPeakHour: boolean;
-  lastBusTime: string | null;
-  grabEstimate: {
-    minPrice: number;
-    maxPrice: number;
-    travelTime: string;
-  };
-}
