@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.input {
+  font-size: 32px;
+  font-weight: 700;
+  padding: 16px 20px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background: var(--color-background);
+  color: var(--color-primary);
+  font-family: var(--font-family);
+  outline: none;
+  transition: var(--transition);
+  width: 100%;
+  max-width: 200px;
+  font-variant-numeric: tabular-nums;
+}
+
+.input:focus {
+  border-color: var(--color-accent);
+}
+
+.input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+
+.input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
