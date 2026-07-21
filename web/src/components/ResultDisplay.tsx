@@ -1,8 +1,8 @@
-import { FormData, SimpleArrivalResult } from '../types';
+import { ArrivalFormData, SimpleArrivalResult } from '../types';
 
 interface ResultDisplayProps {
   result: SimpleArrivalResult;
-  formData: FormData;
+  formData: ArrivalFormData;
   onRecalculate: () => void;
 }
 

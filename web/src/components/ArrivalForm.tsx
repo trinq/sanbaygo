@@ -1,8 +1,8 @@
-import { FormData } from '../types';
+import { ArrivalFormData } from '../types';
 
 interface ArrivalFormProps {
-  formData: FormData;
-  onUpdate: <K extends keyof FormData>(field: K, value: FormData[K]) => void;
+  formData: ArrivalFormData;
+  onUpdate: <K extends keyof ArrivalFormData>(key: K, value: ArrivalFormData[K]) => void;
   onCalculate: () => void;
 }
 

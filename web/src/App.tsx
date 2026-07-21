@@ -16,13 +16,17 @@ function AppContent() {
   const { formData, updateFormData, reset } = useFormState();
 
   const handleCalculate = () => {
-    // Convert FormData to ArrivalFormData for calculation
+    // Validate required fields before calculating
+    if (!formData.terminal || !formData.baggage || !formData.destination) {
+      return;
+    }
+    // Convert ArrivalFormData for calculation
     const formDataForCalc = {
       arrivalTime: formData.arrivalTime,
       terminal: formData.terminal,
-      baggage: formData.baggage.replace('-', '_') as 'carry_on' | 'checked',
+      baggage: formData.baggage,
       destination: formData.destination,
-      flightType: 'domestic' as const,
+      flightType: formData.flightType,
     };
     const calculated = calculateResult(formDataForCalc);
     if (calculated) {

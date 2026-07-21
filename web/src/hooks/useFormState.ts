@@ -1,26 +1,36 @@
 import { useState, useCallback } from 'react';
-import { FormData } from '../types';
+import { ArrivalFormData } from '../types';
 
-const initialFormData: FormData = {
-  arrivalTime: '',
-  terminal: 'T1',
-  baggage: 'carry-on',
-  destination: 'old-quarter',
+function getCurrentTime(): string {
+  const now = new Date();
+  return `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+}
+
+const initialFormState: ArrivalFormData = {
+  arrivalTime: getCurrentTime(),
+  terminal: null,
+  baggage: null,
+  destination: null,
+  flightType: 'domestic',
 };
 
 export function useFormState() {
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formData, setFormData] = useState<ArrivalFormData>(initialFormState);
 
-  const updateFormData = useCallback(<K extends keyof FormData>(
-    field: K,
-    value: FormData[K]
+  const updateFormData = useCallback(<K extends keyof ArrivalFormData>(
+    key: K,
+    value: ArrivalFormData[K]
   ) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => ({ ...prev, [key]: value }));
   }, []);
 
   const reset = useCallback(() => {
-    setFormData(initialFormData);
+    setFormData({ ...initialFormState, arrivalTime: getCurrentTime() });
   }, []);
 
-  return { formData, updateFormData, reset };
+  return {
+    formData,
+    updateFormData,
+    reset,
+  };
 }
