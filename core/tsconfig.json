@@ -7,5 +7,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["./types", "./utils", "./tests"]
+  "include": ["./types", "./utils", "./data", "./tests"]
 }
