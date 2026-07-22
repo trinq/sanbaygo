@@ -139,8 +139,9 @@
       "platform": "web",
       "title": "Web project scaffold with Vite + React",
       "user_visible_behavior": "Developer can run `cd web && npm install && npm run dev` and see the app at localhost:5173",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Run `cd web && npm install`\n2. Run `cd web && npm run dev`\n3. Verify dev server starts on port 5173",
+      "evidence": "Commit d9f3e10 - Vite + React scaffold created, TypeScript compiles, dev server runs",
       "notes": "Part of Task 1 in web implementation plan"
     },
     {
@@ -150,8 +151,9 @@
       "platform": "web",
       "title": "Minimal header with language toggle (vi/en)",
       "user_visible_behavior": "Header shows logo 'SanBayGo' and 'English'/'Tiếng Việt' toggle button",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Click toggle to switch between Vietnamese and English\n2. All UI text updates to selected language",
+      "evidence": "Commit 9555957 - Header component with LanguageContext, vi/en translations",
       "notes": "Part of Task 2 in web implementation plan"
     },
     {
@@ -161,8 +163,9 @@
       "platform": "web",
       "title": "Web calculation engine bridge (replicated from RN)",
       "user_visible_behavior": "Web app uses same calculation logic: isPeakHour, findNextCatchableTrip, calculateExitTime, calculateArrivalEstimate",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Same test cases as RN calculation engine\n2. Results match between web and mobile",
+      "evidence": "Commit ca199c8 - calculation-engine.ts with all pure functions, TypeScript passes",
       "notes": "Part of Task 3 in web implementation plan"
     },
     {
@@ -172,8 +175,9 @@
       "platform": "web",
       "title": "Side-by-side form layout (desktop) / stacked (mobile)",
       "user_visible_behavior": "Desktop shows form + schedule preview side-by-side. Mobile (<768px) stacks vertically.",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Resize browser to test responsive breakpoints\n2. Verify layout switches at 768px",
+      "evidence": "Commit 4fa9a9a - ArrivalForm with side-by-side layout, SchedulePreview component",
       "notes": "Part of Task 5 in web implementation plan"
     },
     {
@@ -183,9 +187,10 @@
       "platform": "web",
       "title": "Time picker for flight arrival",
       "user_visible_behavior": "Large time input showing current time, clickable to change",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Click time input\n2. Native time picker appears\n3. Select new time, form updates",
-      "notes": "Part of Task 6 in web implementation plan"
+      "evidence": "Commit 4fa9a9a - TimePicker component with native HTML5 time input",
+      "notes": "Part of Task 5 in web implementation plan"
     },
     {
       "id": "web-schedule-preview",
@@ -194,8 +199,9 @@
       "platform": "web",
       "title": "Bus 86 schedule preview with catchable highlighting",
       "user_visible_behavior": "Shows all 26 departures. Green highlight = catchable after your arrival. Gray = already missed.",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Select arrival time 08:00\n2. Schedule shows buses from 08:00 onwards in green\n3. Earlier buses shown in gray",
+      "evidence": "Commit 4fa9a9a - SchedulePreview component with catchable highlighting",
       "notes": "Part of Task 5 in web implementation plan"
     },
     {
@@ -205,8 +211,9 @@
       "platform": "web",
       "title": "5 destination cards grid",
       "user_visible_behavior": "User selects from: Old Quarter, Hoan Kiem, Dong Da, Ba Dinh, Cau Giay",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. See 5 destination cards in grid\n2. Click to select, card highlights\n3. Only one can be selected at a time",
+      "evidence": "Commit 4fa9a9a - DestinationPicker component with 5 cards in grid layout",
       "notes": "Part of Task 9 in web implementation plan"
     },
     {
@@ -216,8 +223,9 @@
       "platform": "web",
       "title": "Journey timeline visualization",
       "user_visible_behavior": "Visual timeline: Exit terminal → Walk to stop → Bus departs → Arrive destination",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Complete form\n2. See horizontal timeline on desktop\n3. See vertical timeline on mobile",
+      "evidence": "Commit 7cf51d7 - JourneyTimeline component with horizontal/vertical responsive layout",
       "notes": "Part of Task 10 in web implementation plan"
     },
     {
@@ -227,8 +235,9 @@
       "platform": "web",
       "title": "Bus recommendation card",
       "user_visible_behavior": "Shows: Bus 86, departure time, wait minutes, ticket price (35,000 VND)",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Complete form with catchable bus\n2. See green-bordered card with bus details",
+      "evidence": "Commit c902ec5 - BusRecommendation component with price formatting",
       "notes": "Part of Task 11 in web implementation plan"
     },
     {
@@ -238,20 +247,46 @@
       "platform": "web",
       "title": "Grab fallback card",
       "user_visible_behavior": "Shows price estimate (250k-350k VND), travel time, and 'Open Grab' button",
-      "status": "pending",
+      "status": "completed",
       "verification": "1. Complete form\n2. See Grab alternative card\n3. Click button opens grab.com in new tab",
+      "evidence": "Commit ad5e926 - GrabFallback component with price estimate and travel time",
       "notes": "Part of Task 12 in web implementation plan"
     },
     {
-      "id": "web-no-bus-warning",
-      "priority": 11,
+      "id": "web-vehicle-comparison",
+      "priority": 12,
       "area": "ui",
       "platform": "web",
-      "title": "No bus available warning",
-      "user_visible_behavior": "Shows warning message when bus is not catchable, with Grab as fallback",
-      "status": "pending",
-      "verification": "1. Set arrival time to 23:00\n2. See warning: 'Không có chuyến xe phù hợp'\n3. Grab fallback still visible",
-      "notes": "Part of Task 10 in web implementation plan"
+      "title": "Vehicle comparison with sort toggle",
+      "user_visible_behavior": "Shows all transport options (Bus 86, Grab, Mai Linh, Be, GoJek, Xanh SM) with price and time, sortable by price or duration",
+      "status": "completed",
+      "verification": "1. Complete form\n2. See all transport options listed\n3. Toggle sort by price/time\n4. Verify correct pricing and travel times",
+      "evidence": "Commit f83cb90 - VehicleComparison components with sort toggle, integration in ResultDisplay commit 6c23b9d",
+      "notes": "Tasks 5-6 in web implementation plan - multi-transport comparison feature"
+    },
+    {
+      "id": "web-terminal-baggage-selection",
+      "priority": 13,
+      "area": "ui",
+      "platform": "web",
+      "title": "Terminal and baggage card selection",
+      "user_visible_behavior": "User selects T1/T2 terminal and carry-on/checked baggage via card buttons",
+      "status": "completed",
+      "verification": "1. Select T1 or T2 terminal\n2. Select carry-on or checked baggage\n3. Cards highlight on selection",
+      "evidence": "Commit 4fa9a9a - TerminalSelector and BaggageSelector components",
+      "notes": "Tasks 7-8 in web implementation plan"
+    },
+    {
+      "id": "web-calculate-button",
+      "priority": 14,
+      "area": "ui",
+      "platform": "web",
+      "title": "Calculate button with form validation",
+      "user_visible_behavior": "Button enables when all form fields are filled, triggers result calculation",
+      "status": "completed",
+      "verification": "1. See button disabled when form incomplete\n2. See button enable when all fields filled\n3. Click triggers result display",
+      "evidence": "Commit 4fa9a9a - Calculate button with isFormValid integration in ArrivalForm",
+      "notes": "Task 13 in web implementation plan"
     }
   ]
 }

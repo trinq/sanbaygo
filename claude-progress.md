@@ -15,6 +15,7 @@
 **Recent fixes:**
 - Fixed ResultDisplay wiring (was using stub file instead of index.tsx)
 - Fixed double peak surcharge bug (travelTime.peak was getting +30min surcharge on top)
+- Fixed VehicleComparison showing empty (was calling non-existent HTTP API `/api/calculate-trip` in Vite frontend-only build; changed to call `calculateTripComparison()` directly)
 
 ---
 
