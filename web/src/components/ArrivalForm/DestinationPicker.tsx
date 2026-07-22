@@ -1,5 +1,5 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { DESTINATIONS } from '../../lib/data';
+import { DESTINATIONS } from '@core';
 import styles from './DestinationPicker.module.css';
 
 interface DestinationPickerProps {

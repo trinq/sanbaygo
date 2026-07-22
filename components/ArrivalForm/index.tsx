@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { ArrivalFormData } from '../../types';
+import { ArrivalFormData } from '@core';
 import { TimeInput } from './TimeInput';
 import { TerminalSelector } from './TerminalSelector';
 import { BaggageSelector } from './BaggageSelector';

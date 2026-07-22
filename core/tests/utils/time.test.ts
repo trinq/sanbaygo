@@ -7,7 +7,7 @@ import {
   compareTimes,
   isAfterOrEqual,
   isWithinRange,
-} from '../utils/time';
+} from '../../utils/time';
 
 describe('Time Utilities', () => {
   describe('parseTime', () => {

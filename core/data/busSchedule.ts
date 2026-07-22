@@ -11,7 +11,7 @@ export const BUS_86: BusRoute = {
   id: 'bus-86',
   routeNumber: '86',
   schedule: BUS_86_SCHEDULE,
-  ticketPrice: 35000, // VND
+  ticketPrice: 50000, // VND — per CONTEXT.md line 92
   operatingHours: { start: '06:40', end: '22:15' },
   // Real-world travel time from Noi Bai to central Hanoi
   // Source: user research (2026-07-21)

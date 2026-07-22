@@ -1,10 +1,10 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { ArrivalFormData, TerminalId, BaggageType } from '../../types';
+import { ArrivalFormData, TerminalId, BaggageType } from '@core';
 import { TimePicker } from './TimePicker';
 import { TerminalSelector } from './TerminalSelector';
 import { BaggageSelector } from './BaggageSelector';
 import { DestinationPicker } from './DestinationPicker';
-import { BUS_86_SCHEDULE } from '../../lib/data';
+import { BUS_86_SCHEDULE } from '@core';
 import { isFormValid } from './validation';
 import styles from './index.module.css';
 

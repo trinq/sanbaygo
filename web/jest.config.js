@@ -2,10 +2,12 @@
 export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  roots: ['<rootDir>'],
-  testMatch: ['**/__tests__/**/*.test.ts', '**/__tests__/**/*.test.tsx'],
+  roots: ['<rootDir>', '../core'],
+  testMatch: ['**/__tests__/**/*.test.ts', '**/__tests__/**/*.test.tsx', '../core/tests/**/*.test.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^@core$': '<rootDir>/../core/index.ts',
+    '^@core/(.*)$': '<rootDir>/../core/$1',
     '\\.module\\.css$': '<rootDir>/__mocks__/styleMock.js',
   },
   transform: {

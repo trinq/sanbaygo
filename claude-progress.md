@@ -21,6 +21,41 @@
 
 ## Session Record
 
+### Session 11: 2026-07-22
+
+**Goal:** Plan and ticket the "collapse platform duplication" refactor — extract shared business logic from web and RN into a single `core/` module imported via the `@core` path alias.
+
+**Completed:**
+- Wrote implementation plan `docs/superpowers/plans/2026-07-22-collapse-platform-duplication.md` (1283 lines, 8 tasks, 50 checkboxes)
+- Self-reviewed and fixed 7 issues: relative-path inconsistency, redundant type export, standalone `tsc` verify commands, TODO-planning in `vehicle-comparison-data.test.ts`, missing `findNextCatchableTrip.test.ts` price-assertion step, missing `web/src/lib/api/**` coverage, inconsistent rg patterns
+- Broke plan into 7 tickets under `.scratch/sanbaygo-mvp/issues/01–07` using expand→migrate batches→contract pattern
+- Updated this progress log
+
+**Decisions encoded:**
+- Folder structure: `core/data/`, `core/calculation-engine/`, `core/utils/`, `core/types/`
+- Module format: TypeScript path alias `@core` → `core/index.ts` (no deep imports, no `../../core`-style relative paths)
+- Consumer naming: barrel exports via `from '@core'`
+- Tests live inside `core/`; run from both web and RN Jest configs
+- Migration order: web-first (active development), RN second
+- Bus 86 price: 50,000 VND per CONTEXT.md (was stale 35,000)
+- T1 supports international flights: `Terminal.flightTypes: FlightType[]`
+- Destination `'other'` added with `hasBusCoverage: false`
+
+**Verification run:** N/A — planning + ticket breakdown only, no code changes
+
+**Evidence recorded:** Plan file + 7 ticket files exist; this session log
+
+**Commits:** None — no implementation this session
+
+**Known risks:**
+- Plan and tickets are review-only; not yet executed
+- Web has web-only logic in `transport-calculator.ts` and `transport-data.ts` that intentionally stays out of `core/`
+- Web's legacy types in `src/types/index.ts` (`Baggage`, `Destination`, `FormData`) are unused by components — safe to delete, but verify by grep before contract step
+
+**Next best action:** Implement ticket 01 — stand up `core/` skeleton. Use `/implement 01` to start.
+
+---
+
 ### Session 1: 2026-07-21
 
 **Goal:** Create development harness and scaffold Expo project

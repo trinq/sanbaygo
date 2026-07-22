@@ -1,4 +1,4 @@
-import { SortOption } from '@/types';
+import { SortOption } from '@core';
 import styles from './SortToggle.module.css';
 
 interface SortToggleProps {

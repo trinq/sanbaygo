@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { BusRecommendation } from '../../types';
+import { BusRecommendation } from '@core';
 
 interface BusRecommendationCardProps {
   recommendation: BusRecommendation;

@@ -1,4 +1,4 @@
-import { BaggageType } from '../../types';
+import { BaggageType } from '@core';
 import styles from './BaggageSelector.module.css';
 
 interface BaggageSelectorProps {

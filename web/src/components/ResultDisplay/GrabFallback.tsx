@@ -1,5 +1,5 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { TimeRange } from '../../types';
+import { TimeRange } from '@core';
 import styles from './GrabFallback.module.css';
 
 interface GrabFallbackProps {

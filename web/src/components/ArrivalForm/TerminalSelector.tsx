@@ -1,4 +1,4 @@
-import { TerminalId } from '../../types';
+import { TerminalId } from '@core';
 import styles from './TerminalSelector.module.css';
 
 interface TerminalSelectorProps {

@@ -1,4 +1,4 @@
-import { TransportOption } from '../types';
+import { TransportOption } from '@core';
 
 export const TRANSPORT_OPTIONS: TransportOption[] = [
   {
@@ -6,7 +6,7 @@ export const TRANSPORT_OPTIONS: TransportOption[] = [
     name: 'Bus 86',
     nameVi: 'Xe buýt 86',
     type: 'bus',
-    basePrice: 35000,
+    basePrice: 50000,
     priceUnit: 'per_trip',
     travelTime: {
       normal: { min: 50, max: 55 },

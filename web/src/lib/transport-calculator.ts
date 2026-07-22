@@ -4,15 +4,15 @@ import {
   TripCalculationRequest,
   TripCalculationResponse,
   SortOption,
-} from '../types';
+} from '@core';
 import { TRANSPORT_OPTIONS, getScoreLabel } from './transport-data';
 import {
   isPeakHour,
   calculateExitTime,
   timeToMinutes,
   addMinutes,
-} from './calculation-engine';
-import { BUS_86 } from './data';
+} from '@core';
+import { BUS_86 } from '@core';
 
 const WALKING_TO_PICKUP_MINUTES = 5;
 

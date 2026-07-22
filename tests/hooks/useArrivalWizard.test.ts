@@ -1,5 +1,5 @@
 import { formReducer, initialFormState, calculateResultFromForm } from '../../hooks/useArrivalWizard';
-import { ArrivalFormData } from '../../types';
+import { ArrivalFormData } from '@core';
 
 describe('formReducer', () => {
   describe('SET_TIME', () => {

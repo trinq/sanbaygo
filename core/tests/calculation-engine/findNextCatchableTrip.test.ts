@@ -11,7 +11,7 @@ describe('findNextCatchableTrip', () => {
         // First bus >= 08:50 is 09:15
         expect(result.trip.departureTime).toBe('09:15');
         expect(result.trip.waitMinutes).toBe(25); // 09:15 - 08:50
-        expect(result.trip.ticketPrice).toBe(35000);
+        expect(result.trip.ticketPrice).toBe(50000);
       }
     });
 
@@ -48,7 +48,7 @@ describe('findNextCatchableTrip', () => {
       // but there's no catchable bus
       // Actually: if readyTime >= first bus but < last bus, we can catch a bus
       // So "missed_last" happens when readyTime > last bus departure
-      // Let's test: 21:30 arrival + 90 + 5 = 23:15 > 22:15 = "too_late"
+      // Let's test: 21:30 arrival + 90 + 5 = 23:05 > 22:15 = "too_late"
       // For "missed_last": readyTime is before operating hours end but no bus found
       // This happens when readyTime is past all schedule times but before operatingHours.end
       // Hmm, the schedule ends at 22:15 but operatingHours.end is 22:15
