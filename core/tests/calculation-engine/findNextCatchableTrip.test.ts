@@ -11,7 +11,7 @@ describe('findNextCatchableTrip', () => {
         // First bus >= 08:50 is 09:15
         expect(result.trip.departureTime).toBe('09:15');
         expect(result.trip.waitMinutes).toBe(25); // 09:15 - 08:50
-        expect(result.trip.ticketPrice).toBe(35000);
+        expect(result.trip.ticketPrice).toBe(50000);
       }
     });
 

@@ -57,4 +57,15 @@ export const DESTINATIONS: DestinationPoint[] = [
       peak: { min: 55, max: 65 },
     },
   },
+  {
+    id: 'other',
+    name: 'Khu vực khác',
+    nearestBusStop: 'Đại lộ Thăng Long',
+    walkingMinutes: 5,
+    hasBusCoverage: false,
+    travelTime: {
+      normal: { min: 50, max: 55 },
+      peak: { min: 65, max: 75 },
+    },
+  },
 ];
