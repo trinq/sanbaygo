@@ -1,8 +1,5 @@
 import { useReducer, useCallback } from 'react';
-import { ArrivalFormData, ArrivalResult } from '../types';
-import { calculateExitTime, isPeakHour, findNextCatchableTrip, calculateArrivalEstimate } from '../calculation-engine';
-import { DESTINATIONS } from '../data/destinations';
-import { NOI_BAI_AIRPORT } from '../data/airport';
+import { ArrivalFormData, ArrivalResult, calculateExitTime, isPeakHour, findNextCatchableTrip, calculateArrivalEstimate, DESTINATIONS, NOI_BAI_AIRPORT } from '@core';
 
 type Action =
   | { type: 'SET_TIME'; payload: string }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { ArrivalResult } from '../../types';
-import { isPeakHour } from '../../calculation-engine';
+import { ArrivalResult } from '@core';
+import { isPeakHour } from '@core';
 import { BusRecommendationCard } from './BusRecommendation';
 import { GrabFallbackCard } from './GrabFallback';
 import { DirectionGuide } from './DirectionGuide';

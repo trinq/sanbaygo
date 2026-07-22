@@ -37,8 +37,13 @@
   "jest": {
     "preset": "ts-jest",
     "testMatch": [
-      "**/tests/**/*.test.ts"
+      "**/tests/**/*.test.ts",
+      "**/core/tests/**/*.test.ts"
     ],
+    "moduleNameMapper": {
+      "^@core$": "<rootDir>/core/index.ts",
+      "^@core/(.*)$": "<rootDir>/core/$1"
+    },
     "moduleFileExtensions": [
       "ts",
       "tsx",

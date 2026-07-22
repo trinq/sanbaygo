@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useArrivalWizard } from '../hooks/useArrivalWizard';
 import { ArrivalForm } from '../components/ArrivalForm';
 import { ResultDisplay } from '../components/ResultDisplay';
-import { ArrivalResult } from '../types';
+import { ArrivalResult } from '@core';
 
 type AppState = 'form' | 'result';
 

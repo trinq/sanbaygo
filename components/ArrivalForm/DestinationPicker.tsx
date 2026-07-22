@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { DESTINATIONS } from '../../data/destinations';
+import { DESTINATIONS } from '@core';
 
 interface DestinationPickerProps {
   value: string | null;
