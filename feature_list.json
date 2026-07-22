@@ -287,6 +287,90 @@
       "verification": "1. See button disabled when form incomplete\n2. See button enable when all fields filled\n3. Click triggers result display",
       "evidence": "Commit 4fa9a9a - Calculate button with isFormValid integration in ArrivalForm",
       "notes": "Task 13 in web implementation plan"
+    },
+    {
+      "id": "core-module-skeleton",
+      "priority": 1,
+      "area": "infrastructure",
+      "platform": "shared",
+      "title": "core/ module skeleton with barrel and tsconfig (Ticket 01)",
+      "user_visible_behavior": "Running `cd core && npx tsc --noEmit -p tsconfig.json` exits 0; web and RN test suites still pass with no consumer imports from core yet",
+      "status": "pending",
+      "verification": "1. Run `cd core && npx tsc --noEmit -p tsconfig.json`\n2. Verify exit code 0\n3. Run `cd web && npm test` and `npm test` at root\n4. Verify both pass without changes to existing behavior",
+      "evidence": "Pending implementation",
+      "notes": "Ticket 01 in docs/superpowers/plans/2026-07-22-collapse-platform-duplication.md"
+    },
+    {
+      "id": "core-types-consolidated",
+      "priority": 2,
+      "area": "infrastructure",
+      "platform": "shared",
+      "title": "Consolidated shared types in core/types with Terminal.flightTypes (Ticket 02)",
+      "user_visible_behavior": "core/types/index.ts contains RN types + web vehicle-comparison types; Terminal now has flightTypes array",
+      "status": "pending",
+      "verification": "1. Verify Terminal interface has flightTypes: FlightType[]\n2. Verify TransportType, SortOption, TransportOption, TransportComparison exist\n3. Run tsc --noEmit -p core/tsconfig.json\n4. Run web and RN test suites — still green",
+      "evidence": "Pending implementation",
+      "notes": "Ticket 02; consumers do not import core yet so no breakage"
+    },
+    {
+      "id": "core-data-with-corrections",
+      "priority": 3,
+      "area": "data",
+      "platform": "shared",
+      "title": "Shared data in core/data with Bus 86 50k, T1 international, 'other' destination (Ticket 03)",
+      "user_visible_behavior": "BUS_86.ticketPrice === 50000; T1 supports international flights; 'other' destination exists with hasBusCoverage=false",
+      "status": "pending",
+      "verification": "1. Run core/tests/data.test.ts — all assertions pass\n2. Verify Bus 86 price = 50000 VND\n3. Verify 'other' destination present with hasBusCoverage=false\n4. Verify T1 international exit-time entries exist for both baggage types",
+      "evidence": "Pending implementation",
+      "notes": "Ticket 03; pins the three intentional data corrections so future drift is caught"
+    },
+    {
+      "id": "core-calc-engine",
+      "priority": 4,
+      "area": "business-logic",
+      "platform": "shared",
+      "title": "Time utilities and calculation engine in core/ with tests (Ticket 04)",
+      "user_visible_behavior": "core/utils/time.ts and core/calculation-engine/*.ts contain the canonical pure functions; core/tests/ contains their moved tests with findNextCatchableTrip price assertion = 50000",
+      "status": "pending",
+      "verification": "1. Run npm test at repo root — all moved calc-engine tests pass\n2. Run npm test in web/ — passes\n3. Verify findNextCatchableTrip.test.ts expects 50000 not 35000",
+      "evidence": "Pending implementation",
+      "notes": "Ticket 04; old files stay in place until Ticket 06 contract step"
+    },
+    {
+      "id": "web-core-migration",
+      "priority": 5,
+      "area": "infrastructure",
+      "platform": "web",
+      "title": "Web consumers migrated to @core path alias (Ticket 05)",
+      "user_visible_behavior": "Web imports from '@core' instead of relative paths; web/src/lib/{data,calculation-engine,time}.ts and web/src/types/index.ts deleted; web test suite green including core/tests/**",
+      "status": "pending",
+      "verification": "1. Run `cd web && npm test` — passes\n2. Run `cd web && npx tsc --noEmit` — exit 0\n3. Verify web/__tests__/lib/transport-calculator.test.ts asserts 50000 VND\n4. Verify deleted files no longer present",
+      "evidence": "Pending implementation",
+      "notes": "Ticket 05; web-first per migration order decision"
+    },
+    {
+      "id": "rn-core-migration",
+      "priority": 6,
+      "area": "infrastructure",
+      "platform": "react-native",
+      "title": "RN consumers migrated to @core path alias and duplicates deleted (Ticket 06)",
+      "user_visible_behavior": "RN imports from '@core'; root data/, types/, utils/, calculation-engine/ directories deleted; root npm test green",
+      "status": "pending",
+      "verification": "1. Run `npm test` at root — passes\n2. Run `npx tsc --noEmit` at root — exit 0\n3. Verify data/, types/, utils/, calculation-engine/ directories gone\n4. Verify tests/calculation-engine/ empty and removed; tests/hooks/ intact",
+      "evidence": "Pending implementation",
+      "notes": "Ticket 06; web-first means this runs second"
+    },
+    {
+      "id": "core-final-verification",
+      "priority": 7,
+      "area": "infrastructure",
+      "platform": "shared",
+      "title": "Final contract verification — single source of truth (Ticket 07)",
+      "user_visible_behavior": "No leftover duplicate modules; no consumer imports legacy paths; both test suites and both tsc checks green; working tree clean",
+      "status": "pending",
+      "verification": "1. ls data types utils calculation-engine — all 'No such file'\n2. rg for legacy imports — no matches\n3. web and root npm test — both pass\n4. web and root npx tsc --noEmit — both exit 0\n5. git status — clean",
+      "evidence": "Pending implementation",
+      "notes": "Ticket 07; verification-only, no commit"
     }
   ]
 }
