@@ -7,5 +7,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["./types/index.ts"]
+  "include": ["./types", "./utils", "./tests"]
 }
