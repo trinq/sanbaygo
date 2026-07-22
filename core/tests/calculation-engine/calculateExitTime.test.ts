@@ -1,5 +1,4 @@
 import { calculateExitTime } from '../../calculation-engine/calculateExitTime';
-import { TerminalType, BaggageType, FlightType } from '../../types';
 
 describe('calculateExitTime', () => {
   describe('T1 domestic flights', () => {

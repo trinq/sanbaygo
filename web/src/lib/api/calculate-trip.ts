@@ -3,7 +3,7 @@
  * These provide server-style API responses for trip calculations
  */
 import { calculateTripComparison } from '../transport-calculator';
-import { TripCalculationRequest, TripCalculationResponse } from '../../types';
+import { TripCalculationRequest, TripCalculationResponse } from '@core';
 
 export interface CalculateTripError {
   error: string;

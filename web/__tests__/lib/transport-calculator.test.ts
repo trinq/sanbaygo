@@ -1,5 +1,5 @@
 import { sortComparisons, calculateTripComparison } from '../../src/lib/transport-calculator';
-import { TransportComparison } from '../../src/types';
+import { TransportComparison } from '@core';
 
 describe('sortComparisons', () => {
   const mockComparisons: TransportComparison[] = [
@@ -8,7 +8,7 @@ describe('sortComparisons', () => {
       name: 'Bus 86',
       nameVi: 'Xe buýt 86',
       type: 'bus',
-      price: { estimate: '35,000 VND', value: 35000, isEstimate: false },
+      price: { estimate: '50,000 VND', value: 50000, isEstimate: false },
       travelTime: {
         estimate: '50-70 phút',
         minutesRange: { min: 50, max: 70 },
@@ -114,7 +114,7 @@ describe('calculateTripComparison', () => {
     expect(result.metadata.isPeakHour).toBe(false);
   });
 
-  test('Bus 86 has fixed price of 35000', () => {
+  test('Bus 86 has fixed price of 50000', () => {
     const result = calculateTripComparison({
       arrivalTime: '14:00',
       terminalId: 'T1',
@@ -124,7 +124,7 @@ describe('calculateTripComparison', () => {
     });
 
     const bus86 = result.comparison.find((c) => c.id === 'BUS_86');
-    expect(bus86?.price.value).toBe(35000);
+    expect(bus86?.price.value).toBe(50000);
     expect(bus86?.price.isEstimate).toBe(false);
   });
 
@@ -227,7 +227,7 @@ describe('calculateTripComparison', () => {
       sortBy: 'fastest',
     });
 
-    // Cheapest should have Bus 86 first (35000)
+    // Cheapest should have Bus 86 first (50000)
     expect(cheapestResult.comparison[0].id).toBe('BUS_86');
 
     // Fastest should have motorbikes first (40-50 min vs 50-55 min for bus)

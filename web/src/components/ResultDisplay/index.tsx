@@ -1,6 +1,5 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { ArrivalResult, ArrivalFormData } from '../../types';
-import { isPeakHour } from '../../lib/calculation-engine';
+import { ArrivalResult, ArrivalFormData, isPeakHour } from '@core';
 import { JourneyTimeline } from './JourneyTimeline';
 import { BusRecommendation } from './BusRecommendation';
 import { GrabFallback } from './GrabFallback';

@@ -1,7 +1,5 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { ArrivalResult, ArrivalFormData } from '../../types';
-import { calculateExitTime } from '../../lib/calculation-engine';
-import { NOI_BAI_AIRPORT } from '../../lib/data';
+import { ArrivalResult, ArrivalFormData, calculateExitTime, NOI_BAI_AIRPORT } from '@core';
 import styles from './JourneyTimeline.module.css';
 
 interface JourneyTimelineProps {

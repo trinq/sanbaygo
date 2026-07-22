@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TransportComparison, SortOption } from '@/types';
+import { TransportComparison, SortOption } from '@core';
 import { SortToggle } from './SortToggle';
 import { VehicleCard } from './VehicleCard';
 import { calculateTripComparison } from '@/lib/transport-calculator';

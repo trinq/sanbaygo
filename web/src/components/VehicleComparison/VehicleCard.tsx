@@ -1,4 +1,4 @@
-import { TransportComparison } from '@/types';
+import { TransportComparison } from '@core';
 import styles from './VehicleCard.module.css';
 
 interface VehicleCardProps {

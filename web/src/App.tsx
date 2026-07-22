@@ -4,7 +4,7 @@ import { Header } from './components/Header';
 import { ArrivalForm } from './components/ArrivalForm';
 import { ResultDisplay } from './components/ResultDisplay';
 import { useFormState } from './hooks/useFormState';
-import { calculateResult } from './lib/calculation-engine';
+import { calculateResult } from './lib/calculation-result';
 import styles from './App.module.css';
 
 type View = 'form' | 'result';

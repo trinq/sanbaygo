@@ -1,4 +1,4 @@
-import { ArrivalFormData } from '../../types';
+import { ArrivalFormData } from '@core';
 
 export function isFormValid(formData: ArrivalFormData): boolean {
   return (

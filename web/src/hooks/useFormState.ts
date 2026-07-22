@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { ArrivalFormData } from '../types';
+import { ArrivalFormData } from '@core';
 
 function getCurrentTime(): string {
   const now = new Date();

@@ -1,5 +1,5 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { BusRecommendation as BusRecommendationType } from '../../types';
+import { BusRecommendation as BusRecommendationType } from '@core';
 import styles from './BusRecommendation.module.css';
 
 interface BusRecommendationProps {
