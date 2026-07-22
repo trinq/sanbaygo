@@ -33,4 +33,17 @@ describe('core data integrity', () => {
       expect(checked).toBeDefined();
     });
   });
+
+  describe('T2 international flight support', () => {
+    it("T2 flightTypes includes 'international'", () => {
+      const t2 = NOI_BAI_AIRPORT.terminals.find(t => t.id === 'T2');
+      expect(t2).toBeDefined();
+      expect(t2?.flightTypes).toContain('international');
+    });
+
+    it('T2 supports international flights only', () => {
+      const t2 = NOI_BAI_AIRPORT.terminals.find(t => t.id === 'T2');
+      expect(t2?.flightTypes).toEqual(['international']);
+    });
+  });
 });

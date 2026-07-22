@@ -30,6 +30,14 @@ describe('calculateArrivalEstimate', () => {
     });
   });
 
+  describe('midnight wrap', () => {
+    it('handles wrap-around past midnight', () => {
+      const result = calculateArrivalEstimate('23:50', { min: 5, max: 30 }, false);
+      expect(result.early).toBe('23:55');
+      expect(result.late).toBe('00:20');
+    });
+  });
+
   describe('time boundary handling', () => {
     it('wraps past midnight correctly', () => {
       const result = calculateArrivalEstimate('23:30', { min: 60, max: 90 }, false);
