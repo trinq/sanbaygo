@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ds } from '@design-system';
 import { useArrivalWizard } from '../hooks/useArrivalWizard';
 import { ArrivalForm } from '../components/ArrivalForm';
 import { ResultDisplay } from '../components/ResultDisplay';
@@ -41,41 +42,39 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['bottom']}>
-      <KeyboardAvoidingView
-        style={styles.keyboardView}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        {appState === 'form' ? (
-          <ArrivalForm
-            formData={formData}
-            onTimeChange={setArrivalTime}
-            onTerminalChange={setTerminal}
-            onBaggageChange={setBaggage}
-            onDestinationChange={setDestination}
-            onComplete={handleFormComplete}
-          />
-        ) : (
-          result && (
-            <ResultDisplay
-              result={result}
-              arrivalTime={formData.arrivalTime}
-              onBack={handleBack}
-              onRecalculate={handleRecalculate}
+    <View style={styles.warmBackground}>
+      <SafeAreaView style={styles.container} edges={['bottom']}>
+        <KeyboardAvoidingView
+          style={styles.keyboardView}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
+          {appState === 'form' ? (
+            <ArrivalForm
+              formData={formData}
+              onTimeChange={setArrivalTime}
+              onTerminalChange={setTerminal}
+              onBaggageChange={setBaggage}
+              onDestinationChange={setDestination}
+              onComplete={handleFormComplete}
             />
-          )
-        )}
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+          ) : (
+            result && (
+              <ResultDisplay
+                result={result}
+                arrivalTime={formData.arrivalTime}
+                onBack={handleBack}
+                onRecalculate={handleRecalculate}
+              />
+            )
+          )}
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  keyboardView: {
-    flex: 1,
-  },
+  warmBackground: { flex: 1, backgroundColor: ds.semantic.surfaceBackground },
+  container: { flex: 1 },
+  keyboardView: { flex: 1 },
 });

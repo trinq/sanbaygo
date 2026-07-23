@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { ArrivalResult } from '@core';
-import { isPeakHour } from '@core';
+import { ArrivalResult, isPeakHour } from '@core';
+import { ds } from '@design-system';
+import { resultCopyVi } from '@design-system/copy/result-display.vi';
 import { BusRecommendationCard } from './BusRecommendation';
 import { GrabFallbackCard } from './GrabFallback';
 import { DirectionGuide } from './DirectionGuide';
@@ -15,22 +16,20 @@ interface ResultDisplayProps {
 
 export function ResultDisplay({ result, arrivalTime, onBack, onRecalculate }: ResultDisplayProps) {
   const isPeak = isPeakHour(arrivalTime);
+  const c = resultCopyVi;
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>Kết quả</Text>
+        <Text style={styles.title}>{c.header.title}</Text>
         <Text style={styles.subtitle}>
-          Dựa trên giờ đáp {arrivalTime}
-          {isPeak && ' (giờ cao điểm)'}
+          {c.header.basedOn} {arrivalTime}
+          {isPeak && ` ${c.header.peakSuffix}`}
         </Text>
       </View>
 
-      {/* Bus recommendation */}
       <BusRecommendationCard recommendation={result.bus} />
 
-      {/* Direction guide (if bus available) */}
       {result.bus.available && result.direction && (
         <DirectionGuide
           description={result.direction.description}
@@ -38,20 +37,28 @@ export function ResultDisplay({ result, arrivalTime, onBack, onRecalculate }: Re
         />
       )}
 
-      {/* Grab fallback */}
       <GrabFallbackCard
         priceEstimate={result.grab.priceEstimate}
         travelTime={result.grab.travelTime}
         isPeak={isPeak}
       />
 
-      {/* Actions */}
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.backButton} onPress={onBack}>
-          <Text style={styles.backButtonText}>← Sửa lại</Text>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={onBack}
+          accessibilityRole="button"
+          accessibilityLabel={c.actions.back}
+        >
+          <Text style={styles.backButtonText}>{c.actions.back}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.recalculateButton} onPress={onRecalculate}>
-          <Text style={styles.recalculateButtonText}>Tính lại</Text>
+        <TouchableOpacity
+          style={styles.recalculateButton}
+          onPress={onRecalculate}
+          accessibilityRole="button"
+          accessibilityLabel={c.actions.recalculate}
+        >
+          <Text style={styles.recalculateButtonText}>{c.actions.recalculate}</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -59,24 +66,16 @@ export function ResultDisplay({ result, arrivalTime, onBack, onRecalculate }: Re
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F7FA',
-    padding: 16,
-  },
-  header: {
-    marginBottom: 20,
-  },
+  container: { flex: 1, padding: ds.space[4] },
+  header: { marginBottom: 20 },
   title: {
-    fontSize: 28,
+    fontFamily: ds.font.display,
+    fontSize: ds.fontSize.display,
     fontWeight: '700',
-    color: '#1E3A5F',
+    color: ds.semantic.textPrimary,
     marginBottom: 4,
   },
-  subtitle: {
-    fontSize: 16,
-    color: '#6B7C8F',
-  },
+  subtitle: { fontSize: ds.fontSize.body, color: ds.semantic.textMuted },
   actions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -84,25 +83,14 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 32,
   },
-  backButton: {
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-  },
-  backButtonText: {
-    fontSize: 16,
-    color: '#6B7C8F',
-    fontWeight: '500',
-  },
+  backButton: { paddingVertical: 14, paddingHorizontal: 20 },
+  backButtonText: { fontSize: 16, color: ds.semantic.textMuted, fontWeight: '500' },
   recalculateButton: {
     flex: 1,
-    backgroundColor: '#1E3A5F',
+    backgroundColor: ds.semantic.accentRecommended,
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: 'center',
   },
-  recalculateButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#FFFFFF',
-  },
+  recalculateButtonText: { fontSize: 16, fontWeight: '600', color: ds.color.ivory['50'] },
 });
