@@ -111,3 +111,52 @@ All 10 implementation tasks completed:
 |------|---------|------|--------|
 | 2026-07-21 | 1 | Create harness + scaffold | Harness done, scaffold pending |
 | 2026-07-21 | 2-10 | Implement MVP features | COMPLETE |
+
+
+---
+
+### Session 12: 2026-07-24
+
+**Goal:** Apply glassmorphism + warm palette to the result screens on both platforms (RN + web); port `VehicleComparison` from web-only to RN.
+
+**Branch:** `feature/glass-warm-result-screen` (worktree `/Users/trinq/Developer/sanbaygo-glass`).
+
+**Commits on this branch (14 total):**
+- `66fe5ca` Task 1 — JSON tokens + RN adapter + MASTER
+- `59c0308` Task 2 — `@design-system` path alias (root + web + Metro)
+- `5f61121` Task 3 — CSS-vars adapter + barrel
+- `d25eafc` Task 4 — Vietnamese copy table
+- `fcc9188` Task 5 — `ResultCard` primitive (RN + web) + Jest harness
+- `3e86f7c` Task 6 — 14 token-invariant tests
+- `b218b6c` Task 7 — relocate `calculateTripComparison` into `@core`
+- `4a83c38` Tasks 8+9 — RN card redesign + warm background
+- `0da1587` Task 10 — web ResultDisplay re-skin + LanguageContext keys
+- `896fcde` Task 11 — web VehicleComparison re-skin
+- `95fe1c0` Task 12 — RN VehicleComparison port
+- `9e66069` Task 13 — wire VehicleComparison into ResultDisplay
+- `fe67b30` Task 13b — drop duplicate `jest.config.js`
+- `e60e9ad` Task 14a — fix Vite aliases for `@design-system/*` sub-path resolution
+
+**Verification (Task 14):**
+- root `npx tsc --noEmit` exit 0
+- web `npx tsc --noEmit` exit 0
+- root `npx jest` → 135/135 tests pass
+- web `npm test` → 11/11 tests pass
+- web `npm run build` → exit 0 (80 modules; was ENOTDIR before Vite alias fix)
+- grep Vietnamese literals in RN components → OK_NO_LITERALS
+- grep hex literals in web CSS modules (excluding score[1-5]) → OK_NO_HEX
+- 7 files import from `@design-system` (≥ 4 required)
+
+**Evidence recorded:** `feature_list.json` gains `rn-result-glass-redesign` (priority 14) and `web-result-glass-redesign` (priority 15), both `status: passing`.
+
+**Subagent deviations caught (good):**
+- Task 12+13: actual `calculateTripComparison` returns `{comparison, metadata:{isPeakHour}}` not `{comparisons, isPeakHour}` as plan showed
+- Task 14: Vite alias fix (`@design-system/` was resolving to `design-system/index.ts/tokens/index.css` — ENOTDIR)
+- Task 13b: removed subagent-created duplicate `jest.config.js`
+
+**Known risks:**
+- Vite regex aliases are required for `@design-system/*` sub-paths to resolve correctly
+- Sandbox blocks writing to `web/dist/`; production build needs to run with `all` permission
+- The web `tsc` step runs before `vite build` per `npm run build` — any TS error halts before reaching the alias check
+
+**Next best action:** Open a PR from `feature/glass-warm-result-screen` → `main`. Use `/finishing-a-development-branch` to pick merge vs PR strategy.
