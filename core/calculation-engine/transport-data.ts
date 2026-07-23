@@ -1,4 +1,4 @@
-import { TransportOption } from '@core';
+import { TransportOption } from '../types';
 
 export const TRANSPORT_OPTIONS: TransportOption[] = [
   {
@@ -104,10 +104,6 @@ export const TRANSPORT_OPTIONS: TransportOption[] = [
     notes: 'Dịch vụ xe của Be, xe 4 chỗ có điều hòa',
   },
 ];
-
-export function getTransportOption(id: string): TransportOption | undefined {
-  return TRANSPORT_OPTIONS.find((opt) => opt.id === id);
-}
 
 export function getScoreLabel(score: number): string {
   if (score >= 4) return 'Tốt';

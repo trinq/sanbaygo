@@ -1,8 +1,8 @@
 /**
  * API utilities for transport options
- * These provide server-style API responses using static data
+ * Pulls TRANSPORT_OPTIONS from `@core` (relocated from web/src/lib/transport-data).
  */
-import { TRANSPORT_OPTIONS } from '../transport-data';
+import { TRANSPORT_OPTIONS } from '@core';
 
 export interface TransportOptionsResponse {
   options: typeof TRANSPORT_OPTIONS;

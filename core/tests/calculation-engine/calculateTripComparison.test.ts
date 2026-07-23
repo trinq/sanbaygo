@@ -1,4 +1,4 @@
-import { sortComparisons, calculateTripComparison } from '../../src/lib/transport-calculator';
+import { sortComparisons, calculateTripComparison } from '../../calculation-engine';
 import { TransportComparison } from '@core';
 
 describe('sortComparisons', () => {
