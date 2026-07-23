@@ -1,4 +1,5 @@
 import { TransportComparison } from '@core';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './VehicleCard.module.css';
 
 interface VehicleCardProps {
@@ -12,16 +13,18 @@ const TYPE_ICONS: Record<string, string> = {
 };
 
 export function VehicleCard({ comparison }: VehicleCardProps) {
+  const { t } = useLanguage();
   const icon = TYPE_ICONS[comparison.type] || '🚗';
+  const className = `${styles.card} ${comparison.isRecommended ? styles.recommended : ''}`;
 
   return (
-    <div className={`${styles.card} ${comparison.isRecommended ? styles.recommended : ''}`}>
+    <div className={className}>
       {comparison.isRecommended && (
-        <div className={styles.badge}>Đề xuất</div>
+        <div className={styles.badge}>{t.results.recommended}</div>
       )}
 
       <div className={styles.header}>
-        <span className={styles.icon}>{icon}</span>
+        <span className={styles.icon} aria-hidden>{icon}</span>
         <div className={styles.name}>
           <h3 className={styles.nameText}>{comparison.nameVi}</h3>
           <span className={styles.nameEn}>{comparison.name}</span>
@@ -31,20 +34,21 @@ export function VehicleCard({ comparison }: VehicleCardProps) {
       <div className={styles.price}>
         <span className={styles.priceValue}>{comparison.price.estimate}</span>
         {comparison.price.isEstimate && (
-          <span className={styles.estimateTag}>ước tính</span>
+          <span className={styles.estimateTag}>{t.results.grabEstimate}</span>
         )}
       </div>
 
       <div className={styles.time}>
-        <span className={styles.timeIcon}>⏱️</span>
-        <span className={styles.timeValue}>{comparison.travelTime.estimate}</span>
+        <span aria-hidden>⏱️</span>
+        <span>{comparison.travelTime.estimate}</span>
       </div>
 
       {comparison.waitTime && (
         <div className={styles.wait}>
           <span className={styles.waitLabel}>Chờ xe:</span>
-          <span className={styles.waitValue}>{comparison.waitTime.minutes} phút</span>
-          <span className={styles.waitNext}>({comparison.waitTime.nextDeparture})</span>
+          <span className={styles.waitValue}>
+            {comparison.waitTime.minutes} phút ({comparison.waitTime.nextDeparture})
+          </span>
         </div>
       )}
 

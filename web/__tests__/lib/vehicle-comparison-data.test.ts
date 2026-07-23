@@ -1,4 +1,4 @@
-import { calculateTripComparison } from '../../src/lib/transport-calculator';
+import { calculateTripComparison } from '@core';
 
 /**
  * This test documents the expected behavior for VehicleComparison component.

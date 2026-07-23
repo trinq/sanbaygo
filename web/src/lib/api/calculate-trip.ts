@@ -1,8 +1,9 @@
 /**
  * API utilities for trip calculation
- * These provide server-style API responses for trip calculations
+ * Thin re-export of `calculateTripComparison` from `@core`, with error wrapping
+ * preserved for callers that import through the api surface.
  */
-import { calculateTripComparison } from '../transport-calculator';
+import { calculateTripComparison } from '@core';
 import { TripCalculationRequest, TripCalculationResponse } from '@core';
 
 export interface CalculateTripError {

@@ -12,6 +12,12 @@
       ],
       "@core/*": [
         "./core/*"
+      ],
+      "@design-system": [
+        "./design-system/index.ts"
+      ],
+      "@design-system/*": [
+        "./design-system/*"
       ]
     }
   },

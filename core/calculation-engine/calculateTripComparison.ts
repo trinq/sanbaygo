@@ -3,16 +3,13 @@ import {
   TransportOption,
   TripCalculationRequest,
   TripCalculationResponse,
-  SortOption,
-} from '@core';
+} from '../types';
+import { isPeakHour } from './isPeakHour';
+import { calculateExitTime } from './calculateExitTime';
+import { timeToMinutes, addMinutes } from '../utils/time';
+import { BUS_86 } from '../data';
 import { TRANSPORT_OPTIONS, getScoreLabel } from './transport-data';
-import {
-  isPeakHour,
-  calculateExitTime,
-  timeToMinutes,
-  addMinutes,
-} from '@core';
-import { BUS_86 } from '@core';
+import { sortComparisons } from './sortComparisons';
 
 const WALKING_TO_PICKUP_MINUTES = 5;
 
@@ -99,29 +96,6 @@ function buildComparison(
     notes: option.notes,
     isRecommended: option.isRecommended,
   };
-}
-
-export function sortComparisons(
-  comparisons: TransportComparison[],
-  sortBy: SortOption
-): TransportComparison[] {
-  const sorted = [...comparisons];
-
-  switch (sortBy) {
-    case 'cheapest':
-      return sorted.sort((a, b) => a.price.value - b.price.value);
-
-    case 'fastest':
-      return sorted.sort((a, b) => a.travelTime.minutesRange.min - b.travelTime.minutesRange.min);
-
-    case 'recommended':
-    default:
-      return sorted.sort((a, b) => {
-        if (a.isRecommended && !b.isRecommended) return -1;
-        if (!a.isRecommended && b.isRecommended) return 1;
-        return 0;
-      });
-  }
 }
 
 export function calculateTripComparison(
