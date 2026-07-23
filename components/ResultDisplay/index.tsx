@@ -6,15 +6,27 @@ import { resultCopyVi } from '@design-system/copy/result-display.vi';
 import { BusRecommendationCard } from './BusRecommendation';
 import { GrabFallbackCard } from './GrabFallback';
 import { DirectionGuide } from './DirectionGuide';
+import { VehicleComparison } from '../VehicleComparison';
 
 interface ResultDisplayProps {
   result: ArrivalResult;
   arrivalTime: string;
+  terminalId: 'T1' | 'T2';
+  baggageType: 'carry_on' | 'checked';
+  destinationId: string;
   onBack: () => void;
   onRecalculate: () => void;
 }
 
-export function ResultDisplay({ result, arrivalTime, onBack, onRecalculate }: ResultDisplayProps) {
+export function ResultDisplay({
+  result,
+  arrivalTime,
+  terminalId,
+  baggageType,
+  destinationId,
+  onBack,
+  onRecalculate,
+}: ResultDisplayProps) {
   const isPeak = isPeakHour(arrivalTime);
   const c = resultCopyVi;
 
@@ -41,6 +53,13 @@ export function ResultDisplay({ result, arrivalTime, onBack, onRecalculate }: Re
         priceEstimate={result.grab.priceEstimate}
         travelTime={result.grab.travelTime}
         isPeak={isPeak}
+      />
+
+      <VehicleComparison
+        arrivalTime={arrivalTime}
+        terminalId={terminalId}
+        baggageType={baggageType}
+        destinationId={destinationId}
       />
 
       <View style={styles.actions}>

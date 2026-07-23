@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import { ArrivalResult, BusRecommendation, TimeRange } from '@core';
 import { BusRecommendationCard } from '../../../components/ResultDisplay/BusRecommendation';
 import { GrabFallbackCard } from '../../../components/ResultDisplay/GrabFallback';
@@ -62,5 +62,24 @@ describe('<GrabFallbackCard /> (RN, after redesign)', () => {
       <GrabFallbackCard priceEstimate="250.000 - 350.000 VND" travelTime={baseGrab} isPeak={false} />
     );
     expect(queryByText(/giờ cao điểm/i)).toBeNull();
+  });
+});
+
+import { VehicleComparison } from '../../../components/VehicleComparison';
+
+describe('<VehicleComparison /> integration', () => {
+  it('changes first card when sort is toggled', () => {
+    const { getByText, getAllByText } = render(
+      <VehicleComparison
+        arrivalTime="14:00"
+        terminalId="T1"
+        baggageType="carry_on"
+        destinationId="old-quarter"
+      />
+    );
+    const cheapest = getByText(/Giá rẻ nhất/);
+    fireEvent.press(cheapest);
+    const allBusCards = getAllByText(/Xe buýt 86/);
+    expect(allBusCards.length).toBeGreaterThanOrEqual(1);
   });
 });

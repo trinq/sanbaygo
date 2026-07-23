@@ -62,6 +62,9 @@ export default function HomeScreen() {
               <ResultDisplay
                 result={result}
                 arrivalTime={formData.arrivalTime}
+                terminalId={(formData.terminal ?? 'T1') as 'T1' | 'T2'}
+                baggageType={(formData.baggage ?? 'carry_on') as 'carry_on' | 'checked'}
+                destinationId={formData.destination ?? 'old-quarter'}
                 onBack={handleBack}
                 onRecalculate={handleRecalculate}
               />
