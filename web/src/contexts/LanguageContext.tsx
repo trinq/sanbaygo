@@ -41,6 +41,13 @@ interface Translations {
     lastBusAt: string;
     needToArriveBy: string;
     recalculate: string;
+    recommended: string;
+    peakWarning: string;
+    grabEstimate: string;
+    comparisonTitle: string;
+    sortRecommended: string;
+    sortCheapest: string;
+    sortFastest: string;
   };
   destinations: {
     [key: string]: string;
@@ -87,6 +94,13 @@ const translations: Record<Language, Translations> = {
       lastBusAt: 'Chuyến cuối khởi hành lúc',
       needToArriveBy: 'Bạn cần đến điểm đón trước',
       recalculate: 'Tính lại',
+      recommended: 'ĐỀ XUẤT',
+      peakWarning: '⚠️ Giờ cao điểm, thời gian có thể lâu hơn bình thường',
+      grabEstimate: 'ước tính',
+      comparisonTitle: 'So sánh phương tiện',
+      sortRecommended: 'Đề xuất',
+      sortCheapest: 'Giá rẻ nhất',
+      sortFastest: 'Nhanh nhất',
     },
     destinations: {
       'old-quarter': 'Khu phố cổ',
@@ -136,6 +150,13 @@ const translations: Record<Language, Translations> = {
       lastBusAt: 'Last bus departs at',
       needToArriveBy: 'You need to arrive by',
       recalculate: 'Recalculate',
+      recommended: 'RECOMMENDED',
+      peakWarning: '⚠️ Peak hours, travel time may be longer than usual',
+      grabEstimate: 'estimate',
+      comparisonTitle: 'Transport Comparison',
+      sortRecommended: 'Recommended',
+      sortCheapest: 'Cheapest',
+      sortFastest: 'Fastest',
     },
     destinations: {
       'old-quarter': 'Old Quarter',

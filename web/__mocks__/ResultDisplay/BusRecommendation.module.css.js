@@ -1,0 +1,15 @@
+module.exports = {
+  container: 'container',
+  header: 'header',
+  title: 'title',
+  badge: 'badge',
+  content: 'content',
+  busIcon: 'busIcon',
+  details: 'details',
+  route: 'route',
+  info: 'info',
+  depart: 'depart',
+  wait: 'wait',
+  price: 'price',
+  tier3: 'tier3',
+};

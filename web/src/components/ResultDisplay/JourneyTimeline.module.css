@@ -1,16 +1,20 @@
 .container {
-  background: var(--color-background-alt);
-  border-radius: var(--border-radius);
-  padding: 24px;
-  margin-bottom: 24px;
-  border: 1px solid var(--color-border);
+  background: var(--glass-2-bg);
+  backdrop-filter: var(--glass-2-blur);
+  -webkit-backdrop-filter: var(--glass-2-blur);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-card);
 }
 
 .title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-primary);
-  margin-bottom: 24px;
+  font-family: var(--font-display);
+  font-size: var(--font-size-title);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
 }
 
 .timeline {
@@ -24,7 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   z-index: 1;
   min-width: 80px;
 }
@@ -36,25 +40,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-background);
+  background: var(--color-ivory-50);
   border-radius: 50%;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-card);
 }
 
 .point.primary .pointIcon {
-  background: var(--color-primary);
+  background: var(--accent-recommended);
 }
 
 .point.neutral .pointIcon {
-  background: var(--color-text-muted);
+  background: var(--text-muted);
 }
 
 .point.success .pointIcon {
-  background: var(--color-success);
+  background: var(--accent-recommended);
 }
 
 .point.highlight .pointIcon {
-  background: var(--color-success);
+  background: var(--accent-recommended);
   transform: scale(1.1);
 }
 
@@ -62,16 +66,16 @@
   font-size: 14px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: var(--color-text);
+  color: var(--text-primary);
 }
 
 .point.highlight .pointTime {
-  color: var(--color-success);
+  color: var(--accent-recommended);
 }
 
 .pointLabel {
   font-size: 11px;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
   text-align: center;
   max-width: 80px;
 }
@@ -79,9 +83,9 @@
 .line {
   flex: 1;
   height: 3px;
-  background: var(--color-border);
+  background: var(--border-glass);
   margin: 0 -8px;
-  margin-bottom: 32px;
+  margin-bottom: var(--space-8);
 }
 
 @media (max-width: 768px) {
@@ -94,12 +98,12 @@
   .point {
     flex-direction: row;
     min-width: auto;
-    gap: 12px;
+    gap: var(--space-3);
   }
 
   .line {
     width: 3px;
-    height: 32px;
+    height: var(--space-8);
     margin: 0;
     margin-left: 24px;
   }

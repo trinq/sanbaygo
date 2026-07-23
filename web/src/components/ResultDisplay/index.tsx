@@ -28,13 +28,8 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
 
       {result.bus.available ? (
         <>
-          <JourneyTimeline
-            result={result}
-            formData={formData}
-          />
-          <BusRecommendation
-            recommendation={result.bus}
-          />
+          <JourneyTimeline result={result} formData={formData} />
+          <BusRecommendation recommendation={result.bus} />
         </>
       ) : (
         <div className={styles.noBus}>
