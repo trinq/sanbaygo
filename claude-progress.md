@@ -8,14 +8,15 @@
 
 **Standard verification path:** `npm test`
 
-**All features:** COMPLETED
+**All features:** COMPLETED + 2 new (priorities 14–15) passing on branch `feature/glass-warm-result-screen`
 
-**Current status:** MVP complete + bug fixes pushed to GitHub
+**Current status:** MVP complete + glassmorphism result screens shipped on branch `feature/glass-warm-result-screen` (19 commits, awaiting PR)
 
 **Recent fixes:**
 - Fixed ResultDisplay wiring (was using stub file instead of index.tsx)
 - Fixed double peak surcharge bug (travelTime.peak was getting +30min surcharge on top)
 - Fixed VehicleComparison showing empty (was calling non-existent HTTP API `/api/calculate-trip` in Vite frontend-only build; changed to call `calculateTripComparison()` directly)
+- Applied glassmorphism + warm palette to RN + web result screens (Session 12, 19 commits, see Session 12 below)
 
 ---
 
@@ -55,6 +56,72 @@
 **Next best action:** Implement ticket 01 — stand up `core/` skeleton. Use `/implement 01` to start.
 
 ---
+### Session 12: 2026-07-24
+
+**Goal:** Apply glassmorphism + warm palette to the result screens on both platforms (RN + web); port `VehicleComparison` from web-only to RN.
+
+**Branch:** `feature/glass-warm-result-screen` (worktree `/Users/trinq/Developer/sanbaygo-glass`)
+**Plan:** `docs/superpowers/plans/2026-07-24-glassmorphism-warm-result-screen.md` (2990 lines, 14 tasks)
+
+**Branch commits (19 total):**
+- `66fe5ca` Task 1 — JSON tokens + RN adapter + MASTER
+- `59c0308` Task 2 — `@design-system` path alias (root + web + Metro)
+- `5f61121` Task 3 — CSS-vars adapter + barrel
+- `d25eafc` Task 4 — Vietnamese copy table
+- `fcc9188` Task 5 — `ResultCard` primitive (RN + web) + Jest harness
+- `3e86f7c` Task 6 — 14 token-invariant tests
+- `b218b6c` Task 7 — relocate `calculateTripComparison` into `@core`
+- `4a83c38` Tasks 8+9 — RN card redesign (BusRecommendation / GrabFallback / DirectionGuide / ResultDisplay container / app warm bg)
+- `0da1587` Task 10 — web ResultDisplay re-skin + LanguageContext keys + tests
+- `896fcde` Task 11 — web VehicleComparison re-skin
+- `95fe1c0` Task 12 — RN VehicleComparison port (4 new files)
+- `9e66069` Task 13 — wire VehicleComparison into ResultDisplay
+- `fe67b30` Task 13b — drop duplicate `jest.config.js`
+- `e60e9ad` Task 14a — fix Vite aliases for `@design-system/*` sub-path resolution
+- `71c2f3d` Task 14b — bookkeeping (feature_list.json, this file)
+- `e6a9584` Task 14c — consolidate web CSS module mocks (ESM/CJS default-interop)
+- `149b7da` Task 14d — note the late web-mock consolidation
+- `69e45a5` Code review fixes — DirectionGuide comment, ResultCard JSDoc
+- `331878c` Code review record — appending findings to Session 12
+
+**Verification (all green):**
+- root `npx tsc --noEmit` → exit 0
+- web `npx tsc --noEmit` → exit 0
+- root `npx jest` → **135/135 tests pass**
+- web `npm test` → **11/11 tests pass**
+- web `npm run build` → exit 0 (80 modules)
+- `grep` Vietnamese literals inside redesigned RN components → `OK_NO_LITERALS`
+- `grep` hex literals inside web CSS modules (excluding score[1-5]) → `OK_NO_HEX`
+- 7 files import from `@design-system` (≥ 4 required)
+
+**Evidence recorded:** `feature_list.json` gains `rn-result-glass-redesign` (priority 14) and `web-result-glass-redesign` (priority 15), both `status: passing`.
+
+**Subagent deviations caught (good catches):**
+- Task 8+9: `getAllByText` instead of `getByText` for multi-match `giờ cao điểm`; `arrivalEstimate?.` guard for strict-mode optional type
+- Task 10+11: rewrote `web/jest.config.js` as ESM with regex-anchored CSS module mocks; `.eco` hex swapped to fallback var
+- Task 12+13: actual `calculateTripComparison` returns `{comparison, metadata:{isPeakHour}}` not `{comparisons, isPeakHour}` as the plan showed; `fireEvent.press` instead of `props.onPress()`; `getByText(/sân bay chuyên dụng/)` instead of `/Grab Bike/` (unique)
+- Task 13b: subagent created `jest.config.js` next to inline `package.json` jest block → removed
+- Task 14a: Vite alias fix (`@design-system/` was resolving to `design-system/index.ts/tokens/index.css` — ENOTDIR)
+- Task 14c: subagent created duplicate `web/src/__mocks__/` next to legacy `web/__mocks__/`; ESM/CJS default-import mismatch → consolidated
+
+**Post-implementation code review (4 findings: 3 majors, 1 minor, 1 nit):**
+- Major #1 (TDD non-compliance): systemic — all 4 component test files committed alongside their implementation. Hybrid execution model means subagents write test+impl together; the red-then-green history isn't visible. **Not re-architected** — pragmatic acceptance for this branch. Run `npx jest --testPathPattern=…` after each component confirms green.
+- Major #2 (`DirectionGuide._estimatedMinutes` inert rename): **fixed in `69e45a5`**. Comment was misattributing the underscore prefix to web tsconfig strictness; this is RN, where `noUnusedParameters` is not enabled.
+- Major #3 (`ResultCard` prop additions `style` + `testID`): **fixed in `69e45a5`** via JSDoc — explained why (VehicleCard width constraint; RN test selectors).
+- Minor (`formatVnd` duplicated across RN + web): left in place — RN and web are different runtimes; consolidation would require a third module just for a 6-line function (YAGNI).
+- Nit (data clumps: `terminalId`/`baggageType`/`destinationId`/`arrivalTime` travel together through 4 layers): left in place — refactoring 4 files to introduce a `TripSearchParams` type is YAGNI for an MVP screen.
+
+**Known risks:**
+- Vite regex aliases are required for `@design-system/*` sub-paths to resolve correctly (string-prefix aliases break)
+- The web `tsc` step runs before `vite build` per `npm run build` — any TS error halts before reaching the alias check
+- Sandbox blocks writing to `web/dist/`; production build needs to run with `all` permission
+
+**Next best action:** Open a PR from `feature/glass-warm-result-screen` → `main`. Use `/finishing-a-development-branch` to pick merge vs PR strategy.
+
+**Stale housekeeping:** `session-handoff.md` is still the mid-session snapshot (Tasks 1-5 complete). It needs a refresh to reflect the full branch state — flagging here rather than touching without instruction.
+
+---
+
 
 ### Session 1: 2026-07-21
 
@@ -111,71 +178,7 @@ All 10 implementation tasks completed:
 |------|---------|------|--------|
 | 2026-07-21 | 1 | Create harness + scaffold | Harness done, scaffold pending |
 | 2026-07-21 | 2-10 | Implement MVP features | COMPLETE |
+| 2026-07-22 | 11 | Plan + ticket collapse-platform-duplication refactor | PLAN COMPLETE |
+| 2026-07-24 | 12 | Apply glassmorphism + warm palette (RN + web) | BRANCH SHIPPED (19 commits) |
 
 
----
-
-### Session 12: 2026-07-24
-
-**Goal:** Apply glassmorphism + warm palette to the result screens on both platforms (RN + web); port `VehicleComparison` from web-only to RN.
-
-**Branch:** `feature/glass-warm-result-screen` (worktree `/Users/trinq/Developer/sanbaygo-glass`).
-
-**Commits on this branch (14 total):**
-- `66fe5ca` Task 1 — JSON tokens + RN adapter + MASTER
-- `59c0308` Task 2 — `@design-system` path alias (root + web + Metro)
-- `5f61121` Task 3 — CSS-vars adapter + barrel
-- `d25eafc` Task 4 — Vietnamese copy table
-- `fcc9188` Task 5 — `ResultCard` primitive (RN + web) + Jest harness
-- `3e86f7c` Task 6 — 14 token-invariant tests
-- `b218b6c` Task 7 — relocate `calculateTripComparison` into `@core`
-- `4a83c38` Tasks 8+9 — RN card redesign + warm background
-- `0da1587` Task 10 — web ResultDisplay re-skin + LanguageContext keys
-- `896fcde` Task 11 — web VehicleComparison re-skin
-- `95fe1c0` Task 12 — RN VehicleComparison port
-- `9e66069` Task 13 — wire VehicleComparison into ResultDisplay
-- `fe67b30` Task 13b — drop duplicate `jest.config.js`
-- `e60e9ad` Task 14a — fix Vite aliases for `@design-system/*` sub-path resolution
-
-**Verification (Task 14):**
-- root `npx tsc --noEmit` exit 0
-- web `npx tsc --noEmit` exit 0
-- root `npx jest` → 135/135 tests pass
-- web `npm test` → 11/11 tests pass
-- web `npm run build` → exit 0 (80 modules; was ENOTDIR before Vite alias fix)
-- grep Vietnamese literals in RN components → OK_NO_LITERALS
-- grep hex literals in web CSS modules (excluding score[1-5]) → OK_NO_HEX
-- 7 files import from `@design-system` (≥ 4 required)
-
-**Evidence recorded:** `feature_list.json` gains `rn-result-glass-redesign` (priority 14) and `web-result-glass-redesign` (priority 15), both `status: passing`.
-
-**Subagent deviations caught (good):**
-- Task 12+13: actual `calculateTripComparison` returns `{comparison, metadata:{isPeakHour}}` not `{comparisons, isPeakHour}` as plan showed
-- Task 14: Vite alias fix (`@design-system/` was resolving to `design-system/index.ts/tokens/index.css` — ENOTDIR)
-- Task 13b: removed subagent-created duplicate `jest.config.js`
-
-**Known risks:**
-- Vite regex aliases are required for `@design-system/*` sub-paths to resolve correctly
-- Sandbox blocks writing to `web/dist/`; production build needs to run with `all` permission
-- The web `tsc` step runs before `vite build` per `npm run build` — any TS error halts before reaching the alias check
-
-**Next best action:** Open a PR from `feature/glass-warm-result-screen` → `main`. Use `/finishing-a-development-branch` to pick merge vs PR strategy.
-
-
-**Late fix (after initial verification):**
-- `e6a9584` `fix(test): consolidate web CSS module mocks + ESM/CJS default-interop`
-  - Deleted duplicate `web/src/__mocks__/` directory created by Task 10+11 subagent
-  - Pointed jest moduleNameMapper at canonical `web/__mocks__/styleMock.js`
-  - Added `module.exports.default = mocks` to bridge CJS file to ESM default-import (ts-jest `useESM: true` interop)
-  - Re-verified: 11/11 web tests pass; npm run build exit 0
-
-
-**Post-implementation code review (subagent):**
-- 4 findings: 3 majors, 1 minor, 1 nit
-- Major #1 (TDD non-compliance): systemic — all 4 component test files committed alongside their implementation. Hybrid execution model means the subagents write test+impl together; a red-green history is not visible. Mitigated by running `npx jest --testPathPattern=…` after each component to confirm green, but the **commit boundary doesn't match the plan's red-then-green intent**. Not re-architected — pragmatic acceptance for this branch.
-- Major #2 (`_estimatedMinutes` inert rename): fixed in `69e45a5`. Comment was misattributing the underscore prefix to web tsconfig strictness; this is RN, where noUnusedParameters is not enabled.
-- Major #3 (`ResultCard` prop additions `style` + `testID`): fixed in `69e45a5` via JSDoc — explained why (VehicleCard width constraint; RN test selectors).
-- Minor (`formatVnd` duplicated across RN + web): left in place — RN and web are different runtimes; consolidation would require a third module just for a formatter, which is YAGNI for a 6-line function.
-- Nit (data clumps: terminalId/baggageType/destinationId/arrivalTime travel together): left in place — refactoring 4 files to introduce a `TripSearchParams` type is YAGNI for an MVP screen.
-
-Final commit count on `feature/glass-warm-result-screen`: 18 (last: `69e45a5`).
