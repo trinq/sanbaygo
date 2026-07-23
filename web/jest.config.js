@@ -15,15 +15,12 @@ export default {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@core$': '<rootDir>/../core/index.ts',
     '^@core/(.*)$': '<rootDir>/../core/$1',
-    // CSS module mocks with explicit per-component patterns
-    '^.*/ResultDisplay/index\\.module\\.css$': resolve(rootDir, 'src/__mocks__/ResultDisplay/index.module.css.js'),
-    '^.*/ResultDisplay/JourneyTimeline\\.module\\.css$': resolve(rootDir, 'src/__mocks__/ResultDisplay/JourneyTimeline.module.css.js'),
-    '^.*/ResultDisplay/BusRecommendation\\.module\\.css$': resolve(rootDir, 'src/__mocks__/ResultDisplay/BusRecommendation.module.css.js'),
-    '^.*/ResultDisplay/GrabFallback\\.module\\.css$': resolve(rootDir, 'src/__mocks__/ResultDisplay/GrabFallback.module.css.js'),
-    '^.*/VehicleComparison/index\\.module\\.css$': resolve(rootDir, 'src/__mocks__/VehicleComparison/index.module.css.js'),
-    '^.*/VehicleComparison/SortToggle\\.module\\.css$': resolve(rootDir, 'src/__mocks__/VehicleComparison/SortToggle.module.css.js'),
-    '^.*/VehicleComparison/VehicleCard\\.module\\.css$': resolve(rootDir, 'src/__mocks__/VehicleComparison/VehicleCard.module.css.js'),
-    '\\.module\\.css$': resolve(rootDir, 'src/__mocks__/styleMock.js'),
+    // CSS module mocks: legacy `web/__mocks__/` is CJS and canonical.
+    // Jest's manual-mock auto-discovery requires the file to live at
+    // `<rootDir>/__mocks__/...` and use CJS syntax. Both directories
+    // existed for a while; the duplicate at `src/__mocks__/` has been
+    // removed in favor of this single source.
+    '\\.module\\.css$': resolve(rootDir, '__mocks__/styleMock.js'),
   },
   transform: {
     '^.+\\.tsx?$': ['ts-jest', {
