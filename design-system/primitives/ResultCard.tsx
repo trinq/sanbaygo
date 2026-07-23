@@ -4,6 +4,16 @@ import { ds } from '../tokens';
 
 export type GlassTier = 1 | 2 | 3;
 
+/**
+ * Glassmorphism card primitive. Three tiers (1=subtle, 2=lifted, 3=featured)
+ * drive the background opacity and blur intensity.
+ *
+ * `style` is composable with the base + tier styles — used by VehicleCard to
+ * constrain width inside a horizontal ScrollView.
+ *
+ * `testID` is forwarded to the underlying View — required by RN render tests
+ * that assert against rendered trees.
+ */
 interface ResultCardProps {
   tier?: GlassTier;
   style?: StyleProp<ViewStyle>;

@@ -7,8 +7,8 @@ import { resultCopyVi } from '@design-system/copy/result-display.vi';
 interface Props { description: string; estimatedMinutes: number }
 
 // `estimatedMinutes` is kept in the props for future use (e.g. showing a
-// "5 phút" badge) but is not rendered yet. Prefix with `_` so
-// `noUnusedParameters` does not fire under `web/tsconfig.json` strict mode.
+// "5 phút" badge) but is not rendered yet. The underscore prefix is a
+// deliberate signal to readers that this is intentionally unused.
 export function DirectionGuide({ description, estimatedMinutes: _estimatedMinutes }: Props) {
   const c = resultCopyVi.direction;
   return (
