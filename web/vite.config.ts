@@ -8,12 +8,16 @@ const dsRoot = resolve(process.cwd(), '..', 'design-system');
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@': resolve(process.cwd(), 'src'),
-      '@core': resolve(coreRoot, 'index.ts'),
-      '@core/': `${coreRoot}/`,
-      '@design-system': resolve(dsRoot, 'index.ts'),
-      '@design-system/': `${dsRoot}/`,
-    },
+    alias: [
+      // Regex-anchored aliases — exact-match (^) and prefix-match.
+      // Anchored with /$ to avoid prefix-stripping bugs like
+      // `@design-system/x` accidentally resolving to
+      // `design-system/index.ts/x`.
+      { find: /^@core$/, replacement: resolve(coreRoot, 'index.ts') },
+      { find: /^@core\/(.*)$/, replacement: resolve(coreRoot, '$1') },
+      { find: /^@design-system$/, replacement: resolve(dsRoot, 'index.ts') },
+      { find: /^@design-system\/(.*)$/, replacement: resolve(dsRoot, '$1') },
+      { find: /^@\/(.*)$/, replacement: resolve(process.cwd(), 'src', '$1') },
+    ],
   },
 });
