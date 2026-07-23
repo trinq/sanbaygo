@@ -160,3 +160,11 @@ All 10 implementation tasks completed:
 - The web `tsc` step runs before `vite build` per `npm run build` — any TS error halts before reaching the alias check
 
 **Next best action:** Open a PR from `feature/glass-warm-result-screen` → `main`. Use `/finishing-a-development-branch` to pick merge vs PR strategy.
+
+
+**Late fix (after initial verification):**
+- `e6a9584` `fix(test): consolidate web CSS module mocks + ESM/CJS default-interop`
+  - Deleted duplicate `web/src/__mocks__/` directory created by Task 10+11 subagent
+  - Pointed jest moduleNameMapper at canonical `web/__mocks__/styleMock.js`
+  - Added `module.exports.default = mocks` to bridge CJS file to ESM default-import (ts-jest `useESM: true` interop)
+  - Re-verified: 11/11 web tests pass; npm run build exit 0
