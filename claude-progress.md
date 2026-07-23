@@ -168,3 +168,14 @@ All 10 implementation tasks completed:
   - Pointed jest moduleNameMapper at canonical `web/__mocks__/styleMock.js`
   - Added `module.exports.default = mocks` to bridge CJS file to ESM default-import (ts-jest `useESM: true` interop)
   - Re-verified: 11/11 web tests pass; npm run build exit 0
+
+
+**Post-implementation code review (subagent):**
+- 4 findings: 3 majors, 1 minor, 1 nit
+- Major #1 (TDD non-compliance): systemic — all 4 component test files committed alongside their implementation. Hybrid execution model means the subagents write test+impl together; a red-green history is not visible. Mitigated by running `npx jest --testPathPattern=…` after each component to confirm green, but the **commit boundary doesn't match the plan's red-then-green intent**. Not re-architected — pragmatic acceptance for this branch.
+- Major #2 (`_estimatedMinutes` inert rename): fixed in `69e45a5`. Comment was misattributing the underscore prefix to web tsconfig strictness; this is RN, where noUnusedParameters is not enabled.
+- Major #3 (`ResultCard` prop additions `style` + `testID`): fixed in `69e45a5` via JSDoc — explained why (VehicleCard width constraint; RN test selectors).
+- Minor (`formatVnd` duplicated across RN + web): left in place — RN and web are different runtimes; consolidation would require a third module just for a formatter, which is YAGNI for a 6-line function.
+- Nit (data clumps: terminalId/baggageType/destinationId/arrivalTime travel together): left in place — refactoring 4 files to introduce a `TripSearchParams` type is YAGNI for an MVP screen.
+
+Final commit count on `feature/glass-warm-result-screen`: 18 (last: `69e45a5`).
