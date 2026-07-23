@@ -1,0 +1,46 @@
+.card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-card);
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-lifted);
+}
+
+.card:focus-within {
+  outline: 2px solid var(--accent-recommended);
+  outline-offset: 2px;
+}
+
+.tier1 {
+  background: var(--glass-1-bg);
+  backdrop-filter: var(--glass-1-blur);
+  -webkit-backdrop-filter: var(--glass-1-blur);
+}
+
+.tier2 {
+  background: var(--glass-2-bg);
+  backdrop-filter: var(--glass-2-blur);
+  -webkit-backdrop-filter: var(--glass-2-blur);
+}
+
+.tier3 {
+  background: var(--glass-3-bg);
+  backdrop-filter: var(--glass-3-blur);
+  -webkit-backdrop-filter: var(--glass-3-blur);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  .card:hover {
+    transform: none;
+  }
+}
