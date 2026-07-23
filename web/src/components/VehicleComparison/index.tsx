@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { TransportComparison, SortOption } from '@core';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { SortToggle } from './SortToggle';
 import { VehicleCard } from './VehicleCard';
 import { calculateTripComparison } from '@core';
@@ -17,6 +18,7 @@ interface VehicleComparisonProps {
 }
 
 export function VehicleComparison({ formData }: VehicleComparisonProps) {
+  const { t } = useLanguage();
   const [comparisons, setComparisons] = useState<TransportComparison[]>([]);
   const [sortBy, setSortBy] = useState<SortOption>('recommended');
   const [isPeakHour, setIsPeakHour] = useState(false);
@@ -29,7 +31,6 @@ export function VehicleComparison({ formData }: VehicleComparisonProps) {
   }, []);
 
   useEffect(() => {
-    // Call calculation directly (not via HTTP) - works in Vite frontend-only build
     const result = calculateTripComparison({
       ...formData,
       sortBy,
@@ -47,9 +48,9 @@ export function VehicleComparison({ formData }: VehicleComparisonProps) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.title}>So sánh phương tiện</h2>
+        <h2 className={styles.title}>{t.results.comparisonTitle}</h2>
         {isPeakHour && (
-          <span className={styles.peakBadge}>Giờ cao điểm</span>
+          <span className={styles.peakBadge}>{t.results.peakWarning}</span>
         )}
       </div>
 

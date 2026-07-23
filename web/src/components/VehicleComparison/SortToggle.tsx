@@ -1,4 +1,5 @@
 import { SortOption } from '@core';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './SortToggle.module.css';
 
 interface SortToggleProps {
@@ -6,13 +7,14 @@ interface SortToggleProps {
   onChange: (sort: SortOption) => void;
 }
 
-const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: 'recommended', label: 'Đề xuất' },
-  { value: 'cheapest', label: 'Giá rẻ nhất' },
-  { value: 'fastest', label: 'Nhanh nhất' },
-];
-
 export function SortToggle({ value, onChange }: SortToggleProps) {
+  const { t } = useLanguage();
+  const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+    { value: 'recommended', label: t.results.sortRecommended },
+    { value: 'cheapest', label: t.results.sortCheapest },
+    { value: 'fastest', label: t.results.sortFastest },
+  ];
+
   return (
     <div className={styles.container}>
       {SORT_OPTIONS.map((option) => (
@@ -20,6 +22,7 @@ export function SortToggle({ value, onChange }: SortToggleProps) {
           key={option.value}
           className={`${styles.button} ${value === option.value ? styles.active : ''}`}
           onClick={() => onChange(option.value)}
+          aria-pressed={value === option.value}
         >
           {option.label}
         </button>
