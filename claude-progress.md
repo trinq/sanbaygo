@@ -4,13 +4,17 @@
 
 **Repository root directory:** `/Users/trinq/Developer/sanbaygo`
 
-**Standard startup path:** `npm start`
+**Monorepo layout:**
 
-**Standard verification path:** `npm test`
+- Root = Expo React Native (RN) app, `npm start` → Metro dev server
+- `web/` = Vite + React frontend, `cd web && npm run dev` → http://localhost:5173
+- `api/` = Express + tsx, `cd api && npm run dev` → http://localhost:3000
+- `core/` = Shared TypeScript module, imported via `@core` path alias
+- `init.sh` verifies all three: installs root + web + api, runs `tsc --noEmit` on root/core/web, runs `npm test` on root + web
 
 **All features:** COMPLETED
 
-**Current status:** MVP complete + bug fixes pushed to GitHub
+**Current status:** MVP complete + bug fixes pushed to GitHub + services running locally
 
 **Recent fixes:**
 - Fixed ResultDisplay wiring (was using stub file instead of index.tsx)
@@ -18,9 +22,50 @@
 - Fixed VehicleComparison showing empty (was calling non-existent HTTP API `/api/calculate-trip` in Vite frontend-only build; changed to call `calculateTripComparison()` directly)
 - Fixed white page on `http://localhost:5173` — `useFormState` was setting `busSchedules` to array of API objects (`{id, departure_time, ...}`) instead of time strings; `SchedulePreview` then crashed on `time.split(':')`. Now extracts `departure_time` from each schedule object before setState.
 
+**Running services (Session 13):**
+- API: pid 80576, port 3000 (Express + tsx watch) — HTTP 200 on /api/airports
+- Web: pid 80860, port 5173 (Vite) — HTTP 200, returns `<title>SanBayGo - Đi xe buýt từ Nội Bài</title>`
+- Killed 3 zombie Vite processes from previous sessions (pids 55594, 40730, 27641) and one orphaned tsx API process (pid 93434) before restart
+
 ---
 
 ## Session Record
+
+### Session 13: 2026-07-24
+
+**Goal:** Confirm PR #4 is merged into main, sync local main with origin, restart dev services cleanly so the web UI fix is actually running, and update dev-harness files to reflect the current monorepo shape.
+
+**Completed:**
+- Verified `fix/web-bus-schedules-time-shape` is 1 commit ahead of `origin/main`, 0 behind — PR #4 merged cleanly
+- Ran `git checkout main && git pull origin main` → fast-forward to merge commit `cf1ecfd`
+- Killed 3 zombie Vite processes from previous sessions (pids 55594, 40730, 27641) and the orphaned tsx API process (pid 93434)
+- Restarted API (`api/`, tsx watch, port 3000) and Web (`web/`, Vite, port 5173) cleanly via background shell
+- Smoke-tested: `curl /api/airports` → HTTP 200, `curl http://localhost:5173/` → HTTP 200 with correct Vietnamese title
+- Updated `init.sh` to verify all three subprojects (root + web + api) instead of the old single-package setup
+- Updated `feature_list.json` with the new `web-bus-schedules-time-shape` feature
+
+**Decisions encoded:**
+- `init.sh` now runs `npm install` for root, then for `web/` and `api/` only if their `node_modules` is missing. It runs `tsc --noEmit` on root, `core/`, and `web/`, and `npm test` on root + web. Does NOT auto-start dev servers — they stay optional via `RUN_START_COMMAND=1`.
+- Dev services are started by the agent in a sandboxed background shell, not by `init.sh`, so logs land in `/tmp/sanbaygo-{api,web}.log` and the processes survive the shell call.
+- `init.sh` is now safe to run repeatedly; dependency installs are skipped when `node_modules` already exists.
+
+**Verification run:**
+- `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/api/airports` → `200`
+- `curl -s -o /dev/null -w "%{http_code}" http://localhost:5173/` → `200`
+- `curl -s http://localhost:5173/` contains `<title>SanBayGo - Đi xe buýt từ Nội Bài</title>`
+- `git rev-list --left-right --count origin/main...HEAD` (on main) → `0 0` after pull
+
+**Evidence recorded:** `lsof` output showing pids + ports, curl status codes, git log confirming merge commit.
+
+**Commits:** None this session (only file updates, no code changes)
+
+**Known risks:**
+- Services are running in the background; if the user closes the terminal session that started them they may need restart. Long-term: dev orchestration should move to a `concurrently` script or a single `npm run dev:all` at root.
+- API is in `tsx watch` mode so it auto-reloads on file changes; if the watch dies silently (seen in this session when one tsx process stopped listening without exiting) it would need a manual restart.
+
+**Next best action:** Add a `concurrently`-based `npm run dev:all` script at the root that starts api + web + metro in one terminal with prefixed logs.
+
+---
 
 ### Session 12: 2026-07-24
 
@@ -32,7 +77,7 @@
 - Fixed `useFormState.ts` to map each schedule object to its `departure_time` string before calling `setBusSchedules(...)`
 - Restarted Vite (HMR was serving cached module) and re-verified via Playwright: page now renders header, form, terminals T1/T2, baggage, destinations — no console errors
 - Updated `claude-progress.md` with the fix
-- Created branch `fix/web-bus-schedules-time-shape`, committed the fix, opened PR
+- Created branch `fix/web-bus-schedules-time-shape`, committed the fix, opened PR #4, merged into main
 
 **Decisions encoded:**
 - Fix is local to `useFormState` (the boundary between API and UI); `SchedulePreview` keeps its existing assumption that `busSchedules` is `string[]` — that's the correct type for the UI
@@ -40,10 +85,11 @@
 
 **Verification run:**
 - Playwright headless load of `http://localhost:5173` → body contains `SanBayGo`, `Nhập thông tin chuyến bay`, terminals, baggage selector, destinations; zero console errors; zero page errors
+- After Session 13 restart: `curl /` returns 200 with correct title
 
 **Evidence recorded:** Playwright debug session output captured errors before fix and confirmed clean render after.
 
-**Commits:** `fix(web): map busSchedules to departure_time strings in useFormState`
+**Commits:** `fix(web): map busSchedules to departure_time strings in useFormState` (commit `21f148d`), merged via PR #4 → `cf1ecfd`
 
 **Known risks:**
 - Same shape mismatch could exist in RN app if `useArrivalWizard.ts` consumes the same API contract — should check but not part of this fix
@@ -143,3 +189,6 @@ All 10 implementation tasks completed:
 |------|---------|------|--------|
 | 2026-07-21 | 1 | Create harness + scaffold | Harness done, scaffold pending |
 | 2026-07-21 | 2-10 | Implement MVP features | COMPLETE |
+| 2026-07-22 | 11 | Plan collapse-platform-duplication refactor + 7 tickets | COMPLETE |
+| 2026-07-24 | 12 | Fix white page (busSchedules time shape) → PR #4 merged | COMPLETE |
+| 2026-07-24 | 13 | Restart api+web dev servers, sync local main with origin, update harness | COMPLETE |

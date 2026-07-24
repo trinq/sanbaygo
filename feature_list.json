@@ -371,6 +371,18 @@
       "verification": "1. ls data types utils calculation-engine \u2014 all 'No such file'\n2. rg for legacy imports \u2014 no matches\n3. web and root npm test \u2014 both pass\n4. web and root npx tsc --noEmit \u2014 both exit 0\n5. git status \u2014 clean",
       "evidence": "Commits landed on branch refactor/collapse-platform-duplication: ab59a4e (Ticket 07 + final-review-fixes); web + root tsc both exit 0; web 24/24 + root 92/92 tests passing",
       "notes": "Ticket 07; verification-only, no commit"
+    },
+    {
+      "id": "web-bus-schedules-time-shape",
+      "priority": 11,
+      "area": "bugfix",
+      "platform": "web",
+      "title": "Fix white page \u2014 map busSchedules to time strings in useFormState",
+      "user_visible_behavior": "Page at http://localhost:5173 renders the form (header, time input, terminal T1/T2, baggage, destinations) instead of a blank white page. Console has zero runtime errors.",
+      "status": "completed",
+      "verification": "1. Restart Vite (HMR can serve cached module): `pkill -f 'node.*vite' && cd web && npm run dev`\n2. curl http://localhost:5173/ \u2192 HTTP 200 with body containing 'SanBayGo'\n3. Open in headless browser, verify body text contains 'Nh\u1eadp th\u00f4ng tin chuy\u1ebfn bay', 'T1', 'T2', 'H\u00e0nh l\u00fd x\u00e1ch tay', 'Ph\u1ed1 c\u1ed5'\n4. Console: zero page errors, zero console errors",
+      "evidence": "Playwright headless capture before/after; commit 21f148d on branch fix/web-bus-schedules-time-shape, merged to main via PR #4 (merge commit cf1ecfd). After Session 13 restart: curl / returns 200 and title is 'SanBayGo - \u0110i xe bu\u00fdt t\u1eeb N\u1ed9i B\u00e0i'.",
+      "notes": "Root cause: useFormState set busSchedules to API object array ({id, departure_time, ...}) but SchedulePreview expected string[] and called time.split(':'). Fix is one line \u2014 map each schedule to its departure_time before setBusSchedules. Same shape mismatch could exist in RN useArrivalWizard \u2014 flagged in Session 12 known risks for a follow-up."
     }
   ]
 }
