@@ -16,10 +16,42 @@
 - Fixed ResultDisplay wiring (was using stub file instead of index.tsx)
 - Fixed double peak surcharge bug (travelTime.peak was getting +30min surcharge on top)
 - Fixed VehicleComparison showing empty (was calling non-existent HTTP API `/api/calculate-trip` in Vite frontend-only build; changed to call `calculateTripComparison()` directly)
+- Fixed white page on `http://localhost:5173` — `useFormState` was setting `busSchedules` to array of API objects (`{id, departure_time, ...}`) instead of time strings; `SchedulePreview` then crashed on `time.split(':')`. Now extracts `departure_time` from each schedule object before setState.
 
 ---
 
 ## Session Record
+
+### Session 12: 2026-07-24
+
+**Goal:** Fix white page on `http://localhost:5173` (SanBayGo web UI) and ship the fix as a PR.
+
+**Completed:**
+- Reproduced the bug via Playwright headless: page rendered empty because React unmounted on runtime error `time.split is not a function` inside `SchedulePreview` (web/src/components/ArrivalForm/index.tsx:179)
+- Root cause: `web/src/hooks/useFormState.ts` was setting `busSchedules` from the API response directly, but `/api/airports/{id}/bus-routes/{id}` returns `schedules` as an array of objects (`{id, departure_time, ...}`), not an array of time strings
+- Fixed `useFormState.ts` to map each schedule object to its `departure_time` string before calling `setBusSchedules(...)`
+- Restarted Vite (HMR was serving cached module) and re-verified via Playwright: page now renders header, form, terminals T1/T2, baggage, destinations — no console errors
+- Updated `claude-progress.md` with the fix
+- Created branch `fix/web-bus-schedules-time-shape`, committed the fix, opened PR
+
+**Decisions encoded:**
+- Fix is local to `useFormState` (the boundary between API and UI); `SchedulePreview` keeps its existing assumption that `busSchedules` is `string[]` — that's the correct type for the UI
+- Did not change the API contract — extracting on the client matches the rest of the codebase's "API gives raw rows, hook normalizes" pattern
+
+**Verification run:**
+- Playwright headless load of `http://localhost:5173` → body contains `SanBayGo`, `Nhập thông tin chuyến bay`, terminals, baggage selector, destinations; zero console errors; zero page errors
+
+**Evidence recorded:** Playwright debug session output captured errors before fix and confirmed clean render after.
+
+**Commits:** `fix(web): map busSchedules to departure_time strings in useFormState`
+
+**Known risks:**
+- Same shape mismatch could exist in RN app if `useArrivalWizard.ts` consumes the same API contract — should check but not part of this fix
+- No automated test guards the shape mapping yet — bug regression possible if someone refactors `useFormState`
+
+**Next best action:** Add a Jest test for `useFormState` that asserts `busSchedules` ends up as `string[]` after a mocked API response with schedule objects.
+
+---
 
 ### Session 11: 2026-07-22
 
