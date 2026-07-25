@@ -58,9 +58,7 @@ export function ArrivalForm({ formData, onUpdate, onCalculate }: ArrivalFormProp
       <div className={styles.counterRow}>
         <Field icon={<Icon name="people" size={28} color={tokens.color.textTertiary} />} label={t.form.peopleLabel} active>
           <div className={styles.counter}>
-            <button type="button" aria-label="decrement">−</button>
             <span className={styles.counterValue}>{formData.flightType === 'international' ? 2 : 1}</span>
-            <button type="button" aria-label="increment">+</button>
           </div>
         </Field>
         <Field icon={<Icon name="luggage" size={28} color={tokens.color.textTertiary} />} label={t.form.baggageLabel} active>

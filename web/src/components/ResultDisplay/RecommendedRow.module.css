@@ -78,7 +78,7 @@
   height: 40px;
   border-radius: var(--radius-sm);
   border: none;
-  font-size: var(--font-size-secondary) + 1;
+  font-size: calc(var(--font-size-secondary) + 1px);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   font-family: inherit;

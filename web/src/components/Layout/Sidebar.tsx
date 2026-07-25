@@ -1,27 +1,29 @@
 import { Icon } from '../Icon';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './Sidebar.module.css';
 
 export function Sidebar() {
+  const { t } = useLanguage();
   return (
     <aside className={styles.sidebar}>
       <div className={styles.brand}>
         <div className={styles.brandMark} aria-hidden="true">S</div>
-        <div className={styles.brandWord}>SanBayGo</div>
+        <div className={styles.brandWord}>{t.layout.brand}</div>
       </div>
 
       <div className={styles.search}>
         <Icon name="search" size={16} />
-        <span>Tìm chuyến gần đây</span>
+        <span>{t.layout.sidebar.search}</span>
       </div>
 
-      <div className={styles.section}>PLAN</div>
-      <NavItem label="So sánh" active />
-      <NavItem label="Tuyến thường dùng" />
-      <NavItem label="Lịch sử" />
+      <div className={styles.section}>{t.layout.sidebar.sectionPlan}</div>
+      <NavItem label={t.layout.sidebar.navCompare} active />
+      <NavItem label={t.layout.sidebar.navFavorites} />
+      <NavItem label={t.layout.sidebar.navHistory} />
 
-      <div className={styles.section}>REFERENCE</div>
-      <NavItem label="Bảng giá Bus 86" />
-      <NavItem label="Giờ cao điểm" />
+      <div className={styles.section}>{t.layout.sidebar.sectionReference}</div>
+      <NavItem label={t.layout.sidebar.navBusPricing} />
+      <NavItem label={t.layout.sidebar.navPeakHours} />
     </aside>
   );
 }

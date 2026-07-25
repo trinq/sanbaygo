@@ -91,6 +91,29 @@ interface Translations {
   destinations: {
     [key: string]: string;
   };
+  layout: {
+    brand: string;
+    sidebar: {
+      search: string;
+      sectionPlan: string;
+      sectionReference: string;
+      navCompare: string;
+      navFavorites: string;
+      navHistory: string;
+      navBusPricing: string;
+      navPeakHours: string;
+    };
+    topBar: {
+      title: string;
+      menuLabel: string;
+    };
+    tabletTopBar: {
+      tabCompare: string;
+      tabHistory: string;
+      tabReference: string;
+    };
+    languageToggle: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -188,6 +211,29 @@ const translations: Record<Language, Translations> = {
       'cau-giay': 'Quận Cầu Giấy',
       'other': 'Khu vực khác',
     },
+    layout: {
+      brand: 'SanBayGo',
+      sidebar: {
+        search: 'Tìm chuyến gần đây',
+        sectionPlan: 'PLAN',
+        sectionReference: 'REFERENCE',
+        navCompare: 'So sánh',
+        navFavorites: 'Tuyến thường dùng',
+        navHistory: 'Lịch sử',
+        navBusPricing: 'Bảng giá Bus 86',
+        navPeakHours: 'Giờ cao điểm',
+      },
+      topBar: {
+        title: 'SanBayGo',
+        menuLabel: 'menu',
+      },
+      tabletTopBar: {
+        tabCompare: 'So sánh',
+        tabHistory: 'Lịch sử',
+        tabReference: 'Tham khảo',
+      },
+      languageToggle: 'English',
+    },
   },
   en: {
     header: {
@@ -282,6 +328,29 @@ const translations: Record<Language, Translations> = {
       'ba-dinh': 'Ba Dinh District',
       'cau-giay': 'Cau Giay District',
       'other': 'Other areas',
+    },
+    layout: {
+      brand: 'SanBayGo',
+      sidebar: {
+        search: 'Find recent trip',
+        sectionPlan: 'PLAN',
+        sectionReference: 'REFERENCE',
+        navCompare: 'Compare',
+        navFavorites: 'Favorite routes',
+        navHistory: 'History',
+        navBusPricing: 'Bus 86 pricing',
+        navPeakHours: 'Peak hours',
+      },
+      topBar: {
+        title: 'SanBayGo',
+        menuLabel: 'menu',
+      },
+      tabletTopBar: {
+        tabCompare: 'Compare',
+        tabHistory: 'History',
+        tabReference: 'Reference',
+      },
+      languageToggle: 'Tiếng Việt',
     },
   },
 };
