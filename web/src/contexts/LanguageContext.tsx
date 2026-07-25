@@ -130,6 +130,7 @@ interface Translations {
     benefitCheap: string;
     benefitCheapDesc: string;
     fieldDeparture: string;
+    departurePlaceholder: string;
     fieldDestination: string;
     fieldPeople: string;
     fieldLuggage: string;
@@ -277,6 +278,7 @@ const translations: Record<Language, Translations> = {
       benefitCheap: 'Tiết kiệm',
       benefitCheapDesc: 'Chỉ 50.000đ cho xe buýt',
       fieldDeparture: 'Sân bay khởi hành',
+      departurePlaceholder: 'Chọn sân bay',
       fieldDestination: 'Bạn muốn đi đâu?',
       fieldPeople: 'Số người',
       fieldLuggage: 'Hành lý',
@@ -423,6 +425,7 @@ const translations: Record<Language, Translations> = {
       benefitCheap: 'Affordable',
       benefitCheapDesc: 'Only 50,000 VND by bus',
       fieldDeparture: 'Departure airport',
+      departurePlaceholder: 'Choose airport',
       fieldDestination: 'Where are you going?',
       fieldPeople: 'People',
       fieldLuggage: 'Luggage',
