@@ -18,6 +18,22 @@ interface Translations {
     t2: string;
     carryOn: string;
     checked: string;
+    stepEyebrow: string;
+    lede: string;
+    fromLabel: string;
+    toLabel: string;
+    selectDestination: string;
+    destinationOldQuarter: string;
+    destinationBaDinh: string;
+    destinationTayHo: string;
+    peopleLabel: string;
+    baggageLabel: string;
+    baggageCarryOn: string;
+    baggageChecked: string;
+    t1Label: string;
+    t1Sub: string;
+    t2Label: string;
+    t2Sub: string;
   };
   results: {
     title: string;
@@ -54,16 +70,32 @@ const translations: Record<Language, Translations> = {
       languageToggle: 'English',
     },
     form: {
-      title: 'Nhập thông tin chuyến bay',
+      title: 'Bạn bay từ đâu, đi đâu?',
       arrivalTime: 'Giờ đáp cánh',
       terminal: 'Chọn nhà ga',
       baggage: 'Hành lý',
       destination: 'Điểm đến',
-      calculate: 'Tính toán',
+      calculate: 'Tìm phương tiện phù hợp →',
       t1: 'Nhà ga T1 (Nội địa)',
       t2: 'Nhà ga T2 (Quốc tế)',
       carryOn: 'Xách tay',
       checked: 'Ký gửi',
+      stepEyebrow: 'Bước 1 — Lên kế hoạch',
+      lede: 'Chúng tôi so sánh Xe buýt 86, Taxi và Grab theo giá, thời gian và hành lý — rồi gợi ý lựa chọn phù hợp nhất.',
+      fromLabel: 'Sân bay khởi hành',
+      toLabel: 'Điểm đến',
+      selectDestination: 'Chọn điểm đến',
+      destinationOldQuarter: 'Hoàn Kiếm · Phố Cổ',
+      destinationBaDinh: 'Ba Đình',
+      destinationTayHo: 'Tây Hồ',
+      peopleLabel: 'Số người',
+      baggageLabel: 'Hành lý',
+      baggageCarryOn: 'Xách tay',
+      baggageChecked: 'Ký gửi',
+      t1Label: 'Nội Bài · T1',
+      t1Sub: 'Quốc tế',
+      t2Label: 'Nội Bài · T2',
+      t2Sub: 'Quốc nội',
     },
     results: {
       title: 'Kết quả',
@@ -103,16 +135,32 @@ const translations: Record<Language, Translations> = {
       languageToggle: 'Tiếng Việt',
     },
     form: {
-      title: 'Enter flight information',
+      title: 'Where are you flying from, and where to?',
       arrivalTime: 'Arrival Time',
       terminal: 'Select Terminal',
       baggage: 'Luggage',
       destination: 'Destination',
-      calculate: 'Calculate',
+      calculate: 'Find a ride →',
       t1: 'Terminal T1 (Domestic)',
       t2: 'Terminal T2 (International)',
       carryOn: 'Carry-on',
       checked: 'Checked',
+      stepEyebrow: 'Step 1 — Plan your trip',
+      lede: 'We compare Bus 86, Taxi, and Grab by price, time, and luggage — then suggest the best fit.',
+      fromLabel: 'Departure airport',
+      toLabel: 'Destination',
+      selectDestination: 'Select destination',
+      destinationOldQuarter: 'Hoan Kiem · Old Quarter',
+      destinationBaDinh: 'Ba Dinh',
+      destinationTayHo: 'Tay Ho',
+      peopleLabel: 'People',
+      baggageLabel: 'Luggage',
+      baggageCarryOn: 'Carry-on',
+      baggageChecked: 'Checked',
+      t1Label: 'Noi Bai · T1',
+      t1Sub: 'International',
+      t2Label: 'Noi Bai · T2',
+      t2Sub: 'Domestic',
     },
     results: {
       title: 'Results',

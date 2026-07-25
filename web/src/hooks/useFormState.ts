@@ -142,11 +142,8 @@ export function useFormState() {
     fetchData();
   }, []);
 
-  const updateFormData = useCallback(<K extends keyof ArrivalFormData>(
-    key: K,
-    value: ArrivalFormData[K]
-  ) => {
-    setFormData(prev => ({ ...prev, [key]: value }));
+  const updateFormData = useCallback((patch: Partial<ArrivalFormData>) => {
+    setFormData(prev => ({ ...prev, ...patch }));
   }, []);
 
   const reset = useCallback(() => {
