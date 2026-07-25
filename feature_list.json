@@ -385,16 +385,55 @@
       "notes": "Root cause: useFormState set busSchedules to API object array ({id, departure_time, ...}) but SchedulePreview expected string[] and called time.split(':'). Fix is one line \u2014 map each schedule to its departure_time before setBusSchedules. Same shape mismatch could exist in RN useArrivalWizard \u2014 flagged in Session 12 known risks for a follow-up."
     },
     {
-      "id": "web-responsive-apple-minimal",
+      "id": "editorial-paper-web",
+      "priority": 12,
+      "area": "ui",
+      "platform": "web",
+      "title": "Editorial-paper web redesign with BusTimetableSpine",
+      "user_visible_behavior": "Web uses warm-paper tokens, editorial typography, and a Bus 86 timetable spine as its primary result-page visual.",
+      "status": "superseded",
+      "superseded_by": "landing-hero-web",
+      "verification": "Historical baseline verified by the landing-page replacement plan before the Figma-style redesign landed.",
+      "evidence": "Commit d6d423e - editorial-paper baseline with BusTimetableSpine; superseded by landing-hero-web.",
+      "notes": "This direction replaced Apple-minimal and was subsequently replaced by the Figma-style sky-blue landing page."
+    },
+    {
+      "id": "responsive-web-apple-minimal",
       "priority": 11,
       "area": "ui",
       "platform": "web",
       "title": "Responsive web MVP with Apple-minimal design tokens",
       "user_visible_behavior": "Single web codebase serves mobile (\u2264768 px), tablet (769\u20131024 px), and desktop (\u22651025 px). Apple HIG aesthetic \u2014 #007AFF accent, neutral palette, hairline separators, no glassmorphism or warm tones. Sidebar on desktop, top bar on mobile, inline tabs on tablet.",
-      "status": "completed",
+      "status": "superseded",
+      "superseded_by": "landing-hero-web",
       "verification": "1. bash init.sh \u2192 green\n2. cd web && npm test \u2192 all tests pass\n3. cd web && PLAYWRIGHT_BROWSERS_PATH=/Users/trinq/Library/Caches/ms-playwright npx playwright test --grep 'responsive flow' --project=chromium \u2192 all 3 viewports pass\n4. Visual diff vs canvas: every viewport matches the rendered screen",
       "evidence": "Commits on branch feature/responsive-web-apple-minimal: 233613f (Task 4 \u2014 alias wiring), 618ba33 (Task 5 \u2014 Icon + useViewport), 511236d (Task 6 \u2014 RecommendedRow), ea70d4d (Task 7 \u2014 token parity), cb00a66 (Task 8 \u2014 global + App + Header tokens), 635f37a (Task 9 \u2014 single-page ArrivalForm), 3b9b9d5 (Task 10 \u2014 ResultDisplay rewrite), d7e2aab (Task 11 \u2014 VehicleComparison + SortToggle), 9799a77 (Task 12 \u2014 responsive shell), 66adb0a (Task 13 \u2014 Playwright e2e). 92/92 jest + 3/3 Playwright tests pass; tsc --noEmit clean.",
       "notes": "Supersedes the glassmorphism + warm-palette direction for web/ (RN follow-up plan to come). Playwright e2e was force-added (git add -f web/e2e/responsive-flow.spec.ts) because web/e2e/ is gitignored. Existing web/e2e/arrival-flow.spec.ts is broken against the new single-page form (out of scope for this plan; needs follow-up to match Task 9 form)."
+    },
+    {
+      "id": "landing-hero-web",
+      "description": "Landing page replaces ArrivalForm on web (hero + search card \u2192 ResultDisplay). Figma-style sky-blue + glass tokens.",
+      "status": "passing",
+      "evidence": [
+        "7240ead",
+        "bfc2a69"
+      ],
+      "tests": [
+        "web/__tests__/components/Landing/Hero.test.tsx",
+        "web/__tests__/components/Landing/SearchCard.test.tsx",
+        "web/e2e/landing-flow.spec.ts"
+      ]
+    },
+    {
+      "id": "landing-hero-rn",
+      "description": "Landing page mirrors web on RN with expo-blur + NativeWind.",
+      "status": "passing",
+      "evidence": [
+        "7519e00"
+      ],
+      "tests": [
+        "components/Landing/__tests__/Hero.test.tsx"
+      ]
     }
   ]
 }
