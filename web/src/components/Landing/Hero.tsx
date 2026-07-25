@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Nav } from './Nav';
 import { Pill } from './Pill';
@@ -5,7 +6,7 @@ import { BenefitChips } from './BenefitChips';
 import { SocialProof } from './SocialProof';
 import { Footer } from './Footer';
 
-export function Hero() {
+export function Hero({ children }: { children?: ReactNode }) {
   const { t } = useLanguage();
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 to-white">
@@ -38,13 +39,14 @@ export function Hero() {
             <BenefitChips />
           </div>
           <div className="lg:col-span-5">
-            {/* SearchCard slot — wired in Task 7 */}
-            <div
-              data-testid="search-card-slot"
-              className="rounded-2xl border border-dashed border-surface-border bg-white/60 p-12 text-center text-ink-quiet"
-            >
-              SearchCard placeholder
-            </div>
+            {children ?? (
+              <div
+                data-testid="search-card-slot"
+                className="rounded-2xl border border-dashed border-surface-border bg-white/60 p-12 text-center text-ink-quiet"
+              >
+                SearchCard placeholder
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { ArrivalResult, ArrivalFormData, isPeakHour } from '@core';
-import { BusTimetableSpine } from './BusTimetableSpine';
+import { ArrivalResult, ArrivalFormData } from '@core';
 import styles from './index.module.css';
 
 interface ResultDisplayProps {
@@ -9,17 +8,8 @@ interface ResultDisplayProps {
   onRecalculate: () => void;
 }
 
-/**
- * Result screen — anchored by the BusTimetableSpine.
- * Header is a single editorial sentence; everything else is a footnote.
- */
 export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplayProps) {
   const { t } = useLanguage();
-  const isPeak = isPeakHour(formData.arrivalTime);
-
-  const catchableFrom = result.bus.trip?.departureTime ?? null;
-  const recommendedDeparture = result.bus.available ? result.bus.trip?.departureTime ?? null : null;
-  const hasMissedLastBus = !result.bus.available;
 
   return (
     <article className={styles.root}>
@@ -67,16 +57,6 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
 
       <hr className={styles.rule} />
 
-      <BusTimetableSpine
-        catchableFrom={catchableFrom}
-        recommendedDeparture={recommendedDeparture}
-        hasMissedLastBus={hasMissedLastBus}
-        isPeak={isPeak}
-      />
-
-      <hr className={styles.rule} />
-
-      {/* Secondary rail — ride-hail as a footnote, not a hero. */}
       <section className={styles.footnoteSection}>
         <div className={styles.footnoteEyebrow}>
           <span className={styles.footnoteEyebrowRule} aria-hidden="true" />
