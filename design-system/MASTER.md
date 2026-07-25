@@ -59,3 +59,5 @@ System font: `-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display"
 - ❌ No `box-shadow` with `rgba(..., 0.3+)` (overly diffuse).
 - ✅ All accent usage of `#007AFF` lives behind the `--color-accent*` tokens.
 - ✅ All body font sizes ≥ 17 px.
+
+> ⚠️ Open call: `--color-warn: #FF9500` (systemOrange) is warm; conflicting with "no warm tones". Resolved in Task 2.

@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "outDir": "dist",
-    "rootDir": ".",
-    "include": ["**/*.ts", "**/*.tsx", "tokens/*.json"]
-  }
+    "rootDir": "."
+  },
+  "include": ["**/*.ts", "**/*.tsx", "tokens/*.json"]
 }
