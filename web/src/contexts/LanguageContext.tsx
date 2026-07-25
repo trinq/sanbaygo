@@ -53,9 +53,35 @@ interface Translations {
     priceEstimate: string;
     travelTime: string;
     openGrab: string;
+    edit: string;
+    from: string;
+    to: string;
+    peopleCount: string;
+    baggageCarryOn: string;
+    baggageChecked: string;
+    timelineTitle: string;
+    timelineExit: string;
+    timelineExitSub: string;
+    timelineWalk: string;
+    timelineWalkSub: string;
+    timelineBoard: string;
+    timelineBoardSub: string;
+    timelineArrive: string;
+    timelineArriveSub: string;
+    comparisonTitle: string;
+    recommended: string;
+    min: string;
+    time: string;
+    convenience: string;
+    luggage: string;
+    actionBus: string;
+    actionTaxi: string;
+    actionGrab: string;
+    tableHeaders: string[];
     noBus: string;
     lastBusAt: string;
     needToArriveBy: string;
+    disclaimer: string;
     recalculate: string;
   };
   destinations: {
@@ -100,7 +126,6 @@ const translations: Record<Language, Translations> = {
     results: {
       title: 'Kết quả',
       basedOn: 'Dựa trên giờ đáp',
-      peakHour: 'giờ cao điểm',
       busRecommendation: 'Xe buýt phù hợp',
       catchable: 'Có thể bắt được',
       departAt: 'Khởi hành lúc',
@@ -115,10 +140,37 @@ const translations: Record<Language, Translations> = {
       priceEstimate: 'Ước tính giá',
       travelTime: 'Thời gian di chuyển',
       openGrab: 'Mở Grab',
-      noBus: 'Không có chuyến xe phù hợp',
-      lastBusAt: 'Chuyến cuối khởi hành lúc',
-      needToArriveBy: 'Bạn cần đến điểm đón trước',
-      recalculate: 'Tính lại',
+      edit: '← Sửa lại',
+      from: 'Nội Bài',
+      to: 'Hoàn Kiếm',
+      peopleCount: '{n} người',
+      baggageCarryOn: 'Hành lý xách tay',
+      baggageChecked: 'Hành lý ký gửi',
+      peakHour: 'Giờ cao điểm',
+      timelineTitle: 'Hành trình của bạn',
+      timelineExit: 'Ra cửa nhà ga',
+      timelineExitSub: 'Đi bộ 5 phút',
+      timelineWalk: 'Đến điểm đón xe buýt',
+      timelineWalkSub: 'Nhà ga',
+      timelineBoard: 'Xe buýt khởi hành',
+      timelineBoardSub: 'Tuyến 86',
+      timelineArrive: 'Đến điểm dừng',
+      timelineArriveSub: 'Phố Cổ',
+      comparisonTitle: 'So sánh phương tiện',
+      recommended: 'Khuyến nghị',
+      min: 'phút',
+      time: 'Thời gian',
+      convenience: 'Tiện lợi',
+      luggage: 'Hành lý',
+      actionBus: 'Chọn xe buýt →',
+      actionTaxi: 'Gọi Taxi →',
+      actionGrab: 'Mở Grab →',
+      tableHeaders: ['Phương tiện', 'Giá ước tính', 'Thời gian', 'Tiện lợi', 'Hành lý', ''],
+      noBus: 'Không có chuyến xe buýt',
+      lastBusAt: 'Chuyến cuối lúc',
+      needToArriveBy: 'Cần đến sân bay trước',
+      disclaimer: 'Giá và thời gian mang tính tham khảo.',
+      recalculate: 'Tính lại chuyến khác',
     },
     destinations: {
       'old-quarter': 'Khu phố cổ',
@@ -165,7 +217,6 @@ const translations: Record<Language, Translations> = {
     results: {
       title: 'Results',
       basedOn: 'Based on arrival at',
-      peakHour: 'peak hours',
       busRecommendation: 'Recommended Bus',
       catchable: 'Catchable',
       departAt: 'Departs at',
@@ -180,9 +231,36 @@ const translations: Record<Language, Translations> = {
       priceEstimate: 'Price estimate',
       travelTime: 'Travel time',
       openGrab: 'Open Grab',
-      noBus: 'No suitable bus available',
-      lastBusAt: 'Last bus departs at',
+      edit: '← Edit',
+      from: 'Noi Bai',
+      to: 'Hoan Kiem',
+      peopleCount: '{n} people',
+      baggageCarryOn: 'Carry-on luggage',
+      baggageChecked: 'Checked luggage',
+      peakHour: 'Peak hours',
+      timelineTitle: 'Your journey',
+      timelineExit: 'Exit terminal',
+      timelineExitSub: '5 min walk',
+      timelineWalk: 'Walk to bus stop',
+      timelineWalkSub: 'Terminal',
+      timelineBoard: 'Bus departs',
+      timelineBoardSub: 'Route 86',
+      timelineArrive: 'Arrive at stop',
+      timelineArriveSub: 'Old Quarter',
+      comparisonTitle: 'Compare transport',
+      recommended: 'Recommended',
+      min: 'min',
+      time: 'Time',
+      convenience: 'Convenience',
+      luggage: 'Luggage',
+      actionBus: 'Choose bus →',
+      actionTaxi: 'Call taxi →',
+      actionGrab: 'Open Grab →',
+      tableHeaders: ['Transport', 'Est. price', 'Time', 'Convenience', 'Luggage', ''],
+      noBus: 'No bus available',
+      lastBusAt: 'Last bus at',
       needToArriveBy: 'You need to arrive by',
+      disclaimer: 'Prices and times are estimates only.',
       recalculate: 'Recalculate',
     },
     destinations: {
