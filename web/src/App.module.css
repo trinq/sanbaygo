@@ -3,15 +3,6 @@
   background: var(--color-bg-page);
   min-height: 100vh;
   color: var(--color-text-primary);
-}
-
-.desktop {
-  display: flex;
-  min-height: 100vh;
-}
-
-.mobileShell {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -21,24 +12,16 @@
   padding: var(--space-5) var(--space-4);
 }
 
-.mainMobile {
-  padding: var(--space-5) var(--space-4);
-}
-
-.mainTablet {
-  padding: var(--space-6) var(--space-5);
-  max-width: 1024px;
-  margin: 0 auto;
+.mainCentered {
   width: 100%;
-}
-
-.mainDesktop {
-  max-width: 1280px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: var(--space-7) var(--space-8);
-  width: 100%;
+  padding: var(--space-7) var(--space-5);
 }
 
-.contentDesktop {
-  padding: var(--space-7) 0;
+@media (max-width: 768px) {
+  .mainCentered {
+    padding: var(--space-5) var(--space-4);
+    max-width: 100%;
+  }
 }
