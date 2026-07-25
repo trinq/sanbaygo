@@ -65,7 +65,9 @@
         "preset": "react-native",
         "testMatch": [
           "<rootDir>/app/**/*.test.ts",
-          "<rootDir>/app/**/*.test.tsx"
+          "<rootDir>/app/**/*.test.tsx",
+          "<rootDir>/components/**/*.test.ts",
+          "<rootDir>/components/**/*.test.tsx"
         ],
         "moduleNameMapper": {
           "^@core$": "<rootDir>/core/index.ts",
