@@ -74,6 +74,17 @@ $ npx tsc --noEmit
 
 <!-- Add session-specific notes here -->
 
+## Responsive Web MVP (Apple-minimal) — Completion Checklist
+
+- [ ] design-system tokens scaffolded (palette, typography, spacing, radii, shadows) with CSS-vars ↔ TS parity test
+- [ ] web responsive shell (sidebar at desktop, top bar at mobile, inline top bar at tablet)
+- [ ] web ArrivalForm is a single-page responsive form (not a 4-step wizard)
+- [ ] web ResultDisplay renders responsive comparison (table on desktop, stacked cards on mobile/tablet)
+- [ ] VehicleComparison consumes RecommendedRow at desktop, stacked cards on mobile/tablet
+- [ ] Glassmorphism + warm-palette CSS purged from web/src/components/**/*.module.css
+- [ ] init.sh runs tsc on design-system/
+- [ ] Playwright e2e green at 375/900/1280
+
 ---
 
-**Last updated:** 2026-07-21
+**Last updated:** 2026-07-25
