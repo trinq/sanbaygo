@@ -15,7 +15,7 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
     <article className={styles.root}>
       <header className={styles.header}>
         <div className={styles.byline}>
-          <span className={styles.bylineLabel}>Số 02 — Chuyến đi</span>
+          <span className={styles.bylineLabel}>{t.results.tripIssue}</span>
           <span className={styles.bylineRule} aria-hidden="true" />
           <span className={styles.bylineTime}>{formData.arrivalTime}</span>
         </div>
@@ -23,11 +23,11 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
         <h1 className={styles.title}>
           {result.bus.available ? (
             <>
-              Chuyến buýt kế tiếp: <span className={styles.titleCatchable}>{result.bus.trip?.departureTime}</span>.
+              {t.results.nextBus} <span className={styles.titleCatchable}>{result.bus.trip?.departureTime}</span>.
             </>
           ) : (
             <>
-              Đã lỡ chuyến cuối. <span className={styles.titleMissed}>Gọi xe thôi.</span>
+              {t.results.missedLastBus} <span className={styles.titleMissed}>{t.results.callRide}</span>
             </>
           )}
         </h1>
@@ -67,13 +67,13 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
         </h2>
         <div className={styles.footnoteRow}>
           <div className={styles.footnoteLine}>
-            <span className={styles.footnoteKey}>Grab · Taxi</span>
-            <span className={styles.footnoteValue}>~250–350k VND</span>
+            <span className={styles.footnoteKey}>{t.results.rideHailProviders}</span>
+            <span className={styles.footnoteValue}>{t.results.rideHailPrice}</span>
             <span className={styles.footnoteMeta}>40–60 phút</span>
           </div>
           <div className={styles.footnoteLine}>
             <span className={styles.footnoteKey}>Đón tại</span>
-            <span className={styles.footnoteValue}>Cột số 4 · Tầng 1 nhà ga đến</span>
+            <span className={styles.footnoteValue}>{t.results.rideHailPickupLocation}</span>
             <span className={styles.footnoteMeta}>2 phút đi bộ</span>
           </div>
         </div>

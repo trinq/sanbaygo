@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { ResultDisplay } from '../../../src/components/ResultDisplay';
-import { LanguageProvider } from '../../../src/contexts/LanguageContext';
+import { LanguageProvider, useLanguage } from '../../../src/contexts/LanguageContext';
 import type { ArrivalResult, ArrivalFormData } from '@core';
 
 const result: ArrivalResult = {
@@ -32,6 +32,17 @@ function renderWithLang(ui: React.ReactNode) {
   return render(<LanguageProvider>{ui}</LanguageProvider>);
 }
 
+function EnglishResultDisplay({ resultData = result }: { resultData?: ArrivalResult }) {
+  const { setLanguage } = useLanguage();
+
+  return (
+    <>
+      <button type="button" onClick={() => setLanguage('en')}>Switch to English</button>
+      <ResultDisplay result={resultData} formData={formData} onRecalculate={jest.fn()} />
+    </>
+  );
+}
+
 describe('ResultDisplay', () => {
   it('renders the catchable departure time as the headline', () => {
     renderWithLang(<ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />);
@@ -47,5 +58,24 @@ describe('ResultDisplay', () => {
     const missed: ArrivalResult = { bus: { available: false, reason: 'too_late' }, grab: result.grab };
     renderWithLang(<ResultDisplay result={missed} formData={formData} onRecalculate={jest.fn()} />);
     expect(screen.getByText(/Đã lỡ chuyến cuối|Last bus/i)).toBeTruthy();
+  });
+
+  it('localizes the reviewed trip and ride-hail copy in English', () => {
+    renderWithLang(<EnglishResultDisplay />);
+    fireEvent.click(screen.getByRole('button', { name: 'Switch to English' }));
+
+    expect(screen.getByText('Issue 02 — Trip')).toBeTruthy();
+    expect(screen.getByRole('heading', { level: 1, name: /Next bus: 10:30/ })).toBeTruthy();
+    expect(screen.getByText('Grab · Taxi')).toBeTruthy();
+    expect(screen.getByText('~VND 250–350k')).toBeTruthy();
+    expect(screen.getByText('Pillar 4 · Arrivals level 1')).toBeTruthy();
+  });
+
+  it('localizes the missed-last-bus headline in English', () => {
+    const missed: ArrivalResult = { bus: { available: false, reason: 'too_late' }, grab: result.grab };
+    renderWithLang(<EnglishResultDisplay resultData={missed} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Switch to English' }));
+
+    expect(screen.getByRole('heading', { level: 1, name: 'You missed the last bus. Call a ride.' })).toBeTruthy();
   });
 });

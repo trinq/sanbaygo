@@ -30,6 +30,13 @@ interface Translations {
   };
   results: {
     title: string;
+    tripIssue: string;
+    nextBus: string;
+    missedLastBus: string;
+    callRide: string;
+    rideHailProviders: string;
+    rideHailPrice: string;
+    rideHailPickupLocation: string;
     basedOn: string;
     peakHour: string;
     busRecommendation: string;
@@ -173,6 +180,13 @@ const translations: Record<Language, Translations> = {
     },
     results: {
       title: 'Kết quả',
+      tripIssue: 'Số 02 — Chuyến đi',
+      nextBus: 'Chuyến buýt kế tiếp:',
+      missedLastBus: 'Đã lỡ chuyến cuối.',
+      callRide: 'Gọi xe thôi.',
+      rideHailProviders: 'Grab · Taxi',
+      rideHailPrice: '~250–350k VND',
+      rideHailPickupLocation: 'Cột số 4 · Tầng 1 nhà ga đến',
       basedOn: 'Dựa trên giờ đáp',
       busRecommendation: 'Xe buýt phù hợp',
       catchable: 'Có thể bắt được',
@@ -320,6 +334,13 @@ const translations: Record<Language, Translations> = {
     },
     results: {
       title: 'Results',
+      tripIssue: 'Issue 02 — Trip',
+      nextBus: 'Next bus:',
+      missedLastBus: 'You missed the last bus.',
+      callRide: 'Call a ride.',
+      rideHailProviders: 'Grab · Taxi',
+      rideHailPrice: '~VND 250–350k',
+      rideHailPickupLocation: 'Pillar 4 · Arrivals level 1',
       basedOn: 'Based on arrival at',
       busRecommendation: 'Recommended Bus',
       catchable: 'Catchable',
