@@ -1,4 +1,16 @@
 .app {
+  font-family: var(--font-family);
+  background: var(--color-bg-page);
+  min-height: 100vh;
+  color: var(--color-text-primary);
+}
+
+.desktop {
+  display: flex;
+  min-height: 100vh;
+}
+
+.mobileShell {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -6,14 +18,27 @@
 
 .main {
   flex: 1;
-  padding: 24px;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
 }
 
-@media (max-width: 768px) {
-  .main {
-    padding: 16px;
-  }
+.mainMobile {
+  padding: var(--space-5) var(--space-4);
+}
+
+.mainTablet {
+  padding: var(--space-6) var(--space-5);
+  max-width: 1024px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mainDesktop {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-8);
+  width: 100%;
+}
+
+.contentDesktop {
+  padding: var(--space-7) 0;
 }

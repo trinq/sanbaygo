@@ -1,29 +1,26 @@
-.container {
-  display: flex;
-  gap: 8px;
-  padding: 8px;
-  background: var(--color-surface);
-  border-radius: 12px;
+.row {
+  display: inline-flex;
+  gap: var(--space-1);
+  background: var(--color-bg-grouped);
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-3);
 }
 
-.button {
-  flex: 1;
-  padding: 8px 12px;
-  border: none;
+.btn {
   background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: var(--font-size-secondary);
   color: var(--color-text-secondary);
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
 }
 
-.button:hover {
-  background: var(--color-hover);
-}
-
-.button.active {
-  background: var(--color-primary);
-  color: white;
+.btnActive {
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  box-shadow: var(--shadow-card);
 }

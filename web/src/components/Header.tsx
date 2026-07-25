@@ -8,8 +8,8 @@ export function Header() {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.brand}>
-          <span className={styles.icon}>🚌</span>
-          <span className={styles.title}>{t.header.title}</span>
+          <div className={styles.brandMark} aria-hidden="true">S</div>
+          <div className={styles.title}>{t.header.title}</div>
         </div>
         <button
           className={styles.languageToggle}

@@ -1,135 +1,168 @@
-.container {
-  display: flex;
-  gap: 32px;
-  min-height: calc(100vh - 100px);
+.root {
+  max-width: 760px;
+  padding: var(--space-7) 0;
+  font-family: var(--font-family);
 }
 
-.inputSection {
-  flex: 1;
-  max-width: 500px;
-}
-
-.previewSection {
-  flex: 1;
-  position: sticky;
-  top: 100px;
-  height: fit-content;
+.eyebrow {
+  font-size: var(--font-size-secondary);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
 }
 
 .title {
-  font-size: 28px;
+  font-size: var(--font-size-page);
   font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 24px;
+  letter-spacing: -1px;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-3);
+  line-height: 1.05;
+}
+
+.lede {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-6);
+  line-height: 1.5;
+  max-width: 520px;
 }
 
 .field {
-  margin-bottom: 28px;
-}
-
-.schedulePreview {
-  background: var(--color-background-alt);
-  border-radius: var(--border-radius);
-  padding: 24px;
-  border: 1px solid var(--color-border);
-}
-
-.scheduleTitle {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-primary);
-  margin-bottom: 8px;
-}
-
-.scheduleSubtitle {
-  font-size: 14px;
-  color: var(--color-text-muted);
-  margin-bottom: 20px;
-}
-
-.scheduleGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-}
-
-.scheduleItem {
-  padding: 10px;
-  border-radius: var(--border-radius-sm);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-}
-
-.catchable {
-  background: var(--color-success);
-  color: white;
-}
-
-.uncatchable {
-  background: var(--color-border-light);
-  color: var(--color-text-muted);
-}
-
-.scheduleLegend {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: var(--shadow-card);
+  border-left: 3px solid transparent;
   display: flex;
-  gap: 16px;
-  margin-top: 16px;
-  font-size: 12px;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
-.legendCatchable {
-  color: var(--color-success);
+.fieldActive {
+  border-left-color: var(--color-accent);
 }
 
-.legendUncatchable {
-  color: var(--color-text-muted);
+.fieldIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-grouped);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fieldLabel {
+  font-size: var(--font-size-secondary);
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+
+.fieldBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.fieldValue {
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.chips {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: transparent;
+  border: 1px solid var(--color-separator);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.chipActive {
+  background: var(--color-accent-tint);
+  border-color: var(--color-accent);
+}
+
+.chipLabel {
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.chipSub {
+  font-size: var(--font-size-secondary);
+  color: var(--color-text-secondary);
+}
+
+.select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+  padding: 0;
+}
+
+.counterRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.counterValue {
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  min-width: 24px;
+  text-align: center;
+}
+
+.actions {
+  margin-top: var(--space-5);
+}
+
+.primary {
+  padding: var(--space-3) var(--space-5);
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.primary:disabled {
+  background: var(--color-bg-grouped);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .inputSection {
-    max-width: none;
-  }
-
-  .previewSection {
-    position: static;
-  }
-
-  .scheduleGrid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.calculateButton {
-  width: 100%;
-  padding: 16px 24px;
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  background: var(--color-accent);
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: var(--transition);
-  font-family: var(--font-family);
-  margin-top: 8px;
-}
-
-.calculateButton:hover:not(:disabled) {
-  background: var(--color-warning);
-  transform: translateY(-1px);
-}
-
-.calculateButton:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.calculateButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  .root { padding: var(--space-5) 0; }
+  .title { font-size: 28px; letter-spacing: -0.6px; }
+  .counterRow { grid-template-columns: 1fr; }
 }

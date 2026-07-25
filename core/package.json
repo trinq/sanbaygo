@@ -1,0 +1,10 @@
+{
+  "name": "@sanbaygo/core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared pure types + calculation engine + static data, consumed by web/, api/, and the Expo RN app via @core path alias.",
+  "main": "index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

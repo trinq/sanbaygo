@@ -18,7 +18,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@core": ["../core/index.ts"],
-      "@core/*": ["../core/*"]
+      "@core/*": ["../core/*"],
+      "@design-system": ["../design-system/tokens/index.ts"],
+      "@design-system/*": ["../design-system/*"]
     }
   },
   "include": ["src", "../core"],
