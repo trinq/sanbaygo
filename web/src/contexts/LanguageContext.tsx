@@ -83,6 +83,10 @@ interface Translations {
     needToArriveBy: string;
     disclaimer: string;
     recalculate: string;
+    sortLabel: string;
+    sortRecommended: string;
+    sortCheapest: string;
+    sortFastest: string;
   };
   destinations: {
     [key: string]: string;
@@ -171,6 +175,10 @@ const translations: Record<Language, Translations> = {
       needToArriveBy: 'Cần đến sân bay trước',
       disclaimer: 'Giá và thời gian mang tính tham khảo.',
       recalculate: 'Tính lại chuyến khác',
+      sortLabel: 'Sắp xếp theo',
+      sortRecommended: 'Khuyến nghị',
+      sortCheapest: 'Rẻ nhất',
+      sortFastest: 'Nhanh nhất',
     },
     destinations: {
       'old-quarter': 'Khu phố cổ',
@@ -262,6 +270,10 @@ const translations: Record<Language, Translations> = {
       needToArriveBy: 'You need to arrive by',
       disclaimer: 'Prices and times are estimates only.',
       recalculate: 'Recalculate',
+      sortLabel: 'Sort by',
+      sortRecommended: 'Recommended',
+      sortCheapest: 'Cheapest',
+      sortFastest: 'Fastest',
     },
     destinations: {
       'old-quarter': 'Old Quarter',

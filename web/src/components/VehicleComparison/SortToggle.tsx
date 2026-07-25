@@ -1,27 +1,28 @@
-import { SortOption } from '@core';
+import { useLanguage } from '../../contexts/LanguageContext';
+import type { SortOption } from '@core';
 import styles from './SortToggle.module.css';
 
-interface SortToggleProps {
+const OPTIONS: SortOption[] = ['recommended', 'cheapest', 'fastest'];
+
+interface Props {
   value: SortOption;
-  onChange: (sort: SortOption) => void;
+  onChange: (s: SortOption) => void;
 }
 
-const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: 'recommended', label: 'Đề xuất' },
-  { value: 'cheapest', label: 'Giá rẻ nhất' },
-  { value: 'fastest', label: 'Nhanh nhất' },
-];
-
-export function SortToggle({ value, onChange }: SortToggleProps) {
+export function SortToggle({ value, onChange }: Props) {
+  const { t } = useLanguage();
   return (
-    <div className={styles.container}>
-      {SORT_OPTIONS.map((option) => (
+    <div className={styles.row} role="tablist" aria-label={t.results.sortLabel}>
+      {OPTIONS.map((opt) => (
         <button
-          key={option.value}
-          className={`${styles.button} ${value === option.value ? styles.active : ''}`}
-          onClick={() => onChange(option.value)}
+          key={opt}
+          type="button"
+          role="tab"
+          aria-selected={value === opt}
+          className={`${styles.btn} ${value === opt ? styles.btnActive : ''}`}
+          onClick={() => onChange(opt)}
         >
-          {option.label}
+          {t.results[`sort${opt.charAt(0).toUpperCase()}${opt.slice(1)}` as 'sortRecommended']}
         </button>
       ))}
     </div>

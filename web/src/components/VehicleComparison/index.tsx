@@ -1,13 +1,13 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { TransportComparison, SortOption } from '@core';
+import { useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { calculateTripComparison, sortComparisons } from '../../lib/transport-calculator';
+import type { SortOption } from '@core';
+import { useViewport } from '../../hooks/useViewport';
+import { RecommendedRow } from '../ResultDisplay/RecommendedRow';
 import { SortToggle } from './SortToggle';
-import { VehicleCard } from './VehicleCard';
-import { calculateTripComparison } from '../../lib/transport-calculator';
 import styles from './index.module.css';
 
-interface VehicleComparisonProps {
+interface Props {
   formData: {
     arrivalTime: string;
     terminalId: 'T1' | 'T2';
@@ -16,50 +16,59 @@ interface VehicleComparisonProps {
   };
 }
 
-export function VehicleComparison({ formData }: VehicleComparisonProps) {
-  const [comparisons, setComparisons] = useState<TransportComparison[]>([]);
-  const [sortBy, setSortBy] = useState<SortOption>('recommended');
-  const [isPeakHour, setIsPeakHour] = useState(false);
+const ICONS: Array<'bus' | 'taxi' | 'grab'> = ['bus', 'taxi', 'grab'];
 
-  useEffect(() => {
-    const savedSort = localStorage.getItem('vehicle-sort') as SortOption;
-    if (savedSort) {
-      setSortBy(savedSort);
-    }
-  }, []);
+export function VehicleComparison({ formData }: Props) {
+  const { t } = useLanguage();
+  const viewport = useViewport();
+  const [sort, setSort] = useState<SortOption>('recommended');
 
-  useEffect(() => {
-    // Call calculation directly (not via HTTP) - works in Vite frontend-only build
-    const result = calculateTripComparison({
-      ...formData,
-      sortBy,
-    });
+  const comparison = sortComparisons(
+    calculateTripComparison({ ...formData, sortBy: 'recommended' }).comparison,
+    sort,
+  );
 
-    setComparisons(result.comparison);
-    setIsPeakHour(result.metadata.isPeakHour);
-  }, [formData, sortBy]);
-
-  const handleSortChange = (newSort: SortOption) => {
-    setSortBy(newSort);
-    localStorage.setItem('vehicle-sort', newSort);
-  };
+  if (viewport === 'desktop') {
+    return (
+      <section className={styles.section}>
+        <SortToggle value={sort} onChange={setSort} />
+        <div className={styles.table}>
+          {comparison.map((c, idx) => (
+            <RecommendedRow
+              key={c.id}
+              icon={ICONS[idx % ICONS.length]}
+              name={c.name}
+              sub={c.notes ?? ''}
+              price={c.price.estimate}
+              badge={idx === 0 && sort === 'recommended' ? t.results.recommended : undefined}
+              time={`${c.travelTime.minutesRange.min}-${c.travelTime.minutesRange.max}`}
+              convenience={`${c.comfort.score} / 5`}
+              luggage={c.luggage.label}
+              isRecommended={idx === 0 && sort === 'recommended'}
+              action={idx === 0 ? 'primary' : 'secondary'}
+              actionLabel={t.results.actionBus}
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>So sánh phương tiện</h2>
-        {isPeakHour && (
-          <span className={styles.peakBadge}>Giờ cao điểm</span>
-        )}
-      </div>
-
-      <SortToggle value={sortBy} onChange={handleSortChange} />
-
-      <div className={styles.grid}>
-        {comparisons.map((comparison) => (
-          <VehicleCard key={comparison.id} comparison={comparison} />
+    <section className={styles.section}>
+      <SortToggle value={sort} onChange={setSort} />
+      <div className={styles.cards}>
+        {comparison.map((c, idx) => (
+          <article
+            key={c.id}
+            className={`${styles.card} ${idx === 0 && sort === 'recommended' ? styles.cardRecommended : ''}`}
+          >
+            <h3 className={styles.cardTitle}>{c.name}</h3>
+            <div className={styles.cardPrice}>{c.price.estimate}</div>
+            <p className={styles.cardSub}>{c.notes}</p>
+          </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
