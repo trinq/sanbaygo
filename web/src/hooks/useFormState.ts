@@ -8,10 +8,10 @@ function getCurrentTime(): string {
 
 const initialFormState: ArrivalFormData = {
   arrivalTime: getCurrentTime(),
-  terminal: null,
-  baggage: null,
+  terminal: 'T1',
+  baggage: 'carry_on',
   destination: null,
-  flightType: 'domestic',
+  flightType: 'international',
 };
 
 export function useFormState() {
