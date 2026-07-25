@@ -11,6 +11,7 @@ export default {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@core$': '<rootDir>/../core/index.ts',
     '^@design-system$': '<rootDir>/../design-system/tokens/index.ts',
+    '^@design-system/(.*)$': '<rootDir>/../design-system/$1',
     '^@core/(.*)$': '<rootDir>/../core/$1',
     '\\.module\\.css$': '<rootDir>/__mocks__/styleMock.js',
   },

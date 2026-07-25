@@ -1,67 +1,61 @@
-// Single source of truth for SanBayGo design tokens — Editorial Paper direction.
-// A warm-paper timetable aesthetic: one ink, one accent, one rule.
+// Single source of truth for SanBayGo design tokens — Figma Make landing direction.
+// Sky-blue primary with glass surfaces, Plus Jakarta Sans typography, amber accent.
 // CSS-vars (tokens.css) MUST mirror these values — see tokens-parity.test.ts.
 
 export const tokens = {
   color: {
-    // Surfaces — the back of a printed bus timetable.
-    paper: '#F4F1EA',          // primary background
-    paperDeep: '#EBE6DA',      // secondary grouped / inset surface
-    paperEdge: '#E0DACE',      // ruled/edge tone
+    // Primary — sky-blue scale (Figma's bg-primary)
+    primary: '#0284C7',         // sky-600
+    primaryHover: '#0369A1',    // sky-700
+    primarySoft: '#E0F2FE',     // sky-100
 
-    // Ink — high-contrast text & primary strokes.
-    ink: '#1A1A1A',            // primary text
-    inkSoft: '#57534E',        // secondary text
-    inkQuiet: '#9A958D',       // tertiary / muted (timed-out markers)
+    // Accent — amber underline highlight ("nhanh nhất")
+    accent: '#FCD34D',          // amber-300
+    accentInk: '#92400E',       // amber-800 text on accent
 
-    // Rule — printed column hairlines.
-    rule: '#D6D3CE',           // 1px hairline
-    ruleStrong: '#BFB9AC',     // slightly heavier rule
+    // Benefit chip icon — emerald
+    benefit: '#059669',         // emerald-600
+    benefitSoft: '#D1FAE5',     // emerald-100
 
-    // Accent — the only saturated color. Signal red.
-    accent: '#D4321C',         // "you can catch this one"
-    accentSoft: '#FCE7E3',     // tint for selected fill
-    accentInk: '#FFFFFF',      // text on accent
+    // Neutrals — slate
+    ink: '#0F172A',             // slate-900 primary text
+    inkSoft: '#475569',         // slate-600 secondary
+    inkQuiet: '#94A3B8',        // slate-400 muted
+    surface: '#FFFFFF',         // white
+    surfaceMuted: '#F8FAFC',    // slate-50
+    surfaceBorder: '#E2E8F0',   // slate-200
+    background: '#F1F5F9',      // slate-100 page background
 
-    // "Missed" state — softly desaturated red, not alarming.
-    missed: '#A6635C',
-    missedSoft: '#F1E6E2',
-
-    // Peak-hour badge — a different saturated hue, used sparingly.
-    peak: '#8B5A2B',           // earthy amber
-    peakSoft: '#F2EAD9',
+    // Glass — translucent white overlays
+    glass: 'rgba(255, 255, 255, 0.30)',
+    glassStrong: 'rgba(255, 255, 255, 0.80)',
 
     // System
-    warn: '#8B5A2B',
-    warnTint: '#F2EAD9',
+    warn: '#D97706',            // amber-600
+    warnTint: '#FEF3C7',
   },
   font: {
-    // Three roles: a characterful display serif, a utility body, a real monospace for times.
-    // We rely on system fallbacks for the body and mono; the display face is a self-hosted
-    // Fraunces variant loaded in web/index.html so the page can render without a network.
-    family:
-      '"Fraunces", "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif',
-    bodyFamily:
-      '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", "Segoe UI", system-ui, sans-serif',
-    monoFamily:
-      '"JetBrains Mono", "SF Mono", ui-monospace, "Menlo", "Consolas", monospace',
+    family: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+    bodyFamily: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+    monoFamily: '"JetBrains Mono", "SF Mono", ui-monospace, monospace',
     size: {
-      caption: 11,
-      secondary: 13,
-      body: 17,
+      caption: 12,
+      secondary: 14,
+      body: 16,
       section: 22,
       display: 28,
-      hero: 34,
-      page: 40,
+      hero: 36,
+      page: 44,
     },
     weight: {
       regular: 400,
       medium: 500,
       semibold: 600,
       bold: 700,
+      extrabold: 800,
     },
     letterSpacing: {
-      tight: -0.6,
+      tight: -0.5,
       tighter: -1,
       eyebrow: 0.5,
     },
@@ -77,17 +71,15 @@ export const tokens = {
     8: 64,
   },
   radius: {
-    // Most things are square — this is a printed timetable, not a card UI.
-    // Radius is only used for the small form chips and the single CTA pill.
-    sm: 4,
-    md: 8,
-    lg: 12,
+    sm: 8,
+    md: 12,
+    lg: 16,
+    xl: 24,                     // Figma 'rounded-xl'
     pill: 999,
   },
   shadow: {
-    // A printed page has no shadow. Suppress everything.
-    card: 'none',
-    hero: 'none',
+    card: '0 8px 24px rgba(2, 132, 199, 0.12)',
+    hero: '0 20px 60px rgba(2, 132, 199, 0.18)',
   },
   breakpoint: {
     tablet: 769,
