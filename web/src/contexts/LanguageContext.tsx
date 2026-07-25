@@ -119,6 +119,28 @@ interface Translations {
     };
     languageToggle: string;
   };
+  landing: {
+    pill: string;
+    headline: string;
+    subtitle: string;
+    benefitFast: string;
+    benefitFastDesc: string;
+    benefitSafe: string;
+    benefitSafeDesc: string;
+    benefitCheap: string;
+    benefitCheapDesc: string;
+    fieldDeparture: string;
+    fieldDestination: string;
+    fieldPeople: string;
+    fieldLuggage: string;
+    cta: string;
+    ctaShort: string;
+    socialProof: string;
+    footer: string;
+    assumption: string;
+    navBrand: string;
+    navBrandAccent: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -243,6 +265,30 @@ const translations: Record<Language, Translations> = {
       },
       languageToggle: 'English',
     },
+    landing: {
+      pill: 'Dịch vụ xe đưa đón sân bay',
+      headline: 'Cách nhanh nhất từ sân bay về trung tâm.',
+      subtitle:
+        'So sánh xe buýt, Grab, taxi trong 5 giây. Không cần tải app, không cần đăng ký.',
+      benefitFast: 'Nhanh nhất',
+      benefitFastDesc: 'Lịch trình 26 chuyến/ngày',
+      benefitSafe: 'An toàn',
+      benefitSafeDesc: 'Tài xế xác minh, giá công khai',
+      benefitCheap: 'Tiết kiệm',
+      benefitCheapDesc: 'Chỉ 50.000đ cho xe buýt',
+      fieldDeparture: 'Sân bay khởi hành',
+      fieldDestination: 'Bạn muốn đi đâu?',
+      fieldPeople: 'Số người',
+      fieldLuggage: 'Hành lý',
+      cta: 'Tìm phương tiện',
+      ctaShort: 'Đặt nhanh',
+      socialProof: '4.9 điểm từ 12.000+ hành khách',
+      footer:
+        'Lịch trình được tính cho khung giờ 12:00 — nhập giờ thực tế khi cần chính xác.',
+      assumption: 'Đang giả định nhà ga T1 + hành lý xách tay — chi tiết hơn sau.',
+      navBrand: 'SanBayGo',
+      navBrandAccent: 'Go',
+    },
   },
   en: {
     header: {
@@ -364,6 +410,29 @@ const translations: Record<Language, Translations> = {
         tabReference: 'Reference',
       },
       languageToggle: 'Tiếng Việt',
+    },
+    landing: {
+      pill: 'Airport transfer service',
+      headline: 'The fastest way from the airport to the city.',
+      subtitle:
+        'Compare bus, Grab, and taxi in 5 seconds. No app to install, no account to create.',
+      benefitFast: 'Fastest',
+      benefitFastDesc: '26 daily departures',
+      benefitSafe: 'Safe',
+      benefitSafeDesc: 'Verified drivers, transparent pricing',
+      benefitCheap: 'Affordable',
+      benefitCheapDesc: 'Only 50,000 VND by bus',
+      fieldDeparture: 'Departure airport',
+      fieldDestination: 'Where are you going?',
+      fieldPeople: 'People',
+      fieldLuggage: 'Luggage',
+      cta: 'Find a ride',
+      ctaShort: 'Book now',
+      socialProof: '4.9 rating from 12,000+ travelers',
+      footer: 'Schedule calculated for 12:00 — enter your actual time for accuracy.',
+      assumption: 'Assuming Terminal T1 + carry-on luggage — more details later.',
+      navBrand: 'SanBay',
+      navBrandAccent: 'Go',
     },
   },
 };
