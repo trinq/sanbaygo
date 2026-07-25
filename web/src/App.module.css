@@ -2,11 +2,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-bg-page);
 }
 
 .main {
   flex: 1;
-  padding: 24px;
+  padding: var(--space-5);
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
@@ -14,6 +15,6 @@
 
 @media (max-width: 768px) {
   .main {
-    padding: 16px;
+    padding: var(--space-4);
   }
 }
