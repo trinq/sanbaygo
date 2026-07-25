@@ -53,11 +53,10 @@ System font: `-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display"
 
 ## Anti-patterns (encoded in `tokens-parity.test.ts`)
 
-- ❌ No `purple`, `magenta`, `cyan`, `neon` hex anywhere.
+- ❌ No `purple`, `magenta`, `cyan`, `neon` hex in decorative usage (brand/CTA/icons).
 - ❌ No `gradient` keyword in CSS.
 - ❌ No `backdrop-filter` / `blur` keyword.
 - ❌ No `box-shadow` with `rgba(..., 0.3+)` (overly diffuse).
 - ✅ All accent usage of `#007AFF` lives behind the `--color-accent*` tokens.
 - ✅ All body font sizes ≥ 17 px.
-
-> ⚠️ Open call: `--color-warn: #FF9500` (systemOrange) is warm; conflicting with "no warm tones". Resolved in Task 2.
+- ✅ **Exception:** `--color-warn: #FF9500` (Apple `systemOrange`) is allowed for functional warnings only (peak-hour indicator, destructive actions). Not used for decoration.
