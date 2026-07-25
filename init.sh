@@ -68,6 +68,10 @@ step "TypeScript: core/ (shared module)"
 (cd core && npx tsc --noEmit -p tsconfig.json)
 ok "core/ tsc clean"
 
+step "TypeScript: design-system/"
+(cd design-system && npx tsc --noEmit)
+ok "design-system/ tsc clean"
+
 step "TypeScript: web/"
 (cd web && npx tsc --noEmit)
 ok "web/ tsc clean"
