@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Header } from './components/Header';
+import { Sidebar } from './components/Layout/Sidebar';
+import { TopBar, TabletTopBar } from './components/Layout/TopBar';
 import { ArrivalForm } from './components/ArrivalForm';
 import { ResultDisplay } from './components/ResultDisplay';
+import { useViewport } from './hooks/useViewport';
 import { useFormState } from './hooks/useFormState';
 import { calculateResult } from './lib/calculation-result';
 import styles from './App.module.css';
@@ -12,24 +15,20 @@ type View = 'form' | 'result';
 function AppContent() {
   const [view, setView] = useState<View>('form');
   const [result, setResult] = useState<ReturnType<typeof calculateResult>>(null);
+  const viewport = useViewport();
   const { formData, updateFormData, reset } = useFormState();
 
   const handleCalculate = () => {
-    // Validate required fields before calculating
-    if (!formData.terminal || !formData.baggage || !formData.destination) {
-      return;
-    }
-    // Convert ArrivalFormData for calculation
-    const formDataForCalc = {
+    if (!formData.terminal || !formData.baggage || !formData.destination) return;
+    const calc = calculateResult({
       arrivalTime: formData.arrivalTime,
       terminal: formData.terminal,
       baggage: formData.baggage,
       destination: formData.destination,
       flightType: formData.flightType,
-    };
-    const calculated = calculateResult(formDataForCalc);
-    if (calculated) {
-      setResult(calculated);
+    });
+    if (calc) {
+      setResult(calc);
       setView('result');
     }
   };
@@ -42,24 +41,32 @@ function AppContent() {
 
   return (
     <div className={styles.app}>
-      <Header />
-      <main className={styles.main}>
-        {view === 'form' ? (
-          <ArrivalForm
-            formData={formData}
-            onUpdate={updateFormData}
-            onCalculate={handleCalculate}
-          />
-        ) : (
-          result && (
-            <ResultDisplay
-              result={result}
-              formData={formData}
-              onRecalculate={handleRecalculate}
-            />
-          )
-        )}
-      </main>
+      {viewport === 'desktop' ? (
+        <div className={styles.desktop}>
+          <Sidebar />
+          <main className={`${styles.main} ${styles.mainDesktop}`}>
+            <Header />
+            <div className={styles.contentDesktop}>
+              {view === 'form' ? (
+                <ArrivalForm formData={formData} onUpdate={updateFormData} onCalculate={handleCalculate} />
+              ) : (
+                result && <ResultDisplay result={result} formData={formData} onRecalculate={handleRecalculate} />
+              )}
+            </div>
+          </main>
+        </div>
+      ) : (
+        <div className={styles.mobileShell}>
+          {viewport === 'mobile' ? <TopBar title="SanBayGo" /> : <TabletTopBar />}
+          <main className={`${styles.main} ${viewport === 'mobile' ? styles.mainMobile : styles.mainTablet}`}>
+            {view === 'form' ? (
+              <ArrivalForm formData={formData} onUpdate={updateFormData} onCalculate={handleCalculate} />
+            ) : (
+              result && <ResultDisplay result={result} formData={formData} onRecalculate={handleRecalculate} />
+            )}
+          </main>
+        </div>
+      )}
     </div>
   );
 }
