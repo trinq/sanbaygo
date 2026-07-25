@@ -1,168 +1,291 @@
+/* Editorial-paper form
+ * — a single column, hairline rules between sections, time as mono.
+ * — Tags are square chips, no fill, hairline border. Selected = ink fill.
+ */
+
 .root {
-  max-width: 760px;
-  padding: var(--space-7) 0;
-  font-family: var(--font-family);
+  font-family: var(--font-body-family);
+  color: var(--color-ink);
 }
 
-.eyebrow {
-  font-size: var(--font-size-secondary);
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  color: var(--color-accent);
-  margin-bottom: var(--space-2);
+/* Byline — like a newspaper dateline */
+.byline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  font-family: var(--font-body-family);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-ink-soft);
+}
+
+.bylineDate::after {
+  content: ' ·';
+  margin-left: var(--space-2);
+  color: var(--color-ink-quiet);
+}
+
+.bylineLabel {
+  color: var(--color-ink-soft);
 }
 
 .title {
-  font-size: var(--font-size-page);
-  font-weight: 700;
-  letter-spacing: -1px;
-  color: var(--color-text-primary);
-  margin: 0 0 var(--space-3);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 44px;
   line-height: 1.05;
+  letter-spacing: -1.2px;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+}
+
+.titleEm {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.titleAccent {
+  /* The cliffhanger of the headline */
+  font-weight: 600;
+  color: var(--color-ink);
+  font-style: italic;
 }
 
 .lede {
-  font-size: var(--font-size-body);
-  color: var(--color-text-secondary);
-  margin: 0 0 var(--space-6);
+  font-family: var(--font-family);
+  font-size: 18px;
   line-height: 1.5;
-  max-width: 520px;
+  font-style: italic;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-5);
+  max-width: 56ch;
 }
 
-.field {
-  background: var(--color-bg-card);
-  border-radius: var(--radius-md);
-  padding: var(--space-4) var(--space-5);
-  box-shadow: var(--shadow-card);
-  border-left: 3px solid transparent;
+.rule {
+  border: 0;
+  border-top: 1px solid var(--color-rule);
+  margin: var(--space-5) 0;
+}
+
+/* Time field — the hero */
+
+.timeField {
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-3);
+  align-items: flex-end;
+  gap: var(--space-5);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-rule);
 }
 
-.fieldActive {
-  border-left-color: var(--color-accent);
-}
-
-.fieldIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-grouped);
+.timeLabel {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.fieldLabel {
-  font-size: var(--font-size-secondary);
-  color: var(--color-text-secondary);
-  margin-bottom: 2px;
-}
-
-.fieldBody {
+  flex-direction: column;
+  gap: 4px;
   flex: 1;
-  min-width: 0;
 }
 
-.fieldValue {
-  font-size: var(--font-size-body);
+.timeLabelText {
+  font-family: var(--font-body-family);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-ink-soft);
+}
+
+.timeLabelHint {
+  font-family: var(--font-family);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--color-ink-quiet);
+}
+
+.timeInputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: var(--space-2);
+}
+
+.timeInput {
+  font-family: var(--font-mono-family);
+  font-size: 64px;
   font-weight: 500;
-  color: var(--color-text-primary);
-}
-
-.chips {
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-}
-
-.chip {
+  line-height: 1;
+  letter-spacing: -2px;
   background: transparent;
-  border: 1px solid var(--color-separator);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-3);
-  cursor: pointer;
-  font-family: inherit;
+  border: none;
+  border-bottom: 2px solid var(--color-ink);
+  color: var(--color-ink);
+  padding: 0 var(--space-3) 6px 0;
+  font-variant-numeric: tabular-nums;
+  width: 240px;
+  outline: none;
+  font-feature-settings: 'tnum' 1;
+}
+
+.timeInput:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+.timeCursor {
+  font-family: var(--font-mono-family);
+  font-size: 48px;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-left: -10px;
+  animation: blink 1.4s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to { visibility: hidden; }
+}
+
+/* Inline row — horizontal label + value */
+
+.row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--space-5);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-rule);
+  align-items: start;
+}
+
+.rowLabel {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rowLabelText {
+  font-family: var(--font-body-family);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-ink-soft);
+}
+
+.rowLabelHint {
+  font-family: var(--font-family);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--color-ink-quiet);
+}
+
+.rowValue {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag {
+  font-family: var(--font-body-family);
+  display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
-}
-
-.chipActive {
-  background: var(--color-accent-tint);
-  border-color: var(--color-accent);
-}
-
-.chipLabel {
-  font-size: var(--font-size-body);
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.chipSub {
-  font-size: var(--font-size-secondary);
-  color: var(--color-text-secondary);
-}
-
-.select {
-  width: 100%;
   background: transparent;
-  border: none;
-  font-family: inherit;
-  font-size: var(--font-size-body);
-  color: var(--color-text-primary);
-  padding: 0;
-}
-
-.counterRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-3);
-}
-
-.counter {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.counterValue {
-  font-size: var(--font-size-body);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  min-width: 24px;
-  text-align: center;
-}
-
-.actions {
-  margin-top: var(--space-5);
-}
-
-.primary {
-  padding: var(--space-3) var(--space-5);
-  height: 44px;
-  border-radius: var(--radius-sm);
-  border: none;
-  background: var(--color-accent);
-  color: #FFFFFF;
-  font-size: var(--font-size-body);
-  font-weight: 600;
+  border: 1px solid var(--color-rule-strong);
+  color: var(--color-ink);
+  padding: 10px 14px;
+  border-radius: 0;
   cursor: pointer;
-  font-family: inherit;
+  transition: border-color 120ms ease, background 120ms ease;
+  text-align: left;
 }
 
-.primary:disabled {
-  background: var(--color-bg-grouped);
-  color: var(--color-text-secondary);
+.tag:hover {
+  border-color: var(--color-ink);
+}
+
+.tagActive {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.tagActive .tagSub {
+  color: var(--color-ink-quiet);
+}
+
+.tagMain {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.tagSub {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+}
+
+.tagNarrow {
+  padding: 10px 16px;
+}
+
+.cta {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.ctaBtn {
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: background 120ms ease;
+  letter-spacing: -0.2px;
+}
+
+.ctaBtn:hover:not(:disabled) {
+  background: var(--color-accent);
+}
+
+.ctaBtn:disabled {
+  background: var(--color-ink-quiet);
   cursor: not-allowed;
 }
 
+.ctaFootnote {
+  font-family: var(--font-family);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--color-ink-soft);
+}
+
 @media (max-width: 768px) {
-  .root { padding: var(--space-5) 0; }
-  .title { font-size: 28px; letter-spacing: -0.6px; }
-  .counterRow { grid-template-columns: 1fr; }
+  .title { font-size: 32px; letter-spacing: -0.8px; }
+  .timeInput { font-size: 44px; width: 180px; letter-spacing: -1px; }
+  .timeCursor { font-size: 32px; }
+  .row { grid-template-columns: 1fr; gap: var(--space-3); }
+  .timeField { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+  .lede { font-size: 16px; }
+}
+
+@media (max-width: 480px) {
+  .title { font-size: 26px; }
+  .timeInput { font-size: 36px; width: 160px; }
 }

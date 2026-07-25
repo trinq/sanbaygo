@@ -1,25 +1,28 @@
 import { tokens } from '@design-system';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
 
 describe('design-system token parity', () => {
-  const cssPath = resolve(__dirname, '../../../design-system/tokens/tokens.css');
+  const cssPath = resolve(dirname(fileURLToPath(import.meta.url)), '../../../design-system/tokens/tokens.css');
   const css = readFileSync(cssPath, 'utf8');
 
   const expected: Array<[string, string]> = [
-    ['color.bgPage', '--color-bg-page'],
-    ['color.bgCard', '--color-bg-card'],
-    ['color.bgGrouped', '--color-bg-grouped'],
-    ['color.bgSidebar', '--color-bg-sidebar'],
-    ['color.textPrimary', '--color-text-primary'],
-    ['color.textSecondary', '--color-text-secondary'],
-    ['color.textTertiary', '--color-text-tertiary'],
-    ['color.separator', '--color-separator'],
-    ['color.separatorStrong', '--color-separator-strong'],
+    ['color.paper', '--color-paper'],
+    ['color.paperDeep', '--color-paper-deep'],
+    ['color.paperEdge', '--color-paper-edge'],
+    ['color.ink', '--color-ink'],
+    ['color.inkSoft', '--color-ink-soft'],
+    ['color.inkQuiet', '--color-ink-quiet'],
+    ['color.rule', '--color-rule'],
+    ['color.ruleStrong', '--color-rule-strong'],
     ['color.accent', '--color-accent'],
-    ['color.accentPressed', '--color-accent-pressed'],
-    ['color.accentTint', '--color-accent-tint'],
-    ['color.accentTintStrong', '--color-accent-tint-strong'],
+    ['color.accentSoft', '--color-accent-soft'],
+    ['color.accentInk', '--color-accent-ink'],
+    ['color.missed', '--color-missed'],
+    ['color.missedSoft', '--color-missed-soft'],
+    ['color.peak', '--color-peak'],
+    ['color.peakSoft', '--color-peak-soft'],
     ['color.warn', '--color-warn'],
     ['color.warnTint', '--color-warn-tint'],
   ];
@@ -40,8 +43,8 @@ describe('design-system token parity', () => {
     expect(normalize(cssMatch![1], value)).toBe(value);
   });
 
-  it('accent is #007AFF', () => {
-    expect(tokens.color.accent).toBe('#007AFF');
+  it('accent is signal red', () => {
+    expect(tokens.color.accent).toBe('#D4321C');
   });
 
   it('contains no banned hues', () => {
@@ -62,5 +65,23 @@ describe('design-system token parity', () => {
 
   it('CSS contains no backdrop-filter / blur keyword', () => {
     expect(css).not.toMatch(/backdrop-filter|filter:\s*blur/i);
+  });
+
+  it('CSS contains no drop-shadow / box-shadow (printed page has no shadow)', () => {
+    expect(css).not.toMatch(/drop-shadow|box-shadow/i);
+  });
+
+  it('tokens define both paper palette and legacy aliases', () => {
+    expect(css).toMatch(/--color-bg-page:\s*var\(--color-paper\)/);
+    expect(css).toMatch(/--color-text-primary:\s*var\(--color-ink\)/);
+  });
+
+  it('display font is a serif (Fraunces or system serif fallback)', () => {
+    expect(tokens.font.family).toMatch(/Fraunces|serif/i);
+  });
+
+  it('mono font is defined for tabular times', () => {
+    expect(css).toMatch(/--font-mono-family/);
+    expect(tokens.font.monoFamily).toMatch(/mono/i);
   });
 });

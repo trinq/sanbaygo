@@ -1,28 +1,52 @@
 /* CSS custom properties — mirrors design-system/tokens/tokens.ts.
  * Any change here MUST be reflected in tokens.ts (and vice versa).
- * tokens-parity.test.ts pins parity in Task 7.
+ * tokens-parity.test.ts pins parity.
  */
 
 :root {
-  /* Color */
-  --color-bg-page: #FAFAFA;
-  --color-bg-card: #FFFFFF;
-  --color-bg-grouped: #F2F2F7;
-  --color-bg-sidebar: #F5F5F7;
-  --color-text-primary: #1C1C1E;
-  --color-text-secondary: #8E8E93;
-  --color-text-tertiary: #C7C7CC;
-  --color-separator: rgba(60, 60, 67, 0.12);
-  --color-separator-strong: rgba(60, 60, 67, 0.20);
-  --color-accent: #007AFF;
-  --color-accent-pressed: #0051D5;
-  --color-accent-tint: rgba(0, 122, 255, 0.08);
-  --color-accent-tint-strong: rgba(0, 122, 255, 0.14);
-  --color-warn: #FF9500;
-  --color-warn-tint: rgba(255, 149, 0, 0.12);
+  /* Color — Editorial Paper */
+  --color-paper: #F4F1EA;
+  --color-paper-deep: #EBE6DA;
+  --color-paper-edge: #E0DACE;
+
+  --color-ink: #1A1A1A;
+  --color-ink-soft: #57534E;
+  --color-ink-quiet: #9A958D;
+
+  --color-rule: #D6D3CE;
+  --color-rule-strong: #BFB9AC;
+
+  --color-accent: #D4321C;
+  --color-accent-soft: #FCE7E3;
+  --color-accent-ink: #FFFFFF;
+
+  --color-missed: #A6635C;
+  --color-missed-soft: #F1E6E2;
+
+  --color-peak: #8B5A2B;
+  --color-peak-soft: #F2EAD9;
+
+  /* System (kept for parity with tests) */
+  --color-warn: #8B5A2B;
+  --color-warn-tint: #F2EAD9;
+
+  /* Legacy aliases — kept so existing components that reference
+   * --color-bg-page, --color-text-primary, etc. don't break.
+   * New code should use the semantic tokens above. */
+  --color-bg-page: var(--color-paper);
+  --color-bg-card: var(--color-paper);
+  --color-bg-grouped: var(--color-paper-deep);
+  --color-bg-sidebar: var(--color-paper-deep);
+  --color-text-primary: var(--color-ink);
+  --color-text-secondary: var(--color-ink-soft);
+  --color-text-tertiary: var(--color-ink-quiet);
+  --color-separator: var(--color-rule);
+  --color-separator-strong: var(--color-rule-strong);
 
   /* Font family */
-  --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+  --font-family: "Fraunces", "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+  --font-body-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --font-mono-family: "JetBrains Mono", "SF Mono", ui-monospace, "Menlo", "Consolas", monospace;
 
   /* Font sizes (px) */
   --font-size-caption: 11px;
@@ -50,14 +74,14 @@
   --space-8: 64px;
 
   /* Radii */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   --radius-pill: 999px;
 
-  /* Shadow */
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
-  --shadow-hero: 0 2px 12px rgba(0, 0, 0, 0.04), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  /* Shadow — printed page has no shadow */
+  --shadow-card: none;
+  --shadow-hero: none;
 
   /* Breakpoints (used in JS via tokens.breakpoint; values are px) */
   /* (No CSS var needed — JS reads tokens.breakpoint directly.) */

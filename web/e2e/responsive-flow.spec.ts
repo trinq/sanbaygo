@@ -12,27 +12,25 @@ for (const vp of VIEWPORTS) {
       await page.setViewportSize({ width: vp.width, height: vp.height });
     });
 
-    test('fills the form, sees comparison, sees detail', async ({ page }) => {
+    test('fills the form, sees the timetable spine, sees the ride-hail footnote', async ({ page }) => {
       await page.goto('/');
 
-      // Terminal: chip buttons with text "Nội Bài · T1" / "Nội Bài · T2"
-      // Use regex that matches either language (Vietnamese default; English if user toggled)
-      await page.getByRole('button', { name: /Nội Bài · T1|Noi Bai · T1|T1/i }).first().click();
+      // Terminal: tag button "Nội Bài · T1" / "Nội Bài · T2"
+      await page.getByRole('button', { name: /Nội Bài · T1|Noi Bai · T1/i }).first().click();
 
-      // Destination: <select> with option values "old-quarter" / "ba-dinh" / "tay-ho"
-      await page.locator('select').first().selectOption({ value: 'old-quarter' });
+      // Destination: tag button "Phố Cổ" / "Old Quarter"
+      await page.getByRole('button', { name: /Phố Cổ|Old Quarter/i }).first().click();
 
-      // Baggage: <select> with option values "carry_on" / "checked"
-      await page.locator('select').nth(1).selectOption({ value: 'carry_on' });
+      // Baggage: tag button "Xách tay" / "Carry-on"
+      await page.getByRole('button', { name: /Xách tay|Carry-on/i }).first().click();
 
-      // Calculate: "Tìm phương tiện phù hợp →" / "Find a ride →"
-      await page.getByRole('button', { name: /Tìm phương tiện|Find a ride/i }).click();
+      // Calculate: "Xem các chuyến buýt kế tiếp" / "Find a ride"
+      await page.getByRole('button', { name: /Xem các chuyến buýt|Find a ride/i }).click();
 
-      // Result display: shows all 3 transport option families
-      // Use .first() because Sidebar (desktop only) also contains "Bus 86",
-      // and Grab/Be/Xanh SM cards all match "/Grab/i" / "/Taxi/i".
-      await expect(page.getByText(/Xe buýt 86|Bus 86/i).first()).toBeVisible();
-      await expect(page.getByText(/Taxi/i).first()).toBeVisible();
+      // Result display: the spine list should have 26 departures, and the
+      // ride-hail footnote should be visible.
+      const departures = await page.locator('ol li').count();
+      expect(departures).toBe(26);
       await expect(page.getByText(/Grab/i).first()).toBeVisible();
     });
   });

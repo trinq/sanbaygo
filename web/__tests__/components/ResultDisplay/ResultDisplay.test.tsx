@@ -1,10 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { ResultDisplay } from '../../../src/components/ResultDisplay';
 import { LanguageProvider } from '../../../src/contexts/LanguageContext';
-import { useViewport } from '../../../src/hooks/useViewport';
 import type { ArrivalResult, ArrivalFormData } from '@core';
-
-jest.mock('../../../src/hooks/useViewport');
 
 const result: ArrivalResult = {
   bus: {
@@ -31,25 +28,54 @@ const formData: ArrivalFormData = {
   flightType: 'international',
 };
 
-function setup(viewport: 'mobile' | 'tablet' | 'desktop') {
-  (useViewport as jest.Mock).mockReturnValue(viewport);
-  render(
-    <LanguageProvider>
-      <ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />
-    </LanguageProvider>,
-  );
+function renderWithLang(ui: React.ReactNode) {
+  return render(<LanguageProvider>{ui}</LanguageProvider>);
 }
 
-describe('ResultDisplay', () => {
-  it('renders at desktop as a single-column table', () => {
-    setup('desktop');
-    expect(screen.getByText(/Xe buýt 86|Bus 86/i)).toBeTruthy();
-    expect(screen.getByText(/Taxi/i)).toBeTruthy();
-    expect(screen.getAllByText(/Grab/i).length).toBeGreaterThan(0);
+describe('ResultDisplay — editorial paper', () => {
+  it('renders the catchable departure time as the headline', () => {
+    renderWithLang(
+      <ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />,
+    );
+    // Headline contains the recommended departure
+    expect(screen.getAllByText('10:30').length).toBeGreaterThan(0);
   });
 
-  it('renders at mobile as stacked cards', () => {
-    setup('mobile');
-    expect(screen.getByText(/Xe buýt 86|Bus 86/i)).toBeTruthy();
+  it('renders the 26-departure spine', () => {
+    const { container } = renderWithLang(
+      <ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />,
+    );
+    const list = container.querySelector('ol');
+    expect(list).not.toBeNull();
+    expect(list?.querySelectorAll('li').length).toBe(26);
+  });
+
+  it('marks departed buses as missed (struck through)', () => {
+    const { container } = renderWithLang(
+      <ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />,
+    );
+    // 06:40 is the first departure; user arrived at 10:00 => it should be missed
+    const items = container.querySelectorAll('li');
+    const first = items[0];
+    expect(first.className).toMatch(/status_missed/);
+    expect(first.querySelector('time, .time, span:nth-child(2)')?.textContent).toBe('06:40');
+  });
+
+  it('shows the ride-hail footnote', () => {
+    renderWithLang(
+      <ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />,
+    );
+    expect(screen.getByText(/Grab/i)).toBeTruthy();
+  });
+
+  it('renders a missed-bus headline when no bus is available', () => {
+    const missed: ArrivalResult = {
+      bus: { available: false, reason: 'too_late' },
+      grab: result.grab,
+    };
+    renderWithLang(
+      <ResultDisplay result={missed} formData={formData} onRecalculate={jest.fn()} />,
+    );
+    expect(screen.getByText(/Đã lỡ chuyến cuối|Last bus/i)).toBeTruthy();
   });
 });

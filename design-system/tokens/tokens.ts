@@ -1,27 +1,50 @@
-// Single source of truth for SanBayGo design tokens.
+// Single source of truth for SanBayGo design tokens — Editorial Paper direction.
+// A warm-paper timetable aesthetic: one ink, one accent, one rule.
 // CSS-vars (tokens.css) MUST mirror these values — see tokens-parity.test.ts.
 
 export const tokens = {
   color: {
-    bgPage: '#FAFAFA',
-    bgCard: '#FFFFFF',
-    bgGrouped: '#F2F2F7',
-    bgSidebar: '#F5F5F7',
-    textPrimary: '#1C1C1E',
-    textSecondary: '#8E8E93',
-    textTertiary: '#C7C7CC',
-    separator: 'rgba(60, 60, 67, 0.12)',
-    separatorStrong: 'rgba(60, 60, 67, 0.20)',
-    accent: '#007AFF',
-    accentPressed: '#0051D5',
-    accentTint: 'rgba(0, 122, 255, 0.08)',
-    accentTintStrong: 'rgba(0, 122, 255, 0.14)',
-    warn: '#FF9500',
-    warnTint: 'rgba(255, 149, 0, 0.12)',
+    // Surfaces — the back of a printed bus timetable.
+    paper: '#F4F1EA',          // primary background
+    paperDeep: '#EBE6DA',      // secondary grouped / inset surface
+    paperEdge: '#E0DACE',      // ruled/edge tone
+
+    // Ink — high-contrast text & primary strokes.
+    ink: '#1A1A1A',            // primary text
+    inkSoft: '#57534E',        // secondary text
+    inkQuiet: '#9A958D',       // tertiary / muted (timed-out markers)
+
+    // Rule — printed column hairlines.
+    rule: '#D6D3CE',           // 1px hairline
+    ruleStrong: '#BFB9AC',     // slightly heavier rule
+
+    // Accent — the only saturated color. Signal red.
+    accent: '#D4321C',         // "you can catch this one"
+    accentSoft: '#FCE7E3',     // tint for selected fill
+    accentInk: '#FFFFFF',      // text on accent
+
+    // "Missed" state — softly desaturated red, not alarming.
+    missed: '#A6635C',
+    missedSoft: '#F1E6E2',
+
+    // Peak-hour badge — a different saturated hue, used sparingly.
+    peak: '#8B5A2B',           // earthy amber
+    peakSoft: '#F2EAD9',
+
+    // System
+    warn: '#8B5A2B',
+    warnTint: '#F2EAD9',
   },
   font: {
+    // Three roles: a characterful display serif, a utility body, a real monospace for times.
+    // We rely on system fallbacks for the body and mono; the display face is a self-hosted
+    // Fraunces variant loaded in web/index.html so the page can render without a network.
     family:
-      '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif',
+      '"Fraunces", "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif',
+    bodyFamily:
+      '-apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", "Segoe UI", system-ui, sans-serif',
+    monoFamily:
+      '"JetBrains Mono", "SF Mono", ui-monospace, "Menlo", "Consolas", monospace',
     size: {
       caption: 11,
       secondary: 13,
@@ -54,14 +77,17 @@ export const tokens = {
     8: 64,
   },
   radius: {
-    sm: 8,
-    md: 12,
-    lg: 16,
+    // Most things are square — this is a printed timetable, not a card UI.
+    // Radius is only used for the small form chips and the single CTA pill.
+    sm: 4,
+    md: 8,
+    lg: 12,
     pill: 999,
   },
   shadow: {
-    card: '0 1px 2px rgba(0,0,0,0.04), 0 0 0 0.5px rgba(0,0,0,0.06)',
-    hero: '0 2px 12px rgba(0,0,0,0.04), 0 0 0 0.5px rgba(0,0,0,0.04)',
+    // A printed page has no shadow. Suppress everything.
+    card: 'none',
+    hero: 'none',
   },
   breakpoint: {
     tablet: 769,

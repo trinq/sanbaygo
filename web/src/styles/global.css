@@ -6,17 +6,49 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: var(--font-family);
-  background-color: var(--color-bg-page);
-  color: var(--color-text-primary);
-  line-height: 1.5;
+html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body-family);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  line-height: 1.5;
+}
+
+/* A printed page has a quiet texture. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(rgba(26, 26, 26, 0.022) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  opacity: 0.6;
 }
 
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* Editorial type classes — the headline & display serializer. */
+.serif {
+  font-family: var(--font-family);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.mono {
+  font-family: var(--font-mono-family);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
 }

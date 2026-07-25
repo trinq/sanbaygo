@@ -9,31 +9,24 @@ interface Translations {
   };
   form: {
     title: string;
-    arrivalTime: string;
-    terminal: string;
-    baggage: string;
-    destination: string;
-    calculate: string;
-    t1: string;
-    t2: string;
-    carryOn: string;
-    checked: string;
-    stepEyebrow: string;
     lede: string;
-    fromLabel: string;
-    toLabel: string;
-    selectDestination: string;
-    destinationOldQuarter: string;
-    destinationBaDinh: string;
-    destinationTayHo: string;
-    peopleLabel: string;
+    eyebrow: string;
+    arrivalTimeLabel: string;
+    arrivalTimeHint: string;
+    terminalLabel: string;
+    destinationLabel: string;
     baggageLabel: string;
-    baggageCarryOn: string;
-    baggageChecked: string;
+    calculate: string;
     t1Label: string;
     t1Sub: string;
     t2Label: string;
     t2Sub: string;
+    carryOn: string;
+    checked: string;
+    selectDestination: string;
+    destinationOldQuarter: string;
+    destinationBaDinh: string;
+    destinationTayHo: string;
   };
   results: {
     title: string;
@@ -87,6 +80,18 @@ interface Translations {
     sortRecommended: string;
     sortCheapest: string;
     sortFastest: string;
+    // Spine (signature element)
+    spineEyebrow: string;
+    spineTitle: string;
+    spineCatchable: string;
+    spineMissed: string;
+    spineNext: string;
+    spineLast: string;
+    railTitle: string;
+    railSubtitle: string;
+    railFootnote: string;
+    rideHailTitle: string;
+    rideHailSubtitle: string;
   };
   destinations: {
     [key: string]: string;
@@ -124,31 +129,24 @@ const translations: Record<Language, Translations> = {
     },
     form: {
       title: 'Bạn bay từ đâu, đi đâu?',
-      arrivalTime: 'Giờ đáp cánh',
-      terminal: 'Chọn nhà ga',
-      baggage: 'Hành lý',
-      destination: 'Điểm đến',
-      calculate: 'Tìm phương tiện phù hợp →',
-      t1: 'Nhà ga T1 (Nội địa)',
-      t2: 'Nhà ga T2 (Quốc tế)',
-      carryOn: 'Xách tay',
-      checked: 'Ký gửi',
-      stepEyebrow: 'Bước 1 — Lên kế hoạch',
       lede: 'Chúng tôi so sánh Xe buýt 86, Taxi và Grab theo giá, thời gian và hành lý — rồi gợi ý lựa chọn phù hợp nhất.',
-      fromLabel: 'Sân bay khởi hành',
-      toLabel: 'Điểm đến',
-      selectDestination: 'Chọn điểm đến',
-      destinationOldQuarter: 'Hoàn Kiếm · Phố Cổ',
-      destinationBaDinh: 'Ba Đình',
-      destinationTayHo: 'Tây Hồ',
-      peopleLabel: 'Số người',
+      eyebrow: 'Bước 1 — Lên kế hoạch',
+      arrivalTimeLabel: 'Giờ đáp cánh',
+      arrivalTimeHint: 'Thời gian máy bay chạm bánh',
+      terminalLabel: 'Sân bay khởi hành',
+      destinationLabel: 'Điểm đến',
       baggageLabel: 'Hành lý',
-      baggageCarryOn: 'Xách tay',
-      baggageChecked: 'Ký gửi',
+      calculate: 'Tìm phương tiện phù hợp →',
       t1Label: 'Nội Bài · T1',
       t1Sub: 'Quốc tế',
       t2Label: 'Nội Bài · T2',
       t2Sub: 'Quốc nội',
+      carryOn: 'Xách tay',
+      checked: 'Ký gửi',
+      selectDestination: 'Chọn điểm đến',
+      destinationOldQuarter: 'Hoàn Kiếm · Phố Cổ',
+      destinationBaDinh: 'Ba Đình',
+      destinationTayHo: 'Tây Hồ',
     },
     results: {
       title: 'Kết quả',
@@ -202,6 +200,17 @@ const translations: Record<Language, Translations> = {
       sortRecommended: 'Khuyến nghị',
       sortCheapest: 'Rẻ nhất',
       sortFastest: 'Nhanh nhất',
+      spineEyebrow: 'Tuyến 86 — hôm nay',
+      spineTitle: 'Bạn kịp chuyến nào?',
+      spineCatchable: 'Còn kịp',
+      spineMissed: 'Đã lỡ',
+      spineNext: 'Chuyến kế tiếp',
+      spineLast: 'Chuyến cuối',
+      railTitle: 'So sánh phương tiện',
+      railSubtitle: 'Giá và thời gian ước tính',
+      railFootnote: 'Hoặc gọi xe — nếu hành lý nhiều hoặc trễ chuyến.',
+      rideHailTitle: 'Hoặc gọi xe',
+      rideHailSubtitle: 'Khi hành lý nhiều, trễ chuyến, hoặc đi từ 3 người.',
     },
     destinations: {
       'old-quarter': 'Khu phố cổ',
@@ -242,31 +251,24 @@ const translations: Record<Language, Translations> = {
     },
     form: {
       title: 'Where are you flying from, and where to?',
-      arrivalTime: 'Arrival Time',
-      terminal: 'Select Terminal',
-      baggage: 'Luggage',
-      destination: 'Destination',
-      calculate: 'Find a ride →',
-      t1: 'Terminal T1 (Domestic)',
-      t2: 'Terminal T2 (International)',
-      carryOn: 'Carry-on',
-      checked: 'Checked',
-      stepEyebrow: 'Step 1 — Plan your trip',
       lede: 'We compare Bus 86, Taxi, and Grab by price, time, and luggage — then suggest the best fit.',
-      fromLabel: 'Departure airport',
-      toLabel: 'Destination',
-      selectDestination: 'Select destination',
-      destinationOldQuarter: 'Hoan Kiem · Old Quarter',
-      destinationBaDinh: 'Ba Dinh',
-      destinationTayHo: 'Tay Ho',
-      peopleLabel: 'People',
+      eyebrow: 'Step 1 — Plan your trip',
+      arrivalTimeLabel: 'Arrival time',
+      arrivalTimeHint: 'When the plane touches down',
+      terminalLabel: 'Departure airport',
+      destinationLabel: 'Destination',
       baggageLabel: 'Luggage',
-      baggageCarryOn: 'Carry-on',
-      baggageChecked: 'Checked',
+      calculate: 'Find a ride →',
       t1Label: 'Noi Bai · T1',
       t1Sub: 'International',
       t2Label: 'Noi Bai · T2',
       t2Sub: 'Domestic',
+      carryOn: 'Carry-on',
+      checked: 'Checked',
+      selectDestination: 'Select destination',
+      destinationOldQuarter: 'Hoan Kiem · Old Quarter',
+      destinationBaDinh: 'Ba Dinh',
+      destinationTayHo: 'Tay Ho',
     },
     results: {
       title: 'Results',
@@ -320,6 +322,17 @@ const translations: Record<Language, Translations> = {
       sortRecommended: 'Recommended',
       sortCheapest: 'Cheapest',
       sortFastest: 'Fastest',
+      spineEyebrow: 'Route 86 — today',
+      spineTitle: 'Which bus can you catch?',
+      spineCatchable: 'Catchable',
+      spineMissed: 'Missed',
+      spineNext: 'Next departure',
+      spineLast: 'Last bus',
+      railTitle: 'Compare transport',
+      railSubtitle: 'Estimated prices and travel time',
+      railFootnote: 'Or ride-hail — for extra luggage, missed buses, or 3+ people.',
+      rideHailTitle: 'Or ride-hail',
+      rideHailSubtitle: 'For extra luggage, a missed bus, or 3+ people.',
     },
     destinations: {
       'old-quarter': 'Old Quarter',

@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Header } from './components/Header';
-import { TopBar, TabletTopBar } from './components/Layout/TopBar';
 import { ArrivalForm } from './components/ArrivalForm';
 import { ResultDisplay } from './components/ResultDisplay';
-import { useViewport } from './hooks/useViewport';
 import { useFormState } from './hooks/useFormState';
 import { calculateResult } from './lib/calculation-result';
 import styles from './App.module.css';
@@ -14,7 +12,6 @@ type View = 'form' | 'result';
 function AppContent() {
   const [view, setView] = useState<View>('form');
   const [result, setResult] = useState<ReturnType<typeof calculateResult>>(null);
-  const viewport = useViewport();
   const { formData, updateFormData, reset } = useFormState();
 
   const handleCalculate = () => {
@@ -40,13 +37,7 @@ function AppContent() {
 
   return (
     <div className={styles.app}>
-      {viewport === 'mobile' ? (
-        <TopBar title="SanBayGo" />
-      ) : viewport === 'tablet' ? (
-        <TabletTopBar />
-      ) : (
-        <Header />
-      )}
+      <Header />
       <main className={`${styles.main} ${styles.mainCentered}`}>
         {view === 'form' ? (
           <ArrivalForm formData={formData} onUpdate={updateFormData} onCalculate={handleCalculate} />
