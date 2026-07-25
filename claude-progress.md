@@ -204,3 +204,13 @@ All 10 implementation tasks completed:
 - Editorial-paper and apple-minimal plans are closed/superseded.
 - Figma palette replaces editorial-paper; BusTimetableSpine removed.
 - Glass fallback on RN handled by `expo-blur` BlurView defaults.
+- Task 16 feature ID renamed from `web-responsive-apple-minimal` to `responsive-web-apple-minimal`.
+- Deferred — NativeWind 4 + Tailwind 4 pipeline + missing Metro config (RN Critical): requires a dedicated dependency and build-pipeline correction.
+- Deferred — restore `result.comparisons` rendering in `ResultDisplay` (Web Critical): large behavior change outside this final-fix pass.
+- Deferred — RN `LandingPage` `calculateResult` drops `direction` data (RN Critical): depends on the existing core result type.
+- Deferred — `DepartureDropdown` keyboard operability (web + RN): plan-mandated follow-up.
+- Deferred — RN Nav language toggle has no `onPress`: requires RN language-context wiring.
+- Deferred — text glyphs versus Lucide icons (RN): small visual follow-up.
+- Deferred — RN `SearchCard` test missing: scheduled for the next session.
+- Deferred — i18n schema divergence (`landing.field*` versus `form.*`) (web): requires a focused consolidation task.
+- Deferred — Footer `lg:` breakpoint on RN: visual-polish follow-up.
