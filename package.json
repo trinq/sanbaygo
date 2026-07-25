@@ -27,6 +27,7 @@
     "@babel/core": "^7.25.0",
     "@playwright/test": "^1.61.1",
     "@testing-library/react": "^16.3.2",
+    "@testing-library/react-native": "^12.9.0",
     "@types/jest": "^29.5.0",
     "@types/react": "~18.3.0",
     "@types/react-test-renderer": "^19.1.0",
@@ -39,21 +40,52 @@
     "typescript": "~5.3.0"
   },
   "jest": {
-    "preset": "ts-jest",
-    "testMatch": [
-      "**/tests/**/*.test.ts",
-      "**/core/tests/**/*.test.ts"
-    ],
-    "moduleNameMapper": {
-      "^@core$": "<rootDir>/core/index.ts",
-      "^@core/(.*)$": "<rootDir>/core/$1"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx"
-    ],
-    "passWithNoTests": true
+    "passWithNoTests": true,
+    "projects": [
+      {
+        "displayName": "core",
+        "preset": "ts-jest",
+        "testMatch": [
+          "<rootDir>/tests/**/*.test.ts",
+          "<rootDir>/core/tests/**/*.test.ts"
+        ],
+        "moduleNameMapper": {
+          "^@core$": "<rootDir>/core/index.ts",
+          "^@core/(.*)$": "<rootDir>/core/$1"
+        },
+        "moduleFileExtensions": [
+          "ts",
+          "tsx",
+          "js",
+          "jsx"
+        ]
+      },
+      {
+        "displayName": "rn",
+        "preset": "react-native",
+        "testMatch": [
+          "<rootDir>/app/**/*.test.ts",
+          "<rootDir>/app/**/*.test.tsx"
+        ],
+        "moduleNameMapper": {
+          "^@core$": "<rootDir>/core/index.ts",
+          "^@core/(.*)$": "<rootDir>/core/$1"
+        },
+        "transformIgnorePatterns": [
+          "node_modules/(?!((jest-)?react-native|@react-native(-community)?|@react-navigation|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-clone-referenced-element|@testing-library|react-native-web)/)"
+        ],
+        "transform": {
+          "^.+\\.(js|ts|tsx)$": [
+            "babel-jest",
+            {
+              "configFile": "./babel.config.test.js"
+            }
+          ]
+        },
+        "setupFiles": [
+          "<rootDir>/jest.setup.js"
+        ]
+      }
+    ]
   }
 }
