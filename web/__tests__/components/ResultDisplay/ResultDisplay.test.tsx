@@ -41,7 +41,7 @@ function setup(viewport: 'mobile' | 'tablet' | 'desktop') {
 }
 
 describe('ResultDisplay', () => {
-  it('renders at desktop with sidebar + table', () => {
+  it('renders at desktop as a single-column table', () => {
     setup('desktop');
     expect(screen.getByText(/Xe buýt 86|Bus 86/i)).toBeTruthy();
     expect(screen.getByText(/Taxi/i)).toBeTruthy();
