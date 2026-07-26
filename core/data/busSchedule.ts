@@ -10,8 +10,7 @@ export const BUS_86_SCHEDULE: string[] = [
 export const BUS_86: BusRoute = {
   id: 'bus-86',
   routeNumber: '86',
-  schedule: BUS_86_SCHEDULE,
-  ticketPrice: 50000, // VND — per CONTEXT.md line 92
+  ticketPrice: 50000,
   operatingHours: { start: '06:40', end: '22:15' },
   // Real-world travel time from Noi Bai to central Hanoi
   // Source: user research (2026-07-21)
@@ -20,5 +19,13 @@ export const BUS_86: BusRoute = {
   travelTime: {
     normal: { min: 50, max: 55 },
     peak: { min: 65, max: 75 },
+  },
+  pickupPoints: [
+    { terminalId: 'HAN-T1', location: 'Tầng 1 sảnh đến, đối diện cột 12' },
+    { terminalId: 'HAN-T2', location: 'Tầng 1 sảnh đến, đối diện cột 14' },
+  ],
+  scheduleSource: {
+    kind: 'explicit',
+    departures: BUS_86_SCHEDULE,
   },
 };

@@ -4,13 +4,13 @@ import { GRAB_ESTIMATE } from './grabEstimates';
 
 const TERMINALS: Terminal[] = [
   {
-    id: 'T1',
+    id: 'HAN-T1',
     name: 'Nhà ga T1',
     type: 'domestic',
     flightTypes: ['domestic', 'international'],
   },
   {
-    id: 'T2',
+    id: 'HAN-T2',
     name: 'Nhà ga T2',
     type: 'international',
     flightTypes: ['international'],
