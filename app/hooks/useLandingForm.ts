@@ -1,60 +1,97 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import type {
+  AirportId,
   ArrivalFormData,
   BaggageType,
+  DestinationPoint,
   FlightType,
+  Terminal,
   TerminalId,
 } from '@core';
+import { AIRPORTS, DESTINATIONS_BY_AIRPORT } from '@core';
 
 const DEFAULT_ARRIVAL_TIME = '12:00';
-const DEFAULT_TERMINAL: TerminalId = 'T1';
 const DEFAULT_BAGGAGE: BaggageType = 'carry_on';
-const DEFAULT_FLIGHT_TYPE: FlightType = 'international';
 
 const clamp = (n: number, min: number, max: number) =>
   Math.max(min, Math.min(max, n));
 
 export function useLandingForm() {
-  const [departure, setDeparture] = useState<string | null>(null);
-  const [destination, setDestination] = useState<string | null>(null);
+  const [airport, setAirportRaw] = useState<AirportId | null>(null);
+  const [terminal, setTerminalRaw] = useState<TerminalId | null>(null);
+  const [destination, setDestinationRaw] = useState<string | null>(null);
   const [people, setPeopleRaw] = useState(1);
-  const [luggage, setLuggageRaw] = useState(1);
+  const [carryOn, setCarryOnRaw] = useState(false);
+  const [checked, setCheckedRaw] = useState(false);
 
+  const setAirport = useCallback((id: AirportId) => {
+    setAirportRaw(id);
+    setTerminalRaw(null);
+    setDestinationRaw(null);
+  }, []);
+
+  const setTerminal = useCallback((id: TerminalId) => setTerminalRaw(id), []);
+  const setDestination = useCallback((id: string) => setDestinationRaw(id), []);
   const setPeople = useCallback((n: number) => setPeopleRaw(clamp(n, 1, 10)), []);
-  const setLuggage = useCallback((n: number) => setLuggageRaw(clamp(n, 0, 10)), []);
+  const setCarryOn = useCallback((v: boolean) => setCarryOnRaw(v), []);
+  const setChecked = useCallback((v: boolean) => setCheckedRaw(v), []);
+
+  const terminalOptions: Terminal[] = useMemo(() => {
+    if (!airport) return [];
+    return AIRPORTS[airport].terminals;
+  }, [airport]);
+
+  const destinationOptions: DestinationPoint[] = useMemo(() => {
+    if (!airport) return [];
+    return DESTINATIONS_BY_AIRPORT[airport];
+  }, [airport]);
 
   const validate = useCallback(
-    () => departure !== null && destination !== null,
-    [departure, destination],
+    () => airport !== null && terminal !== null && destination !== null,
+    [airport, terminal, destination],
   );
 
   const buildArrivalFormData = useCallback((): ArrivalFormData | null => {
-    if (!departure || !destination) return null;
+    if (!airport || !terminal || !destination) return null;
+
+    const flightType: FlightType = airport === 'noi-bai' && terminal === 'HAN-T1'
+      ? 'international'
+      : 'domestic';
+
     return {
       arrivalTime: DEFAULT_ARRIVAL_TIME,
-      terminal: DEFAULT_TERMINAL,
+      airportId: airport,
+      terminal,
       baggage: DEFAULT_BAGGAGE,
       destination,
-      flightType: DEFAULT_FLIGHT_TYPE,
+      flightType,
     };
-  }, [departure, destination]);
+  }, [airport, terminal, destination]);
 
   const reset = useCallback(() => {
-    setDeparture(null);
-    setDestination(null);
+    setAirportRaw(null);
+    setTerminalRaw(null);
+    setDestinationRaw(null);
     setPeopleRaw(1);
-    setLuggageRaw(1);
+    setCarryOnRaw(false);
+    setCheckedRaw(false);
   }, []);
 
   return {
-    departure,
+    airport,
+    terminal,
     destination,
     people,
-    luggage,
-    setDeparture,
+    carryOn,
+    checked,
+    setAirport,
+    setTerminal,
     setDestination,
     setPeople,
-    setLuggage,
+    setCarryOn,
+    setChecked,
+    terminalOptions,
+    destinationOptions,
     validate,
     buildArrivalFormData,
     reset,

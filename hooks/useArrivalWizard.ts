@@ -1,9 +1,21 @@
 import { useReducer, useCallback } from 'react';
-import { ArrivalFormData, ArrivalResult, calculateExitTime, isPeakHour, findNextCatchableTrip, calculateArrivalEstimate, DESTINATIONS, NOI_BAI_AIRPORT } from '@core';
+import {
+  AirportId,
+  ArrivalFormData,
+  ArrivalResult,
+  calculateExitTime,
+  isPeakHour,
+  findNextCatchableTrip,
+  findCatchableBusForTerminal,
+  calculateArrivalEstimate,
+  AIRPORTS,
+  DESTINATIONS_BY_AIRPORT,
+  TerminalId,
+} from '@core';
 
 type Action =
   | { type: 'SET_TIME'; payload: string }
-  | { type: 'SET_TERMINAL'; payload: 'T1' | 'T2' }
+  | { type: 'SET_TERMINAL'; payload: TerminalId }
   | { type: 'SET_BAGGAGE'; payload: 'carry_on' | 'checked' }
   | { type: 'SET_DESTINATION'; payload: string }
   | { type: 'SET_FLIGHT_TYPE'; payload: 'domestic' | 'international' }
@@ -20,6 +32,7 @@ export const initialFormState: ArrivalFormData = {
   baggage: null,
   destination: null,
   flightType: 'domestic',
+  airportId: 'noi-bai' as AirportId,
 };
 
 export function formReducer(state: ArrivalFormData, action: Action): ArrivalFormData {
@@ -46,36 +59,52 @@ export function calculateResultFromForm(formData: ArrivalFormData): ArrivalResul
     return null;
   }
 
-  const terminalInfo = NOI_BAI_AIRPORT.terminals.find(t => t.id === formData.terminal);
-  const destination = DESTINATIONS.find(d => d.id === formData.destination);
-  
+  const airport = AIRPORTS[formData.airportId];
+  if (!airport) return null;
+
+  const terminalInfo = airport.terminals.find((t) => t.id === formData.terminal);
+  const destinations = DESTINATIONS_BY_AIRPORT[formData.airportId];
+  const destination = destinations.find((d) => d.id === formData.destination);
+
   if (!terminalInfo || !destination) {
     return null;
   }
 
   const isPeak = isPeakHour(formData.arrivalTime);
   const exitTime = calculateExitTime(terminalInfo.type, formData.baggage, formData.flightType);
-  const busRecommendation = findNextCatchableTrip(formData.arrivalTime, { min: exitTime.minMinutes, max: exitTime.maxMinutes });
-  
+
+  const busRecommendation = findCatchableBusForTerminal(
+    airport.busRoutes,
+    formData.terminal,
+    formData.arrivalTime,
+    { min: exitTime.minMinutes, max: exitTime.maxMinutes },
+    isPeak,
+  );
+
   if (busRecommendation.available && busRecommendation.trip) {
-    busRecommendation.trip.arrivalEstimate = calculateArrivalEstimate(
-      busRecommendation.trip.departureTime,
-      isPeak ? NOI_BAI_AIRPORT.busRoutes[0].travelTime.peak : NOI_BAI_AIRPORT.busRoutes[0].travelTime.normal,
-      isPeak
+    const matchedBus = airport.busRoutes.find((b) =>
+      b.pickupPoints.some((p) => p.terminalId === formData.terminal),
     );
+    if (matchedBus) {
+      busRecommendation.trip.arrivalEstimate = calculateArrivalEstimate(
+        busRecommendation.trip.departureTime,
+        matchedBus.travelTime[isPeak ? 'peak' : 'normal'],
+        isPeak,
+      );
+    }
   }
 
   const grabTravelTime = calculateArrivalEstimate(
     formData.arrivalTime,
-    isPeak ? NOI_BAI_AIRPORT.grabEstimates.travelTime.peak : NOI_BAI_AIRPORT.grabEstimates.travelTime.normal,
-    isPeak
+    airport.grabEstimates.travelTime[isPeak ? 'peak' : 'normal'],
+    isPeak,
   );
 
   return {
     bus: busRecommendation,
     grab: {
       available: true,
-      priceEstimate: `${NOI_BAI_AIRPORT.grabEstimates.priceRange.min.toLocaleString()} - ${NOI_BAI_AIRPORT.grabEstimates.priceRange.max.toLocaleString()} VND`,
+      priceEstimate: `${airport.grabEstimates.priceRange.min.toLocaleString()} - ${airport.grabEstimates.priceRange.max.toLocaleString()} VND`,
       travelTime: grabTravelTime,
     },
     direction: {
@@ -92,7 +121,7 @@ export function useArrivalWizard() {
     dispatch({ type: 'SET_TIME', payload: time });
   }, []);
 
-  const setTerminal = useCallback((terminal: 'T1' | 'T2') => {
+  const setTerminal = useCallback((terminal: TerminalId) => {
     dispatch({ type: 'SET_TERMINAL', payload: terminal });
   }, []);
 

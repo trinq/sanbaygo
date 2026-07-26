@@ -1,5 +1,8 @@
 export { BUS_86_SCHEDULE, BUS_86 } from './busSchedule';
+export { BUS_109, BUS_152, TIA } from './busSchedules/sgn';
 export { EXIT_TIME_ESTIMATES } from './exitTimeEstimates';
 export { GRAB_ESTIMATE } from './grabEstimates';
-export { DESTINATIONS } from './destinations';
-export { NOI_BAI_AIRPORT } from './airport';
+export { SGN_GRAB_ESTIMATE } from './grabEstimates/sgn';
+export { DESTINATIONS, DESTINATIONS_BY_AIRPORT } from './destinations';
+export { NOI_BAI_AIRPORT, AIRPORTS, AIRPORT_LIST } from './airport';
+export { SGN_AIRPORT } from './airports/sgn';

@@ -7,6 +7,7 @@ export default {
     '<rootDir>/__tests__/**/*.test.ts',
     '<rootDir>/__tests__/**/*.test.tsx',
   ],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@core$': '<rootDir>/../core/index.ts',

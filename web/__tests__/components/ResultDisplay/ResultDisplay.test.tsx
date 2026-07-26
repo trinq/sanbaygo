@@ -163,4 +163,45 @@ describe('ResultDisplay', () => {
     expect(onRecalculate).toHaveBeenCalledTimes(1);
     expect(onBack).not.toHaveBeenCalled();
   });
+
+  it('renders TiaHint when SGN-T1 + bus-109', () => {
+    const mockResultWithBus109: ArrivalResult = {
+      bus: {
+        available: true,
+        trip: {
+          departureTime: '10:30',
+          waitMinutes: 5,
+          ticketPrice: 15000,
+          arrivalEstimate: { early: '11:30', late: '11:40', minutesRange: { min: 60, max: 70 } },
+          selectedRoute: {
+            id: 'bus-109',
+            routeNumber: '109',
+            ticketPrice: 15000,
+            operatingHours: { start: '05:30', end: '22:00' },
+            travelTime: { normal: { min: 30, max: 45 }, peak: { min: 50, max: 70 } },
+            pickupPoints: [{ terminalId: 'SGN-T3', location: 'T3 column A17–A20' }],
+            scheduleSource: { kind: 'explicit', departures: [] },
+          },
+        },
+      },
+      grab: result.grab,
+    };
+    const mockFormDataSgnT1: ArrivalFormData = {
+      arrivalTime: '10:00',
+      airportId: 'tan-son-nhat',
+      terminal: 'SGN-T1',
+      baggage: 'carry_on',
+      destination: 'QUAN_1',
+      flightType: 'international',
+    };
+    renderWithLang(
+      <ResultDisplay
+        result={mockResultWithBus109}
+        formData={mockFormDataSgnT1}
+        onBack={() => {}}
+        onRecalculate={() => {}}
+      />
+    );
+    expect(screen.getByText(/TIA/i)).toBeInTheDocument();
+  });
 });

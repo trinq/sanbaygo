@@ -15,14 +15,14 @@ describe('core data integrity', () => {
     });
   });
 
-  describe('T1 international flight support', () => {
-    it("T1 flightTypes includes 'international'", () => {
-      const t1 = NOI_BAI_AIRPORT.terminals.find(t => t.id === 'T1');
+  describe('HAN-T1 international flight support', () => {
+    it("HAN-T1 flightTypes includes 'international'", () => {
+      const t1 = NOI_BAI_AIRPORT.terminals.find(t => t.id === 'HAN-T1');
       expect(t1).toBeDefined();
       expect(t1?.flightTypes).toContain('international');
     });
 
-    it('T1 international exit-time entries exist for both baggage types', () => {
+    it('HAN-T1 international exit-time entries exist for both baggage types', () => {
       const carryOn = EXIT_TIME_ESTIMATES.find(
         e => e.terminalType === 'domestic' && e.baggageType === 'carry_on' && e.flightType === 'international'
       );
@@ -34,15 +34,15 @@ describe('core data integrity', () => {
     });
   });
 
-  describe('T2 international flight support', () => {
-    it("T2 flightTypes includes 'international'", () => {
-      const t2 = NOI_BAI_AIRPORT.terminals.find(t => t.id === 'T2');
+  describe('HAN-T2 international flight support', () => {
+    it("HAN-T2 flightTypes includes 'international'", () => {
+      const t2 = NOI_BAI_AIRPORT.terminals.find(t => t.id === 'HAN-T2');
       expect(t2).toBeDefined();
       expect(t2?.flightTypes).toContain('international');
     });
 
-    it('T2 supports international flights only', () => {
-      const t2 = NOI_BAI_AIRPORT.terminals.find(t => t.id === 'T2');
+    it('HAN-T2 supports international flights only', () => {
+      const t2 = NOI_BAI_AIRPORT.terminals.find(t => t.id === 'HAN-T2');
       expect(t2?.flightTypes).toEqual(['international']);
     });
   });

@@ -5,6 +5,7 @@ import {
   TripCalculationResponse,
   SortOption,
 } from '@core';
+import { AIRPORTS } from '@core';
 import { TRANSPORT_OPTIONS, getScoreLabel } from './transport-data';
 import {
   isPeakHour,
@@ -12,19 +13,19 @@ import {
   timeToMinutes,
   addMinutes,
 } from '@core';
-import { BUS_86 } from '@core';
 
 const WALKING_TO_PICKUP_MINUTES = 5;
+const AIRPORT_TOLL_VND = 15000;
+const PEAK_SURGE = 1.25;
 
 function calculatePrice(option: TransportOption, isPeak: boolean): number {
-  if (option.id === 'BUS_86') {
+  if (option.type === 'bus') {
     return option.basePrice;
   }
 
-  const airportToll = 15000;
-  const peakSurge = isPeak ? 1.25 : 1.0;
+  const peakSurge = isPeak ? PEAK_SURGE : 1.0;
 
-  return Math.round((option.basePrice + airportToll) * peakSurge);
+  return Math.round((option.basePrice + AIRPORT_TOLL_VND) * peakSurge);
 }
 
 function formatPrice(value: number): string {
@@ -42,31 +43,39 @@ interface WaitTimeResult {
   nextDeparture: string;
 }
 
+function findNextDeparture(departures: string[], readyMinutes: number): string | null {
+  for (const departure of departures) {
+    if (timeToMinutes(departure) >= readyMinutes) {
+      return departure;
+    }
+  }
+  return null;
+}
+
 function buildComparison(
   option: TransportOption,
+  airportBusDepartures: string[] | null,
   _arrivalTime: string,
   isPeak: boolean,
   readyAt: string
 ): TransportComparison {
-  const isBus86 = option.id === 'BUS_86';
+  const isBus = option.type === 'bus' && airportBusDepartures !== null;
 
   let waitTime: WaitTimeResult | undefined;
-  if (isBus86) {
+  if (isBus && airportBusDepartures) {
     const readyMinutes = timeToMinutes(readyAt);
-    for (const departure of BUS_86.schedule) {
-      if (timeToMinutes(departure) >= readyMinutes) {
-        waitTime = {
-          minutes: timeToMinutes(departure) - readyMinutes,
-          nextDeparture: departure,
-        };
-        break;
-      }
+    const next = findNextDeparture(airportBusDepartures, readyMinutes);
+    if (next) {
+      waitTime = {
+        minutes: timeToMinutes(next) - readyMinutes,
+        nextDeparture: next,
+      };
     }
   }
 
   const travelTimeRange = isPeak ? option.travelTime.peak : option.travelTime.normal;
 
-  const startTime = isBus86 && waitTime ? waitTime.nextDeparture : readyAt;
+  const startTime = isBus && waitTime ? waitTime.nextDeparture : readyAt;
   const arrivalEstimate = formatTimeRange(startTime, travelTimeRange);
 
   const priceValue = calculatePrice(option, isPeak);
@@ -79,7 +88,7 @@ function buildComparison(
     price: {
       estimate: formatPrice(priceValue),
       value: priceValue,
-      isEstimate: !isBus86,
+      isEstimate: !isBus,
     },
     travelTime: {
       estimate: `${travelTimeRange.min}-${travelTimeRange.max} phút`,
@@ -127,12 +136,15 @@ export function sortComparisons(
 export function calculateTripComparison(
   request: TripCalculationRequest
 ): TripCalculationResponse {
-  const { arrivalTime, terminalId, baggageType, sortBy } = request;
+  const { arrivalTime, airportId, terminalId, baggageType, sortBy } = request;
+
+  const airport = AIRPORTS[airportId];
+  const terminalInfo = airport?.terminals.find((t) => t.id === terminalId);
 
   const isPeak = isPeakHour(arrivalTime);
   const exitTime = calculateExitTime(
-    terminalId === 'T1' ? 'domestic' : 'international',
-    baggageType
+    terminalInfo?.type ?? 'domestic',
+    baggageType,
   );
 
   const readyAt = addMinutes(
@@ -140,8 +152,14 @@ export function calculateTripComparison(
     exitTime.maxMinutes + WALKING_TO_PICKUP_MINUTES
   );
 
+  const airportBusRoute = airport?.busRoutes[0];
+  const airportBusDepartures =
+    airportBusRoute?.scheduleSource.kind === 'explicit'
+      ? airportBusRoute.scheduleSource.departures
+      : null;
+
   const comparisons = TRANSPORT_OPTIONS.map((option) =>
-    buildComparison(option, arrivalTime, isPeak, readyAt)
+    buildComparison(option, airportBusDepartures, arrivalTime, isPeak, readyAt)
   );
 
   return {

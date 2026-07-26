@@ -67,7 +67,8 @@ describe('calculateTripComparison', () => {
   test('returns comparison for valid request', () => {
     const result = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -81,7 +82,8 @@ describe('calculateTripComparison', () => {
   test('sets isPeakHour correctly for morning peak', () => {
     const result = calculateTripComparison({
       arrivalTime: '08:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -93,7 +95,8 @@ describe('calculateTripComparison', () => {
   test('sets isPeakHour correctly for evening peak', () => {
     const result = calculateTripComparison({
       arrivalTime: '18:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -105,7 +108,8 @@ describe('calculateTripComparison', () => {
   test('sets isPeakHour correctly for non-peak hours', () => {
     const result = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -117,7 +121,8 @@ describe('calculateTripComparison', () => {
   test('Bus 86 has fixed price of 50000', () => {
     const result = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -131,7 +136,8 @@ describe('calculateTripComparison', () => {
   test('Grab Car has estimate price with airport toll', () => {
     const result = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -146,7 +152,8 @@ describe('calculateTripComparison', () => {
   test('Grab Car has peak surge during peak hours', () => {
     const normalResult = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -154,7 +161,8 @@ describe('calculateTripComparison', () => {
 
     const peakResult = calculateTripComparison({
       arrivalTime: '08:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -171,7 +179,8 @@ describe('calculateTripComparison', () => {
   test('Bus 86 includes wait time calculation', () => {
     const result = calculateTripComparison({
       arrivalTime: '08:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -186,7 +195,8 @@ describe('calculateTripComparison', () => {
   test('Non-bus options do not have wait time', () => {
     const result = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
@@ -199,13 +209,14 @@ describe('calculateTripComparison', () => {
   test('readyAt is calculated correctly', () => {
     const result = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'recommended',
     });
 
-    // T1 carry_on: 15-25 min exit + 5 min walking = 20-30 min
+    // HAN-T1 carry_on: 15-25 min exit + 5 min walking = 20-30 min
     // 14:00 + 25 + 5 = 14:30
     expect(result.metadata.readyAt).toBe('14:30');
   });
@@ -213,7 +224,8 @@ describe('calculateTripComparison', () => {
   test('sorts correctly with different sort options', () => {
     const cheapestResult = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'cheapest',
@@ -221,7 +233,8 @@ describe('calculateTripComparison', () => {
 
     const fastestResult = calculateTripComparison({
       arrivalTime: '14:00',
-      terminalId: 'T1',
+      airportId: 'noi-bai',
+      terminalId: 'HAN-T1',
       baggageType: 'carry_on',
       destinationId: 'old-quarter',
       sortBy: 'fastest',
