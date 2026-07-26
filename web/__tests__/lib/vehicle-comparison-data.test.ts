@@ -14,7 +14,8 @@ import { calculateTripComparison } from '../../src/lib/transport-calculator';
 describe('VehicleComparison data contract', () => {
   const formData = {
     arrivalTime: '14:00',
-    terminalId: 'T1' as const,
+    airportId: 'noi-bai' as const,
+    terminalId: 'HAN-T1' as const,
     baggageType: 'carry_on' as const,
     destinationId: 'old-quarter',
     sortBy: 'recommended' as const,
