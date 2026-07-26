@@ -2,8 +2,50 @@
 
 App giúp người đi từ sân bay về thành phố nắm rõ lịch trình xe buýt và chọn phương tiện phù hợp, ưu tiên xe buýt sân bay.
 
-**Current**: Noi Bai Airport → Hanoi city, Express Bus 86 + Vehicle Comparison
-**Future**: Mở rộng thêm nhiều sân bay khác, real-time traffic integration
+**Current**: Noi Bai (HAN) + Tan Son Nhat (SGN) airports, Express Bus routes + Vehicle Comparison
+**Future**: More airports (Da Nang, Cam Ranh...), real-time traffic integration
+
+---
+
+## Airports
+
+**Noi Bai (HAN)** — Hà Nội
+- T1: domestic (also handles some international)
+- T2: international (immigration)
+- Express Bus: Route 86 (50,000 VND, 06:40–22:15)
+
+**Tan Son Nhat (SGN)** — TP.HCM
+- T1 (SGN-T1): domestic (cũ)
+- T2 (SGN-T2): international
+- T3 (SGN-T3): domestic/international (mới, opened April 2025)
+- Express Buses:
+  - Route 109 — chỉ T3 (xe điện hiện đại, 15,000 VND, 05:30–22:00)
+  - Route 152 — T1/T2 (Làn B, 5–7,000 VND, 05:00–19:00)
+  - TIA (VinBus) — free shuttle nội bộ T1↔T2↔T3 (15-20 phút/chuyến)
+
+**SGN Destinations** (Quận trung tâm Sài Gòn):
+- Q1, Q3, Q5, Bình Thạnh, Phú Nhuận
+- Destinations chia theo `airportId` (HAN_DESTINATIONS, SGN_DESTINATIONS)
+
+---
+
+## Terminal ID Scheme
+
+Scoped: `HAN-T1`, `HAN-T2`, `SGN-T1`, `SGN-T2`, `SGN-T3`
+- Global unique, không nhập nhằng khi multi-airport
+
+---
+
+## Bus Route Pickup Points
+
+`BusRoute` type có field `pickupPoints: { terminalId: TerminalId, location: string }[]`
+- Mỗi bus liệt kê các terminal mà bus đỗ + vị trí cụ thể (cột, làn)
+
+**Bus Route Schedule Format**
+
+`BusRoute` có optional `frequencyMinutes: { peak: number, normal: number }` (e.g., TIA 15-20 min)
+- Bus có `schedule: string[]` (HH:mm) cố định (Bus 86, 109, 152)
+- Bus có `frequencyMinutes` + `operatingHours` (TIA)
 
 ---
 
