@@ -12,11 +12,13 @@
 - `core/` = Shared TypeScript module, imported via `@core` path alias
 - `init.sh` verifies all three: installs root + web + api, runs `tsc --noEmit` on root/core/web, runs `npm test` on root + web
 
-**All features:** COMPLETED
+**All features:** MVP + Landing Hero + Figma Result/Hero overlay complete; ResultDisplay→ResultPage swap landed (state lifted to App); `result` and `formData` not yet plumbed into ResultPage props.
 
-**Current status:** MVP complete + bug fixes pushed to GitHub + services running locally
+**Current status:** Figma Make result screen live; `web/public/hero.jpg` committed; dev harness updated; services running locally (Session 13 restart).
 
 **Recent fixes:**
+- Figma Make result page (commit `8b4f19e`): new `web/src/components/Result/`, 4-step timeline with solid slate-200 connector, sky-600 accent, slate-900 CTA, hero blur stack (5 layers incl. `backdrop-blur-[2px]`)
+- Lift `result`/`formData` state to App so `LandingPage` no longer renders `ResultDisplay` itself and `<ResultPage onBack>` in `App.tsx` actually mounts (uncommitted, verified TS + 13/13 tests pass)
 - Fixed ResultDisplay wiring (was using stub file instead of index.tsx)
 - Fixed double peak surcharge bug (travelTime.peak was getting +30min surcharge on top)
 - Fixed VehicleComparison showing empty (was calling non-existent HTTP API `/api/calculate-trip` in Vite frontend-only build; changed to call `calculateTripComparison()` directly)
@@ -192,6 +194,29 @@ All 10 implementation tasks completed:
 | 2026-07-22 | 11 | Plan collapse-platform-duplication refactor + 7 tickets | COMPLETE |
 | 2026-07-24 | 12 | Fix white page (busSchedules time shape) → PR #4 merged | COMPLETE |
 | 2026-07-24 | 13 | Restart api+web dev servers, sync local main with origin, update harness | COMPLETE |
+| 2026-07-26 | 14 | Implement Figma Make Result page + Hero blur image; lift state to App so ResultPage mounts | COMPLETE |
+
+## 2026-07-26 — Figma Make Result page + Hero blur image
+
+- **Goal:** Bring the in-flight Figma Make redesign to the local web UI. Two pieces: a brand-new `ResultPage` (no longer the editorial-paper `ResultDisplay`) that mirrors the Figma Make result screen 1:1, and the missing `backdrop-blur` image stack on the landing hero.
+- **What landed (commit `8b4f19e`):**
+  - `web/src/components/Result/ResultPage.{tsx,module.css,index.ts}` — Figma Make result screen: sticky header with `ArrowLeft` + `Sân bay Nội Bài (T2)` + `Đến Phố Cổ, Hà Nội`, page title `Phương án di chuyển tốt nhất`, primary Bus card with sky-600 accent strip, `Khuyên dùng` badge, 4-step journey timeline (Pickup → Departure → Transit → Dropoff) with solid `bg-slate-200` connector and `border-[2.5px]` dots, amber callout, divider, ride-hail secondary card with slate-900 CTA.
+  - `web/src/App.tsx` + `web/src/components/Landing/LandingPage.tsx` — `onSearch` prop now carries `(formData, result)` so App can lift state.
+  - `web/src/components/Landing/Hero.tsx` — replaced 2-layer background with Figma's 5-layer stack: `bg-[#e6eff6]` fallback, full-width Unsplash photo via `mix-blend-overlay`, `from-white/95 via-white/80 to-white/10` left-right gradient (desktop), `from-transparent via-white/20 to-white/90` top-bottom gradient (mobile), and the key missing `bg-white/30 backdrop-blur-[2px]`.
+  - `web/public/hero.jpg` — 2070×1382 JPEG, 454 KB, downloaded from the Unsplash URL Figma references (URLs expire in ~7 days, so downloaded to `public/`).
+  - `design-system/tokens/tokens.{css,ts}` — added `--color-primary-50/100`, `--color-benefit-50/100`, `--color-warn-50/100/500/900` for Figma hex parity (slate/sky/emerald/amber families were already in place).
+- **Integration fix (this session, uncommitted):**
+  - `LandingPage` previously rendered `ResultDisplay` itself when `result` was set, so the `<ResultPage onBack>` branch in `App.tsx` was never reached. Now `LandingPage` no longer renders `ResultDisplay` — it just calls `onSearch(formData, result)` and App handles the swap. `ResultDisplay` is still imported by tests (12 tests pass against it directly) but is no longer mounted in the live app.
+  - `App.tsx` deliberately ignores the lifted `formData`/`result` for now; `ResultPage` (Figma) renders static content. The wiring is in place so the next pass can plumb `formData` + `result` through `ResultPage` props to replace the static hard-coded values.
+- **Verification:**
+  - `web npx tsc --noEmit` → exit 0
+  - `web npm test` → 13 suites, 77 tests pass
+  - Vite serves `App.tsx`, `LandingPage.tsx`, `ResultPage.tsx` all HTTP 200; `web/public/hero.jpg` serves 454918 bytes
+- **Known risks:**
+  - `ResultPage` displays hard-coded values (`14:30`, `45.000₫`, `Phố Cổ, Hà Nội`, `14:50`, `45 – 50 phút`, `~ 250.000₫`, `~35 phút`, `Cột 4 - Cột 6`). The state is at App.tsx but not yet passed down — next session should plumb `formData` (arrivalTime, terminal, baggage, destination) and `result` (bus.trip, grab) into the ResultPage props.
+  - `ResultDisplay` (editorial-paper version) still exists in the codebase and is still tested, but is no longer rendered in the app. Either delete it or keep it as a fallback while the Figma version stabilizes.
+  - RN side has not been touched — `LandingPage` on RN still renders its own result, the Figma `ResultPage` import is web-only for now.
+- **Next best action:** Plumb `formData` + `result` into `ResultPage` so the hard-coded values become dynamic. Then decide whether to delete `ResultDisplay` or keep it behind a feature flag.
 
 ## 2026-07-25 — Landing Page Replaces Form
 

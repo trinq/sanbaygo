@@ -434,6 +434,28 @@
       "tests": [
         "components/Landing/__tests__/Hero.test.tsx"
       ]
+    },
+    {
+      "id": "figma-result-page-web",
+      "description": "Result page mirrors Figma Make result screen 1:1 (sticky header, 4-step journey timeline with solid connector, primary Bus card with Khuyên dùng badge, amber callout, divider, ride-hail secondary card). State lifted to App so LandingPage no longer renders ResultDisplay.",
+      "status": "passing",
+      "evidence": [
+        "8b4f19e"
+      ],
+      "tests": [
+        "web/__tests__/components/ResultDisplay/ResultDisplay.test.tsx"
+      ]
+    },
+    {
+      "id": "figma-hero-blur-image",
+      "description": "Hero background uses Figma's 5-layer blur stack: bg-[#e6eff6] fallback, full-width Unsplash photo via mix-blend-overlay, left-right gradient (desktop), top-bottom gradient (mobile), and bg-white/30 backdrop-blur-[2px] overlay. Image downloaded to web/public/hero.jpg (2070x1382, 454KB) so the asset is not bound to the expiring Figma URL.",
+      "status": "passing",
+      "evidence": [
+        "8b4f19e"
+      ],
+      "tests": [
+        "web/__tests__/components/Landing/Layout.test.tsx"
+      ]
     }
   ]
 }

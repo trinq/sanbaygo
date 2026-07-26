@@ -30,11 +30,20 @@ cd "$ROOT_DIR"
 
 # ---- Pre-flight: expected directory layout ----
 step "Pre-flight: checking repo layout"
-for d in core web api; do
+for d in core web; do
   [ -d "$d" ] || fail "missing directory: $d/"
   [ -f "$d/package.json" ] || fail "missing $d/package.json"
 done
-ok "core/, web/, api/ all present"
+ok "core/, web/ present"
+
+# api/ is optional in local dev (untracked artifacts in some sessions)
+if [ -d "api" ] && [ -f "api/package.json" ]; then
+  ok "api/ present (will verify + install)"
+  HAS_API=1
+else
+  warn "api/ not present (skipping API checks — optional in local dev)"
+  HAS_API=0
+fi
 
 # ---- Install root (Expo RN) ----
 step "Installing root dependencies (Expo RN)"
@@ -50,13 +59,15 @@ else
   ok "web/ dependencies installed"
 fi
 
-# ---- Install api ----
-if [ -d "api/node_modules" ] && [ -f "api/node_modules/.package-lock.json" ]; then
-  ok "api/node_modules present, skipping"
-else
-  step "Installing api/ dependencies"
-  (cd api && npm install)
-  ok "api/ dependencies installed"
+# ---- Install api (optional) ----
+if [ "$HAS_API" = "1" ]; then
+  if [ -d "api/node_modules" ] && [ -f "api/node_modules/.package-lock.json" ]; then
+    ok "api/node_modules present, skipping"
+  else
+    step "Installing api/ dependencies"
+    (cd api && npm install)
+    ok "api/ dependencies installed"
+  fi
 fi
 
 # ---- TypeScript checks (all three) ----
@@ -103,6 +114,12 @@ echo "  cd api && npm run dev      - Start API (http://localhost:3000)"
 echo "  cd api && npm test         - Run api tests"
 echo ""
 echo "  cd core && npx tsc --noEmit -p tsconfig.json   - Check shared core"
+echo ""
+echo "Recent Figma overlay (Session 14):"
+echo "  - Result page:  cd web && open src/components/Result/ResultPage.tsx"
+echo "  - Hero blur:    cd web && open src/components/Landing/Hero.tsx"
+echo "  - State lifted: cd web && open src/App.tsx"
+echo "  - Static asset: web/public/hero.jpg (454 KB, downloaded from Figma URL)"
 echo ""
 
 # Optional: start all three dev servers
