@@ -8,14 +8,18 @@
   --color-primary: #0284C7;
   --color-primary-hover: #0369A1;
   --color-primary-soft: #E0F2FE;
+  --color-primary-50: #F0F9FF;        /* sky-50, used for badge bg tint */
+  --color-primary-100: #E0F2FE;       /* sky-100, stronger tint */
 
   /* Accent — amber underline */
   --color-accent: #FCD34D;
   --color-accent-ink: #92400E;
 
-  /* Benefit — emerald chip */
+  /* Benefit — emerald chip + ride-hail accent */
   --color-benefit: #059669;
   --color-benefit-soft: #D1FAE5;
+  --color-benefit-50: #ECFDF5;        /* emerald-50, hover tint */
+  --color-benefit-100: #D1FAE5;       /* emerald-100, icon bg */
 
   /* Neutrals — slate */
   --color-ink: #0F172A;
@@ -27,6 +31,11 @@
   --color-surface-border: #E2E8F0;
   --color-background: #F1F5F9;
 
+  /* Editorial rules — hairlines used in ResultDisplay */
+  --color-rule: #E2E8F0;           /* slate-200, hairline between rows */
+  --color-rule-strong: #94A3B8;    /* slate-400, byline/button underline */
+  --color-missed: #D97706;         /* amber-600, "missed bus" title */
+
   /* Glass — translucent overlays */
   --color-glass: rgba(255, 255, 255, 0.30);
   --color-glass-strong: rgba(255, 255, 255, 0.80);
@@ -34,6 +43,10 @@
   /* System */
   --color-warn: #D97706;
   --color-warn-tint: #FEF3C7;
+  --color-warn-50: #FFFBEB;           /* amber-50, soft callout bg */
+  --color-warn-100: #FEF3C7;          /* amber-100, callout border */
+  --color-warn-500: #F59E0B;          /* amber-500, icon stroke */
+  --color-warn-900: #78350F;          /* amber-900, callout heading text */
 
   /* Font family */
   --font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -43,4 +56,14 @@
   /* Shadows — sky-tinted glow */
   --shadow-card: 0 8px 24px rgba(2, 132, 199, 0.12);
   --shadow-hero: 0 20px 60px rgba(2, 132, 199, 0.18);
+
+  /* Spacing scale — 4px baseline; mirrors tokens.ts `space` */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
 }

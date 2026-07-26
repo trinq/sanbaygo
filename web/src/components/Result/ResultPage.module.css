@@ -1,0 +1,571 @@
+/* ResultPage — SanBayGo result screen (Figma: "Phương án di chuyển tốt nhất")
+ * Single column, sticky header, primary bus option card with 4-step timeline,
+ * divider, and ride-hail secondary card. Mirrors Figma Make source 1:1.
+ */
+
+.root {
+  min-height: 100vh;
+  width: 100%;
+  background: #F8FAFC;  /* slate-50 */
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Header ── */
+
+.header {
+  width: 100%;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;  /* slate-200 */
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 16px 32px;
+  }
+}
+
+.headerInner {
+  max-width: 768px;  /* max-w-3xl */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backButton {
+  padding: 8px;
+  margin-left: -8px;
+  border-radius: 9999px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #334155;  /* slate-700 */
+  transition: background-color 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backButton:hover {
+  background: #F1F5F9;  /* slate-100 */
+}
+
+.headerCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.headerTitle {
+  font-size: 16px;  /* text-base */
+  font-weight: 700;
+  color: #0F172A;  /* slate-900 */
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.headerSubtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;  /* text-xs */
+  font-weight: 500;
+  color: #64748B;  /* slate-500 */
+}
+
+/* ── Main ── */
+
+.main {
+  width: 100%;
+  max-width: 768px;  /* max-w-3xl */
+  margin: 0 auto;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;  /* gap-8 */
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 32px;
+  }
+}
+
+/* Page title block */
+.pageTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;  /* mb-2 + flex gap-2 (PlaneLanding line) */
+}
+
+.pageTitle {
+  font-size: 24px;  /* text-2xl */
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.4px;  /* tracking-tight */
+  line-height: 1.2;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .pageTitle {
+    font-size: 30px;  /* text-3xl */
+    letter-spacing: -0.5px;
+  }
+}
+
+.pageSubtitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #475569;  /* slate-600 */
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pageSubtitleMark {
+  font-weight: 700;
+  color: #0F172A;
+}
+
+/* ── Primary option card (Bus) ── */
+
+.primaryCard {
+  background: #FFFFFF;
+  border-radius: 16px;  /* rounded-2xl */
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);  /* shadow-sm */
+  border: 1px solid #E2E8F0;  /* border-slate-200 */
+  overflow: hidden;
+  position: relative;
+}
+
+.primaryCardAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;  /* w-1.5 */
+  height: 100%;
+  background: #0284C7;  /* bg-sky-500 — tailwind sky-500 = #0EA5E9; Figma uses sky-500 here */
+  /* Figma says bg-sky-500. Tailwind sky-500 = #0EA5E9. */
+}
+
+.primaryCardBody {
+  padding: 20px;  /* p-5 */
+}
+
+@media (min-width: 768px) {
+  .primaryCardBody {
+    padding: 24px;  /* md:p-6 */
+  }
+}
+
+.primaryHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;  /* mb-6 */
+}
+
+.primaryLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;  /* gap-3 */
+}
+
+.primaryIcon {
+  width: 48px;  /* w-12 */
+  height: 48px;
+  border-radius: 12px;  /* rounded-xl */
+  background: #F0F9FF;  /* sky-50 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #E0F2FE;  /* border-sky-100 */
+  color: #0284C7;  /* text-sky-600 */
+  flex-shrink: 0;
+}
+
+.primaryHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.badgeRecommended {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;  /* text-[10px] */
+  font-weight: 700;
+  letter-spacing: 0.1em;  /* tracking-wider */
+  text-transform: uppercase;
+  background: #E0F2FE;  /* bg-sky-100 */
+  color: #0369A1;  /* text-sky-700 */
+  margin-bottom: 4px;  /* mb-1 */
+  width: max-content;
+}
+
+.primaryOptionName {
+  font-size: 18px;  /* text-lg */
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.primaryOptionTagline {
+  font-size: 14px;  /* text-sm */
+  font-weight: 500;
+  color: #64748B;  /* slate-500 */
+  margin: 0;
+}
+
+.primaryPrice {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.primaryPriceValue {
+  font-size: 20px;  /* text-xl */
+  font-weight: 800;
+  color: #0284C7;  /* text-sky-600 */
+  line-height: 1.2;
+}
+
+.primaryPriceUnit {
+  font-size: 12px;  /* text-xs */
+  font-weight: 600;
+  color: #94A3B8;  /* slate-400 */
+  line-height: 1.2;
+}
+
+/* ── Timeline (journey steps — Figma: 4 items, solid connector) ── */
+
+.timeline {
+  position: relative;
+  margin-top: 8px;  /* mt-2 */
+}
+
+/* Solid vertical connector bar */
+.timelineConnector {
+  position: absolute;
+  left: 11px;  /* left-[11px] */
+  top: 12px;  /* top-3 */
+  bottom: 24px;  /* bottom-6 */
+  width: 2px;  /* w-0.5 */
+  background: #E2E8F0;  /* bg-slate-200 */
+}
+
+.timelineItem {
+  position: relative;
+  display: flex;
+  gap: 16px;  /* gap-4 */
+  padding-bottom: 24px;  /* pb-6 */
+}
+
+.timelineItem:last-child {
+  padding-bottom: 0;
+}
+
+.timelineDotCol {
+  position: relative;
+  z-index: 10;
+  width: 24px;  /* w-6 */
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;  /* pt-1.5 */
+  background: #FFFFFF;
+}
+
+.timelineDot {
+  width: 10px;  /* w-2.5 */
+  height: 10px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2.5px solid #0284C7;  /* border-[2.5px] border-sky-500 */
+}
+
+.timelineDotMuted {
+  border-color: #CBD5E1;  /* border-slate-300 */
+}
+
+.timelineDotFinal {
+  background: #0EA5E9;  /* bg-sky-500 */
+  border-color: #0EA5E9;
+  box-shadow: 0 0 0 4px #F0F9FF;  /* ring-4 ring-sky-50 */
+}
+
+.timelineContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timelineTitle {
+  font-size: 14px;  /* text-sm */
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.25;  /* leading-tight */
+  margin: 0;
+}
+
+.timelineInline {
+  font-size: 14px;  /* text-sm */
+  color: #64748B;  /* text-slate-500 */
+  margin-top: 4px;  /* mt-1 */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;  /* gap-1.5 */
+  font-weight: 500;
+}
+
+.timelineInline strong {
+  color: #0F172A;
+  font-weight: 700;
+}
+
+/* ── Callout (Ghi chú chuyến đi) ── */
+
+.callout {
+  margin-top: 28px;  /* mt-7 */
+  padding: 16px;  /* p-4 */
+  background: #FFFBEB;  /* amber-50 */
+  border: 1px solid #FEF3C7;  /* border-amber-100 */
+  border-radius: 12px;  /* rounded-xl */
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;  /* gap-3 */
+}
+
+.calloutIcon {
+  color: #F59E0B;  /* text-amber-500 */
+  flex-shrink: 0;
+  margin-top: 2px;  /* mt-0.5 */
+}
+
+.calloutBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.calloutTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #78350F;  /* amber-900 */
+  margin: 0 0 4px;
+}
+
+.calloutText {
+  font-size: 14px;
+  color: #92400E;  /* amber-800 */
+  line-height: 1.625;  /* leading-relaxed */
+  margin: 0;
+}
+
+/* ── Divider ── */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;  /* gap-4 */
+  margin: 8px 0;  /* my-2 */
+}
+
+.dividerRule {
+  flex: 1;
+  height: 1px;
+  background: #E2E8F0;
+}
+
+.dividerLabel {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;  /* tracking-widest */
+  color: #94A3B8;  /* text-slate-400 */
+}
+
+/* ── Secondary option card (Ride-hail) ── */
+
+.secondaryCard {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  border: 1px solid #E2E8F0;
+  padding: 20px;
+  cursor: pointer;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .secondaryCard {
+    padding: 24px;
+  }
+}
+
+.secondaryCard:hover {
+  border-color: #A7F3D0;  /* border-emerald-200 */
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);  /* shadow-md */
+}
+
+.secondaryInner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;  /* gap-5 */
+}
+
+@media (min-width: 768px) {
+  .secondaryInner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.secondaryLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;  /* gap-4 */
+}
+
+.secondaryIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #ECFDF5;  /* emerald-50 */
+  border: 1px solid #D1FAE5;  /* border-emerald-100 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #059669;  /* text-emerald-600 */
+  flex-shrink: 0;
+  transition: background-color 150ms ease;
+}
+
+.secondaryCard:hover .secondaryIcon {
+  background: #D1FAE5;  /* group-hover:bg-emerald-100 */
+}
+
+.secondaryHeading {
+  display: flex;
+  flex-direction: column;
+}
+
+.secondaryTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.secondaryMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;  /* gap-3 */
+  font-size: 14px;
+  color: #475569;  /* text-slate-600 */
+}
+
+.secondaryMetaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;  /* gap-1.5 */
+}
+
+.secondaryMetaItem strong {
+  color: #0F172A;
+  font-weight: 700;
+}
+
+.secondaryMetaDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #CBD5E1;  /* bg-slate-300 */
+}
+
+.secondaryRight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #F1F5F9;  /* border-slate-100 */
+  padding-top: 16px;  /* pt-4 */
+}
+
+@media (min-width: 768px) {
+  .secondaryRight {
+    flex-direction: column;
+    align-items: flex-end;
+    border-top: none;
+    padding-top: 0;
+  }
+}
+
+.secondaryPrice {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .secondaryPrice {
+    text-align: right;
+  }
+}
+
+.secondaryPriceLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;  /* slate-500 */
+  margin-bottom: 2px;
+}
+
+.secondaryPriceValue {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.2;
+}
+
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #0F172A;  /* bg-slate-900 */
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.secondaryCta:hover {
+  background: #1E293B;  /* hover:bg-slate-800 */
+}

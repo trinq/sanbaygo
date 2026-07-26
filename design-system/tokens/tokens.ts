@@ -8,14 +8,18 @@ export const tokens = {
     primary: '#0284C7',         // sky-600
     primaryHover: '#0369A1',    // sky-700
     primarySoft: '#E0F2FE',     // sky-100
+    primary50: '#F0F9FF',       // sky-50, badge bg tint
+    primary100: '#E0F2FE',      // sky-100, stronger tint
 
     // Accent — amber underline highlight ("nhanh nhất")
     accent: '#FCD34D',          // amber-300
     accentInk: '#92400E',       // amber-800 text on accent
 
-    // Benefit chip icon — emerald
+    // Benefit chip icon — emerald + ride-hail accent
     benefit: '#059669',         // emerald-600
     benefitSoft: '#D1FAE5',     // emerald-100
+    benefit50: '#ECFDF5',       // emerald-50, hover tint
+    benefit100: '#D1FAE5',      // emerald-100, icon bg
 
     // Neutrals — slate
     ink: '#0F172A',             // slate-900 primary text
@@ -26,6 +30,11 @@ export const tokens = {
     surfaceBorder: '#E2E8F0',   // slate-200
     background: '#F1F5F9',      // slate-100 page background
 
+    // Editorial rules — hairlines used in ResultDisplay
+    rule: '#E2E8F0',            // slate-200, hairline between rows
+    ruleStrong: '#94A3B8',      // slate-400, byline/button underline
+    missed: '#D97706',          // amber-600, "missed bus" title
+
     // Glass — translucent white overlays
     glass: 'rgba(255, 255, 255, 0.30)',
     glassStrong: 'rgba(255, 255, 255, 0.80)',
@@ -33,6 +42,10 @@ export const tokens = {
     // System
     warn: '#D97706',            // amber-600
     warnTint: '#FEF3C7',
+    warn50: '#FFFBEB',          // amber-50, callout bg
+    warn100: '#FEF3C7',         // amber-100, callout border
+    warn500: '#F59E0B',         // amber-500, icon stroke
+    warn900: '#78350F',         // amber-900, callout heading
   },
   font: {
     family: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',

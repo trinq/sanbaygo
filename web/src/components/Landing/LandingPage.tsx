@@ -6,7 +6,11 @@ import { ResultDisplay } from '../ResultDisplay';
 import { Hero } from './Hero';
 import { SearchCard } from './SearchCard';
 
-export function LandingPage() {
+interface LandingPageProps {
+  onSearch: () => void;
+}
+
+export function LandingPage({ onSearch }: LandingPageProps) {
   const form = useLandingForm();
   const [result, setResult] = useState<ArrivalResult | null>(null);
   const [submittedFormData, setSubmittedFormData] = useState<ArrivalFormData | null>(null);
@@ -20,6 +24,7 @@ export function LandingPage() {
 
     setSubmittedFormData(formData);
     setResult(calculation);
+    onSearch();
   };
 
   const handleRecalculate = () => {
@@ -28,11 +33,17 @@ export function LandingPage() {
     form.reset();
   };
 
+  const handleBack = () => {
+    setResult(null);
+    setSubmittedFormData(null);
+  };
+
   if (result && submittedFormData) {
     return (
       <ResultDisplay
         result={result}
         formData={submittedFormData}
+        onBack={handleBack}
         onRecalculate={handleRecalculate}
       />
     );

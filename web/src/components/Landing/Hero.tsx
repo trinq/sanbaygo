@@ -9,14 +9,20 @@ import { Footer } from './Footer';
 export function Hero({ children }: { children?: ReactNode }) {
   const { t } = useLanguage();
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden bg-gradient-to-b from-sky-50 to-white">
-      <div className="pointer-events-none absolute inset-0 z-0">
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#e6eff6]">
+      {/* ── Hero background — Figma blur stack (5 layers) ── */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <img
-          src="/hero.png"
-          alt=""
-          className="absolute right-0 top-0 h-full w-1/2 object-cover opacity-80 mix-blend-overlay lg:w-2/5"
+          src="/hero.jpg"
+          alt="Đường phố hiện đại"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.85] mix-blend-overlay"
         />
-        <div className="absolute inset-y-0 right-0 w-2/3 bg-gradient-to-r from-transparent via-white/60 to-white" />
+        {/* Gradient trái → phải (desktop): hòa tan hero vào nội dung */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/10 md:w-2/3" />
+        {/* Gradient trên → dưới (mobile): fade cho stacked layout */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white/90 md:hidden" />
+        {/* Lớp phủ mờ — backdrop blur nhẹ cho toàn bộ hero */}
+        <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
       </div>
       <div className="relative z-10 flex flex-1 flex-col">
         <Nav />
