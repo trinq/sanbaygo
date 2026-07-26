@@ -51,5 +51,9 @@ export function findCatchableBusForTerminal(
     return a.recommendation.trip.waitMinutes - b.recommendation.trip.waitMinutes;
   });
 
-  return candidates[0].recommendation;
+  const chosen = candidates[0];
+  if (chosen.recommendation.trip) {
+    chosen.recommendation.trip.selectedRoute = chosen.bus;
+  }
+  return chosen.recommendation;
 }

@@ -87,6 +87,7 @@ export interface BusRecommendation {
     waitMinutes: number;
     arrivalEstimate?: TimeRange;
     ticketPrice: number;
+    selectedRoute?: BusRoute;
   };
   reason?: 'no_service' | 'too_late' | 'missed_last';
 }
