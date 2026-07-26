@@ -61,11 +61,12 @@ describe('findNextCatchableTrip', () => {
     it('returns next departure within headway', () => {
       const tia = makeFrequencyBus({ peak: 15, normal: 20 });
       const result = findNextCatchableTrip(tia, '14:00', { min: 5, max: 10 });
-      // 14:00 + 10 + 5 = 14:15. Headway 20-min, next departure 14:20.
+      // 14:00 + 10 + 5 = 14:15. TIA operating from 04:30 with 20-min headway,
+      // departures are 04:30, 04:50, ..., 14:10, 14:30 — next slot from 04:30 is 14:30.
       expect(result.available).toBe(true);
       if (result.trip) {
-        expect(result.trip.departureTime).toBe('14:20');
-        expect(result.trip.waitMinutes).toBe(5);
+        expect(result.trip.departureTime).toBe('14:30');
+        expect(result.trip.waitMinutes).toBe(15);
         expect(result.trip.ticketPrice).toBe(0);
       }
     });
