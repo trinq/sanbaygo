@@ -1,7 +1,6 @@
 import { findCatchableBusForTerminal } from '../../calculation-engine/findCatchableBusForTerminal';
 import { BUS_86 } from '../../data/busSchedule';
 import { BUS_109, BUS_152, TIA } from '../../data/busSchedules/sgn';
-import type { BusRoute } from '../../types';
 
 describe('findCatchableBusForTerminal', () => {
   describe('HAN', () => {
