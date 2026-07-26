@@ -138,6 +138,10 @@ interface Translations {
     benefitCheapDesc: string;
     fieldDeparture: string;
     departurePlaceholder: string;
+    fieldAirport: string;
+    airportPlaceholder: string;
+    fieldTerminal: string;
+    terminalPlaceholder: string;
     fieldDestination: string;
     fieldPeople: string;
     fieldLuggage: string;
@@ -299,6 +303,10 @@ const translations: Record<Language, Translations> = {
       benefitCheapDesc: 'Chỉ 50.000đ cho xe buýt',
       fieldDeparture: 'Sân bay khởi hành',
       departurePlaceholder: 'Chọn sân bay',
+      fieldAirport: 'Sân bay',
+      airportPlaceholder: 'Chọn',
+      fieldTerminal: 'Nhà ga',
+      terminalPlaceholder: 'Chọn nhà ga',
       fieldDestination: 'Bạn muốn đi đâu?',
       fieldPeople: 'Số người',
       fieldLuggage: 'Hành lý',
@@ -458,6 +466,10 @@ const translations: Record<Language, Translations> = {
       benefitCheapDesc: 'Only 50,000 VND by bus',
       fieldDeparture: 'Departure airport',
       departurePlaceholder: 'Choose airport',
+      fieldAirport: 'Airport',
+      airportPlaceholder: 'Choose',
+      fieldTerminal: 'Terminal',
+      terminalPlaceholder: 'Choose terminal',
       fieldDestination: 'Where are you going?',
       fieldPeople: 'People',
       fieldLuggage: 'Luggage',
@@ -485,6 +497,7 @@ interface LanguageContextValue {
 }
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+export { LanguageContext };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('vi');

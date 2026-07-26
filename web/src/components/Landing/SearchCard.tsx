@@ -1,18 +1,23 @@
 import { useLanguage } from '../../contexts/LanguageContext';
 import type { SearchCardProps } from './types';
-import { DepartureDropdown } from './DepartureDropdown';
+import { AirportPicker } from './AirportPicker';
+import { TerminalPicker } from './TerminalPicker';
 import { DestinationChips } from './DestinationChips';
 import { Stepper } from './Stepper';
 import { CTAButton } from './CTAButton';
 import { BaggageChips } from './BaggageChips';
 
 export function SearchCard({
-  departure,
+  airport,
+  terminal,
   destination,
   people,
   carryOn,
   checked,
-  onDepartureChange,
+  terminalOptions,
+  destinationOptions,
+  onAirportChange,
+  onTerminalChange,
   onDestinationChange,
   onPeopleChange,
   onCarryOnChange,
@@ -20,12 +25,25 @@ export function SearchCard({
   onSubmit,
 }: SearchCardProps) {
   const { t } = useLanguage();
-  const ready = departure !== null && destination !== null;
+  const ready = airport !== null && terminal !== null && destination !== null;
   return (
     <div className="rounded-2xl border border-surface-border bg-white/80 p-6 shadow-card backdrop-blur-md">
       <div className="space-y-4">
-        <DepartureDropdown value={departure} onChange={onDepartureChange} />
-        <DestinationChips value={destination} onChange={onDestinationChange} />
+        <AirportPicker value={airport} onChange={onAirportChange} />
+        {airport && (
+          <TerminalPicker
+            value={terminal}
+            options={terminalOptions}
+            onChange={onTerminalChange}
+          />
+        )}
+        {airport && (
+          <DestinationChips
+            value={destination}
+            options={destinationOptions}
+            onChange={onDestinationChange}
+          />
+        )}
         <Stepper
           label={t.landing.fieldPeople}
           value={people}

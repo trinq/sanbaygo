@@ -1,31 +1,24 @@
-import type { ArrivalFormData, ArrivalResult } from '@core';
+import type {
+  AirportId,
+  DestinationPoint,
+  Terminal,
+  TerminalId,
+} from '@core';
 
-export interface LandingPageProps {
-  onSubmit: (formData: ArrivalFormData) => ArrivalResult | null;
-  result: ArrivalResult | null;
-}
-
-export type HeroProps = {
-  language: 'vi' | 'en';
-  onToggleLanguage: () => void;
-};
-
-export type SearchCardProps = {
-  departure: string | null;
+export interface SearchCardProps {
+  airport: AirportId | null;
+  terminal: TerminalId | null;
   destination: string | null;
   people: number;
   carryOn: boolean;
   checked: boolean;
-  onDepartureChange: (id: string) => void;
+  terminalOptions: Terminal[];
+  destinationOptions: DestinationPoint[];
+  onAirportChange: (id: AirportId) => void;
+  onTerminalChange: (id: TerminalId) => void;
   onDestinationChange: (id: string) => void;
   onPeopleChange: (n: number) => void;
-  onCarryOnChange: (value: boolean) => void;
-  onCheckedChange: (value: boolean) => void;
+  onCarryOnChange: (v: boolean) => void;
+  onCheckedChange: (v: boolean) => void;
   onSubmit: () => void;
-};
-
-export type BenefitChip = {
-  icon: 'clock' | 'shield' | 'wallet';
-  title: string;
-  subtitle: string;
-};
+}

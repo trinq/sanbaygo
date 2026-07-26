@@ -24,12 +24,16 @@ export function LandingPage({ onSearch }: LandingPageProps) {
   return (
     <Hero>
       <SearchCard
-        departure={form.departure}
+        airport={form.airport}
+        terminal={form.terminal}
         destination={form.destination}
         people={form.people}
         carryOn={form.carryOn}
         checked={form.checked}
-        onDepartureChange={form.setDeparture}
+        terminalOptions={form.terminalOptions}
+        destinationOptions={form.destinationOptions}
+        onAirportChange={form.setAirport}
+        onTerminalChange={form.setTerminal}
         onDestinationChange={form.setDestination}
         onPeopleChange={form.setPeople}
         onCarryOnChange={form.setCarryOn}

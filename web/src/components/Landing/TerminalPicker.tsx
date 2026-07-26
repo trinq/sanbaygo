@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import { AIRPORT_LIST, type AirportId } from '@core';
+import type { Terminal, TerminalId } from '@core';
 import { useLanguage } from '../../contexts/LanguageContext';
 
-export type AirportPickerProps = {
-  value: AirportId | null;
-  onChange: (id: AirportId) => void;
+export type TerminalPickerProps = {
+  value: TerminalId | null;
+  options: Terminal[];
+  onChange: (id: TerminalId) => void;
 };
 
-export function AirportPicker({ value, onChange }: AirportPickerProps) {
+export function TerminalPicker({ value, options, onChange }: TerminalPickerProps) {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
-  const selected = value ? AIRPORT_LIST.find((a) => a.id === value) : null;
+  const selected = value ? options.find((opt) => opt.id === value) : null;
 
   return (
     <div className="relative">
-      <label className="text-xs font-semibold text-ink-soft">{t.landing.fieldAirport}</label>
+      <label className="text-xs font-semibold text-ink-soft">{t.landing.fieldTerminal}</label>
       <button
         type="button"
         onClick={() => setOpen((current) => !current)}
@@ -24,7 +25,7 @@ export function AirportPicker({ value, onChange }: AirportPickerProps) {
         aria-expanded={open}
       >
         <span className="font-semibold">
-          {selected ? selected.name : t.landing.airportPlaceholder}
+          {selected ? selected.name : t.landing.terminalPlaceholder}
         </span>
         <ChevronDown size={18} className="text-ink-soft" />
       </button>
@@ -33,20 +34,20 @@ export function AirportPicker({ value, onChange }: AirportPickerProps) {
           role="listbox"
           className="absolute z-10 mt-1 w-full overflow-hidden rounded-xl border border-surface-border bg-white shadow-card"
         >
-          {AIRPORT_LIST.map((airport) => {
-            const isSelected = value === airport.id;
+          {options.map((opt) => {
+            const isSelected = value === opt.id;
             return (
               <li
-                key={airport.id}
+                key={opt.id}
                 role="option"
                 aria-selected={isSelected}
                 className="cursor-pointer px-4 py-3 hover:bg-primary-soft"
                 onClick={() => {
-                  onChange(airport.id);
+                  onChange(opt.id);
                   setOpen(false);
                 }}
               >
-                {airport.name}
+                {opt.name}
               </li>
             );
           })}
