@@ -12,7 +12,6 @@ import { AIRPORTS, DESTINATIONS_BY_AIRPORT } from '@core';
 
 const DEFAULT_ARRIVAL_TIME = '12:00';
 const DEFAULT_BAGGAGE: BaggageType = 'carry_on';
-const DEFAULT_FLIGHT_TYPE: FlightType = 'international';
 
 const clamp = (n: number, min: number, max: number) =>
   Math.max(min, Math.min(max, n));
