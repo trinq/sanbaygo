@@ -77,7 +77,8 @@ function findNextFrequencyTrip(
     ? busRoute.scheduleSource.headwayMinutes.peak
     : busRoute.scheduleSource.headwayMinutes.normal;
 
-  const targetMinutes = Math.ceil(readyMinutes / headway) * headway;
+  const offsetMinutes = readyMinutes - startMinutes;
+  const targetMinutes = startMinutes + Math.ceil(offsetMinutes / headway) * headway;
   const departureTime = minutesToTime(targetMinutes);
 
   return {
