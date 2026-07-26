@@ -28,10 +28,11 @@ function calculateResult(formData: ArrivalFormData): ArrivalResult | null {
     formData.baggage,
     formData.flightType,
   );
-  const busRecommendation = findNextCatchableTrip(formData.arrivalTime, {
-    min: exitTime.minMinutes,
-    max: exitTime.maxMinutes,
-  });
+  const busRecommendation = findNextCatchableTrip(
+    NOI_BAI_AIRPORT.busRoutes[0],
+    formData.arrivalTime,
+    { min: exitTime.minMinutes, max: exitTime.maxMinutes },
+  );
   if (busRecommendation.available && busRecommendation.trip) {
     busRecommendation.trip.arrivalEstimate = calculateArrivalEstimate(
       busRecommendation.trip.departureTime,
@@ -84,14 +85,14 @@ export function LandingPage() {
   return (
     <Hero>
       <SearchCard
-        departure={form.departure}
+        departure={form.terminal}
         destination={form.destination}
         people={form.people}
-        luggage={form.luggage}
-        onDepartureChange={form.setDeparture}
+        luggage={form.carryOn || form.checked ? 1 : 0}
+        onDepartureChange={form.setTerminal as (id: string) => void}
         onDestinationChange={form.setDestination}
         onPeopleChange={form.setPeople}
-        onLuggageChange={form.setLuggage}
+        onLuggageChange={() => {}}
         onSubmit={handleSubmit}
       />
     </Hero>
