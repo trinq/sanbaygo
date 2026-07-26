@@ -6,7 +6,20 @@ const noop = () => {};
 
 const renderCard = (overrides = {}) => render(
   <LanguageProvider>
-    <SearchCard departure={null} destination={null} people={1} luggage={1} onDepartureChange={noop} onDestinationChange={noop} onPeopleChange={noop} onLuggageChange={noop} onSubmit={noop} {...overrides} />
+    <SearchCard
+      departure={null}
+      destination={null}
+      people={1}
+      carryOn={0}
+      checked={0}
+      onDepartureChange={noop}
+      onDestinationChange={noop}
+      onPeopleChange={noop}
+      onCarryOnChange={noop}
+      onCheckedChange={noop}
+      onSubmit={noop}
+      {...overrides}
+    />
   </LanguageProvider>,
 );
 

@@ -14,11 +14,13 @@ export type SearchCardProps = {
   departure: string | null;
   destination: string | null;
   people: number;
-  luggage: number;
+  carryOn: boolean;
+  checked: boolean;
   onDepartureChange: (id: string) => void;
   onDestinationChange: (id: string) => void;
   onPeopleChange: (n: number) => void;
-  onLuggageChange: (n: number) => void;
+  onCarryOnChange: (value: boolean) => void;
+  onCheckedChange: (value: boolean) => void;
   onSubmit: () => void;
 };
 

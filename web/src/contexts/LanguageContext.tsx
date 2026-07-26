@@ -141,11 +141,17 @@ interface Translations {
     fieldDestination: string;
     fieldPeople: string;
     fieldLuggage: string;
+    fieldCarryOn: string;
+    fieldChecked: string;
     cta: string;
     ctaShort: string;
     socialProof: string;
+    tagline: string;
     footer: string;
     assumption: string;
+    legalTerms: string;
+    legalPrivacy: string;
+    legalSupport: string;
     navBrand: string;
     navBrandAccent: string;
   };
@@ -296,12 +302,17 @@ const translations: Record<Language, Translations> = {
       fieldDestination: 'Bạn muốn đi đâu?',
       fieldPeople: 'Số người',
       fieldLuggage: 'Hành lý',
+      fieldCarryOn: 'Hành lý xách tay',
+      fieldChecked: 'Hành lý ký gửi',
       cta: 'Tìm phương tiện',
       ctaShort: 'Đặt nhanh',
       socialProof: '4.9 điểm từ 12.000+ hành khách',
-      footer:
-        'Lịch trình được tính cho khung giờ 12:00 — nhập giờ thực tế khi cần chính xác.',
+      tagline: 'Cách đơn giản nhất để di chuyển từ sân bay về trung tâm.',
+      footer: '© 2026 SanBayGo · Sản phẩm của Trinq',
       assumption: 'Đang giả định nhà ga T1 + hành lý xách tay — chi tiết hơn sau.',
+      legalTerms: 'Điều khoản',
+      legalPrivacy: 'Bảo mật',
+      legalSupport: 'Hỗ trợ',
       navBrand: 'SanBayGo',
       navBrandAccent: 'Go',
     },
@@ -450,11 +461,17 @@ const translations: Record<Language, Translations> = {
       fieldDestination: 'Where are you going?',
       fieldPeople: 'People',
       fieldLuggage: 'Luggage',
+      fieldCarryOn: 'Carry-on',
+      fieldChecked: 'Checked',
       cta: 'Find a ride',
       ctaShort: 'Book now',
       socialProof: '4.9 rating from 12,000+ travelers',
-      footer: 'Schedule calculated for 12:00 — enter your actual time for accuracy.',
+      tagline: 'The simplest way from the airport to the city center.',
+      footer: '© 2026 SanBayGo · Built by Trinq',
       assumption: 'Assuming Terminal T1 + carry-on luggage — more details later.',
+      legalTerms: 'Terms',
+      legalPrivacy: 'Privacy',
+      legalSupport: 'Support',
       navBrand: 'SanBay',
       navBrandAccent: 'Go',
     },

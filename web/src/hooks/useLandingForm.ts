@@ -18,10 +18,12 @@ export function useLandingForm() {
   const [departure, setDeparture] = useState<string | null>(null);
   const [destination, setDestination] = useState<string | null>(null);
   const [people, setPeopleRaw] = useState(1);
-  const [luggage, setLuggageRaw] = useState(1);
+  const [carryOn, setCarryOnRaw] = useState(false);
+  const [checked, setCheckedRaw] = useState(false);
 
   const setPeople = useCallback((n: number) => setPeopleRaw(clamp(n, 1, 10)), []);
-  const setLuggage = useCallback((n: number) => setLuggageRaw(clamp(n, 0, 10)), []);
+  const setCarryOn = useCallback((v: boolean) => setCarryOnRaw(v), []);
+  const setChecked = useCallback((v: boolean) => setCheckedRaw(v), []);
 
   const validate = useCallback(
     () => departure !== null && destination !== null,
@@ -43,18 +45,21 @@ export function useLandingForm() {
     setDeparture(null);
     setDestination(null);
     setPeopleRaw(1);
-    setLuggageRaw(1);
+    setCarryOnRaw(false);
+    setCheckedRaw(false);
   }, []);
 
   return {
     departure,
     destination,
     people,
-    luggage,
+    carryOn,
+    checked,
     setDeparture,
     setDestination,
     setPeople,
-    setLuggage,
+    setCarryOn,
+    setChecked,
     validate,
     buildArrivalFormData,
     reset,

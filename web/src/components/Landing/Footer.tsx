@@ -1,24 +1,39 @@
+import { Plane } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { BrandMark } from './BrandMark';
+
+const links = [
+  { key: 'legalTerms' as const, href: '#terms' },
+  { key: 'legalPrivacy' as const, href: '#privacy' },
+  { key: 'legalSupport' as const, href: '#support' },
+];
 
 export function Footer() {
   const { t } = useLanguage();
+  const brandPrefix = t.landing.navBrand;
+  const brandAccent = t.landing.navBrandAccent;
   return (
-    <footer className="mt-16 border-t border-surface-border bg-white/40 px-4 py-8 backdrop-blur-md lg:px-8">
-      <div className="flex flex-col items-center justify-between gap-6 lg:flex-row">
-        <BrandMark />
-        <p className="max-w-md text-center text-sm text-ink-soft lg:text-left">
-          {t.landing.assumption}
-        </p>
-        <div className="flex gap-6 text-sm text-ink-soft">
-          <a href="#" className="hover:text-ink">Privacy</a>
-          <a href="#" className="hover:text-ink">Terms</a>
-          <a href="#" className="hover:text-ink">Contact</a>
+    <footer className="bg-white border-t border-slate-200 px-6 py-6 md:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <Plane className="w-4 h-4 text-primary" aria-hidden="true" />
+          <span className="font-bold text-slate-800">
+            {brandPrefix}
+            <span className="text-primary">{brandAccent}</span>
+          </span>
+        </div>
+        <p className="text-sm font-medium text-slate-500 text-center">{t.landing.tagline}</p>
+        <div className="flex items-center gap-6 text-sm font-semibold text-slate-500">
+          {links.map((link) => (
+            <a
+              key={link.key}
+              href={link.href}
+              className="hover:text-primary transition-colors"
+            >
+              {t.landing[link.key]}
+            </a>
+          ))}
         </div>
       </div>
-      <p className="mt-4 text-center text-xs text-ink-quiet lg:text-left">
-        {t.landing.footer}
-      </p>
     </footer>
   );
 }

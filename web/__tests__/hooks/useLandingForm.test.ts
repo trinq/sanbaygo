@@ -7,7 +7,8 @@ describe('useLandingForm', () => {
     expect(result.current.departure).toBeNull();
     expect(result.current.destination).toBeNull();
     expect(result.current.people).toBe(1);
-    expect(result.current.luggage).toBe(1);
+    expect(result.current.carryOn).toBe(false);
+    expect(result.current.checked).toBe(false);
   });
 
   it('validate() returns false when departure or destination is missing', () => {
@@ -27,12 +28,21 @@ describe('useLandingForm', () => {
     expect(result.current.people).toBe(1);
   });
 
-  it('clamps luggage to [0..10]', () => {
+  it('carry-on and checked are toggled by boolean setter (not clamped count)', () => {
     const { result } = renderHook(() => useLandingForm());
-    act(() => result.current.setLuggage(-1));
-    expect(result.current.luggage).toBe(0);
-    act(() => result.current.setLuggage(99));
-    expect(result.current.luggage).toBe(10);
+    expect(result.current.carryOn).toBe(false);
+    act(() => result.current.setCarryOn(true));
+    expect(result.current.carryOn).toBe(true);
+    act(() => result.current.setCarryOn(false));
+    expect(result.current.carryOn).toBe(false);
+  });
+
+  it('checked and carry-on are independent booleans', () => {
+    const { result } = renderHook(() => useLandingForm());
+    act(() => result.current.setCarryOn(true));
+    act(() => result.current.setChecked(false));
+    expect(result.current.carryOn).toBe(true);
+    expect(result.current.checked).toBe(false);
   });
 
   it('buildArrivalFormData() returns derived defaults when valid', () => {

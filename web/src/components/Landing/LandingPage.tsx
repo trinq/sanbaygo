@@ -44,11 +44,13 @@ export function LandingPage() {
         departure={form.departure}
         destination={form.destination}
         people={form.people}
-        luggage={form.luggage}
+        carryOn={form.carryOn}
+        checked={form.checked}
         onDepartureChange={form.setDeparture}
         onDestinationChange={form.setDestination}
         onPeopleChange={form.setPeople}
-        onLuggageChange={form.setLuggage}
+        onCarryOnChange={form.setCarryOn}
+        onCheckedChange={form.setChecked}
         onSubmit={handleSubmit}
       />
     </Hero>

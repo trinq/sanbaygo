@@ -52,6 +52,9 @@ describe('Hero', () => {
         <Hero />
       </LanguageProvider>,
     );
-    expect(screen.getByText(/Lịch trình được tính/i)).toBeTruthy();
+    expect(screen.getByText(/Cách đơn giản nhất/i)).toBeTruthy();
+    expect(screen.getByText('Điều khoản')).toBeTruthy();
+    expect(screen.getByText('Bảo mật')).toBeTruthy();
+    expect(screen.getByText('Hỗ trợ')).toBeTruthy();
   });
 });
