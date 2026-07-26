@@ -1,7 +1,15 @@
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Icon } from '../Icon';
-import { ArrivalResult, ArrivalFormData } from '@core';
+import { TiaHint } from '../Result/TiaHint';
+import { ArrivalResult, ArrivalFormData, TerminalId } from '@core';
 import styles from './index.module.css';
+
+function getBusIdForAirportAndTerminal(airportId: string, terminalId: TerminalId | null): string | null {
+  if (airportId === 'tan-son-nhat' && (terminalId === 'SGN-T1' || terminalId === 'SGN-T2')) {
+    return 'bus-109';
+  }
+  return null;
+}
 
 interface ResultDisplayProps {
   result: ArrivalResult;
@@ -54,6 +62,12 @@ export function ResultDisplay({ result, formData, onBack, onRecalculate }: Resul
           )}
         </p>
       </header>
+
+      <TiaHint
+        airportId={formData.airportId}
+        terminalId={formData.terminal}
+        recommendedBusId={result.bus.trip ? getBusIdForAirportAndTerminal(formData.airportId, formData.terminal) : null}
+      />
 
       <hr className={styles.rule} />
 
