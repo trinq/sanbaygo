@@ -1,15 +1,8 @@
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Icon } from '../Icon';
 import { TiaHint } from '../Result/TiaHint';
-import { ArrivalResult, ArrivalFormData, TerminalId } from '@core';
+import { ArrivalResult, ArrivalFormData } from '@core';
 import styles from './index.module.css';
-
-function getBusIdForAirportAndTerminal(airportId: string, terminalId: TerminalId | null): string | null {
-  if (airportId === 'tan-son-nhat' && (terminalId === 'SGN-T1' || terminalId === 'SGN-T2')) {
-    return 'bus-109';
-  }
-  return null;
-}
 
 interface ResultDisplayProps {
   result: ArrivalResult;
@@ -22,6 +15,7 @@ export function ResultDisplay({ result, formData, onBack, onRecalculate }: Resul
   const { t } = useLanguage();
   const trip = result.bus.trip;
   const catchable = result.bus.available && trip;
+  const recommendedBusId = trip?.selectedRoute?.id ?? null;
 
   return (
     <article className={styles.root}>
@@ -66,7 +60,7 @@ export function ResultDisplay({ result, formData, onBack, onRecalculate }: Resul
       <TiaHint
         airportId={formData.airportId}
         terminalId={formData.terminal}
-        recommendedBusId={result.bus.trip ? getBusIdForAirportAndTerminal(formData.airportId, formData.terminal) : null}
+        recommendedBusId={recommendedBusId}
       />
 
       <hr className={styles.rule} />
