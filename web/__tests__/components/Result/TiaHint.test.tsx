@@ -30,7 +30,7 @@ describe('TiaHint', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('renders hint when bus-109 is recommended at SGN-T2', () => {
+  it('renders hint for SGN-T2 + bus-109', () => {
     render(
       <TiaHint airportId="tan-son-nhat" terminalId="SGN-T2" recommendedBusId="bus-109" />,
     );
