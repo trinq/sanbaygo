@@ -1,44 +1,61 @@
-// Single source of truth for SanBayGo design tokens.
+// Single source of truth for SanBayGo design tokens — Figma Make landing direction.
+// Sky-blue primary with glass surfaces, Plus Jakarta Sans typography, amber accent.
 // CSS-vars (tokens.css) MUST mirror these values — see tokens-parity.test.ts.
 
 export const tokens = {
   color: {
-    bgPage: '#FAFAFA',
-    bgCard: '#FFFFFF',
-    bgGrouped: '#F2F2F7',
-    bgSidebar: '#F5F5F7',
-    textPrimary: '#1C1C1E',
-    textSecondary: '#8E8E93',
-    textTertiary: '#C7C7CC',
-    separator: 'rgba(60, 60, 67, 0.12)',
-    separatorStrong: 'rgba(60, 60, 67, 0.20)',
-    accent: '#007AFF',
-    accentPressed: '#0051D5',
-    accentTint: 'rgba(0, 122, 255, 0.08)',
-    accentTintStrong: 'rgba(0, 122, 255, 0.14)',
-    warn: '#FF9500',
-    warnTint: 'rgba(255, 149, 0, 0.12)',
+    // Primary — sky-blue scale (Figma's bg-primary)
+    primary: '#0284C7',         // sky-600
+    primaryHover: '#0369A1',    // sky-700
+    primarySoft: '#E0F2FE',     // sky-100
+
+    // Accent — amber underline highlight ("nhanh nhất")
+    accent: '#FCD34D',          // amber-300
+    accentInk: '#92400E',       // amber-800 text on accent
+
+    // Benefit chip icon — emerald
+    benefit: '#059669',         // emerald-600
+    benefitSoft: '#D1FAE5',     // emerald-100
+
+    // Neutrals — slate
+    ink: '#0F172A',             // slate-900 primary text
+    inkSoft: '#475569',         // slate-600 secondary
+    inkQuiet: '#94A3B8',        // slate-400 muted
+    surface: '#FFFFFF',         // white
+    surfaceMuted: '#F8FAFC',    // slate-50
+    surfaceBorder: '#E2E8F0',   // slate-200
+    background: '#F1F5F9',      // slate-100 page background
+
+    // Glass — translucent white overlays
+    glass: 'rgba(255, 255, 255, 0.30)',
+    glassStrong: 'rgba(255, 255, 255, 0.80)',
+
+    // System
+    warn: '#D97706',            // amber-600
+    warnTint: '#FEF3C7',
   },
   font: {
-    family:
-      '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif',
+    family: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+    bodyFamily: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+    monoFamily: '"JetBrains Mono", "SF Mono", ui-monospace, monospace',
     size: {
-      caption: 11,
-      secondary: 13,
-      body: 17,
+      caption: 12,
+      secondary: 14,
+      body: 16,
       section: 22,
       display: 28,
-      hero: 34,
-      page: 40,
+      hero: 36,
+      page: 44,
     },
     weight: {
       regular: 400,
       medium: 500,
       semibold: 600,
       bold: 700,
+      extrabold: 800,
     },
     letterSpacing: {
-      tight: -0.6,
+      tight: -0.5,
       tighter: -1,
       eyebrow: 0.5,
     },
@@ -57,11 +74,12 @@ export const tokens = {
     sm: 8,
     md: 12,
     lg: 16,
+    xl: 24,                     // Figma 'rounded-xl'
     pill: 999,
   },
   shadow: {
-    card: '0 1px 2px rgba(0,0,0,0.04), 0 0 0 0.5px rgba(0,0,0,0.06)',
-    hero: '0 2px 12px rgba(0,0,0,0.04), 0 0 0 0.5px rgba(0,0,0,0.04)',
+    card: '0 8px 24px rgba(2, 132, 199, 0.12)',
+    hero: '0 20px 60px rgba(2, 132, 199, 0.18)',
   },
   breakpoint: {
     tablet: 769,

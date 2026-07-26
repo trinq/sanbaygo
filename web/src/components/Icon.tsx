@@ -141,7 +141,7 @@ export type IconName = keyof typeof paths;
 export function Icon({ name, ...rest }: { name: IconName } & IconProps) {
   const isChevron = name === 'chevron' || name === 'check';
   const isMenu = name === 'menu';
-  const d = paths[name](rest.color ?? C.textSecondary, rest.strokeWidth ?? 1.5);
+  const d = paths[name](rest.color ?? C.inkSoft, rest.strokeWidth ?? 1.5);
   return (
     <Svg
       {...rest}

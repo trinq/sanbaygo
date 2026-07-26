@@ -1,22 +1,46 @@
-@import url('../../../design-system/tokens/tokens.css');
+@import "tailwindcss";
+@import "../../../design-system/tokens/tokens.css";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@theme {
+  --color-primary: #0284C7;
+  --color-primary-hover: #0369A1;
+  --color-primary-soft: #E0F2FE;
+  --color-accent: #FCD34D;
+  --color-accent-ink: #92400E;
+  --color-benefit: #059669;
+  --color-benefit-soft: #D1FAE5;
+  --color-ink: #0F172A;
+  --color-ink-soft: #475569;
+  --color-ink-quiet: #94A3B8;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F8FAFC;
+  --color-surface-border: #E2E8F0;
+  --color-background: #F1F5F9;
+
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --text-base: 1rem; /* 16px — matches tokens.font.size.body */
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  --shadow-card: 0 8px 24px rgba(2, 132, 199, 0.12);
+  --shadow-hero: 0 20px 60px rgba(2, 132, 199, 0.18);
 }
 
-body {
-  font-family: var(--font-family);
-  background-color: var(--color-bg-page);
-  color: var(--color-text-primary);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  body {
+    font-family: var(--font-body-family);
+    font-size: var(--text-base);
+    background-color: var(--color-background);
+    color: var(--color-ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
 }
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+@layer utilities {
+  .font-display {
+    font-family: var(--font-family);
+    font-weight: 800;
+  }
 }

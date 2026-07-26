@@ -1,10 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { ResultDisplay } from '../../../src/components/ResultDisplay';
-import { LanguageProvider } from '../../../src/contexts/LanguageContext';
-import { useViewport } from '../../../src/hooks/useViewport';
+import { LanguageProvider, useLanguage } from '../../../src/contexts/LanguageContext';
 import type { ArrivalResult, ArrivalFormData } from '@core';
-
-jest.mock('../../../src/hooks/useViewport');
 
 const result: ArrivalResult = {
   bus: {
@@ -27,29 +24,58 @@ const formData: ArrivalFormData = {
   arrivalTime: '10:00',
   terminal: 'T1',
   baggage: 'carry_on',
-  destination: 'old-quarter',
+  destination: 'OLD_QUARTER',
   flightType: 'international',
 };
 
-function setup(viewport: 'mobile' | 'tablet' | 'desktop') {
-  (useViewport as jest.Mock).mockReturnValue(viewport);
-  render(
-    <LanguageProvider>
-      <ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />
-    </LanguageProvider>,
+function renderWithLang(ui: React.ReactNode) {
+  return render(<LanguageProvider>{ui}</LanguageProvider>);
+}
+
+function EnglishResultDisplay({ resultData = result }: { resultData?: ArrivalResult }) {
+  const { setLanguage } = useLanguage();
+
+  return (
+    <>
+      <button type="button" onClick={() => setLanguage('en')}>Switch to English</button>
+      <ResultDisplay result={resultData} formData={formData} onRecalculate={jest.fn()} />
+    </>
   );
 }
 
 describe('ResultDisplay', () => {
-  it('renders at desktop as a single-column table', () => {
-    setup('desktop');
-    expect(screen.getByText(/Xe buýt 86|Bus 86/i)).toBeTruthy();
-    expect(screen.getByText(/Taxi/i)).toBeTruthy();
-    expect(screen.getAllByText(/Grab/i).length).toBeGreaterThan(0);
+  it('renders the catchable departure time as the headline', () => {
+    renderWithLang(<ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />);
+    expect(screen.getAllByText('10:30').length).toBeGreaterThan(0);
   });
 
-  it('renders at mobile as stacked cards', () => {
-    setup('mobile');
-    expect(screen.getByText(/Xe buýt 86|Bus 86/i)).toBeTruthy();
+  it('shows the ride-hail footnote', () => {
+    renderWithLang(<ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />);
+    expect(screen.getByText(/Grab/i)).toBeTruthy();
+  });
+
+  it('renders a missed-bus headline when no bus is available', () => {
+    const missed: ArrivalResult = { bus: { available: false, reason: 'too_late' }, grab: result.grab };
+    renderWithLang(<ResultDisplay result={missed} formData={formData} onRecalculate={jest.fn()} />);
+    expect(screen.getByText(/Đã lỡ chuyến cuối|Last bus/i)).toBeTruthy();
+  });
+
+  it('localizes the reviewed trip and ride-hail copy in English', () => {
+    renderWithLang(<EnglishResultDisplay />);
+    fireEvent.click(screen.getByRole('button', { name: 'Switch to English' }));
+
+    expect(screen.getByText('Issue 02 — Trip')).toBeTruthy();
+    expect(screen.getByRole('heading', { level: 1, name: /Next bus: 10:30/ })).toBeTruthy();
+    expect(screen.getByText('Grab · Taxi')).toBeTruthy();
+    expect(screen.getByText('~VND 250–350k')).toBeTruthy();
+    expect(screen.getByText('Pillar 4 · Arrivals level 1')).toBeTruthy();
+  });
+
+  it('localizes the missed-last-bus headline in English', () => {
+    const missed: ArrivalResult = { bus: { available: false, reason: 'too_late' }, grab: result.grab };
+    renderWithLang(<EnglishResultDisplay resultData={missed} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Switch to English' }));
+
+    expect(screen.getByRole('heading', { level: 1, name: 'You missed the last bus. Call a ride.' })).toBeTruthy();
   });
 });

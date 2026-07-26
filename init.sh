@@ -78,11 +78,11 @@ ok "web/ tsc clean"
 
 # ---- Test suites ----
 step "Running tests: root (RN + core)"
-npm test
+npm test -- --no-watchman
 ok "root tests pass"
 
 step "Running tests: web/"
-(cd web && npm test)
+(cd web && npm test -- --no-watchman)
 ok "web/ tests pass"
 
 # ---- Summary ----

@@ -192,3 +192,25 @@ All 10 implementation tasks completed:
 | 2026-07-22 | 11 | Plan collapse-platform-duplication refactor + 7 tickets | COMPLETE |
 | 2026-07-24 | 12 | Fix white page (busSchedules time shape) → PR #4 merged | COMPLETE |
 | 2026-07-24 | 13 | Restart api+web dev servers, sync local main with origin, update harness | COMPLETE |
+
+## 2026-07-25 — Landing Page Replaces Form
+
+- Spec: `docs/superpowers/specs/2026-07-25-landing-hero-replaces-form-design.md`
+- Plan: `docs/superpowers/plans/2026-07-25-landing-hero-replaces-form.md`
+- Plan commit: `1c6d845`
+- Vision commit: `d6d423e` (editorial-paper baseline)
+- Implementation evidence: Task 1 `65d68cf`; Task 2 `0d39e5c`, `cbfd985`; Task 3 `6e697bc`; Task 4 `caa2946`, `fd43e92`; Task 5 `11482ca`; Task 6 `cf95eca`; Task 7 `76455d2`, `eb5403e`; Task 8 `6d65675`; Task 9 `d1865a5`; Task 10 `7240ead`; Task 11 `0698e81`; Task 12 `2e3f11e`; Task 13 `6649a0f`; Task 14 `7519e00`; Task 15 `bfc2a69`.
+- All 16 tasks complete; `init.sh` is green; Playwright e2e passes at 3 viewports.
+- Editorial-paper and apple-minimal plans are closed/superseded.
+- Figma palette replaces editorial-paper; BusTimetableSpine removed.
+- Glass fallback on RN handled by `expo-blur` BlurView defaults.
+- Task 16 feature ID renamed from `web-responsive-apple-minimal` to `responsive-web-apple-minimal`.
+- Deferred — NativeWind 4 + Tailwind 4 pipeline + missing Metro config (RN Critical): requires a dedicated dependency and build-pipeline correction.
+- Deferred — restore `result.comparisons` rendering in `ResultDisplay` (Web Critical): large behavior change outside this final-fix pass.
+- Deferred — RN `LandingPage` `calculateResult` drops `direction` data (RN Critical): depends on the existing core result type.
+- Deferred — `DepartureDropdown` keyboard operability (web + RN): plan-mandated follow-up.
+- Deferred — RN Nav language toggle has no `onPress`: requires RN language-context wiring.
+- Deferred — text glyphs versus Lucide icons (RN): small visual follow-up.
+- Deferred — RN `SearchCard` test missing: scheduled for the next session.
+- Deferred — i18n schema divergence (`landing.field*` versus `form.*`) (web): requires a focused consolidation task.
+- Deferred — Footer `lg:` breakpoint on RN: visual-polish follow-up.

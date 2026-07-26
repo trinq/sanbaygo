@@ -9,34 +9,34 @@ interface Translations {
   };
   form: {
     title: string;
-    arrivalTime: string;
-    terminal: string;
-    baggage: string;
-    destination: string;
-    calculate: string;
-    t1: string;
-    t2: string;
-    carryOn: string;
-    checked: string;
-    stepEyebrow: string;
     lede: string;
-    fromLabel: string;
-    toLabel: string;
-    selectDestination: string;
-    destinationOldQuarter: string;
-    destinationBaDinh: string;
-    destinationTayHo: string;
-    peopleLabel: string;
+    eyebrow: string;
+    arrivalTimeLabel: string;
+    arrivalTimeHint: string;
+    terminalLabel: string;
+    destinationLabel: string;
     baggageLabel: string;
-    baggageCarryOn: string;
-    baggageChecked: string;
+    calculate: string;
     t1Label: string;
     t1Sub: string;
     t2Label: string;
     t2Sub: string;
+    carryOn: string;
+    checked: string;
+    selectDestination: string;
+    destinationOldQuarter: string;
+    destinationBaDinh: string;
+    destinationTayHo: string;
   };
   results: {
     title: string;
+    tripIssue: string;
+    nextBus: string;
+    missedLastBus: string;
+    callRide: string;
+    rideHailProviders: string;
+    rideHailPrice: string;
+    rideHailPickupLocation: string;
     basedOn: string;
     peakHour: string;
     busRecommendation: string;
@@ -87,6 +87,18 @@ interface Translations {
     sortRecommended: string;
     sortCheapest: string;
     sortFastest: string;
+    // Spine (signature element)
+    spineEyebrow: string;
+    spineTitle: string;
+    spineCatchable: string;
+    spineMissed: string;
+    spineNext: string;
+    spineLast: string;
+    railTitle: string;
+    railSubtitle: string;
+    railFootnote: string;
+    rideHailTitle: string;
+    rideHailSubtitle: string;
   };
   destinations: {
     [key: string]: string;
@@ -114,6 +126,35 @@ interface Translations {
     };
     languageToggle: string;
   };
+  landing: {
+    pill: string;
+    headline: string;
+    subtitle: string;
+    benefitFast: string;
+    benefitFastDesc: string;
+    benefitSafe: string;
+    benefitSafeDesc: string;
+    benefitCheap: string;
+    benefitCheapDesc: string;
+    fieldDeparture: string;
+    departurePlaceholder: string;
+    fieldDestination: string;
+    fieldPeople: string;
+    fieldLuggage: string;
+    fieldCarryOn: string;
+    fieldChecked: string;
+    cta: string;
+    ctaShort: string;
+    socialProof: string;
+    tagline: string;
+    footer: string;
+    assumption: string;
+    legalTerms: string;
+    legalPrivacy: string;
+    legalSupport: string;
+    navBrand: string;
+    navBrandAccent: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -124,34 +165,34 @@ const translations: Record<Language, Translations> = {
     },
     form: {
       title: 'Bạn bay từ đâu, đi đâu?',
-      arrivalTime: 'Giờ đáp cánh',
-      terminal: 'Chọn nhà ga',
-      baggage: 'Hành lý',
-      destination: 'Điểm đến',
-      calculate: 'Tìm phương tiện phù hợp →',
-      t1: 'Nhà ga T1 (Nội địa)',
-      t2: 'Nhà ga T2 (Quốc tế)',
-      carryOn: 'Xách tay',
-      checked: 'Ký gửi',
-      stepEyebrow: 'Bước 1 — Lên kế hoạch',
       lede: 'Chúng tôi so sánh Xe buýt 86, Taxi và Grab theo giá, thời gian và hành lý — rồi gợi ý lựa chọn phù hợp nhất.',
-      fromLabel: 'Sân bay khởi hành',
-      toLabel: 'Điểm đến',
-      selectDestination: 'Chọn điểm đến',
-      destinationOldQuarter: 'Hoàn Kiếm · Phố Cổ',
-      destinationBaDinh: 'Ba Đình',
-      destinationTayHo: 'Tây Hồ',
-      peopleLabel: 'Số người',
+      eyebrow: 'Bước 1 — Lên kế hoạch',
+      arrivalTimeLabel: 'Giờ đáp cánh',
+      arrivalTimeHint: 'Thời gian máy bay chạm bánh',
+      terminalLabel: 'Sân bay khởi hành',
+      destinationLabel: 'Điểm đến',
       baggageLabel: 'Hành lý',
-      baggageCarryOn: 'Xách tay',
-      baggageChecked: 'Ký gửi',
+      calculate: 'Tìm phương tiện phù hợp →',
       t1Label: 'Nội Bài · T1',
       t1Sub: 'Quốc tế',
       t2Label: 'Nội Bài · T2',
       t2Sub: 'Quốc nội',
+      carryOn: 'Xách tay',
+      checked: 'Ký gửi',
+      selectDestination: 'Chọn điểm đến',
+      destinationOldQuarter: 'Hoàn Kiếm · Phố Cổ',
+      destinationBaDinh: 'Ba Đình',
+      destinationTayHo: 'Tây Hồ',
     },
     results: {
       title: 'Kết quả',
+      tripIssue: 'Số 02 — Chuyến đi',
+      nextBus: 'Chuyến buýt kế tiếp:',
+      missedLastBus: 'Đã lỡ chuyến cuối.',
+      callRide: 'Gọi xe thôi.',
+      rideHailProviders: 'Grab · Taxi',
+      rideHailPrice: '~250–350k VND',
+      rideHailPickupLocation: 'Cột số 4 · Tầng 1 nhà ga đến',
       basedOn: 'Dựa trên giờ đáp',
       busRecommendation: 'Xe buýt phù hợp',
       catchable: 'Có thể bắt được',
@@ -202,6 +243,17 @@ const translations: Record<Language, Translations> = {
       sortRecommended: 'Khuyến nghị',
       sortCheapest: 'Rẻ nhất',
       sortFastest: 'Nhanh nhất',
+      spineEyebrow: 'Tuyến 86 — hôm nay',
+      spineTitle: 'Bạn kịp chuyến nào?',
+      spineCatchable: 'Còn kịp',
+      spineMissed: 'Đã lỡ',
+      spineNext: 'Chuyến kế tiếp',
+      spineLast: 'Chuyến cuối',
+      railTitle: 'So sánh phương tiện',
+      railSubtitle: 'Giá và thời gian ước tính',
+      railFootnote: 'Hoặc gọi xe — nếu hành lý nhiều hoặc trễ chuyến.',
+      rideHailTitle: 'Hoặc gọi xe',
+      rideHailSubtitle: 'Khi hành lý nhiều, trễ chuyến, hoặc đi từ 3 người.',
     },
     destinations: {
       'old-quarter': 'Khu phố cổ',
@@ -234,6 +286,36 @@ const translations: Record<Language, Translations> = {
       },
       languageToggle: 'English',
     },
+    landing: {
+      pill: 'Dịch vụ xe đưa đón sân bay',
+      headline: 'Cách nhanh nhất từ sân bay về trung tâm.',
+      subtitle:
+        'So sánh xe buýt, Grab, taxi trong 5 giây. Không cần tải app, không cần đăng ký.',
+      benefitFast: 'Nhanh nhất',
+      benefitFastDesc: 'Lịch trình 26 chuyến/ngày',
+      benefitSafe: 'An toàn',
+      benefitSafeDesc: 'Tài xế xác minh, giá công khai',
+      benefitCheap: 'Tiết kiệm',
+      benefitCheapDesc: 'Chỉ 50.000đ cho xe buýt',
+      fieldDeparture: 'Sân bay khởi hành',
+      departurePlaceholder: 'Chọn sân bay',
+      fieldDestination: 'Bạn muốn đi đâu?',
+      fieldPeople: 'Số người',
+      fieldLuggage: 'Hành lý',
+      fieldCarryOn: 'Hành lý xách tay',
+      fieldChecked: 'Hành lý ký gửi',
+      cta: 'Tìm phương tiện',
+      ctaShort: 'Đặt nhanh',
+      socialProof: '4.9 điểm từ 12.000+ hành khách',
+      tagline: 'Cách đơn giản nhất để di chuyển từ sân bay về trung tâm.',
+      footer: '© 2026 SanBayGo · Sản phẩm của Trinq',
+      assumption: 'Đang giả định nhà ga T1 + hành lý xách tay — chi tiết hơn sau.',
+      legalTerms: 'Điều khoản',
+      legalPrivacy: 'Bảo mật',
+      legalSupport: 'Hỗ trợ',
+      navBrand: 'SanBayGo',
+      navBrandAccent: 'Go',
+    },
   },
   en: {
     header: {
@@ -242,34 +324,34 @@ const translations: Record<Language, Translations> = {
     },
     form: {
       title: 'Where are you flying from, and where to?',
-      arrivalTime: 'Arrival Time',
-      terminal: 'Select Terminal',
-      baggage: 'Luggage',
-      destination: 'Destination',
-      calculate: 'Find a ride →',
-      t1: 'Terminal T1 (Domestic)',
-      t2: 'Terminal T2 (International)',
-      carryOn: 'Carry-on',
-      checked: 'Checked',
-      stepEyebrow: 'Step 1 — Plan your trip',
       lede: 'We compare Bus 86, Taxi, and Grab by price, time, and luggage — then suggest the best fit.',
-      fromLabel: 'Departure airport',
-      toLabel: 'Destination',
-      selectDestination: 'Select destination',
-      destinationOldQuarter: 'Hoan Kiem · Old Quarter',
-      destinationBaDinh: 'Ba Dinh',
-      destinationTayHo: 'Tay Ho',
-      peopleLabel: 'People',
+      eyebrow: 'Step 1 — Plan your trip',
+      arrivalTimeLabel: 'Arrival time',
+      arrivalTimeHint: 'When the plane touches down',
+      terminalLabel: 'Departure airport',
+      destinationLabel: 'Destination',
       baggageLabel: 'Luggage',
-      baggageCarryOn: 'Carry-on',
-      baggageChecked: 'Checked',
+      calculate: 'Find a ride →',
       t1Label: 'Noi Bai · T1',
       t1Sub: 'International',
       t2Label: 'Noi Bai · T2',
       t2Sub: 'Domestic',
+      carryOn: 'Carry-on',
+      checked: 'Checked',
+      selectDestination: 'Select destination',
+      destinationOldQuarter: 'Hoan Kiem · Old Quarter',
+      destinationBaDinh: 'Ba Dinh',
+      destinationTayHo: 'Tay Ho',
     },
     results: {
       title: 'Results',
+      tripIssue: 'Issue 02 — Trip',
+      nextBus: 'Next bus:',
+      missedLastBus: 'You missed the last bus.',
+      callRide: 'Call a ride.',
+      rideHailProviders: 'Grab · Taxi',
+      rideHailPrice: '~VND 250–350k',
+      rideHailPickupLocation: 'Pillar 4 · Arrivals level 1',
       basedOn: 'Based on arrival at',
       busRecommendation: 'Recommended Bus',
       catchable: 'Catchable',
@@ -320,6 +402,17 @@ const translations: Record<Language, Translations> = {
       sortRecommended: 'Recommended',
       sortCheapest: 'Cheapest',
       sortFastest: 'Fastest',
+      spineEyebrow: 'Route 86 — today',
+      spineTitle: 'Which bus can you catch?',
+      spineCatchable: 'Catchable',
+      spineMissed: 'Missed',
+      spineNext: 'Next departure',
+      spineLast: 'Last bus',
+      railTitle: 'Compare transport',
+      railSubtitle: 'Estimated prices and travel time',
+      railFootnote: 'Or ride-hail — for extra luggage, missed buses, or 3+ people.',
+      rideHailTitle: 'Or ride-hail',
+      rideHailSubtitle: 'For extra luggage, a missed bus, or 3+ people.',
     },
     destinations: {
       'old-quarter': 'Old Quarter',
@@ -351,6 +444,36 @@ const translations: Record<Language, Translations> = {
         tabReference: 'Reference',
       },
       languageToggle: 'Tiếng Việt',
+    },
+    landing: {
+      pill: 'Airport transfer service',
+      headline: 'The fastest way from the airport to the city.',
+      subtitle:
+        'Compare bus, Grab, and taxi in 5 seconds. No app to install, no account to create.',
+      benefitFast: 'Fastest',
+      benefitFastDesc: '26 daily departures',
+      benefitSafe: 'Safe',
+      benefitSafeDesc: 'Verified drivers, transparent pricing',
+      benefitCheap: 'Affordable',
+      benefitCheapDesc: 'Only 50,000 VND by bus',
+      fieldDeparture: 'Departure airport',
+      departurePlaceholder: 'Choose airport',
+      fieldDestination: 'Where are you going?',
+      fieldPeople: 'People',
+      fieldLuggage: 'Luggage',
+      fieldCarryOn: 'Carry-on',
+      fieldChecked: 'Checked',
+      cta: 'Find a ride',
+      ctaShort: 'Book now',
+      socialProof: '4.9 rating from 12,000+ travelers',
+      tagline: 'The simplest way from the airport to the city center.',
+      footer: '© 2026 SanBayGo · Built by Trinq',
+      assumption: 'Assuming Terminal T1 + carry-on luggage — more details later.',
+      legalTerms: 'Terms',
+      legalPrivacy: 'Privacy',
+      legalSupport: 'Support',
+      navBrand: 'SanBay',
+      navBrandAccent: 'Go',
     },
   },
 };

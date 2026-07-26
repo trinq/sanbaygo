@@ -1,64 +1,46 @@
 /* CSS custom properties — mirrors design-system/tokens/tokens.ts.
  * Any change here MUST be reflected in tokens.ts (and vice versa).
- * tokens-parity.test.ts pins parity in Task 7.
+ * tokens-parity.test.ts pins parity.
  */
 
 :root {
-  /* Color */
-  --color-bg-page: #FAFAFA;
-  --color-bg-card: #FFFFFF;
-  --color-bg-grouped: #F2F2F7;
-  --color-bg-sidebar: #F5F5F7;
-  --color-text-primary: #1C1C1E;
-  --color-text-secondary: #8E8E93;
-  --color-text-tertiary: #C7C7CC;
-  --color-separator: rgba(60, 60, 67, 0.12);
-  --color-separator-strong: rgba(60, 60, 67, 0.20);
-  --color-accent: #007AFF;
-  --color-accent-pressed: #0051D5;
-  --color-accent-tint: rgba(0, 122, 255, 0.08);
-  --color-accent-tint-strong: rgba(0, 122, 255, 0.14);
-  --color-warn: #FF9500;
-  --color-warn-tint: rgba(255, 149, 0, 0.12);
+  /* Primary — sky-blue */
+  --color-primary: #0284C7;
+  --color-primary-hover: #0369A1;
+  --color-primary-soft: #E0F2FE;
+
+  /* Accent — amber underline */
+  --color-accent: #FCD34D;
+  --color-accent-ink: #92400E;
+
+  /* Benefit — emerald chip */
+  --color-benefit: #059669;
+  --color-benefit-soft: #D1FAE5;
+
+  /* Neutrals — slate */
+  --color-ink: #0F172A;
+  --color-ink-soft: #475569;
+  --color-ink-quiet: #94A3B8;
+
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F8FAFC;
+  --color-surface-border: #E2E8F0;
+  --color-background: #F1F5F9;
+
+  /* Glass — translucent overlays */
+  --color-glass: rgba(255, 255, 255, 0.30);
+  --color-glass-strong: rgba(255, 255, 255, 0.80);
+
+  /* System */
+  --color-warn: #D97706;
+  --color-warn-tint: #FEF3C7;
 
   /* Font family */
-  --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+  --font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono-family: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
 
-  /* Font sizes (px) */
-  --font-size-caption: 11px;
-  --font-size-secondary: 13px;
-  --font-size-body: 17px;
-  --font-size-section: 22px;
-  --font-size-display: 28px;
-  --font-size-hero: 34px;
-  --font-size-page: 40px;
-
-  /* Font weights */
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-
-  /* Spacing (8pt grid) */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-
-  /* Radii */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-pill: 999px;
-
-  /* Shadow */
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
-  --shadow-hero: 0 2px 12px rgba(0, 0, 0, 0.04), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
-
-  /* Breakpoints (used in JS via tokens.breakpoint; values are px) */
-  /* (No CSS var needed — JS reads tokens.breakpoint directly.) */
+  /* Shadows — sky-tinted glow */
+  --shadow-card: 0 8px 24px rgba(2, 132, 199, 0.12);
+  --shadow-hero: 0 20px 60px rgba(2, 132, 199, 0.18);
 }
