@@ -1,6 +1,11 @@
 import { BusRecommendation, BusRoute, TerminalId } from '../types';
 import { findNextCatchableTrip } from './findNextCatchableTrip';
 
+type Candidate = {
+  bus: BusRoute;
+  recommendation: BusRecommendation & { trip: NonNullable<BusRecommendation['trip']> };
+};
+
 export function findCatchableBusForTerminal(
   buses: BusRoute[],
   terminalId: TerminalId,
@@ -16,19 +21,35 @@ export function findCatchableBusForTerminal(
     return { available: false, reason: 'no_service' };
   }
 
-  const candidates = matching
-    .map((bus) => findNextCatchableTrip(bus, arrivalTime, exitTimeMinutes, isPeak))
-    .filter((r) => r.available && r.trip) as Array<BusRecommendation & { trip: NonNullable<BusRecommendation['trip']> }>;
+  const candidates: Candidate[] = matching
+    .map((bus) => {
+      const recommendation = findNextCatchableTrip(
+        bus,
+        arrivalTime,
+        exitTimeMinutes,
+        isPeak,
+      );
+      return recommendation.available && recommendation.trip
+        ? ({ bus, recommendation } as Candidate)
+        : null;
+    })
+    .filter((c): c is Candidate => c !== null);
 
   if (candidates.length === 0) {
     return { available: false, reason: 'no_service' };
   }
 
   candidates.sort((a, b) => {
-    const priceDiff = a.trip.ticketPrice - b.trip.ticketPrice;
+    const kindRank = (s: BusRoute['scheduleSource']) => (s.kind === 'explicit' ? 0 : 1);
+    const aKind = kindRank(a.bus.scheduleSource);
+    const bKind = kindRank(b.bus.scheduleSource);
+    if (aKind !== bKind) return aKind - bKind;
+
+    const priceDiff = a.recommendation.trip.ticketPrice - b.recommendation.trip.ticketPrice;
     if (priceDiff !== 0) return priceDiff;
-    return a.trip.waitMinutes - b.trip.waitMinutes;
+
+    return a.recommendation.trip.waitMinutes - b.recommendation.trip.waitMinutes;
   });
 
-  return candidates[0];
+  return candidates[0].recommendation;
 }
