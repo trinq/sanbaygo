@@ -1,13 +1,12 @@
-// Calculation result orchestration — wires core functions into the ArrivalResult shape
 import {
   ArrivalResult,
   ArrivalFormData,
-  NOI_BAI_AIRPORT,
-  DESTINATIONS,
+  AIRPORTS,
+  DESTINATIONS_BY_AIRPORT,
   isPeakHour,
   calculateExitTime,
-  findNextCatchableTrip,
-  calculateArrivalEstimate,
+  findCatchableBusForTerminal,
+  calculateArrivalEstimateForBus,
 } from '@core';
 
 export function calculateResult(formData: ArrivalFormData): ArrivalResult | null {
@@ -15,43 +14,66 @@ export function calculateResult(formData: ArrivalFormData): ArrivalResult | null
     return null;
   }
 
-  const terminalInfo = NOI_BAI_AIRPORT.terminals.find((t) => t.id === formData.terminal);
-  const destination = DESTINATIONS.find((d) => d.id === formData.destination);
+  const airport = AIRPORTS[formData.airportId];
+  if (!airport) return null;
 
-  if (!terminalInfo || !destination) {
-    return null;
-  }
+  const terminalInfo = airport.terminals.find((t) => t.id === formData.terminal);
+  const destinations = DESTINATIONS_BY_AIRPORT[formData.airportId];
+  const destination = destinations.find((d) => d.id === formData.destination);
+
+  if (!terminalInfo || !destination) return null;
 
   const isPeak = isPeakHour(formData.arrivalTime);
-  const exitTime = calculateExitTime(
-    terminalInfo.type,
-    formData.baggage,
-    formData.flightType
-  );
-  const busRecommendation = findNextCatchableTrip(
+  const exitTime = calculateExitTime(terminalInfo.type, formData.baggage, formData.flightType);
+
+  const busRecommendation = findCatchableBusForTerminal(
+    airport.busRoutes,
+    formData.terminal,
     formData.arrivalTime,
-    { min: exitTime.minMinutes, max: exitTime.maxMinutes }
+    { min: exitTime.minMinutes, max: exitTime.maxMinutes },
+    isPeak,
   );
 
   if (busRecommendation.available && busRecommendation.trip) {
-    busRecommendation.trip.arrivalEstimate = calculateArrivalEstimate(
-      busRecommendation.trip.departureTime,
-      NOI_BAI_AIRPORT.busRoutes[0].travelTime[isPeak ? 'peak' : 'normal'],
-      isPeak
+    const matchedBus = airport.busRoutes.find((b) =>
+      b.pickupPoints.some((p) => p.terminalId === formData.terminal),
     );
+    if (matchedBus) {
+      busRecommendation.trip.arrivalEstimate = calculateArrivalEstimateForBus(
+        matchedBus,
+        busRecommendation.trip.departureTime,
+        isPeak,
+      );
+    }
   }
 
-  const grabTravelTime = calculateArrivalEstimate(
+  const grabTravelTime = calculateArrivalEstimateForBus(
+    airport.busRoutes[0],
     formData.arrivalTime,
-    NOI_BAI_AIRPORT.grabEstimates.travelTime[isPeak ? 'peak' : 'normal'],
-    isPeak
+    isPeak,
   );
+  const grabEstimate = airport.grabEstimates;
+  grabTravelTime.minutesRange = grabEstimate.travelTime[isPeak ? 'peak' : 'normal'];
+  grabTravelTime.early = ((): string => {
+    const [h, m] = formData.arrivalTime.split(':').map(Number);
+    const totalMin = h * 60 + m + grabEstimate.travelTime[isPeak ? 'peak' : 'normal'].min;
+    const hh = Math.floor(totalMin / 60) % 24;
+    const mm = totalMin % 60;
+    return `${hh.toString().padStart(2, '0')}:${mm.toString().padStart(2, '0')}`;
+  })();
+  grabTravelTime.late = ((): string => {
+    const [h, m] = formData.arrivalTime.split(':').map(Number);
+    const totalMin = h * 60 + m + grabEstimate.travelTime[isPeak ? 'peak' : 'normal'].max;
+    const hh = Math.floor(totalMin / 60) % 24;
+    const mm = totalMin % 60;
+    return `${hh.toString().padStart(2, '0')}:${mm.toString().padStart(2, '0')}`;
+  })();
 
   return {
     bus: busRecommendation,
     grab: {
       available: true,
-      priceEstimate: `${NOI_BAI_AIRPORT.grabEstimates.priceRange.min.toLocaleString()} - ${NOI_BAI_AIRPORT.grabEstimates.priceRange.max.toLocaleString()} VND`,
+      priceEstimate: `${grabEstimate.priceRange.min.toLocaleString()} - ${grabEstimate.priceRange.max.toLocaleString()} VND`,
       travelTime: grabTravelTime,
     },
     direction: {
