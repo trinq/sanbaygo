@@ -54,9 +54,8 @@ export function useLandingForm() {
   const buildArrivalFormData = useCallback((): ArrivalFormData | null => {
     if (!airport || !terminal || !destination) return null;
 
-    const flightType: FlightType = airport === 'noi-bai' && terminal === 'HAN-T1'
-      ? 'international'
-      : 'domestic';
+    const terminalData = AIRPORTS[airport].terminals.find((t) => t.id === terminal);
+    const flightType: FlightType = terminalData?.flightTypes[0] ?? terminalData?.type ?? 'domestic';
 
     return {
       arrivalTime: DEFAULT_ARRIVAL_TIME,
