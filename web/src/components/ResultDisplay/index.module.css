@@ -115,6 +115,130 @@
   margin: var(--space-5) 0;
 }
 
+/* Timeline — journey segment */
+
+.timelineSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.timelineEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body-family);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-ink-soft);
+}
+
+.timelineEyebrowRule {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-ink-soft);
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.timelineItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.timelineItem:last-child {
+  border-bottom: 0;
+}
+
+.timelineItem::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-rule);
+}
+
+.timelineItem:last-child::before {
+  bottom: 50%;
+}
+
+.timelineDot {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-ink-soft);
+  z-index: 1;
+  position: relative;
+  margin-left: 7px;
+}
+
+.timelineDotFinal {
+  border-color: var(--color-accent-ink);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-surface);
+}
+
+.timelineRow {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.timelineKey {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body-family);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-ink-soft);
+}
+
+.timelineTime {
+  font-family: var(--font-mono-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.4px;
+}
+
+.timelineMeta {
+  grid-column: 2;
+  grid-row: 2;
+  font-family: var(--font-family);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--color-ink-soft);
+  margin-top: 2px;
+}
+
 /* Footnote — ride-hail */
 
 .footnoteSection {
@@ -197,7 +321,7 @@
   border-top: 1px solid var(--color-rule);
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-3);
   flex-wrap: wrap;
 }
@@ -207,6 +331,17 @@
   font-style: italic;
   font-size: 13px;
   color: var(--color-ink-soft);
+  flex: 1 1 100%;
+  order: 2;
+}
+
+.footerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  order: 1;
+  flex: 1 1 100%;
+  justify-content: space-between;
 }
 
 .recalcLink {

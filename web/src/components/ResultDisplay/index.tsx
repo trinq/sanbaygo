@@ -1,15 +1,19 @@
 import { useLanguage } from '../../contexts/LanguageContext';
+import { Icon } from '../Icon';
 import { ArrivalResult, ArrivalFormData } from '@core';
 import styles from './index.module.css';
 
 interface ResultDisplayProps {
   result: ArrivalResult;
   formData: ArrivalFormData;
+  onBack: () => void;
   onRecalculate: () => void;
 }
 
-export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplayProps) {
+export function ResultDisplay({ result, formData, onBack, onRecalculate }: ResultDisplayProps) {
   const { t } = useLanguage();
+  const trip = result.bus.trip;
+  const catchable = result.bus.available && trip;
 
   return (
     <article className={styles.root}>
@@ -21,9 +25,9 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
         </div>
 
         <h1 className={styles.title}>
-          {result.bus.available ? (
+          {catchable ? (
             <>
-              {t.results.nextBus} <span className={styles.titleCatchable}>{result.bus.trip?.departureTime}</span>.
+              {t.results.nextBus} <span className={styles.titleCatchable}>{trip?.departureTime}</span>.
             </>
           ) : (
             <>
@@ -33,13 +37,13 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
         </h1>
 
         <p className={styles.lede}>
-          {result.bus.available ? (
+          {catchable ? (
             <>
               Bạn hạ cánh lúc <span className={styles.ledeMark}>{formData.arrivalTime}</span>,
               đi bộ ~{t.results.timelineExitSub}, và bắt{' '}
               <strong className={styles.ledeStrong}>xe buýt 86</strong> lúc{' '}
-              <span className={styles.ledeMark}>{result.bus.trip?.departureTime}</span>.
-              Đến <span className={styles.ledeMark}>{result.bus.trip?.arrivalEstimate?.late ?? '—'}</span>.
+              <span className={styles.ledeMark}>{trip?.departureTime}</span>.
+              Đến <span className={styles.ledeMark}>{trip?.arrivalEstimate?.late ?? '—'}</span>.
             </>
           ) : (
             <>
@@ -49,11 +53,58 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
             </>
           )}
         </p>
-
-        <button type="button" className={styles.editLink} onClick={onRecalculate}>
-          {t.results.edit}
-        </button>
       </header>
+
+      <hr className={styles.rule} />
+
+      {catchable && (
+        <section className={styles.timelineSection} aria-label={t.results.timelineTitle}>
+          <div className={styles.timelineEyebrow}>
+            <span className={styles.timelineEyebrowRule} aria-hidden="true" />
+            <span>{t.results.timelineTitle}</span>
+          </div>
+
+          <ol className={styles.timeline}>
+            <li className={styles.timelineItem}>
+              <span className={styles.timelineDot} aria-hidden="true" />
+              <div className={styles.timelineRow}>
+                <div className={styles.timelineKey}>
+                  <Icon name="airport" size={14} color="var(--color-ink-soft)" />
+                  <span>{t.results.timelineExit}</span>
+                </div>
+                <span className={styles.timelineTime}>{formData.arrivalTime}</span>
+              </div>
+              <span className={styles.timelineMeta}>{t.results.timelineExitSub}</span>
+            </li>
+
+            <li className={styles.timelineItem}>
+              <span className={styles.timelineDot} aria-hidden="true" />
+              <div className={styles.timelineRow}>
+                <div className={styles.timelineKey}>
+                  <Icon name="clock" size={14} color="var(--color-ink-soft)" />
+                  <span>{t.results.timelineWalk}</span>
+                </div>
+                <span className={styles.timelineTime}>~{t.results.timelineWalkSub}</span>
+              </div>
+              <span className={styles.timelineMeta}>{t.results.timelineWalkSub}</span>
+            </li>
+
+            <li className={styles.timelineItem}>
+              <span className={`${styles.timelineDot} ${styles.timelineDotFinal}`} aria-hidden="true" />
+              <div className={styles.timelineRow}>
+                <div className={styles.timelineKey}>
+                  <Icon name="bus" size={14} color="var(--color-accent-ink)" />
+                  <span>{t.results.timelineBoard}</span>
+                </div>
+                <span className={styles.timelineTime}>{trip?.departureTime}</span>
+              </div>
+              <span className={styles.timelineMeta}>
+                {t.results.timelineBoardSub} · Đến {trip?.arrivalEstimate?.late ?? '—'}
+              </span>
+            </li>
+          </ol>
+        </section>
+      )}
 
       <hr className={styles.rule} />
 
@@ -81,9 +132,14 @@ export function ResultDisplay({ result, formData, onRecalculate }: ResultDisplay
 
       <footer className={styles.footer}>
         <span className={styles.footerNote}>{t.results.disclaimer}</span>
-        <button type="button" className={styles.recalcLink} onClick={onRecalculate}>
-          {t.results.recalculate}
-        </button>
+        <div className={styles.footerActions}>
+          <button type="button" className={styles.editLink} onClick={onBack}>
+            {t.results.edit}
+          </button>
+          <button type="button" className={styles.recalcLink} onClick={onRecalculate}>
+            {t.results.recalculate}
+          </button>
+        </div>
       </footer>
     </article>
   );

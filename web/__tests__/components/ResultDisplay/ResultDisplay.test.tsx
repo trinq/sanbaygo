@@ -38,25 +38,51 @@ function EnglishResultDisplay({ resultData = result }: { resultData?: ArrivalRes
   return (
     <>
       <button type="button" onClick={() => setLanguage('en')}>Switch to English</button>
-      <ResultDisplay result={resultData} formData={formData} onRecalculate={jest.fn()} />
+      <ResultDisplay
+        result={resultData}
+        formData={formData}
+        onBack={jest.fn()}
+        onRecalculate={jest.fn()}
+      />
     </>
   );
 }
 
 describe('ResultDisplay', () => {
   it('renders the catchable departure time as the headline', () => {
-    renderWithLang(<ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />);
+    renderWithLang(
+      <ResultDisplay
+        result={result}
+        formData={formData}
+        onBack={jest.fn()}
+        onRecalculate={jest.fn()}
+      />
+    );
     expect(screen.getAllByText('10:30').length).toBeGreaterThan(0);
   });
 
   it('shows the ride-hail footnote', () => {
-    renderWithLang(<ResultDisplay result={result} formData={formData} onRecalculate={jest.fn()} />);
+    renderWithLang(
+      <ResultDisplay
+        result={result}
+        formData={formData}
+        onBack={jest.fn()}
+        onRecalculate={jest.fn()}
+      />
+    );
     expect(screen.getByText(/Grab/i)).toBeTruthy();
   });
 
   it('renders a missed-bus headline when no bus is available', () => {
     const missed: ArrivalResult = { bus: { available: false, reason: 'too_late' }, grab: result.grab };
-    renderWithLang(<ResultDisplay result={missed} formData={formData} onRecalculate={jest.fn()} />);
+    renderWithLang(
+      <ResultDisplay
+        result={missed}
+        formData={formData}
+        onBack={jest.fn()}
+        onRecalculate={jest.fn()}
+      />
+    );
     expect(screen.getByText(/Đã lỡ chuyến cuối|Last bus/i)).toBeTruthy();
   });
 
@@ -77,5 +103,64 @@ describe('ResultDisplay', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Switch to English' }));
 
     expect(screen.getByRole('heading', { level: 1, name: 'You missed the last bus. Call a ride.' })).toBeTruthy();
+  });
+
+  it('renders the journey timeline with three steps when bus is catchable', () => {
+    renderWithLang(
+      <ResultDisplay
+        result={result}
+        formData={formData}
+        onBack={jest.fn()}
+        onRecalculate={jest.fn()}
+      />
+    );
+    expect(screen.getByText('Ra cửa nhà ga')).toBeTruthy();
+    expect(screen.getByText('Đến điểm đón xe buýt')).toBeTruthy();
+    expect(screen.getByText('Xe buýt khởi hành')).toBeTruthy();
+  });
+
+  it('hides the timeline when no bus is available', () => {
+    const missed: ArrivalResult = { bus: { available: false, reason: 'too_late' }, grab: result.grab };
+    renderWithLang(
+      <ResultDisplay
+        result={missed}
+        formData={formData}
+        onBack={jest.fn()}
+        onRecalculate={jest.fn()}
+      />
+    );
+    expect(screen.queryByText('Ra cửa nhà ga')).toBeNull();
+  });
+
+  it('calls onBack (not onRecalculate) when "Sửa lại" is clicked', () => {
+    const onBack = jest.fn();
+    const onRecalculate = jest.fn();
+    renderWithLang(
+      <ResultDisplay
+        result={result}
+        formData={formData}
+        onBack={onBack}
+        onRecalculate={onRecalculate}
+      />
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Sửa lại/ }));
+    expect(onBack).toHaveBeenCalledTimes(1);
+    expect(onRecalculate).not.toHaveBeenCalled();
+  });
+
+  it('calls onRecalculate (not onBack) when "Tính lại chuyến khác" is clicked', () => {
+    const onBack = jest.fn();
+    const onRecalculate = jest.fn();
+    renderWithLang(
+      <ResultDisplay
+        result={result}
+        formData={formData}
+        onBack={onBack}
+        onRecalculate={onRecalculate}
+      />
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Tính lại chuyến khác/ }));
+    expect(onRecalculate).toHaveBeenCalledTimes(1);
+    expect(onBack).not.toHaveBeenCalled();
   });
 });
