@@ -2,21 +2,24 @@ import { renderHook, act } from '@testing-library/react';
 import { useLandingForm } from '../../src/hooks/useLandingForm';
 
 describe('useLandingForm', () => {
-  it('starts with empty departure and destination', () => {
+  it('starts with empty airport, terminal, destination', () => {
     const { result } = renderHook(() => useLandingForm());
-    expect(result.current.departure).toBeNull();
+    expect(result.current.airport).toBeNull();
+    expect(result.current.terminal).toBeNull();
     expect(result.current.destination).toBeNull();
     expect(result.current.people).toBe(1);
     expect(result.current.carryOn).toBe(false);
     expect(result.current.checked).toBe(false);
   });
 
-  it('validate() returns false when departure or destination is missing', () => {
+  it('validate() returns false when airport, terminal, or destination is missing', () => {
     const { result } = renderHook(() => useLandingForm());
     expect(result.current.validate()).toBe(false);
-    act(() => result.current.setDeparture('noi-bai'));
+    act(() => result.current.setAirport('noi-bai'));
     expect(result.current.validate()).toBe(false);
-    act(() => result.current.setDestination('OLD_QUARTER'));
+    act(() => result.current.setTerminal('HAN-T1'));
+    expect(result.current.validate()).toBe(false);
+    act(() => result.current.setDestination('old-quarter'));
     expect(result.current.validate()).toBe(true);
   });
 
@@ -28,36 +31,56 @@ describe('useLandingForm', () => {
     expect(result.current.people).toBe(1);
   });
 
-  it('carry-on and checked are toggled by boolean setter (not clamped count)', () => {
+  it('terminal options filter by selected airport', () => {
     const { result } = renderHook(() => useLandingForm());
-    expect(result.current.carryOn).toBe(false);
-    act(() => result.current.setCarryOn(true));
-    expect(result.current.carryOn).toBe(true);
-    act(() => result.current.setCarryOn(false));
-    expect(result.current.carryOn).toBe(false);
+    act(() => result.current.setAirport('tan-son-nhat'));
+    expect(result.current.terminalOptions.map((t) => t.id)).toEqual([
+      'SGN-T1',
+      'SGN-T2',
+      'SGN-T3',
+    ]);
   });
 
-  it('checked and carry-on are independent booleans', () => {
+  it('destination options filter by selected airport', () => {
     const { result } = renderHook(() => useLandingForm());
-    act(() => result.current.setCarryOn(true));
-    act(() => result.current.setChecked(false));
-    expect(result.current.carryOn).toBe(true);
-    expect(result.current.checked).toBe(false);
+    act(() => result.current.setAirport('tan-son-nhat'));
+    expect(result.current.destinationOptions.map((d) => d.id)).toEqual([
+      'q1',
+      'q3',
+      'q5',
+      'binh-thanh',
+      'phu-nhuan',
+    ]);
   });
 
-  it('buildArrivalFormData() returns derived defaults when valid', () => {
+  it('switching airport clears terminal and destination', () => {
     const { result } = renderHook(() => useLandingForm());
     act(() => {
-      result.current.setDeparture('noi-bai');
-      result.current.setDestination('OLD_QUARTER');
+      result.current.setAirport('noi-bai');
+      result.current.setTerminal('HAN-T1');
+      result.current.setDestination('old-quarter');
+    });
+    expect(result.current.terminal).toBe('HAN-T1');
+    act(() => result.current.setAirport('tan-son-nhat'));
+    expect(result.current.terminal).toBeNull();
+    expect(result.current.destination).toBeNull();
+  });
+
+  it('buildArrivalFormData() returns full shape when valid', () => {
+    const { result } = renderHook(() => useLandingForm());
+    act(() => {
+      result.current.setAirport('tan-son-nhat');
+      result.current.setTerminal('SGN-T1');
+      result.current.setDestination('q1');
     });
     const formData = result.current.buildArrivalFormData();
     expect(formData).toEqual({
       arrivalTime: '12:00',
-      terminal: 'T1',
+      airportId: 'tan-son-nhat',
+      terminal: 'SGN-T1',
       baggage: 'carry_on',
-      destination: 'OLD_QUARTER',
-      flightType: 'international',
+      destination: 'q1',
+      flightType: 'domestic',
     });
   });
 
@@ -69,12 +92,14 @@ describe('useLandingForm', () => {
   it('reset() restores initial state', () => {
     const { result } = renderHook(() => useLandingForm());
     act(() => {
-      result.current.setDeparture('noi-bai');
-      result.current.setDestination('OLD_QUARTER');
+      result.current.setAirport('noi-bai');
+      result.current.setTerminal('HAN-T1');
+      result.current.setDestination('old-quarter');
       result.current.setPeople(5);
     });
     act(() => result.current.reset());
-    expect(result.current.departure).toBeNull();
+    expect(result.current.airport).toBeNull();
+    expect(result.current.terminal).toBeNull();
     expect(result.current.destination).toBeNull();
     expect(result.current.people).toBe(1);
   });
