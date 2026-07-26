@@ -6,7 +6,7 @@ import {
   isPeakHour,
   calculateExitTime,
   findCatchableBusForTerminal,
-  calculateArrivalEstimateForBus,
+  calculateArrivalEstimate,
 } from '@core';
 
 export function calculateResult(formData: ArrivalFormData): ArrivalResult | null {
@@ -34,40 +34,21 @@ export function calculateResult(formData: ArrivalFormData): ArrivalResult | null
     isPeak,
   );
 
-  if (busRecommendation.available && busRecommendation.trip) {
-    const matchedBus = airport.busRoutes.find((b) =>
-      b.pickupPoints.some((p) => p.terminalId === formData.terminal),
+  if (busRecommendation.available && busRecommendation.trip && busRecommendation.trip.selectedRoute) {
+    const selectedRoute = busRecommendation.trip.selectedRoute;
+    busRecommendation.trip.arrivalEstimate = calculateArrivalEstimate(
+      busRecommendation.trip.departureTime,
+      selectedRoute.travelTime[isPeak ? 'peak' : 'normal'],
+      isPeak,
     );
-    if (matchedBus) {
-      busRecommendation.trip.arrivalEstimate = calculateArrivalEstimateForBus(
-        matchedBus,
-        busRecommendation.trip.departureTime,
-        isPeak,
-      );
-    }
   }
 
-  const grabTravelTime = calculateArrivalEstimateForBus(
-    airport.busRoutes[0],
+  const grabEstimate = airport.grabEstimates;
+  const grabTravelTime = calculateArrivalEstimate(
     formData.arrivalTime,
+    grabEstimate.travelTime[isPeak ? 'peak' : 'normal'],
     isPeak,
   );
-  const grabEstimate = airport.grabEstimates;
-  grabTravelTime.minutesRange = grabEstimate.travelTime[isPeak ? 'peak' : 'normal'];
-  grabTravelTime.early = ((): string => {
-    const [h, m] = formData.arrivalTime.split(':').map(Number);
-    const totalMin = h * 60 + m + grabEstimate.travelTime[isPeak ? 'peak' : 'normal'].min;
-    const hh = Math.floor(totalMin / 60) % 24;
-    const mm = totalMin % 60;
-    return `${hh.toString().padStart(2, '0')}:${mm.toString().padStart(2, '0')}`;
-  })();
-  grabTravelTime.late = ((): string => {
-    const [h, m] = formData.arrivalTime.split(':').map(Number);
-    const totalMin = h * 60 + m + grabEstimate.travelTime[isPeak ? 'peak' : 'normal'].max;
-    const hh = Math.floor(totalMin / 60) % 24;
-    const mm = totalMin % 60;
-    return `${hh.toString().padStart(2, '0')}:${mm.toString().padStart(2, '0')}`;
-  })();
 
   return {
     bus: busRecommendation,
