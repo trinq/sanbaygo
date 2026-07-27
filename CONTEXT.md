@@ -83,8 +83,16 @@ Thời gian từ lúc cánh cửa máy bay mở đến khi user bước ra khỏ
 _Avoid_: Exit time, walking time, clearance time
 
 **Catchable Trip**:
-Chuyến xe buýt 86 mà user có thể bắt được, dựa trên Actual Arrival + Terminal Exit Time + walking time đến điểm đón.
+Chuyến xe buýt trên tuyến phù hợp mà user có thể bắt được, dựa trên Actual Arrival + Terminal Exit Time + thời gian đi bộ đến điểm đón. Đây là chuyến được hệ thống chọn trong kết quả, không phải một chuyến được chọn lại riêng ở giao diện.
 _Avoid_: Nearest bus, available bus
+
+**Bus Departure Countdown**:
+Khoảng thời gian tính từ thời điểm hiện tại của thiết bị đến giờ khởi hành dự kiến của Catchable Trip. Bộ đếm không đại diện cho vị trí thực tế của xe buýt.
+- Hiển thị dạng `Còn khoảng X phút`, cập nhật mỗi 1 phút (chỉ re-render khi sang phút mới).
+- Chỉ hiển thị khi còn ≤ 60 phút đến giờ khởi hành dự kiến; nếu xa hơn, ẩn bộ đếm.
+- Khi giờ hiện tại đã vượt qua giờ khởi hành dự kiến, ẩn bộ đếm (không đếm số âm, không tự đổi sang chuyến khác).
+- Không render khi Catchable Trip không tồn tại (`no_service`, `too_late`, `missed_last`).
+_Avoid_: Real-time bus countdown, live vehicle tracking
 
 **Destination Point**:
 Một trong các điểm đến được hệ thống hỗ trợ tính toán. Mỗi điểm có tọa độ cố định và thời gian di chuyển từ Bus 86 stop gần nhất.
