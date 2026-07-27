@@ -4,3 +4,4 @@ export { isPeakHour } from './isPeakHour';
 export { findNextCatchableTrip } from './findNextCatchableTrip';
 export { findCatchableBusForTerminal } from './findCatchableBusForTerminal';
 export { calculateArrivalEstimate, calculateArrivalEstimateForBus } from './calculateArrivalEstimate';
+export { calculateTrip } from '../calculate-trip';

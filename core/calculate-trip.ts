@@ -1,15 +1,25 @@
+/**
+ * Canonical trip-calculation entry point.
+ *
+ * All callers — web, RN, future clients — delegate here instead of
+ * re-implementing the same pipeline (isPeak → exitTime → findBus →
+ * arrivalEstimate → grabEstimate → result).
+ *
+ * The engine functions (calculateExitTime, findCatchableBusForTerminal,
+ * calculateArrivalEstimate, isPeakHour) are tested in isolation.  This
+ * module tests the *composition* and is the single seam for UI-layer callers.
+ */
+import type { ArrivalFormData, ArrivalResult } from './types';
 import {
-  ArrivalResult,
-  ArrivalFormData,
   AIRPORTS,
   DESTINATIONS_BY_AIRPORT,
-  isPeakHour,
   calculateExitTime,
   findCatchableBusForTerminal,
   calculateArrivalEstimate,
-} from '@core';
+  isPeakHour,
+} from './index';
 
-export function calculateResult(formData: ArrivalFormData): ArrivalResult | null {
+export function calculateTrip(formData: ArrivalFormData): ArrivalResult | null {
   if (!formData.terminal || !formData.baggage || !formData.destination) {
     return null;
   }
@@ -24,7 +34,11 @@ export function calculateResult(formData: ArrivalFormData): ArrivalResult | null
   if (!terminalInfo || !destination) return null;
 
   const isPeak = isPeakHour(formData.arrivalTime);
-  const exitTime = calculateExitTime(terminalInfo.type, formData.baggage, formData.flightType);
+  const exitTime = calculateExitTime(
+    terminalInfo.type,
+    formData.baggage,
+    formData.flightType,
+  );
 
   const busRecommendation = findCatchableBusForTerminal(
     airport.busRoutes,
@@ -34,7 +48,13 @@ export function calculateResult(formData: ArrivalFormData): ArrivalResult | null
     isPeak,
   );
 
-  if (busRecommendation.available && busRecommendation.trip && busRecommendation.trip.selectedRoute) {
+  // Derive arrival estimate using the already-selected route so we don't
+  // need a second lookup over airport.busRoutes.
+  if (
+    busRecommendation.available &&
+    busRecommendation.trip &&
+    busRecommendation.trip.selectedRoute
+  ) {
     const selectedRoute = busRecommendation.trip.selectedRoute;
     busRecommendation.trip.arrivalEstimate = calculateArrivalEstimate(
       busRecommendation.trip.departureTime,
@@ -50,13 +70,11 @@ export function calculateResult(formData: ArrivalFormData): ArrivalResult | null
     isPeak,
   );
 
-  // Resolve per-terminal Grab pickup hint. GrabEstimate.pickupLocations is
-  // keyed by terminal id; we copy the resolved string into the flat
-  // ArrivalResult.grab.pickupLocation so the result UI does not need to
-  // re-look-up per terminal. When a terminal has no specific hint (e.g.
-  // HAN terminals where ride-hail is curbside same as bus), this is
-  // undefined and the UI falls back to the bus pickup point.
-  const resolvedGrabPickupLocation = grabEstimate.pickupLocations?.[formData.terminal];
+  // Per-terminal Grab pickup hint (SGN terminals have distinct pickup areas;
+  // HAN terminals are curbside, so this is undefined and the UI falls back
+  // to the bus pickup point).
+  const resolvedGrabPickupLocation =
+    grabEstimate.pickupLocations?.[formData.terminal];
 
   return {
     bus: busRecommendation,

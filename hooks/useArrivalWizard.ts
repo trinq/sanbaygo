@@ -3,12 +3,7 @@ import {
   AirportId,
   ArrivalFormData,
   ArrivalResult,
-  calculateExitTime,
-  isPeakHour,
-  findCatchableBusForTerminal,
-  calculateArrivalEstimate,
-  AIRPORTS,
-  DESTINATIONS_BY_AIRPORT,
+  calculateTrip,
   TerminalId,
 } from '@core';
 
@@ -54,63 +49,7 @@ export function formReducer(state: ArrivalFormData, action: Action): ArrivalForm
 }
 
 export function calculateResultFromForm(formData: ArrivalFormData): ArrivalResult | null {
-  if (!formData.terminal || !formData.baggage || !formData.destination) {
-    return null;
-  }
-
-  const airport = AIRPORTS[formData.airportId];
-  if (!airport) return null;
-
-  const terminalInfo = airport.terminals.find((t) => t.id === formData.terminal);
-  const destinations = DESTINATIONS_BY_AIRPORT[formData.airportId];
-  const destination = destinations.find((d) => d.id === formData.destination);
-
-  if (!terminalInfo || !destination) {
-    return null;
-  }
-
-  const isPeak = isPeakHour(formData.arrivalTime);
-  const exitTime = calculateExitTime(terminalInfo.type, formData.baggage, formData.flightType);
-
-  const busRecommendation = findCatchableBusForTerminal(
-    airport.busRoutes,
-    formData.terminal,
-    formData.arrivalTime,
-    { min: exitTime.minMinutes, max: exitTime.maxMinutes },
-    isPeak,
-  );
-
-  if (busRecommendation.available && busRecommendation.trip) {
-    const matchedBus = airport.busRoutes.find((b) =>
-      b.pickupPoints.some((p) => p.terminalId === formData.terminal),
-    );
-    if (matchedBus) {
-      busRecommendation.trip.arrivalEstimate = calculateArrivalEstimate(
-        busRecommendation.trip.departureTime,
-        matchedBus.travelTime[isPeak ? 'peak' : 'normal'],
-        isPeak,
-      );
-    }
-  }
-
-  const grabTravelTime = calculateArrivalEstimate(
-    formData.arrivalTime,
-    airport.grabEstimates.travelTime[isPeak ? 'peak' : 'normal'],
-    isPeak,
-  );
-
-  return {
-    bus: busRecommendation,
-    grab: {
-      available: true,
-      priceEstimate: `${airport.grabEstimates.priceRange.min.toLocaleString()} - ${airport.grabEstimates.priceRange.max.toLocaleString()} VND`,
-      travelTime: grabTravelTime,
-    },
-    direction: {
-      description: `Đi bộ ${destination.walkingMinutes} phút đến điểm đón xe buýt ${terminalInfo.name}`,
-      estimatedMinutes: destination.walkingMinutes,
-    },
-  };
+  return calculateTrip(formData);
 }
 
 export function useArrivalWizard() {

@@ -1,4 +1,4 @@
-import { calculateResult } from '../../src/lib/calculation-result';
+import { calculateTrip as calculateResult } from '@core';
 
 describe('calculateResult', () => {
   it('returns Bus 86 for HAN', () => {
