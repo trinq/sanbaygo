@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { RouteMapProps } from './types';
 import { BUS_152_STOPS } from './Bus152Stops';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './RouteMap.module.css';
 
 const UNIT = 60;
@@ -11,6 +12,8 @@ export const RouteMap: React.FC<RouteMapProps> = ({
   selectedStopId,
   onDirectionChange,
 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useLanguage();
   const stops = direction === 'outbound' ? BUS_152_STOPS.outbound : BUS_152_STOPS.return;
 
   const { pathD, dots } = useMemo(() => {
@@ -49,15 +52,16 @@ export const RouteMap: React.FC<RouteMapProps> = ({
     <div className={styles.wrapper}>
       <button
         className={styles.expandButton}
-        onClick={() => onDirectionChange(direction === 'outbound' ? 'return' : 'outbound')}
+        onClick={() => setIsExpanded(!isExpanded)}
+        data-expanded={isExpanded}
       >
-        {direction === 'outbound' ? 'Hướng đi: KDC Trung Sơn → SGN T3' : 'Hướng về: SGN T3 → KDC Trung Sơn'}
+        {t.results.tapToExpandRoute}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
       </button>
 
-      <div className={styles.content} data-expanded={true}>
+      <div className={styles.content} data-expanded={isExpanded}>
         <div className={styles.directionToggle}>
           <button
             className={styles.directionButton}
@@ -77,6 +81,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({
 
         <div className={styles.mapContainer}>
           <svg
+            key={isExpanded ? 'expanded' : 'collapsed'}
             className={styles.svg}
             viewBox={`0 0 ${width} ${height}`}
             preserveAspectRatio="xMidYMid meet"

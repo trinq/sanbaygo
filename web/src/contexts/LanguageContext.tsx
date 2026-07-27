@@ -105,6 +105,7 @@ interface Translations {
     routeMap: string;
     outbound: string;
     return: string;
+    tapToExpandRoute: string;
   };
   destinations: {
     [key: string]: string;
@@ -270,6 +271,7 @@ const translations: Record<Language, Translations> = {
       routeMap: 'Bản đồ tuyến xe buýt',
       outbound: 'Hướng đi',
       return: 'Hướng về',
+      tapToExpandRoute: 'Nhấn để xem lộ trình',
     },
     destinations: {
       'old-quarter': 'Khu phố cổ',
@@ -439,6 +441,7 @@ const translations: Record<Language, Translations> = {
       routeMap: 'Bus Route Map',
       outbound: 'Outbound',
       return: 'Return',
+      tapToExpandRoute: 'Tap to view route',
     },
     destinations: {
       'old-quarter': 'Old Quarter',
