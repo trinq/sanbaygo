@@ -1,20 +1,6 @@
-.root {
-  --brand-primary: #F97316;
-  --brand-dark: #EA580C;
-  --text-primary: #1E293B;
-  --text-secondary: #64748B;
-  --bg-surface: #FFFFFF;
-  --bg-muted: #F8FAFC;
-  
-  --stop-size-base: 12px;
-  --stop-size-hub: 16px;
-  --stop-size-destination: 20px;
-  --line-stroke-width: 3px;
-  --vertical-gap: 48px;
-}
-
-.wrapper {
-  background: var(--bg-surface);
+/* RouteMap container — Tailwind-friendly layout */
+.routeWrapper {
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   margin-top: 16px;
@@ -29,8 +15,8 @@
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
-  background: var(--bg-muted);
+  color: #1E293B;
+  background: #F8FAFC;
   border: none;
   cursor: pointer;
   transition: background 0.2s;
@@ -44,7 +30,7 @@
   transition: transform 0.3s;
 }
 
-.expandButton[data-expanded="true"] svg {
+.expandButton[data-expanded='true'] svg {
   transform: rotate(180deg);
 }
 
@@ -54,8 +40,8 @@
   transition: max-height 0.3s ease-in-out;
 }
 
-.content[data-expanded="true"] {
-  max-height: 600px;
+.content[data-expanded='true'] {
+  max-height: 700px;
 }
 
 .directionToggle {
@@ -75,62 +61,109 @@
   transition: all 0.2s;
 }
 
-.directionButton[data-active="true"] {
-  background: var(--brand-primary);
+.directionButton[data-active='true'] {
+  background: #F97316;
   color: white;
   border: none;
 }
 
-.directionButton[data-active="false"] {
+.directionButton[data-active='false'] {
   background: transparent;
-  color: var(--text-secondary);
+  color: #64748B;
   border: 1px solid #E2E8F0;
 }
 
+/* SVG container — scrollable both directions */
 .mapContainer {
-  padding: 24px;
-  overflow-x: auto;
+  padding: 0;
+  overflow: auto;
+  background: #ffffff;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
+.mapContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* SVG element */
 .svg {
   display: block;
-  width: 100%;
-  height: auto;
-  min-height: 200px;
-}
-
-.stopDot {
-  fill: var(--brand-primary);
-  transition: r 0.2s;
-}
-
-.stopDotHub {
-  fill: white;
-  stroke: var(--brand-primary);
-  stroke-width: 2;
-}
-
-.stopDotTerminal {
-  fill: var(--brand-dark);
-}
-
-.stopDotDestination {
-  fill: var(--brand-primary);
-  animation: pulse 2s ease-in-out infinite;
+  width: 560px;
+  height: 560px;
+  margin: 0 auto;
 }
 
 .stopLine {
-  stroke: var(--brand-primary);
-  stroke-width: var(--line-stroke-width);
+  stroke: #F97316;
+  stroke-width: 3.5px;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
 }
 
+.stopLabel {
+  font-size: 13px;
+  font-weight: 500;
+  fill: #475569;
+}
+
+.stopLabelHub {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #1E293B;
+}
+
+.stopLabelTerminal {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #EA580C;
+}
+
+.stopDot {
+  fill: #F97316;
+}
+
+.stopDotHub {
+  fill: white;
+  stroke: #F97316;
+  stroke-width: 3px;
+}
+
+.stopDotTerminal {
+  fill: #EA580C;
+}
+
+.stopDotDestination {
+  fill: #F97316;
+}
+
+.stopDotDestinationPulse {
+  fill: #F97316;
+}
+
+/* SVG layer */
+.svgContainer {
+  position: relative;
+  width: 560px;
+  height: 560px;
+  margin: 0 auto;
+}
+
+/* SVG element */
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
 .stopLineAnimated {
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
-  animation: drawLine 0.8s ease-out forwards;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  animation: drawLine 1.2s ease-out forwards;
 }
 
 @keyframes drawLine {
@@ -139,35 +172,168 @@
   }
 }
 
+.arrow {
+  opacity: 0;
+  animation: fadeInArrow 0.3s ease-out forwards;
+}
+
+@keyframes fadeInArrow {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Individual stop wrapper — positioned absolutely */
+.stopWrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Dot */
+.dotWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.dot {
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px white;
+}
+
+.dotRegular {
+  width: 8px;
+  height: 8px;
+  background: #F97316;
+}
+
+.dotHub {
+  width: 14px;
+  height: 14px;
+  background: white;
+  border: 3px solid #F97316;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.dotTerminal {
+  width: 10px;
+  height: 10px;
+  background: #EA580C;
+  box-shadow: 0 0 0 2px white;
+}
+
+.dotSelected {
+  width: 14px;
+  height: 14px;
+  background: #F97316;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px white;
+}
+
+.dotPulse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+}
+
+.dotPulse::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #F97316;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.dotPulse > .dotSelected {
+  position: relative;
+  z-index: 1;
+}
+
+/* Label positioning */
+.label {
+  position: absolute;
+  white-space: nowrap;
+}
+
+.labelTop {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.labelBottom {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 6px;
+  text-align: center;
+}
+
+.labelLeft {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 8px;
+  text-align: right;
+}
+
+.labelRight {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 8px;
+  text-align: left;
+}
+
+/* Hub badge */
+.hubBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: white;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+  font-weight: 600;
+  color: #1E293B;
+}
+
+.stopLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.stopLabelHub {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1E293B;
+}
+
+.stopLabelTerminal {
+  font-size: 13px;
+  font-weight: 600;
+  color: #EA580C;
+}
+
+/* Animations */
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
     opacity: 1;
   }
   50% {
-    transform: scale(1.15);
-    opacity: 0.8;
-  }
-}
-
-.stopLabel {
-  font-size: 13px;
-  fill: var(--text-primary);
-  font-weight: 500;
-}
-
-.stopLabelHub {
-  font-size: 14px;
-  font-weight: 600;
-  fill: var(--text-primary);
-}
-
-@media (max-width: 480px) {
-  .stopLabel {
-    font-size: 11px;
-  }
-  
-  .stopLabelHub {
-    font-size: 12px;
+    transform: scale(2);
+    opacity: 0;
   }
 }

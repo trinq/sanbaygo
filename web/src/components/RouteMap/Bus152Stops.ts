@@ -1,42 +1,50 @@
 import { BusStop } from './types';
 
-export const outboundStops: BusStop[] = [
-  { id: 'kdc-trung-son', name: 'KDC Trung Sơn', isHub: false, isTerminal: true, position: { x: 0, y: 0 } },
-  { id: 'duong-9a', name: 'Đường 9A', isHub: false, isTerminal: false, position: { x: 1, y: 0 } },
-  { id: 'duong-ba-trac', name: 'Dương Bá Trạc', isHub: false, isTerminal: false, position: { x: 2, y: 0 } },
-  { id: 'nguyen-van-cu', name: 'Nguyễn Văn Cừ', isHub: false, isTerminal: false, position: { x: 3, y: 0 } },
-  { id: 'tran-hung-dao', name: 'Trần Hưng Đạo', isHub: false, isTerminal: false, position: { x: 4, y: 0 } },
-  { id: 'ben-thanh', name: 'Bến Thành', isHub: true, isTerminal: false, position: { x: 4, y: 1 } },
-  { id: 'le-lai', name: 'Lê Lai', isHub: false, isTerminal: false, position: { x: 4, y: 2 } },
-  { id: 'pham-hong-thai', name: 'Phạm Hồng Thái', isHub: false, isTerminal: false, position: { x: 3, y: 2 } },
-  { id: 'cach-mang-thang-8', name: 'Cách Mạng Tháng Tám', isHub: false, isTerminal: false, position: { x: 3, y: 3 } },
-  { id: 'nguyen-thi-minh-khai', name: 'Nguyễn Thị Minh Khai', isHub: false, isTerminal: false, position: { x: 2, y: 3 } },
-  { id: 'pasteur', name: 'Pasteur', isHub: false, isTerminal: false, position: { x: 2, y: 4 } },
-  { id: 'vo-thi-sau', name: 'Võ Thị Sáu', isHub: false, isTerminal: false, position: { x: 1, y: 4 } },
-  { id: 'nam-ky-khoi-nghia', name: 'Nam Kỳ Khởi Nghĩa', isHub: false, isTerminal: false, position: { x: 1, y: 5 } },
-  { id: 'nguyen-van-troi', name: 'Nguyễn Văn Trỗi', isHub: false, isTerminal: false, position: { x: 0, y: 5 } },
-  { id: 'phan-dinh-giot', name: 'Phan Đình Giót', isHub: false, isTerminal: false, position: { x: 0, y: 6 } },
-  { id: 'truong-son', name: 'Trường Sơn', isHub: false, isTerminal: false, position: { x: 0, y: 7 } },
-  { id: 'sgn-t3', name: 'SGN T3', isHub: true, isTerminal: true, position: { x: 0, y: 8 } },
+// Lượt đi: Sân bay Tân Sơn Nhất → KDC Trung Sơn
+// Bus 152 dừng đón/trả khách tại T1 (Ga quốc nội, cột B06-B09) và T2 (Ga quốc tế, cột 13-14)
+// KHÔNG kết nối đến nhà ga T3
+const outboundFromSGN: BusStop[] = [
+  { id: 'san-bay-tsn', name: 'Sân bay Tân Sơn Nhất', type: 'hub', position: { x: 2, y: 8 }, labelPos: 'bottom' },
+  { id: 'truong-son', name: 'Trường Sơn', type: 'regular', position: { x: 2, y: 6 }, labelPos: 'right' },
+  { id: 'hoang-van-thu', name: 'Hoàng Văn Thụ', type: 'regular', position: { x: 2, y: 5 }, labelPos: 'left' },
+  { id: 'duong-3-2', name: 'Đường 3/2', type: 'regular', position: { x: 2, y: 3 }, labelPos: 'right' },
+  { id: 'ly-thai-to', name: 'Lý Thái Tổ', type: 'regular', position: { x: 1, y: 3 }, labelPos: 'bottom' },
+  { id: 'le-hong-phong', name: 'Lê Hồng Phong', type: 'regular', position: { x: 0, y: 3 }, labelPos: 'left' },
+  { id: 'tran-phu', name: 'Trần Phú', type: 'regular', position: { x: 0, y: 2 }, labelPos: 'left' },
+  { id: 'nguyen-thi-minh-khai', name: 'Nguyễn Thị Minh Khai', type: 'regular', position: { x: 1, y: 2 }, labelPos: 'bottom' },
+  { id: 'cach-mang-thang-8', name: 'Cách Mạng Tháng 8', type: 'regular', position: { x: 2, y: 2 }, labelPos: 'top' },
+  { id: 'pham-hong-thai', name: 'Phạm Hồng Thái', type: 'regular', position: { x: 3, y: 2 }, labelPos: 'bottom' },
+  { id: 'le-lai', name: 'Lê Lai', type: 'regular', position: { x: 4, y: 2 }, labelPos: 'right' },
+  { id: 'ben-thanh', name: 'Bến Thành', type: 'hub', position: { x: 4, y: 1 }, labelPos: 'right' },
+  { id: 'tran-hung-dao', name: 'Trần Hưng Đạo', type: 'regular', position: { x: 4, y: 0 }, labelPos: 'right' },
+  { id: 'nguyen-van-cu', name: 'Nguyễn Văn Cừ', type: 'regular', position: { x: 3, y: 0 }, labelPos: 'top' },
+  { id: 'duong-ba-trac', name: 'Dương Bá Trạc', type: 'regular', position: { x: 2, y: 0 }, labelPos: 'bottom' },
+  { id: 'duong-9a', name: 'Đường 9A', type: 'regular', position: { x: 1, y: 0 }, labelPos: 'top' },
+  { id: 'kdc-trung-son', name: 'KDC Trung Sơn', type: 'terminal', position: { x: 0, y: 0 }, labelPos: 'left' },
 ];
 
-export const returnStops: BusStop[] = [
-  { id: 'sgn-t3', name: 'SGN T3', isHub: true, isTerminal: true, position: { x: 0, y: 0 } },
-  { id: 'truong-son', name: 'Trường Sơn', isHub: false, isTerminal: false, position: { x: 1, y: 0 } },
-  { id: 'tran-quoc-hoan', name: 'Trần Quốc Hoàn', isHub: false, isTerminal: false, position: { x: 2, y: 0 } },
-  { id: 'hoang-van-thu', name: 'Hoàng Văn Thụ', isHub: false, isTerminal: false, position: { x: 3, y: 0 } },
-  { id: 'nguyen-van-troi-r', name: 'Nguyễn Văn Trỗi', isHub: false, isTerminal: false, position: { x: 4, y: 0 } },
-  { id: 'nam-ky-khoi-nghia-r', name: 'Nam Kỳ Khởi Nghĩa', isHub: false, isTerminal: false, position: { x: 4, y: 1 } },
-  { id: 'ham-nghi', name: 'Hàm Nghi', isHub: false, isTerminal: false, position: { x: 4, y: 2 } },
-  { id: 'ben-thanh-r', name: 'Bến Thành', isHub: true, isTerminal: false, position: { x: 4, y: 3 } },
-  { id: 'tran-hung-dao-r', name: 'Trần Hưng Đạo', isHub: false, isTerminal: false, position: { x: 3, y: 3 } },
-  { id: 'nguyen-van-cu-r', name: 'Nguyễn Văn Cừ', isHub: false, isTerminal: false, position: { x: 2, y: 3 } },
-  { id: 'duong-ba-trac-r', name: 'Dương Bá Trạc', isHub: false, isTerminal: false, position: { x: 1, y: 3 } },
-  { id: 'duong-9a-r', name: 'Đường 9A', isHub: false, isTerminal: false, position: { x: 1, y: 4 } },
-  { id: 'kdc-trung-son-r', name: 'KDC Trung Sơn', isHub: false, isTerminal: true, position: { x: 1, y: 5 } },
+// Lượt về: KDC Trung Sơn → Sân bay Tân Sơn Nhất
+const returnFromKDC: BusStop[] = [
+  { id: 'kdc-trung-son', name: 'KDC Trung Sơn', type: 'terminal', position: { x: 0, y: 0 }, labelPos: 'left' },
+  { id: 'duong-9a', name: 'Đường 9A', type: 'regular', position: { x: 1, y: 0 }, labelPos: 'top' },
+  { id: 'duong-ba-trac', name: 'Dương Bá Trạc', type: 'regular', position: { x: 2, y: 0 }, labelPos: 'bottom' },
+  { id: 'nguyen-van-cu', name: 'Nguyễn Văn Cừ', type: 'regular', position: { x: 3, y: 0 }, labelPos: 'top' },
+  { id: 'tran-hung-dao', name: 'Trần Hưng Đạo', type: 'regular', position: { x: 4, y: 0 }, labelPos: 'right' },
+  { id: 'ben-thanh', name: 'Bến Thành', type: 'hub', position: { x: 4, y: 1 }, labelPos: 'right' },
+  { id: 'le-lai', name: 'Lê Lai', type: 'regular', position: { x: 4, y: 2 }, labelPos: 'right' },
+  { id: 'pham-hong-thai', name: 'Phạm Hồng Thái', type: 'regular', position: { x: 3, y: 2 }, labelPos: 'bottom' },
+  { id: 'cach-mang-thang-8', name: 'Cách Mạng Tháng 8', type: 'regular', position: { x: 2, y: 2 }, labelPos: 'top' },
+  { id: 'nguyen-thi-minh-khai', name: 'Nguyễn Thị Minh Khai', type: 'regular', position: { x: 1, y: 2 }, labelPos: 'bottom' },
+  { id: 'tran-phu', name: 'Trần Phú', type: 'regular', position: { x: 0, y: 2 }, labelPos: 'left' },
+  { id: 'le-hong-phong', name: 'Lê Hồng Phong', type: 'regular', position: { x: 0, y: 3 }, labelPos: 'left' },
+  { id: 'ly-thai-to', name: 'Lý Thái Tổ', type: 'regular', position: { x: 1, y: 3 }, labelPos: 'bottom' },
+  { id: 'duong-3-2', name: 'Đường 3/2', type: 'regular', position: { x: 2, y: 3 }, labelPos: 'right' },
+  { id: 'hoang-van-thu', name: 'Hoàng Văn Thụ', type: 'regular', position: { x: 2, y: 5 }, labelPos: 'left' },
+  { id: 'truong-son', name: 'Trường Sơn', type: 'regular', position: { x: 2, y: 6 }, labelPos: 'right' },
+  { id: 'san-bay-tsn', name: 'Sân bay Tân Sơn Nhất', type: 'hub', position: { x: 2, y: 8 }, labelPos: 'bottom' },
 ];
 
 export const BUS_152_STOPS = {
-  outbound: outboundStops,
-  return: returnStops,
+  outbound: outboundFromSGN,
+  return: returnFromKDC,
 };
