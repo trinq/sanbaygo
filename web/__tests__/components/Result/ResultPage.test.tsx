@@ -264,6 +264,51 @@ describe('ResultPage', () => {
     ).toBeGreaterThanOrEqual(1);
   });
 
+  describe('auto-select route direction based on destination', () => {
+    it('shows outbound direction for city destinations at HAN (Old Quarter)', () => {
+      // User lands at Noi Bai, going to Old Quarter → bus goes OUTBOUND (airport → city)
+      renderWithLang(
+        <ResultPage
+          onBack={jest.fn()}
+          formData={hanForm}
+          result={hanResult}
+        />,
+      );
+      // The "Hướng đi" button should be active (outbound)
+      const outboundBtn = screen.getByRole('button', { name: /Hướng đi/i });
+      const returnBtn = screen.getByRole('button', { name: /Hướng về/i });
+      expect(outboundBtn).toHaveAttribute('data-active', 'true');
+      expect(returnBtn).toHaveAttribute('data-active', 'false');
+    });
+
+    it('shows outbound direction for city destinations at HAN (Cau Giay)', () => {
+      // User going to Cau Giay district → outbound
+      const cauGiayForm = { ...hanForm, destination: 'cau-giay' };
+      renderWithLang(
+        <ResultPage
+          onBack={jest.fn()}
+          formData={cauGiayForm}
+          result={hanResult}
+        />,
+      );
+      const outboundBtn = screen.getByRole('button', { name: /Hướng đi/i });
+      expect(outboundBtn).toHaveAttribute('data-active', 'true');
+    });
+
+    it('shows outbound direction for Q1 at SGN', () => {
+      // User at TSN going to District 1 → outbound (T3 → city center)
+      renderWithLang(
+        <ResultPage
+          onBack={jest.fn()}
+          formData={sgnForm}
+          result={sgnResult}
+        />,
+      );
+      const outboundBtn = screen.getByRole('button', { name: /Hướng đi/i });
+      expect(outboundBtn).toHaveAttribute('data-active', 'true');
+    });
+  });
+
   it('does NOT override bus pickup with Grab pickup hint (separate render paths)', () => {
     // REGRESSION GUARD: when Grab pickupLocation is set, the bus timeline
     // must still show the bus pickup point (Làn B for Bus 152), NOT the
@@ -302,5 +347,83 @@ describe('ResultPage', () => {
     );
     expect(busPickupMarkers.length).toBeGreaterThanOrEqual(1);
     expect(grabPickupMarkers.length).toBeGreaterThanOrEqual(1);
+  });
+
+  describe('Bus Departure Countdown', () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it('renders "Còn khoảng 25 phút" inside the Departure timeline step when trip is catchable', () => {
+      // hanResult.departureTime is 14:50; freeze clock at 14:25 → 25 minutes remaining
+      jest.setSystemTime(new Date('2026-07-28T14:25:00'));
+      renderWithLang(
+        <ResultPage
+          onBack={jest.fn()}
+          formData={hanForm}
+          result={hanResult}
+        />,
+      );
+      // The countdown must appear inside the timeline item whose title is "Lên xe / Khởi hành"
+      const departureTitle = screen.getByText('Lên xe / Khởi hành');
+      const departureItem = departureTitle.closest('div');
+      expect(departureItem).not.toBeNull();
+      expect(
+        screen.getByText(/Còn khoảng 25 phút/),
+      ).toBeInTheDocument();
+    });
+
+    it('does NOT render countdown when reason is too_late', () => {
+      jest.setSystemTime(new Date('2026-07-28T14:25:00'));
+      renderWithLang(
+        <ResultPage
+          onBack={jest.fn()}
+          formData={{ ...hanForm, arrivalTime: '23:00' }}
+          result={tooLateResult}
+        />,
+      );
+      expect(screen.queryByText(/Còn khoảng/)).toBeNull();
+    });
+
+    it('does NOT render countdown when reason is no_service', () => {
+      jest.setSystemTime(new Date('2026-07-28T14:25:00'));
+      renderWithLang(
+        <ResultPage
+          onBack={jest.fn()}
+          formData={{ ...hanForm, arrivalTime: '04:00' }}
+          result={noServiceResult}
+        />,
+      );
+      expect(screen.queryByText(/Còn khoảng/)).toBeNull();
+    });
+
+    it('does NOT render countdown when reason is missed_last', () => {
+      jest.setSystemTime(new Date('2026-07-28T14:25:00'));
+      renderWithLang(
+        <ResultPage
+          onBack={jest.fn()}
+          formData={{ ...hanForm, arrivalTime: '21:30' }}
+          result={missedLastResult}
+        />,
+      );
+      expect(screen.queryByText(/Còn khoảng/)).toBeNull();
+    });
+
+    it('does NOT render countdown when bus departureTime is more than 60 minutes away', () => {
+      // Freeze clock at 12:00, bus departs at 14:50 → 2h 50min away
+      jest.setSystemTime(new Date('2026-07-28T12:00:00'));
+      renderWithLang(
+        <ResultPage
+          onBack={jest.fn()}
+          formData={hanForm}
+          result={hanResult}
+        />,
+      );
+      expect(screen.queryByText(/Còn khoảng/)).toBeNull();
+    });
   });
 });

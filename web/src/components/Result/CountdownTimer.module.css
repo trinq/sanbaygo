@@ -1,0 +1,16 @@
+/* CountdownTimer — single muted line under "Dự kiến khởi hành lúc …"
+ * Reuses the slate-500 muted text token from ResultPage.module.css to
+ * stay consistent with the surrounding timeline inline text.
+ */
+
+.countdown {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748B; /* slate-500 — same as .timelineInline in ResultPage */
+  font-variant-numeric: tabular-nums;
+}
+
+.countdownText {
+  display: inline-block;
+}

@@ -4,10 +4,30 @@ import { RouteMap } from '../RouteMap';
 import { BUS_152_STOPS } from '../RouteMap/Bus152Stops';
 import { BUS_109_STOPS } from '../RouteMap/Bus109Stops';
 import { BUS_86_STOPS } from '../RouteMap/Bus86Stops';
+import { CountdownTimer } from './CountdownTimer';
 import { AIRPORTS, DESTINATIONS_BY_AIRPORT } from '@core';
-import type { ArrivalResult, ArrivalFormData } from '@core';
+import type { ArrivalResult, ArrivalFormData, AirportId } from '@core';
 import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './ResultPage.module.css';
+
+/**
+ * Infer route direction from destination context.
+ *
+ * - If destination is a terminal (user is leaving airport by bus) → outbound
+ * - If destination is a city location (user is going to airport) → return
+ *
+ * Currently the app only supports "from airport" flows, so this always
+ * returns 'outbound' unless the destination matches a terminal ID.
+ */
+function inferRouteDirection(
+  destinationId: string | null,
+  airportId: AirportId,
+): 'outbound' | 'return' {
+  if (!destinationId) return 'outbound';
+  const airport = AIRPORTS[airportId];
+  const isTerminalDestination = airport.terminals.some((t) => t.id === destinationId);
+  return isTerminalDestination ? 'return' : 'outbound';
+}
 
 interface ResultPageProps {
   onBack: () => void;
@@ -17,7 +37,9 @@ interface ResultPageProps {
 
 export function ResultPage({ onBack, formData, result }: ResultPageProps) {
   const { t } = useLanguage();
-  const [routeDirection, setRouteDirection] = useState<'outbound' | 'return'>('outbound');
+  const [routeDirection, setRouteDirection] = useState<'outbound' | 'return'>(() =>
+    inferRouteDirection(formData.destination, formData.airportId),
+  );
   const airport = AIRPORTS[formData.airportId];
   const terminal = airport.terminals.find((t) => t.id === formData.terminal);
   const destination = DESTINATIONS_BY_AIRPORT[formData.airportId].find(
@@ -199,6 +221,7 @@ export function ResultPage({ onBack, formData, result }: ResultPageProps) {
                       <Icon name="clock" size={14} color="#64748B" />
                       <span>Dự kiến khởi hành lúc <strong>{trip.departureTime}</strong></span>
                     </div>
+                    <CountdownTimer trip={trip} />
                   </div>
                 </div>
               )}
