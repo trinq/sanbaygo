@@ -1,6 +1,6 @@
 import type { ArrivalFormData, ArrivalResult } from '@core';
+import { calculateTrip as calculateResult } from '@core';
 import { useLandingForm } from '../../hooks/useLandingForm';
-import { calculateResult } from '../../lib/calculation-result';
 import { Hero } from './Hero';
 import { SearchCard } from './SearchCard';
 
