@@ -1,11 +1,46 @@
 import { Icon } from '../Icon';
+import { AIRPORTS, DESTINATIONS_BY_AIRPORT } from '@core';
+import type { ArrivalResult, ArrivalFormData } from '@core';
+import { useLanguage } from '../../contexts/LanguageContext';
 import styles from './ResultPage.module.css';
 
 interface ResultPageProps {
   onBack: () => void;
+  formData: ArrivalFormData;
+  result: ArrivalResult;
 }
 
-export function ResultPage({ onBack }: ResultPageProps) {
+export function ResultPage({ onBack, formData, result }: ResultPageProps) {
+  const { t } = useLanguage();
+  const airport = AIRPORTS[formData.airportId];
+  const terminal = airport.terminals.find((t) => t.id === formData.terminal);
+  const destination = DESTINATIONS_BY_AIRPORT[formData.airportId].find(
+    (d) => d.id === formData.destination,
+  );
+
+  const trip = result.bus.trip;
+  const catchable = result.bus.available && trip;
+  const selectedRoute = trip?.selectedRoute;
+
+  const busPickupLocation =
+    selectedRoute?.pickupPoints.find((p) => p.terminalId === formData.terminal)?.location ??
+    '';
+  // Grab pickup location: prefer airport-specific hint (e.g. pillar 34 at
+  // SGN-T3), fall back to bus pickup point (most terminals share curbside
+  // lanes for bus and ride-hail), then terminal name as last resort.
+  // Bus and Grab pickup points are RENDERED SEPARATELY — bus timeline shows
+  // busPickupLocation, ride-hail card shows grabPickupLocation. They must
+  // never share the same variable (regression: a 2026-07-27 bug at SGN-T3
+  // caused the bus timeline to inherit Grab's "Cột 34 PNA" string).
+  const grabPickupLocation =
+    result.grab.pickupLocation ?? busPickupLocation ?? terminal?.name ?? '';
+
+  const priceFormatted = trip ? `${trip.ticketPrice.toLocaleString('vi-VN')}₫` : '—';
+  const grabPriceNumber = result.grab.priceEstimate.split(' - ')[0];
+  const grabPriceFormatted = `${grabPriceNumber.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}₫`;
+  const travelMin = trip?.arrivalEstimate?.minutesRange.min ?? 0;
+  const travelMax = trip?.arrivalEstimate?.minutesRange.max ?? 0;
+
   return (
     <div className={styles.root}>
       {/* ── Header ── */}
@@ -20,11 +55,13 @@ export function ResultPage({ onBack }: ResultPageProps) {
             <ArrowLeftIcon />
           </button>
           <div className={styles.headerCenter}>
-            <h1 className={styles.headerTitle}>Sân bay Nội Bài (T2)</h1>
+            <h1 className={styles.headerTitle}>
+              {airport.name} {terminal ? `(${terminal.name})` : ''}
+            </h1>
             <div className={styles.headerSubtitle}>
               <span>Đến</span>
               <ChevronRightIcon />
-              <span>Phố Cổ, Hà Nội</span>
+              <span>{destination?.name ?? '—'}</span>
             </div>
           </div>
           <div style={{ width: 36 }} aria-hidden="true" />
@@ -39,7 +76,7 @@ export function ResultPage({ onBack }: ResultPageProps) {
           <p className={styles.pageSubtitle}>
             <Icon name="airport" size={16} color="#0284C7" />
             Dự kiến hạ cánh lúc{' '}
-            <span className={styles.pageSubtitleMark}>14:30</span>
+            <span className={styles.pageSubtitleMark}>{formData.arrivalTime}</span>
           </p>
         </div>
 
@@ -53,15 +90,27 @@ export function ResultPage({ onBack }: ResultPageProps) {
                   <Icon name="bus" size={24} color="#0284C7" />
                 </div>
                 <div className={styles.primaryHeading}>
-                  <div className={styles.badgeRecommended}>Khuyên dùng</div>
-                  <h3 className={styles.primaryOptionName}>Tuyến Buýt 86</h3>
+                  {catchable && (
+                    <div className={styles.badgeRecommended}>Khuyên dùng</div>
+                  )}
+                  <h3 className={styles.primaryOptionName}>
+                    {catchable && selectedRoute
+                      ? `Tuyến Buýt ${selectedRoute.routeNumber}`
+                      : result.bus.reason === 'too_late'
+                        ? t.results.busTooLate
+                        : result.bus.reason === 'missed_last'
+                          ? t.results.busMissedLast
+                          : result.bus.reason === 'no_service'
+                            ? t.results.busNoService
+                            : 'Không có chuyến phù hợp'}
+                  </h3>
                   <p className={styles.primaryOptionTagline}>
-                    Nhanh chóng & Tiết kiệm nhất
+                    {catchable ? 'Nhanh chóng & Tiết kiệm nhất' : 'Vui lòng gọi xe công nghệ'}
                   </p>
                 </div>
               </div>
               <div className={styles.primaryPrice}>
-                <div className={styles.primaryPriceValue}>45.000₫</div>
+                <div className={styles.primaryPriceValue}>{priceFormatted}</div>
                 <div className={styles.primaryPriceUnit}>/ hành khách</div>
               </div>
             </div>
@@ -76,51 +125,69 @@ export function ResultPage({ onBack }: ResultPageProps) {
                   <span className={styles.timelineDot} aria-hidden="true" />
                 </div>
                 <div className={styles.timelineContent}>
-                  <h4 className={styles.timelineTitle}>Điểm đón: Sảnh đến T2, Cột 2</h4>
+                  <h4 className={styles.timelineTitle}>
+                    Điểm đón: {busPickupLocation}
+                  </h4>
                   <div className={styles.timelineInline}>
                     <FootprintsIcon />
-                    <span>Khoảng 3 phút đi bộ từ cửa ra</span>
+                    <span>Khoảng {destination?.walkingMinutes ?? '—'} phút đi bộ từ cửa ra</span>
                   </div>
                 </div>
               </div>
 
               {/* Departure */}
-              <div className={styles.timelineItem}>
-                <div className={styles.timelineDotCol}>
-                  <span className={styles.timelineDot} aria-hidden="true" />
-                </div>
-                <div className={styles.timelineContent}>
-                  <h4 className={styles.timelineTitle}>Lên xe / Khởi hành</h4>
-                  <div className={styles.timelineInline}>
-                    <Icon name="clock" size={14} color="#64748B" />
-                    <span>Dự kiến khởi hành lúc <strong>14:50</strong></span>
+              {catchable && trip && (
+                <div className={styles.timelineItem}>
+                  <div className={styles.timelineDotCol}>
+                    <span className={styles.timelineDot} aria-hidden="true" />
+                  </div>
+                  <div className={styles.timelineContent}>
+                    <h4 className={styles.timelineTitle}>Lên xe / Khởi hành</h4>
+                    <div className={styles.timelineInline}>
+                      <Icon name="clock" size={14} color="#64748B" />
+                      <span>Dự kiến khởi hành lúc <strong>{trip.departureTime}</strong></span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Transit */}
-              <div className={styles.timelineItem}>
-                <div className={styles.timelineDotCol}>
-                  <span className={`${styles.timelineDot} ${styles.timelineDotMuted}`} aria-hidden="true" />
-                </div>
-                <div className={styles.timelineContent}>
-                  <h4 className={styles.timelineTitle}>Thời gian di chuyển</h4>
-                  <div className={styles.timelineInline}>
-                    <Icon name="bus" size={14} color="#64748B" />
-                    <span><strong>45 – 50 phút</strong> về đến trung tâm</span>
+              {catchable && (
+                <div className={styles.timelineItem}>
+                  <div className={styles.timelineDotCol}>
+                    <span
+                      className={`${styles.timelineDot} ${styles.timelineDotMuted}`}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className={styles.timelineContent}>
+                    <h4 className={styles.timelineTitle}>Thời gian di chuyển</h4>
+                    <div className={styles.timelineInline}>
+                      <Icon name="bus" size={14} color="#64748B" />
+                      <span>
+                        <strong>{travelMin} – {travelMax} phút</strong> về đến {destination?.name ?? 'trung tâm'}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Dropoff */}
-              <div className={styles.timelineItem}>
-                <div className={styles.timelineDotCol}>
-                  <span className={`${styles.timelineDot} ${styles.timelineDotFinal}`} aria-hidden="true" />
+              {catchable && (
+                <div className={styles.timelineItem}>
+                  <div className={styles.timelineDotCol}>
+                    <span
+                      className={`${styles.timelineDot} ${styles.timelineDotFinal}`}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className={styles.timelineContent}>
+                    <h4 className={styles.timelineTitle}>
+                      Điểm trả: {destination?.nearestBusStop ?? destination?.name ?? '—'}
+                    </h4>
+                  </div>
                 </div>
-                <div className={styles.timelineContent}>
-                  <h4 className={styles.timelineTitle}>Điểm trả: Ga Hà Nội / Phố Cổ</h4>
-                </div>
-              </div>
+              )}
             </div>
 
             {/* Notes */}
@@ -131,7 +198,9 @@ export function ResultPage({ onBack }: ResultPageProps) {
               <div className={styles.calloutBody}>
                 <h5 className={styles.calloutTitle}>Ghi chú chuyến đi</h5>
                 <p className={styles.calloutText}>
-                  Thanh toán trực tiếp bằng tiền mặt hoặc thẻ trên xe. Có chỗ để hành lý rộng rãi dưới gầm.
+                  {catchable
+                    ? 'Thanh toán trực tiếp bằng tiền mặt hoặc thẻ trên xe. Có chỗ để hành lý rộng rãi dưới gầm.'
+                    : 'Chuyến cuối đã khởi hành. Vui lòng sử dụng Grab hoặc taxi công nghệ.'}
                 </p>
               </div>
             </aside>
@@ -162,12 +231,12 @@ export function ResultPage({ onBack }: ResultPageProps) {
                 <div className={styles.secondaryMeta}>
                   <span className={styles.secondaryMetaItem}>
                     <Icon name="clock" size={16} color="#94A3B8" />
-                    <strong>~35 phút</strong>
+                    <strong>~{result.grab.travelTime.minutesRange.min} phút</strong>
                   </span>
                   <span className={styles.secondaryMetaDot} aria-hidden="true" />
                   <span className={styles.secondaryMetaItem}>
                     <Icon name="pin" size={16} color="#94A3B8" />
-                    <span>Điểm đón: Cột 4 - Cột 6</span>
+                    <span>Điểm đón: {grabPickupLocation}</span>
                   </span>
                 </div>
               </div>
@@ -176,7 +245,7 @@ export function ResultPage({ onBack }: ResultPageProps) {
             <div className={styles.secondaryRight}>
               <div className={styles.secondaryPrice}>
                 <div className={styles.secondaryPriceLabel}>Giá tham khảo</div>
-                <div className={styles.secondaryPriceValue}>~ 250.000₫</div>
+                <div className={styles.secondaryPriceValue}>~ {grabPriceFormatted}</div>
               </div>
               <button type="button" className={styles.secondaryCta}>
                 <NavigationIcon />

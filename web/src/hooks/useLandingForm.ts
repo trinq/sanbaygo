@@ -13,16 +13,24 @@ import { AIRPORTS, DESTINATIONS_BY_AIRPORT } from '@core';
 const DEFAULT_ARRIVAL_TIME = '12:00';
 const DEFAULT_BAGGAGE: BaggageType = 'carry_on';
 
+const TIME_FORMAT = /^([01]\d|2[0-3]):[0-5]\d$/;
+
 const clamp = (n: number, min: number, max: number) =>
   Math.max(min, Math.min(max, n));
 
 export function useLandingForm() {
+  const [arrivalTime, setArrivalTimeRaw] = useState<string>(DEFAULT_ARRIVAL_TIME);
   const [airport, setAirportRaw] = useState<AirportId | null>(null);
   const [terminal, setTerminalRaw] = useState<TerminalId | null>(null);
   const [destination, setDestinationRaw] = useState<string | null>(null);
   const [people, setPeopleRaw] = useState(1);
   const [carryOn, setCarryOnRaw] = useState(false);
   const [checked, setCheckedRaw] = useState(false);
+
+  const setArrivalTime = useCallback((time: string) => {
+    if (!TIME_FORMAT.test(time)) return;
+    setArrivalTimeRaw(time);
+  }, []);
 
   const setAirport = useCallback((id: AirportId) => {
     setAirportRaw(id);
@@ -58,16 +66,17 @@ export function useLandingForm() {
     const flightType: FlightType = terminalData?.flightTypes[0] ?? terminalData?.type ?? 'domestic';
 
     return {
-      arrivalTime: DEFAULT_ARRIVAL_TIME,
+      arrivalTime,
       airportId: airport,
       terminal,
       baggage: DEFAULT_BAGGAGE,
       destination,
       flightType,
     };
-  }, [airport, terminal, destination]);
+  }, [arrivalTime, airport, terminal, destination]);
 
   const reset = useCallback(() => {
+    setArrivalTimeRaw(DEFAULT_ARRIVAL_TIME);
     setAirportRaw(null);
     setTerminalRaw(null);
     setDestinationRaw(null);
@@ -77,12 +86,14 @@ export function useLandingForm() {
   }, []);
 
   return {
+    arrivalTime,
     airport,
     terminal,
     destination,
     people,
     carryOn,
     checked,
+    setArrivalTime,
     setAirport,
     setTerminal,
     setDestination,

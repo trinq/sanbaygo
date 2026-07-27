@@ -36,7 +36,19 @@ export function findCatchableBusForTerminal(
     .filter((c): c is Candidate => c !== null);
 
   if (candidates.length === 0) {
-    return { available: false, reason: 'no_service' };
+    // Aggregate failure reason. Late-arrival reasons take priority: if any
+    // candidate bus is still running today (so the user arrived after service
+    // ended), say so — otherwise fall back to "no service yet / at this terminal".
+    const reasons = matching
+      .map((bus) =>
+        findNextCatchableTrip(bus, arrivalTime, exitTimeMinutes, isPeak),
+      )
+      .map((r) => r.reason)
+      .filter((r): r is NonNullable<typeof r> => r !== undefined);
+    const lateReason = reasons.find(
+      (r) => r === 'too_late' || r === 'missed_last',
+    );
+    return { available: false, reason: lateReason ?? 'no_service' };
   }
 
   candidates.sort((a, b) => {

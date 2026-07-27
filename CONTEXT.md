@@ -19,9 +19,9 @@ App giúp người đi từ sân bay về thành phố nắm rõ lịch trình x
 - T2 (SGN-T2): international
 - T3 (SGN-T3): domestic/international (mới, opened April 2025)
 - Express Buses:
-  - Route 109 — chỉ T3 (xe điện hiện đại, 15,000 VND, 05:30–22:00)
-  - Route 152 — T1/T2 (Làn B, 5–7,000 VND, 05:00–19:00)
-  - TIA (VinBus) — free shuttle nội bộ T1↔T2↔T3 (15-20 phút/chuyến)
+  - Route 109 — chỉ T3 (xe điện Phương Trang FUTA, 15,000 VND regular / 7,000 VND student, 05:30–22:00, headway 40–45 min) — KHÔNG đón tại T1/T2, hành khách T1/T2 phải dùng TIA shuttle miễn phí nội bộ hoặc đón tuyến 152
+  - Route 152 — T1/T2 (Làn B, 5,000 VND regular / 3,000 VND student, 05:00–22:00, headway ~12-20 min) — Phương Trang (FUTA City Bus), xe buýt điện
+- Grab/Taxi công nghệ pickup tại SGN-T3: Tầng 1 Nhà để xe PNA — Cột 34 (không phải sảnh mặt tiền đường). Grab Việt Nam confirmed 2026-07-26. Tài xế chỉ được dừng tối đa 3 phút — user cần vào khu vực nhà xe trước khi bấm "Đặt xe".
 
 **SGN Destinations** (Quận trung tâm Sài Gòn):
 - Q1, Q3, Q5, Bình Thạnh, Phú Nhuận
@@ -43,9 +43,9 @@ Scoped: `HAN-T1`, `HAN-T2`, `SGN-T1`, `SGN-T2`, `SGN-T3`
 
 **Bus Route Schedule Format**
 
-`BusRoute` có optional `frequencyMinutes: { peak: number, normal: number }` (e.g., TIA 15-20 min)
-- Bus có `schedule: string[]` (HH:mm) cố định (Bus 86, 109, 152)
-- Bus có `frequencyMinutes` + `operatingHours` (TIA)
+`BusRoute` uses `scheduleSource: ScheduleSource` (discriminated union):
+- `{ kind: 'explicit', departures: string[] }` — fixed `HH:mm` list (Bus 86, 109, 152)
+- `{ kind: 'frequency', headwayMinutes: { peak: number, normal: number } }` — runs every Nth minute within `operatingHours` (no SGN route currently uses this; reserved for future use)
 
 ---
 

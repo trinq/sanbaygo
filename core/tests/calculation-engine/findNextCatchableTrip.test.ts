@@ -6,7 +6,7 @@ const makeFrequencyBus = (headway: { peak: number; normal: number }): BusRoute =
   id: 'tia',
   routeNumber: 'TIA',
   ticketPrice: 0,
-  operatingHours: { start: '04:30', end: '00:30' },
+  operatingHours: { start: '04:30', end: '00:35' },
   travelTime: { normal: { min: 15, max: 20 }, peak: { min: 15, max: 20 } },
   pickupPoints: [
     { terminalId: 'SGN-T1', location: 'Làn B' },
@@ -78,12 +78,19 @@ describe('findNextCatchableTrip', () => {
       expect(result.reason).toBe('no_service');
     });
 
-    it('returns too_late when readyTime is after operating hours end', () => {
+    it('returns too_late when readyTime is after operating hours end (TIA updated to 00:35)', () => {
       const tia = makeFrequencyBus({ peak: 15, normal: 20 });
-      // 23:30 + 60 + 5 = 00:35, after 00:30
-      const result = findNextCatchableTrip(tia, '23:30', { min: 5, max: 60 });
+      // TIA now ends at 00:35. 23:35 + 60 + 5 = 01:00, after 00:35 → too_late.
+      const result = findNextCatchableTrip(tia, '23:35', { min: 5, max: 60 });
       expect(result.available).toBe(false);
       expect(result.reason).toBe('too_late');
+    });
+
+    it('catches TIA at the exact end boundary (readyTime == 00:35)', () => {
+      const tia = makeFrequencyBus({ peak: 15, normal: 20 });
+      // 23:30 + 60 + 5 = 00:35 — exactly at TIA end, still in service.
+      const result = findNextCatchableTrip(tia, '23:30', { min: 5, max: 60 });
+      expect(result.available).toBe(true);
     });
   });
 });

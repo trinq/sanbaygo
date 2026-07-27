@@ -1,5 +1,5 @@
 export { BUS_86_SCHEDULE, BUS_86 } from './busSchedule';
-export { BUS_109, BUS_152, TIA } from './busSchedules/sgn';
+export { BUS_109, BUS_152 } from './busSchedules/sgn';
 export { EXIT_TIME_ESTIMATES } from './exitTimeEstimates';
 export { GRAB_ESTIMATE } from './grabEstimates';
 export { SGN_GRAB_ESTIMATE } from './grabEstimates/sgn';

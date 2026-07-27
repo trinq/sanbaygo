@@ -72,6 +72,14 @@ export interface GrabEstimate {
     normal: { min: number; max: number };
     peak: { min: number; max: number };
   };
+  /**
+   * Optional pickup-location hint shown in result UI.
+   * Some terminals (e.g. SGN-T3) concentrate ride-hail pickups in a
+   * designated area (pillar 34, Floor 1 of PNA parking) rather than at
+   * curbside. Leave undefined when not needed (UI falls back to bus
+   * pickup point or terminal name).
+   */
+  pickupLocation?: string;
 }
 
 export interface TimeRange {
@@ -98,6 +106,8 @@ export interface ArrivalResult {
     available: boolean;
     priceEstimate: string;
     travelTime: TimeRange;
+    /** Airport-specific pickup hint passed through from GrabEstimate. */
+    pickupLocation?: string;
   };
   direction?: {
     description: string;

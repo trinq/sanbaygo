@@ -5,7 +5,6 @@ import {
   ArrivalResult,
   calculateExitTime,
   isPeakHour,
-  findNextCatchableTrip,
   findCatchableBusForTerminal,
   calculateArrivalEstimate,
   AIRPORTS,

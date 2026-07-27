@@ -24,6 +24,7 @@ export function LandingPage({ onSearch }: LandingPageProps) {
   return (
     <Hero>
       <SearchCard
+        arrivalTime={form.arrivalTime}
         airport={form.airport}
         terminal={form.terminal}
         destination={form.destination}
@@ -32,6 +33,7 @@ export function LandingPage({ onSearch }: LandingPageProps) {
         checked={form.checked}
         terminalOptions={form.terminalOptions}
         destinationOptions={form.destinationOptions}
+        onArrivalTimeChange={form.setArrivalTime}
         onAirportChange={form.setAirport}
         onTerminalChange={form.setTerminal}
         onDestinationChange={form.setDestination}

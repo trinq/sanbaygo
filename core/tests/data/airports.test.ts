@@ -6,10 +6,10 @@ describe('Airports registry', () => {
     expect(NOI_BAI_AIRPORT.id).toBe('noi-bai');
   });
 
-  it('SGN_AIRPORT has 3 terminals, 3 bus routes', () => {
+  it('SGN_AIRPORT has 3 terminals, 2 bus routes (109, 152)', () => {
     expect(SGN_AIRPORT.id).toBe('tan-son-nhat');
     expect(SGN_AIRPORT.terminals).toHaveLength(3);
-    expect(SGN_AIRPORT.busRoutes).toHaveLength(3);
+    expect(SGN_AIRPORT.busRoutes.map((b) => b.id).sort()).toEqual(['bus-109', 'bus-152']);
   });
 
   it('AIRPORTS map has both airports', () => {

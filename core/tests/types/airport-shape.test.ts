@@ -35,17 +35,4 @@ describe('multi-airport type shape', () => {
     };
     expect(r.scheduleSource.kind).toBe('explicit');
   });
-
-  it('BusRoute uses scheduleSource discriminated union — frequency kind', () => {
-    const r: BusRoute = {
-      id: 'tia',
-      routeNumber: 'TIA',
-      ticketPrice: 0,
-      operatingHours: { start: '04:30', end: '00:30' },
-      travelTime: { normal: { min: 15, max: 20 }, peak: { min: 15, max: 20 } },
-      pickupPoints: [{ terminalId: 'SGN-T1', location: 'Làn B' }],
-      scheduleSource: { kind: 'frequency', headwayMinutes: { peak: 15, normal: 20 } },
-    };
-    expect(r.scheduleSource.kind).toBe('frequency');
-  });
 });

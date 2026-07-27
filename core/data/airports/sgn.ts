@@ -1,5 +1,5 @@
 import { Airport, Terminal } from '../../types';
-import { BUS_109, BUS_152, TIA } from '../busSchedules/sgn';
+import { BUS_109, BUS_152 } from '../busSchedules/sgn';
 import { SGN_GRAB_ESTIMATE } from '../grabEstimates/sgn';
 
 const TERMINALS: Terminal[] = [
@@ -27,6 +27,6 @@ export const SGN_AIRPORT: Airport = {
   id: 'tan-son-nhat',
   name: 'Sân bay Tân Sơn Nhất',
   terminals: TERMINALS,
-  busRoutes: [BUS_109, BUS_152, TIA],
+  busRoutes: [BUS_109, BUS_152],
   grabEstimates: SGN_GRAB_ESTIMATE,
 };

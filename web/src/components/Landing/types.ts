@@ -6,6 +6,7 @@ import type {
 } from '@core';
 
 export interface SearchCardProps {
+  arrivalTime: string;
   airport: AirportId | null;
   terminal: TerminalId | null;
   destination: string | null;
@@ -14,6 +15,7 @@ export interface SearchCardProps {
   checked: boolean;
   terminalOptions: Terminal[];
   destinationOptions: DestinationPoint[];
+  onArrivalTimeChange: (time: string) => void;
   onAirportChange: (id: AirportId) => void;
   onTerminalChange: (id: TerminalId) => void;
   onDestinationChange: (id: string) => void;

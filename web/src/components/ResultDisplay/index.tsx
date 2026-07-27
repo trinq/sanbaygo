@@ -1,6 +1,5 @@
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Icon } from '../Icon';
-import { TiaHint } from '../Result/TiaHint';
 import { ArrivalResult, ArrivalFormData } from '@core';
 import styles from './index.module.css';
 
@@ -15,7 +14,6 @@ export function ResultDisplay({ result, formData, onBack, onRecalculate }: Resul
   const { t } = useLanguage();
   const trip = result.bus.trip;
   const catchable = result.bus.available && trip;
-  const recommendedBusId = trip?.selectedRoute?.id ?? null;
 
   return (
     <article className={styles.root}>
@@ -56,12 +54,6 @@ export function ResultDisplay({ result, formData, onBack, onRecalculate }: Resul
           )}
         </p>
       </header>
-
-      <TiaHint
-        airportId={formData.airportId}
-        terminalId={formData.terminal}
-        recommendedBusId={recommendedBusId}
-      />
 
       <hr className={styles.rule} />
 

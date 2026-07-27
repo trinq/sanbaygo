@@ -81,6 +81,9 @@ interface Translations {
     noBus: string;
     lastBusAt: string;
     needToArriveBy: string;
+    busTooLate: string;
+    busNoService: string;
+    busMissedLast: string;
     disclaimer: string;
     recalculate: string;
     sortLabel: string;
@@ -241,6 +244,9 @@ const translations: Record<Language, Translations> = {
       noBus: 'Không có chuyến xe buýt',
       lastBusAt: 'Chuyến cuối lúc',
       needToArriveBy: 'Cần đến sân bay trước',
+      busTooLate: 'Đã hết giờ hoạt động',
+      busNoService: 'Chưa đến giờ xe buýt chạy',
+      busMissedLast: 'Đã lỡ chuyến cuối',
       disclaimer: 'Giá và thời gian mang tính tham khảo.',
       recalculate: 'Tính lại chuyến khác',
       sortLabel: 'Sắp xếp theo',
@@ -404,6 +410,9 @@ const translations: Record<Language, Translations> = {
       noBus: 'No bus available',
       lastBusAt: 'Last bus at',
       needToArriveBy: 'You need to arrive by',
+      busTooLate: 'Bus service has ended for the day',
+      busNoService: 'Bus service has not started yet',
+      busMissedLast: 'You missed the last bus',
       disclaimer: 'Prices and times are estimates only.',
       recalculate: 'Recalculate',
       sortLabel: 'Sort by',

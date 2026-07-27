@@ -56,6 +56,7 @@ export function calculateResult(formData: ArrivalFormData): ArrivalResult | null
       available: true,
       priceEstimate: `${grabEstimate.priceRange.min.toLocaleString()} - ${grabEstimate.priceRange.max.toLocaleString()} VND`,
       travelTime: grabTravelTime,
+      pickupLocation: grabEstimate.pickupLocation,
     },
     direction: {
       description: `Đi bộ ${destination.walkingMinutes} phút đến điểm đón xe buýt ${terminalInfo.name}`,

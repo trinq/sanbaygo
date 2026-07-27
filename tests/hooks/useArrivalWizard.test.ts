@@ -178,4 +178,55 @@ describe('calculateResultFromForm', () => {
 
     expect(result).toBeNull();
   });
+
+  describe('SGN city-bound buses — no TIA, no surprise recommendations', () => {
+    // SanBayGo's scope is "get me from the airport to the city". Only city-
+    // bound buses (Bus 109, Bus 152) belong in the engine's recommendation
+    // set. TIA was an inter-terminal shuttle (T1↔T2↔T3) that was removed
+    // from the data entirely because it never served a city destination.
+    // These tests pin that contract: at SGN-T1, 00:00, no city-bound bus
+    // is in service (both 109 and 152 wrap past 22:00, and 109 doesn't pick
+    // up at T1 anyway), so the result must surface "no bus available" —
+    // not TIA, not anything.
+    const cityForms: ArrivalFormData[] = (
+      ['q1', 'q3', 'q5', 'binh-thanh', 'phu-nhuan'] as const
+    ).map((destId) => ({
+      arrivalTime: '00:00',
+      terminal: 'SGN-T1' as const,
+      baggage: 'carry_on' as const,
+      destination: destId,
+      flightType: 'domestic' as const,
+      airportId: 'tan-son-nhat' as const,
+    }));
+
+    it.each(cityForms)(
+      'reports no bus available for destination "%s" at 00:00 SGN-T1',
+      (formData) => {
+        const r = calculateResultFromForm(formData);
+        expect(r).not.toBeNull();
+        if (!r) return;
+        const recommendedBusId = r.bus.trip?.selectedRoute?.id ?? null;
+        if (r.bus.available) {
+          expect(['bus-109', 'bus-152']).toContain(recommendedBusId);
+        } else {
+          expect(['no_service', 'too_late', 'missed_last']).toContain(r.bus.reason);
+        }
+      },
+    );
+
+    it('reports no bus available at 00:00 SGN-T1 (both 109 and 152 out of hours, 109 wrong terminal)', () => {
+      const r = calculateResultFromForm({
+        arrivalTime: '00:00',
+        terminal: 'SGN-T1',
+        baggage: 'carry_on',
+        destination: 'q1',
+        flightType: 'domestic',
+        airportId: 'tan-son-nhat',
+      });
+      expect(r).not.toBeNull();
+      if (!r) return;
+      expect(r.bus.available).toBe(false);
+      expect(r.bus.reason).toBeDefined();
+    });
+  });
 });

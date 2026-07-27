@@ -2,14 +2,34 @@ import { renderHook, act } from '@testing-library/react';
 import { useLandingForm } from '../../src/hooks/useLandingForm';
 
 describe('useLandingForm', () => {
-  it('starts with empty airport, terminal, destination', () => {
+  it('starts with empty airport, terminal, destination, and default arrivalTime 12:00', () => {
     const { result } = renderHook(() => useLandingForm());
     expect(result.current.airport).toBeNull();
     expect(result.current.terminal).toBeNull();
     expect(result.current.destination).toBeNull();
+    expect(result.current.arrivalTime).toBe('12:00');
     expect(result.current.people).toBe(1);
     expect(result.current.carryOn).toBe(false);
     expect(result.current.checked).toBe(false);
+  });
+
+  it('setArrivalTime updates arrivalTime in HH:mm format', () => {
+    const { result } = renderHook(() => useLandingForm());
+    act(() => result.current.setArrivalTime('08:30'));
+    expect(result.current.arrivalTime).toBe('08:30');
+    act(() => result.current.setArrivalTime('22:15'));
+    expect(result.current.arrivalTime).toBe('22:15');
+  });
+
+  it('setArrivalTime rejects invalid format (non-HH:mm)', () => {
+    const { result } = renderHook(() => useLandingForm());
+    act(() => result.current.setArrivalTime('08:30'));
+    act(() => result.current.setArrivalTime('not-a-time'));
+    expect(result.current.arrivalTime).toBe('08:30');
+    act(() => result.current.setArrivalTime('25:99'));
+    expect(result.current.arrivalTime).toBe('08:30');
+    act(() => result.current.setArrivalTime(''));
+    expect(result.current.arrivalTime).toBe('08:30');
   });
 
   it('validate() returns false when airport, terminal, or destination is missing', () => {
@@ -66,16 +86,17 @@ describe('useLandingForm', () => {
     expect(result.current.destination).toBeNull();
   });
 
-  it('buildArrivalFormData() returns full shape when valid', () => {
+  it('buildArrivalFormData() returns full shape when valid, using current arrivalTime', () => {
     const { result } = renderHook(() => useLandingForm());
     act(() => {
       result.current.setAirport('tan-son-nhat');
       result.current.setTerminal('SGN-T1');
       result.current.setDestination('q1');
+      result.current.setArrivalTime('18:45');
     });
     const formData = result.current.buildArrivalFormData();
     expect(formData).toEqual({
-      arrivalTime: '12:00',
+      arrivalTime: '18:45',
       airportId: 'tan-son-nhat',
       terminal: 'SGN-T1',
       baggage: 'carry_on',
