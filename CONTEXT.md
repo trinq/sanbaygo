@@ -88,7 +88,7 @@ _Avoid_: Nearest bus, available bus
 
 **Bus Departure Countdown**:
 Khoảng thời gian tính từ thời điểm hiện tại của thiết bị đến giờ khởi hành dự kiến của Catchable Trip. Bộ đếm không đại diện cho vị trí thực tế của xe buýt.
-- Hiển thị dạng `Còn khoảng X phút`, cập nhật mỗi 1 phút (chỉ re-render khi sang phút mới).
+- Hiển thị dạng `Còn X phút Y giây`, cập nhật mỗi 1 phút (chỉ re-render khi sang phút mới).
 - Chỉ hiển thị khi còn ≤ 60 phút đến giờ khởi hành dự kiến; nếu xa hơn, ẩn bộ đếm.
 - Khi giờ hiện tại đã vượt qua giờ khởi hành dự kiến, ẩn bộ đếm (không đếm số âm, không tự đổi sang chuyến khác).
 - Không render khi Catchable Trip không tồn tại (`no_service`, `too_late`, `missed_last`).
