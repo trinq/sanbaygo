@@ -1,0 +1,173 @@
+.root {
+  --brand-primary: #F97316;
+  --brand-dark: #EA580C;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --bg-surface: #FFFFFF;
+  --bg-muted: #F8FAFC;
+  
+  --stop-size-base: 12px;
+  --stop-size-hub: 16px;
+  --stop-size-destination: 20px;
+  --line-stroke-width: 3px;
+  --vertical-gap: 48px;
+}
+
+.wrapper {
+  background: var(--bg-surface);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.expandButton {
+  width: 100%;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-muted);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.expandButton:hover {
+  background: #EEF2F7;
+}
+
+.expandButton svg {
+  transition: transform 0.3s;
+}
+
+.expandButton[data-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.content[data-expanded="true"] {
+  max-height: 600px;
+}
+
+.directionToggle {
+  display: flex;
+  gap: 8px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.directionButton {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.directionButton[data-active="true"] {
+  background: var(--brand-primary);
+  color: white;
+  border: none;
+}
+
+.directionButton[data-active="false"] {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid #E2E8F0;
+}
+
+.mapContainer {
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+}
+
+.stopDot {
+  fill: var(--brand-primary);
+  transition: r 0.2s;
+}
+
+.stopDotHub {
+  fill: white;
+  stroke: var(--brand-primary);
+  stroke-width: 2;
+}
+
+.stopDotTerminal {
+  fill: var(--brand-dark);
+}
+
+.stopDotDestination {
+  fill: var(--brand-primary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.stopLine {
+  stroke: var(--brand-primary);
+  stroke-width: var(--line-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.stopLineAnimated {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawLine 0.8s ease-out forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+.stopLabel {
+  font-size: 13px;
+  fill: var(--text-primary);
+  font-weight: 500;
+}
+
+.stopLabelHub {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--text-primary);
+}
+
+@media (max-width: 480px) {
+  .stopLabel {
+    font-size: 11px;
+  }
+  
+  .stopLabelHub {
+    font-size: 12px;
+  }
+}
