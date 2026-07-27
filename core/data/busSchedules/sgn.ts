@@ -46,9 +46,22 @@ export const BUS_152: BusRoute = {
     normal: { min: 25, max: 35 },
     peak: { min: 40, max: 55 },
   },
+  // Pickup points per terminal (research 2026-07-27):
+  //
+  // SGN-T1 (domestic, old terminal): Làn B curbside at cột B06–B09.
+  //   Exit the domestic arrival hall and walk straight to Làn B (the
+  //   second curbside lane after Làn A private vehicles).
+  //
+  // SGN-T2 (international): Làn B, opposite pillars 4 and 5 of the
+  //   international arrival hall. Exit the international arrival hall,
+  //   walk straight across Làn A (private-vehicle lane) into Làn B.
+  //   Look for the yellow/blue public-bus sign. This is the same area
+  //   where the FREE inter-terminal shuttle (T1 ↔ T2 ↔ T3) picks up —
+  //   all buses at SGN-T2 stop in this Làn B area. Inter-terminal shuttle
+  //   routes are not yet modelled (out of scope).
   pickupPoints: [
     { terminalId: 'SGN-T1', location: 'Làn B ga quốc nội, cột B06–B09' },
-    { terminalId: 'SGN-T2', location: 'Làn B gần sảnh đến quốc tế' },
+    { terminalId: 'SGN-T2', location: 'Làn B, đối diện Cột số 4 và Cột số 5 sảnh đến quốc tế' },
   ],
   scheduleSource: {
     kind: 'explicit',
