@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Icon } from '../Icon';
+import { RouteMap } from '../RouteMap';
 import { AIRPORTS, DESTINATIONS_BY_AIRPORT } from '@core';
 import type { ArrivalResult, ArrivalFormData } from '@core';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -12,6 +14,7 @@ interface ResultPageProps {
 
 export function ResultPage({ onBack, formData, result }: ResultPageProps) {
   const { t } = useLanguage();
+  const [routeDirection, setRouteDirection] = useState<'outbound' | 'return'>('outbound');
   const airport = AIRPORTS[formData.airportId];
   const terminal = airport.terminals.find((t) => t.id === formData.terminal);
   const destination = DESTINATIONS_BY_AIRPORT[formData.airportId].find(
@@ -40,6 +43,17 @@ export function ResultPage({ onBack, formData, result }: ResultPageProps) {
   const grabPriceFormatted = `${grabPriceNumber.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}₫`;
   const travelMin = trip?.arrivalEstimate?.minutesRange.min ?? 0;
   const travelMax = trip?.arrivalEstimate?.minutesRange.max ?? 0;
+
+  // Destination → bus stop ID mapping for RouteMap highlight
+  const destinationToStopMap: Record<string, string> = {
+    'ben-thanh': 'ben-thanh',
+    'le-lai': 'le-lai',
+    'tran-hung-dao': 'tran-hung-dao',
+    'nguyen-van-cu': 'nguyen-van-cu',
+    'sgn-t3': 'sgn-t3',
+  };
+  const getDestinationStopId = (dest: string | null): string | undefined =>
+    dest ? destinationToStopMap[dest] : undefined;
 
   return (
     <div className={styles.root}>
@@ -206,6 +220,15 @@ export function ResultPage({ onBack, formData, result }: ResultPageProps) {
             </aside>
           </div>
         </article>
+
+        {/* ── Route Map ── */}
+        {result.bus && (
+          <RouteMap
+            direction={routeDirection}
+            selectedStopId={getDestinationStopId(formData.destination)}
+            onDirectionChange={setRouteDirection}
+          />
+        )}
 
         {/* ── Divider ── */}
         <div className={styles.divider} aria-hidden="true">

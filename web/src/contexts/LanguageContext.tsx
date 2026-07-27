@@ -102,6 +102,9 @@ interface Translations {
     railFootnote: string;
     rideHailTitle: string;
     rideHailSubtitle: string;
+    routeMap: string;
+    outbound: string;
+    return: string;
   };
   destinations: {
     [key: string]: string;
@@ -264,6 +267,9 @@ const translations: Record<Language, Translations> = {
       railFootnote: 'Hoặc gọi xe — nếu hành lý nhiều hoặc trễ chuyến.',
       rideHailTitle: 'Hoặc gọi xe',
       rideHailSubtitle: 'Khi hành lý nhiều, trễ chuyến, hoặc đi từ 3 người.',
+      routeMap: 'Bản đồ tuyến xe buýt',
+      outbound: 'Hướng đi',
+      return: 'Hướng về',
     },
     destinations: {
       'old-quarter': 'Khu phố cổ',
@@ -430,6 +436,9 @@ const translations: Record<Language, Translations> = {
       railFootnote: 'Or ride-hail — for extra luggage, missed buses, or 3+ people.',
       rideHailTitle: 'Or ride-hail',
       rideHailSubtitle: 'For extra luggage, a missed bus, or 3+ people.',
+      routeMap: 'Bus Route Map',
+      outbound: 'Outbound',
+      return: 'Return',
     },
     destinations: {
       'old-quarter': 'Old Quarter',
