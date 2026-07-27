@@ -20,8 +20,18 @@ App giúp người đi từ sân bay về thành phố nắm rõ lịch trình x
 - T3 (SGN-T3): domestic/international (mới, opened April 2025)
 - Express Buses:
   - Route 109 — chỉ T3 (xe điện Phương Trang FUTA, 15,000 VND regular / 7,000 VND student, 05:30–22:00, headway 40–45 min) — KHÔNG đón tại T1/T2, hành khách T1/T2 phải dùng TIA shuttle miễn phí nội bộ hoặc đón tuyến 152
-  - Route 152 — T1/T2 (Làn B, 5,000 VND regular / 3,000 VND student, 05:00–22:00, headway ~12-20 min) — Phương Trang (FUTA City Bus), xe buýt điện
-- Grab/Taxi công nghệ pickup tại SGN-T3: Tầng 1 Nhà để xe PNA — Cột 34 (không phải sảnh mặt tiền đường). Grab Việt Nam confirmed 2026-07-26. Tài xế chỉ được dừng tối đa 3 phút — user cần vào khu vực nhà xe trước khi bấm "Đặt xe".
+  - Route 152 — T1/T2 (Làn B curbside):
+    - **T1 (ga quốc nội cũ)**: cột B06–B09 (ra sảnh đến, đi thẳng ra Làn B).
+    - **T2 (ga quốc tế)**: **đối diện Cột số 4 và Cột số 5** sảnh đến quốc tế — ra cửa sảnh đến, đi thẳng qua Làn A (xe cá nhân) để sang Làn B. Có biển chỉ dẫn xe buýt công cộng màu vàng/xanh. Khu vực này cũng là nơi **shuttle bus miễn phí** nội bộ T1↔T2↔T3 đón khách (chưa model trong app).
+    - 5,000 VND regular / 3,000 VND student, 05:00–22:00, headway ~12-20 min
+    - Phương Trang (FUTA City Bus), xe buýt điện
+- Grab/Xe công nghệ pickup tại SGN (research 2026-07-27 từ mia.vn, vnexpress, be.com.vn, grab.com/vn):
+  - **T1 (ga cũ quốc nội)**: Tất cả Grab/Xanh SM/Be đón tại **Nhà để xe TCP** (tòa nhà đối diện sảnh ga đến), **Làn D1 tầng trệt** (Làn D2 là overflow). Làn A/B/C trước sảnh ga là xe cá nhân + Bus 152, KHÔNG phải ride-hail. User phải đi qua các làn A/B/C, vào TCP, rồi mới bấm đặt xe.
+  - **T2 (ga quốc tế — RIÊNG biệt T1)**: Đón tại **Bãi xe công nghệ quốc tế** (ngoài trời), truy cập từ **Cột 5GF**: ra cửa sảnh đến → rẽ trái → men hành lang sảnh đến (qua Cột 8GF, 9GF...) → đến Cột 5GF cuối sảnh → rẽ phải theo vạch sang đường → vào bãi xe. App hiển thị **Làn B hoặc Làn D** tuỳ cuốc (không có lane cố định như T1). Tài xế T2 KHÔNG pool với T1.
+  - **T3 (ga mới, mở 04/2025)**: Tầng 1 Nhà để xe PNA — Cột 34. Grab VN confirmed. Tài xế dừng tối đa 3 phút.
+  - **Lưu ý xe máy** (GrabBike, BeBike): KHÔNG đón ở các làn — phải gặp ngoài cổng TCP (T1) hoặc cổng soát vé ô tô (T2) hướng đường Trường Sơn. Out-of-scope: project chưa model vehicle-type split.
+  - **Phí bến bãi**: Giá trên app thường chưa gồm phí cổng/nhà xe (~10k-15k VND) — user thanh toán thêm cho tài xế.
+  - **Cảnh báo chèo kéo** (T2): Khu vực bãi xe công nghệ quốc tế có tình trạng chèo kéo — user tuyệt đối không lên xe không trùng biển số trên app.
 
 **SGN Destinations** (Quận trung tâm Sài Gòn):
 - Q1, Q3, Q5, Bình Thạnh, Phú Nhuận

@@ -66,7 +66,7 @@ const sgnRoute: BusRoute = {
   },
   pickupPoints: [
     { terminalId: 'SGN-T1', location: 'Làn B ga quốc nội, cột B06–B09' },
-    { terminalId: 'SGN-T2', location: 'Làn B gần sảnh đến quốc tế' },
+    { terminalId: 'SGN-T2', location: 'Làn B, đối diện Cột số 4 và Cột số 5 sảnh đến quốc tế' },
   ],
   scheduleSource: {
     kind: 'explicit',
@@ -202,10 +202,34 @@ describe('ResultPage', () => {
     expect(screen.getByText(/Đã lỡ chuyến cuối/)).toBeInTheDocument();
   });
 
-  it('renders airport-specific Grab pickup location (pillar 34, PNA) when provided', () => {
-    // Build a SGN result with the Grab-specific pickup hint set, mimicking
-    // what calculateResult propagates from airport.grabEstimates.pickupLocation.
-    const resultWithGrabPickup: ArrivalResult = {
+  it('renders SGN-T1 Grab pickup hint at TCP — Làn D1 (not Làn B)', () => {
+    // SGN-T1 is the old domestic terminal. Ride-hail (Grab/Be/Xanh SM)
+    // picks up at the TCP parking building across from the arrival hall,
+    // Lane D1 ground floor — NOT at Làn B (which is the Bus 152 lane).
+    // This fixture mimics what calculateResult now produces for SGN-T1.
+    const resultWithTcpPickup: ArrivalResult = {
+      ...sgnResult,
+      grab: {
+        ...sgnResult.grab,
+        pickupLocation: 'Tầng trệt Nhà để xe TCP — Làn D1',
+      },
+    };
+    renderWithLang(
+      <ResultPage
+        onBack={jest.fn()}
+        formData={{ ...sgnForm, terminal: 'SGN-T1' }}
+        result={resultWithTcpPickup}
+      />,
+    );
+    expect(
+      screen.getAllByText(/Tầng trệt Nhà để xe TCP — Làn D1/).length,
+    ).toBeGreaterThanOrEqual(1);
+  });
+
+  it('renders SGN-T3 Grab pickup hint at PNA — pillar 34', () => {
+    // SGN-T3 (opened April 2025) is a separate building with its own
+    // parking. Grab concentrates at pillar 34, Floor 1 of PNA building.
+    const resultWithPnaPickup: ArrivalResult = {
       ...sgnResult,
       grab: {
         ...sgnResult.grab,
@@ -216,7 +240,7 @@ describe('ResultPage', () => {
       <ResultPage
         onBack={jest.fn()}
         formData={{ ...sgnForm, terminal: 'SGN-T3' }}
-        result={resultWithGrabPickup}
+        result={resultWithPnaPickup}
       />,
     );
     expect(
@@ -225,52 +249,56 @@ describe('ResultPage', () => {
   });
 
   it('falls back to bus pickup point when Grab pickup location is missing', () => {
-    // SGN-T1/T2 do not have a special Grab pickup hint — UI must fall back
-    // to the bus route's pickup point (the existing pre-Option-1 behavior).
+    // HAN-T1/T2 do not have a special Grab pickup hint — UI must fall back
+    // to the bus route's pickup point (HAN bus 86 pickup is curbside
+    // same as ride-hail, so the bus pickup label is correct for both).
     renderWithLang(
       <ResultPage
         onBack={jest.fn()}
-        formData={sgnForm}
-        result={sgnResult}
+        formData={hanForm}
+        result={hanResult}
       />,
     );
     expect(
-      screen.getAllByText(/Làn B gần sảnh đến quốc tế/).length,
+      screen.getAllByText(/Tầng 1 sảnh đến/).length,
     ).toBeGreaterThanOrEqual(1);
   });
 
   it('does NOT override bus pickup with Grab pickup hint (separate render paths)', () => {
-    // REGRESSION GUARD: when Grab pickupLocation is set (SGN-T3), the bus
-    // timeline must still show the bus pickup point (Làn B for Bus 152), NOT
-    // the Grab pillar 34 hint. The two pickup locations render in different
-    // sections of the page and must come from different sources.
+    // REGRESSION GUARD: when Grab pickupLocation is set, the bus timeline
+    // must still show the bus pickup point (Làn B for Bus 152), NOT the
+    // Grab-specific ride-hail lot hint. The two pickup locations render in
+    // different sections of the page and must come from different sources.
     //
     // We use SGN-T2 here because sgnRoute (Bus 152) only has pickup points
     // for T1/T2 — SGN-T3 doesn't have a bus pickup point. The Grab pickup
-    // hint is then a *separate* string that should appear ONLY in the
-    // Grab row, not in the bus timeline.
+    // hint at SGN-T2 is the international ride-hail lot via pillar 5GF
+    // (outside the terminal), a *separate* location from Bus 152's Làn B
+    // curbside.
     const resultWithGrabPickup: ArrivalResult = {
       ...sgnResult,
       grab: {
         ...sgnResult.grab,
-        pickupLocation: 'Tầng 1 Nhà để xe PNA — Cột 34',
+        pickupLocation:
+          'Bãi xe công nghệ quốc tế — vào từ Cột 5GF',
       },
     };
     renderWithLang(
       <ResultPage
         onBack={jest.fn()}
-        formData={sgnForm} /* SGN-T2 — fixture has 'Làn B gần sảnh đến quốc tế' */
+        formData={sgnForm} /* SGN-T2 — fixture has 'Làn B, đối diện Cột số 4 và Cột số 5' */
         result={resultWithGrabPickup}
       />,
     );
     // Bus timeline label must reference the bus pickup (Làn B), not the
-    // Grab-only pillar 34 — these are physically different locations.
+    // Grab-only ride-hail lot hint. Làn B is curbside; Cột 5GF is on
+    // the other side of the arrival corridor (different building/area).
     const donMarkers = screen.getAllByText(/Điểm đón:/);
     const busPickupMarkers = donMarkers.filter((el) =>
       /Làn B/.test(el.textContent ?? ''),
     );
     const grabPickupMarkers = donMarkers.filter((el) =>
-      /Cột 34/.test(el.textContent ?? ''),
+      /Cột 5GF/.test(el.textContent ?? ''),
     );
     expect(busPickupMarkers.length).toBeGreaterThanOrEqual(1);
     expect(grabPickupMarkers.length).toBeGreaterThanOrEqual(1);

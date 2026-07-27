@@ -50,13 +50,21 @@ export function calculateResult(formData: ArrivalFormData): ArrivalResult | null
     isPeak,
   );
 
+  // Resolve per-terminal Grab pickup hint. GrabEstimate.pickupLocations is
+  // keyed by terminal id; we copy the resolved string into the flat
+  // ArrivalResult.grab.pickupLocation so the result UI does not need to
+  // re-look-up per terminal. When a terminal has no specific hint (e.g.
+  // HAN terminals where ride-hail is curbside same as bus), this is
+  // undefined and the UI falls back to the bus pickup point.
+  const resolvedGrabPickupLocation = grabEstimate.pickupLocations?.[formData.terminal];
+
   return {
     bus: busRecommendation,
     grab: {
       available: true,
       priceEstimate: `${grabEstimate.priceRange.min.toLocaleString()} - ${grabEstimate.priceRange.max.toLocaleString()} VND`,
       travelTime: grabTravelTime,
-      pickupLocation: grabEstimate.pickupLocation,
+      pickupLocation: resolvedGrabPickupLocation,
     },
     direction: {
       description: `Đi bộ ${destination.walkingMinutes} phút đến điểm đón xe buýt ${terminalInfo.name}`,

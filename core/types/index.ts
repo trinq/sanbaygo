@@ -73,13 +73,17 @@ export interface GrabEstimate {
     peak: { min: number; max: number };
   };
   /**
-   * Optional pickup-location hint shown in result UI.
-   * Some terminals (e.g. SGN-T3) concentrate ride-hail pickups in a
-   * designated area (pillar 34, Floor 1 of PNA parking) rather than at
-   * curbside. Leave undefined when not needed (UI falls back to bus
-   * pickup point or terminal name).
+   * Per-terminal pickup-location hints shown in result UI.
+   *
+   * Why per-terminal: ride-hail pickup points differ across terminals
+   * even within the same airport. At SGN, T1/T2 share the TCP parking
+   * building (Lane D1 ground floor), while T3 (opened April 2025) uses
+   * the separate PNA parking building (pillar 34, Floor 1).
+   *
+   * When omitted, the UI falls back to the bus pickup point or the
+   * terminal name. Set this when ride-hail does NOT pick up curbside.
    */
-  pickupLocation?: string;
+  pickupLocations?: Partial<Record<TerminalId, string>>;
 }
 
 export interface TimeRange {
