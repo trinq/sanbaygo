@@ -48,6 +48,10 @@ coverage/
 *.log
 test-results/
 
+# Scratch — throwaway research, screenshots, scratch specs
+# (broken links inside .scratch/ are intentional — not for repo)
+.scratch/
+
 # Playwright (pre-existing, generated test artifacts — not committed)
 web/e2e/
 web/playwright-report/
