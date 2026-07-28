@@ -1,0 +1,55 @@
+%% SanBayGo wiki diagram.
+%% Source of truth — render to ./wiki-diagram.svg via `npm run wiki:render`.
+%% Hand-edit this file, then re-render.
+
+flowchart LR
+  subgraph Sources["Raw sources"]
+    direction TB
+    CTX["CONTEXT.md"]
+    AG["AGENTS.md"]
+    FL["feature_list.json"]
+    CORE["core/"]
+    WEB["web/"]
+    API["api/"]
+    ADR["docs/adr/"]
+    PLANS["docs/superpowers/plans/"]
+  end
+
+  subgraph Wiki["wiki/ (curated)"]
+    direction TB
+    PO["project-overview"]
+    ARC["architecture"]
+    DM["domain-model"]
+    DS["data-sources"]
+    SH["sessions-history"]
+    DEC["decisions"]
+    CON["conventions"]
+    TOO["tooling"]
+    LOG["log.md"]
+  end
+
+  CTX --> PO
+  CTX --> DM
+  CTX --> DS
+  AG --> CON
+  AG --> TOO
+  FL --> SH
+  CORE --> ARC
+  CORE --> DS
+  WEB --> ARC
+  WEB --> TOO
+  API --> ARC
+  ADR --> DEC
+  PLANS --> SH
+
+  PO -.lint C5.-> Wiki
+  ARC -.lint C5.-> Wiki
+  DM -.lint C5.-> Wiki
+  DS -.lint C5.-> Wiki
+  SH -.lint C5.-> Wiki
+  DEC -.lint C5.-> Wiki
+  CON -.lint C5.-> Wiki
+  TOO -.lint C5.-> Wiki
+
+  Wiki -->|"render via mmdc"| SVG["./wiki-diagram.svg"]
+  SVG -.inspect.-> Wiki

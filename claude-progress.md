@@ -1,5 +1,13 @@
 # SanBayGo Progress Log
 
+> **[DEPRECATED — 2026-07-29]** This file is kept as **read-only raw history**.
+> New session entries go to [`wiki/log.md`](wiki/log.md).
+> See [`wiki/README.md`](wiki/README.md) for the wiki workflow.
+> Do not append to this file. The original content below is preserved
+> unmodified.
+
+---
+
 ## Current Verified State
 
 **Repository root directory:** `/Users/trinq/Developer/sanbaygo`
