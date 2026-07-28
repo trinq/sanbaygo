@@ -3,7 +3,7 @@ import { LanguageProvider } from '../../../src/contexts/LanguageContext';
 import { Hero } from '../../../src/components/Landing/Hero';
 
 describe('Hero', () => {
-  it('renders the headline with the accent treatment', () => {
+  it('renders the headline', () => {
     render(
       <LanguageProvider>
         <Hero />
@@ -11,7 +11,7 @@ describe('Hero', () => {
     );
     // Headline is wrapped in an <h1>; chip text is in a <div> — restrict to h1.
     const headline = screen.getByRole('heading', { level: 1 });
-    expect(headline.textContent).toMatch(/nhanh nhất/i);
+    expect(headline.textContent).toMatch(/Chỉ cần nhập giờ đáp/i);
   });
 
   it('renders the tagline pill', () => {

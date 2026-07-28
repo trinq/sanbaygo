@@ -306,9 +306,8 @@ const translations: Record<Language, Translations> = {
     },
     landing: {
       pill: 'Dịch vụ xe đưa đón sân bay',
-      headline: 'Cách nhanh nhất từ sân bay về trung tâm.',
-      subtitle:
-        'So sánh xe buýt, Grab, taxi trong 5 giây. Không cần tải app, không cần đăng ký.',
+      headline: 'Chỉ cần nhập giờ đáp — biết ngay xe gì về được',
+      subtitle: 'SanBayGo so sánh xe buýt công cộng và Grab để bạn chọn phương tiện tốt nhất từ sân bay Nội Bài hoặc Tân Sơn Nhất về trung tâm Hà Nội hoặc TP.HCM.',
       benefitFast: 'Nhanh nhất',
       benefitFastDesc: 'Lịch trình 26 chuyến/ngày',
       benefitSafe: 'An toàn',
@@ -476,9 +475,9 @@ const translations: Record<Language, Translations> = {
     },
     landing: {
       pill: 'Airport transfer service',
-      headline: 'The fastest way from the airport to the city.',
+      headline: 'Enter your arrival time — know which ride to take.',
       subtitle:
-        'Compare bus, Grab, and taxi in 5 seconds. No app to install, no account to create.',
+        'SanBayGo compares public buses and Grab so you can pick the best option from Noi Bai or Tan Son Nhat airports to central Hanoi or Ho Chi Minh City.',
       benefitFast: 'Fastest',
       benefitFastDesc: '26 daily departures',
       benefitSafe: 'Safe',
