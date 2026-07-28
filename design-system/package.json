@@ -2,7 +2,7 @@
   "name": "@sanbaygo/design-system",
   "version": "0.1.0",
   "private": true,
-  "description": "Apple-minimal design tokens for SanBayGo (palette, typography, spacing, radii, shadows). CSS-vars + typed JS object, single source.",
+  "description": "Apple-minimal design tokens for Frylane (palette, typography, spacing, radii, shadows). CSS-vars + typed JS object, single source.",
   "main": "tokens/index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit"

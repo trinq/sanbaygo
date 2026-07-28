@@ -1,4 +1,4 @@
-# SanBayGo Design System — MASTER
+# Frylane Design System — MASTER
 
 ## Mood
 

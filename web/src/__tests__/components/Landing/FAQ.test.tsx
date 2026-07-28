@@ -20,8 +20,8 @@ describe('FAQ', () => {
         <FAQ />
       </LanguageProvider>
     );
-    const firstQuestion = screen.getByText(/SanBayGo có mất phí không?/);
+    const firstQuestion = screen.getByText(/Frylane có mất phí không?/);
     fireEvent.click(firstQuestion);
-    expect(screen.getByText(/Không. SanBayGo hoàn toàn miễn phí/)).toBeInTheDocument();
+    expect(screen.getByText(/Không. Frylane hoàn toàn miễn phí/)).toBeInTheDocument();
   });
 });

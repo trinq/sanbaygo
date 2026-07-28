@@ -3,14 +3,13 @@ import { LanguageProvider } from '../../../src/contexts/LanguageContext';
 import { Footer } from '../../../src/components/Landing/Footer';
 
 describe('Footer (Figma Make reference)', () => {
-  it('renders brand mark with "SanBayGo" wordmark', () => {
+  it('renders brand mark with "Frylane" wordmark', () => {
     render(
       <LanguageProvider>
         <Footer />
       </LanguageProvider>,
     );
-    expect(screen.getByText(/^SanBay/)).toBeTruthy();
-    expect(screen.getByText(/^Go$/)).toBeTruthy();
+    expect(screen.getByText(/^Frylane/)).toBeTruthy();
   });
 
   it('renders the Vietnamese slogan "Cách đơn giản nhất để di chuyển từ sân bay về trung tâm"', () => {

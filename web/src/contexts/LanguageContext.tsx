@@ -201,7 +201,7 @@ interface Translations {
 const translations: Record<Language, Translations> = {
   vi: {
     header: {
-      title: 'SanBayGo',
+      title: 'Frylane',
       languageToggle: 'English',
     },
     form: {
@@ -314,17 +314,17 @@ const translations: Record<Language, Translations> = {
     pages: {
       privacy: {
         title: 'Chính sách bảo mật',
-        content: 'SanBayGo không lưu trữ, thu thập, hoặc chia sẻ bất kỳ dữ liệu cá nhân nào của bạn. Ứng dụng chỉ sử dụng thông tin bạn nhập (giờ đáp, sân bay, điểm đến) để tính toán và hiển thị kết quả trong phiên làm việc hiện tại. Không có cookie, không có analytics, không có theo dõi.',
+        content: 'Frylane không lưu trữ, thu thập, hoặc chia sẻ bất kỳ dữ liệu cá nhân nào của bạn. Ứng dụng chỉ sử dụng thông tin bạn nhập (giờ đáp, sân bay, điểm đến) để tính toán và hiển thị kết quả trong phiên làm việc hiện tại. Không có cookie, không có analytics, không có theo dõi.',
         back: '← Quay về trang chủ',
       },
       terms: {
         title: 'Điều khoản sử dụng',
-        content: 'SanBayGo là công cụ tham khảo miễn phí. Thông tin lịch trình xe buýt và ước tính giá Grab được cung cấp như tham khảo và có thể không chính xác hoàn toàn. Người dùng chịu trách nhiệm kiểm tra thông tin trực tiếp với đơn vị vận tải trước khi di chuyển. SanBayGo không chịu trách nhiệm về bất kỳ tổn thất nào phát sinh từ việc sử dụng ứng dụng.',
+        content: 'Frylane là công cụ tham khảo miễn phí. Thông tin lịch trình xe buýt và ước tính giá Grab được cung cấp như tham khảo và có thể không chính xác hoàn toàn. Người dùng chịu trách nhiệm kiểm tra thông tin trực tiếp với đơn vị vận tải trước khi di chuyển. Frylane không chịu trách nhiệm về bất kỳ tổn thất nào phát sinh từ việc sử dụng ứng dụng.',
         back: '← Quay về trang chủ',
       },
     },
     layout: {
-      brand: 'SanBayGo',
+      brand: 'Frylane',
       sidebar: {
         search: 'Tìm chuyến gần đây',
         sectionPlan: 'PLAN',
@@ -336,7 +336,7 @@ const translations: Record<Language, Translations> = {
         navPeakHours: 'Giờ cao điểm',
       },
       topBar: {
-        title: 'SanBayGo',
+        title: 'Frylane',
         menuLabel: 'menu',
       },
       tabletTopBar: {
@@ -349,7 +349,7 @@ const translations: Record<Language, Translations> = {
     landing: {
       pill: 'Dịch vụ xe đưa đón sân bay',
       headline: 'Chỉ cần nhập giờ đáp — biết ngay xe gì về được',
-      subtitle: 'SanBayGo so sánh xe buýt công cộng và Grab để bạn chọn phương tiện tốt nhất từ sân bay Nội Bài hoặc Tân Sơn Nhất về trung tâm Hà Nội hoặc TP.HCM.',
+      subtitle: 'Frylane so sánh xe buýt công cộng và Grab để bạn chọn phương tiện tốt nhất từ sân bay Nội Bài hoặc Tân Sơn Nhất về trung tâm Hà Nội hoặc TP.HCM.',
       benefitFast: 'Nhanh nhất',
       benefitFastDesc: 'Lịch trình 26 chuyến/ngày',
       benefitSafe: 'An toàn',
@@ -374,12 +374,12 @@ const translations: Record<Language, Translations> = {
         tagline: 'Không cần tải app, không cần đăng ký',
       },
       tagline: 'Cách đơn giản nhất để di chuyển từ sân bay về trung tâm.',
-      footer: '© 2026 SanBayGo · Sản phẩm của Trinq',
+      footer: '© 2026 Frylane · Sản phẩm của Trinq',
       assumption: 'Đang giả định nhà ga T1 + hành lý xách tay — chi tiết hơn sau.',
       legalTerms: 'Điều khoản',
       legalPrivacy: 'Bảo mật',
       legalSupport: 'Hỗ trợ',
-      navBrand: 'SanBayGo',
+      navBrand: 'Frylane',
       navBrandAccent: 'Go',
       howItWorks: {
         title: 'Cách hoạt động',
@@ -405,8 +405,8 @@ const translations: Record<Language, Translations> = {
         title: 'Câu hỏi thường gặp',
         questions: [
           {
-            q: 'SanBayGo có mất phí không?',
-            a: 'Không. SanBayGo hoàn toàn miễn phí sử dụng. Chúng tôi không thu phí, không yêu cầu đăng ký, và không lưu trữ dữ liệu cá nhân của bạn.',
+            q: 'Frylane có mất phí không?',
+            a: 'Không. Frylane hoàn toàn miễn phí sử dụng. Chúng tôi không thu phí, không yêu cầu đăng ký, và không lưu trữ dữ liệu cá nhân của bạn.',
           },
           {
             q: 'Xe buýt có đúng giờ không?',
@@ -414,7 +414,7 @@ const translations: Record<Language, Translations> = {
           },
           {
             q: 'Tôi nên chọn xe buýt hay Grab?',
-            a: 'Xe buýt rẻ hơn nhiều (15.000-50.000đ) nhưng cần thời gian. Grab nhanh hơn nhưng giá cao hơn và phụ thuộc vào tắc đường. SanBayGo hiển thị cả hai để bạn quyết định dựa trên thời gian và ngân sách.',
+            a: 'Xe buýt rẻ hơn nhiều (15.000-50.000đ) nhưng cần thời gian. Grab nhanh hơn nhưng giá cao hơn và phụ thuộc vào tắc đường. Frylane hiển thị cả hai để bạn quyết định dựa trên thời gian và ngân sách.',
           },
           {
             q: 'Làm sao bắt được Grab tại sân bay?',
@@ -430,7 +430,7 @@ const translations: Record<Language, Translations> = {
   },
   en: {
     header: {
-      title: 'SanBayGo',
+      title: 'Frylane',
       languageToggle: 'Tiếng Việt',
     },
     form: {
@@ -543,17 +543,17 @@ const translations: Record<Language, Translations> = {
     pages: {
       privacy: {
         title: 'Privacy Policy',
-        content: 'SanBayGo does not store, collect, or share any of your personal data. The app only uses the information you enter (arrival time, airport, destination) to calculate and display results within the current session. No cookies, no analytics, no tracking.',
+        content: 'Frylane does not store, collect, or share any of your personal data. The app only uses the information you enter (arrival time, airport, destination) to calculate and display results within the current session. No cookies, no analytics, no tracking.',
         back: '← Back to home',
       },
       terms: {
         title: 'Terms of Service',
-        content: 'SanBayGo is a free reference tool. Bus schedule information and Grab price estimates are provided for reference only and may not be entirely accurate. Users are responsible for verifying information directly with the transportation provider before traveling. SanBayGo is not liable for any losses arising from the use of the application.',
+        content: 'Frylane is a free reference tool. Bus schedule information and Grab price estimates are provided for reference only and may not be entirely accurate. Users are responsible for verifying information directly with the transportation provider before traveling. Frylane is not liable for any losses arising from the use of the application.',
         back: '← Back to home',
       },
     },
     layout: {
-      brand: 'SanBayGo',
+      brand: 'Frylane',
       sidebar: {
         search: 'Find recent trip',
         sectionPlan: 'PLAN',
@@ -565,7 +565,7 @@ const translations: Record<Language, Translations> = {
         navPeakHours: 'Peak hours',
       },
       topBar: {
-        title: 'SanBayGo',
+        title: 'Frylane',
         menuLabel: 'menu',
       },
       tabletTopBar: {
@@ -579,7 +579,7 @@ const translations: Record<Language, Translations> = {
       pill: 'Airport transfer service',
       headline: 'Enter your arrival time — know which ride to take.',
       subtitle:
-        'SanBayGo compares public buses and Grab so you can pick the best option from Noi Bai or Tan Son Nhat airports to central Hanoi or Ho Chi Minh City.',
+        'Frylane compares public buses and Grab so you can pick the best option from Noi Bai or Tan Son Nhat airports to central Hanoi or Ho Chi Minh City.',
       benefitFast: 'Fastest',
       benefitFastDesc: '26 daily departures',
       benefitSafe: 'Safe',
@@ -604,13 +604,13 @@ const translations: Record<Language, Translations> = {
         tagline: 'No app to download, no account needed',
       },
       tagline: 'The simplest way from the airport to the city center.',
-      footer: '© 2026 SanBayGo · Built by Trinq',
+      footer: '© 2026 Frylane · Built by Trinq',
       assumption: 'Assuming Terminal T1 + carry-on luggage — more details later.',
       legalTerms: 'Terms',
       legalPrivacy: 'Privacy',
       legalSupport: 'Support',
-      navBrand: 'SanBay',
-      navBrandAccent: 'Go',
+      navBrand: 'Frylane',
+      navBrandAccent: '',
       howItWorks: {
         title: 'How It Works',
         steps: [
@@ -635,8 +635,8 @@ const translations: Record<Language, Translations> = {
         title: 'Frequently Asked Questions',
         questions: [
           {
-            q: 'Is SanBayGo free?',
-            a: 'Yes, SanBayGo is completely free to use. We charge no fees, require no registration, and store no personal data.',
+            q: 'Is Frylane free?',
+            a: 'Yes, Frylane is completely free to use. We charge no fees, require no registration, and store no personal data.',
           },
           {
             q: 'Do buses run on schedule?',
@@ -644,7 +644,7 @@ const translations: Record<Language, Translations> = {
           },
           {
             q: 'Should I choose bus or Grab?',
-            a: 'Buses are much cheaper (15,000-50,000 VND) but take longer. Grab is faster but more expensive and affected by traffic. SanBayGo shows both options so you can decide based on time and budget.',
+            a: 'Buses are much cheaper (15,000-50,000 VND) but take longer. Grab is faster but more expensive and affected by traffic. Frylane shows both options so you can decide based on time and budget.',
           },
           {
             q: 'How do I catch a Grab at the airport?',

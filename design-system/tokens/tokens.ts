@@ -1,4 +1,4 @@
-// Single source of truth for SanBayGo design tokens — Figma Make landing direction.
+// Single source of truth for Frylane design tokens — Figma Make landing direction.
 // Sky-blue primary with glass surfaces, Plus Jakarta Sans typography, amber accent.
 // CSS-vars (tokens.css) MUST mirror these values — see tokens-parity.test.ts.
 
