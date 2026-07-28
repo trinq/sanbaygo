@@ -1,24 +1,18 @@
-import { Star } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export function SocialProof() {
   const { t } = useLanguage();
   return (
     <div className="mt-6 flex items-center gap-3">
-      <div className="flex -space-x-2">
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="h-9 w-9 rounded-full border-2 border-white bg-gradient-to-br from-sky-300 to-sky-500"
-            aria-hidden="true"
-          />
-        ))}
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
+        <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
       </div>
-      <div className="flex items-center gap-1">
-        <Star size={16} className="fill-amber-400 text-amber-400" aria-hidden="true" />
-        <span className="text-sm font-semibold text-ink">4.9</span>
+      <div>
+        <p className="font-semibold text-ink">{t.landing.socialProof.badge}</p>
+        <p className="text-sm text-ink-soft">{t.landing.socialProof.tagline}</p>
       </div>
-      <span className="text-sm text-ink-soft">{t.landing.socialProof}</span>
     </div>
   );
 }

@@ -156,7 +156,10 @@ interface Translations {
     fieldChecked: string;
     cta: string;
     ctaShort: string;
-    socialProof: string;
+    socialProof: {
+      badge: string;
+      tagline: string;
+    };
     tagline: string;
     footer: string;
     assumption: string;
@@ -327,7 +330,10 @@ const translations: Record<Language, Translations> = {
       fieldChecked: 'Hành lý ký gửi',
       cta: 'Tìm phương tiện',
       ctaShort: 'Đặt nhanh',
-      socialProof: '4.9 điểm từ 12.000+ hành khách',
+      socialProof: {
+        badge: 'Miễn phí',
+        tagline: 'Không cần tải app, không cần đăng ký',
+      },
       tagline: 'Cách đơn giản nhất để di chuyển từ sân bay về trung tâm.',
       footer: '© 2026 SanBayGo · Sản phẩm của Trinq',
       assumption: 'Đang giả định nhà ga T1 + hành lý xách tay — chi tiết hơn sau.',
@@ -497,7 +503,10 @@ const translations: Record<Language, Translations> = {
       fieldChecked: 'Checked',
       cta: 'Find a ride',
       ctaShort: 'Book now',
-      socialProof: '4.9 rating from 12,000+ travelers',
+      socialProof: {
+        badge: 'Free',
+        tagline: 'No app to download, no account needed',
+      },
       tagline: 'The simplest way from the airport to the city center.',
       footer: '© 2026 SanBayGo · Built by Trinq',
       assumption: 'Assuming Terminal T1 + carry-on luggage — more details later.',

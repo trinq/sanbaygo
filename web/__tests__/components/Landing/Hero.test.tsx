@@ -41,9 +41,8 @@ describe('Hero', () => {
         <Hero />
       </LanguageProvider>,
     );
-    // "4.9" appears both in the rating <span> and inside the socialProof string.
-    // Target the rating specifically by its parent container.
-    expect(screen.getByText('4.9')).toBeTruthy();
+    expect(screen.getByText('Miễn phí')).toBeTruthy();
+    expect(screen.getByText('Không cần tải app, không cần đăng ký')).toBeTruthy();
   });
 
   it('renders the footer', () => {
