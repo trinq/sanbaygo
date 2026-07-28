@@ -2,12 +2,16 @@ import { renderHook, act } from '@testing-library/react';
 import { useLandingForm } from '../../src/hooks/useLandingForm';
 
 describe('useLandingForm', () => {
-  it('starts with empty airport, terminal, destination, and default arrivalTime 12:00', () => {
+  it('starts with empty airport, terminal, destination, and default arrivalTime rounded to nearest 5', () => {
     const { result } = renderHook(() => useLandingForm());
     expect(result.current.airport).toBeNull();
     expect(result.current.terminal).toBeNull();
     expect(result.current.destination).toBeNull();
-    expect(result.current.arrivalTime).toBe('12:00');
+    // Default arrivalTime is rounded to nearest 5 minutes from current time.
+    // Verify it's a valid HH:mm format.
+    expect(result.current.arrivalTime).toMatch(/^\d{2}:\d{2}$/);
+    const [h, m] = result.current.arrivalTime.split(':').map(Number);
+    expect(m % 5).toBe(0);
     expect(result.current.people).toBe(1);
     expect(result.current.carryOn).toBe(false);
     expect(result.current.checked).toBe(false);

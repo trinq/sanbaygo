@@ -3,6 +3,7 @@ export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   rootDir: '.',
+  watchman: false,
   testMatch: [
     '<rootDir>/__tests__/**/*.test.ts',
     '<rootDir>/__tests__/**/*.test.tsx',

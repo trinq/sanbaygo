@@ -34,7 +34,7 @@ describe('CountdownTimer', () => {
     expect(screen.getByText(/Còn khoảng 0 phút/)).toBeInTheDocument();
   });
 
-  it('hides countdown when more than 60 minutes remain until departure', () => {
+  it('hides countdown when more than 120 minutes remain until departure', () => {
     // Freeze clock at 12:00, bus departs at 14:50 → 2h 50min remaining
     jest.setSystemTime(new Date('2026-07-28T12:00:00'));
     render(<CountdownTimer trip={makeTrip('14:50')} />);
@@ -54,17 +54,48 @@ describe('CountdownTimer', () => {
     expect(screen.queryByText(/Còn khoảng/)).toBeNull();
   });
 
-  it('shows countdown at the 60-minute boundary (≤ 60 minutes remaining)', () => {
+  it('shows countdown at the 60-minute boundary (≤ 120 minutes remaining)', () => {
     // Freeze clock at 13:50, bus departs at 14:50 → exactly 60 minutes remaining
     jest.setSystemTime(new Date('2026-07-28T13:50:00'));
     render(<CountdownTimer trip={makeTrip('14:50')} />);
-    expect(screen.getByText(/Còn khoảng 60 phút/)).toBeInTheDocument();
+    expect(screen.getByText('Còn khoảng 1 tiếng')).toBeInTheDocument();
   });
 
-  it('hides countdown when 61 minutes remain (just outside the boundary)', () => {
-    // Freeze clock at 13:49, bus departs at 14:50 → 61 minutes remaining
-    jest.setSystemTime(new Date('2026-07-28T13:49:00'));
+  it('shows countdown at the 120-minute boundary (≤ 120 minutes remaining)', () => {
+    // Freeze clock at 12:50, bus departs at 14:50 → exactly 120 minutes remaining
+    jest.setSystemTime(new Date('2026-07-28T12:50:00'));
     render(<CountdownTimer trip={makeTrip('14:50')} />);
+    expect(screen.getByText(/Còn khoảng 2 tiếng/)).toBeInTheDocument();
+  });
+
+  it('hides countdown when 121 minutes remain (just outside the boundary)', () => {
+    // Freeze clock at 12:49, bus departs at 14:50 → 121 minutes remaining
+    jest.setSystemTime(new Date('2026-07-28T12:49:00'));
+    render(<CountdownTimer trip={makeTrip('14:50')} />);
+    expect(screen.queryByText(/Còn khoảng/)).toBeNull();
+  });
+
+  it('formats as "1 tiếng" when exactly 60 minutes remain', () => {
+    jest.setSystemTime(new Date('2026-07-28T14:00:00'));
+    render(<CountdownTimer trip={makeTrip('15:00')} />);
+    expect(screen.getByText('Còn khoảng 1 tiếng')).toBeInTheDocument();
+  });
+
+  it('formats as "1 tiếng 15 phút" when 75 minutes remain', () => {
+    jest.setSystemTime(new Date('2026-07-28T14:00:00'));
+    render(<CountdownTimer trip={makeTrip('15:15')} />);
+    expect(screen.getByText('Còn khoảng 1 tiếng 15 phút')).toBeInTheDocument();
+  });
+
+  it('formats as "2 tiếng" when exactly 120 minutes remain', () => {
+    jest.setSystemTime(new Date('2026-07-28T14:00:00'));
+    render(<CountdownTimer trip={makeTrip('16:00')} />);
+    expect(screen.getByText('Còn khoảng 2 tiếng')).toBeInTheDocument();
+  });
+
+  it('hides countdown when 150 minutes remain (above 120-minute window)', () => {
+    jest.setSystemTime(new Date('2026-07-28T14:00:00'));
+    render(<CountdownTimer trip={makeTrip('16:30')} />);
     expect(screen.queryByText(/Còn khoảng/)).toBeNull();
   });
 

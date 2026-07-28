@@ -10,7 +10,16 @@ import type {
 } from '@core';
 import { AIRPORTS, DESTINATIONS_BY_AIRPORT } from '@core';
 
-const DEFAULT_ARRIVAL_TIME = '12:00';
+function roundUpToNearest5(): string {
+  const now = new Date();
+  const totalMinutes = now.getHours() * 60 + now.getMinutes();
+  const rounded = Math.ceil(totalMinutes / 5) * 5;
+  const h = String(Math.floor(rounded / 60)).padStart(2, '0');
+  const m = String(rounded % 60).padStart(2, '0');
+  return `${h}:${m}`;
+}
+
+const DEFAULT_ARRIVAL_TIME = roundUpToNearest5();
 const DEFAULT_BAGGAGE: BaggageType = 'carry_on';
 
 const TIME_FORMAT = /^([01]\d|2[0-3]):[0-5]\d$/;

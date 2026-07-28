@@ -6,7 +6,7 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "test": "jest"
+    "test": "WATCHMAN_DISABLED=1 jest"
   },
   "dependencies": {
     "@react-native-picker/picker": "2.9.0",

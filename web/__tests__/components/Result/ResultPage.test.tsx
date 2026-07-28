@@ -161,7 +161,7 @@ describe('ResultPage', () => {
       />,
     );
     expect(screen.queryByText(/Nội Bài/)).toBeNull();
-    expect(screen.getByText(/Tân Sơn Nhất/)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Tân Sơn Nhất/ })).toBeInTheDocument();
     expect(screen.getByText(/SGN-T2|Nhà ga T2 \(quốc tế\)/)).toBeInTheDocument();
     expect(screen.queryByText(/Tuyến Buýt 86/)).toBeNull();
     expect(screen.getByText(/Tuyến Buýt 152/)).toBeInTheDocument();

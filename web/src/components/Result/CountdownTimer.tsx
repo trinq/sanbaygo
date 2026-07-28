@@ -9,7 +9,18 @@ interface CountdownTimerProps {
 }
 
 const TICK_MS = 60_000;
-const VISIBLE_WINDOW_MINUTES = 60;
+const VISIBLE_WINDOW_MINUTES = 120;
+
+function formatCountdown(minutes: number): string {
+  if (minutes >= 60) {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    const hourWord = h === 1 ? 'tiếng' : 'tiếng';
+    if (m === 0) return `Còn khoảng ${h} ${hourWord}`;
+    return `Còn khoảng ${h} ${hourWord} ${m} phút`;
+  }
+  return `Còn khoảng ${minutes} phút`;
+}
 
 /**
  * Parses `HH:mm` into a Date anchored to today in the device's local timezone.
@@ -21,8 +32,7 @@ function parseLocalTime(hhmm: string, now: Date): Date | null {
   const hours = Number(match[1]);
   const minutes = Number(match[2]);
   if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) return null;
-  const target = new Date(now);
-  target.setHours(hours, minutes, 0, 0);
+  const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, 0, 0);
   return target;
 }
 
@@ -58,9 +68,7 @@ export function CountdownTimer({ trip }: CountdownTimerProps) {
 
   return (
     <div className={styles.countdown} data-testid="countdown-timer">
-      <span className={styles.countdownText}>
-        Còn khoảng {minutes} phút
-      </span>
+      <span className={styles.countdownText}>{formatCountdown(minutes)}</span>
     </div>
   );
 }
