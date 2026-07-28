@@ -3,8 +3,7 @@ last_verified: 2026-07-29
 sources:
   - path: feature_list.json
   - path: docs/superpowers/plans
-  - path: wiki/log.md
-sources_note: Session chronology comes from feature_list.json's `evidence` (commit SHAs back to rn-project-scaffold) and the implementation plans in docs/superpowers/plans/. Per-session detail lives in wiki/log.md (which supersedes the deprecated claude-progress.md).
+sources_note: Session chronology comes from feature_list.json's `evidence` (commit SHAs back to rn-project-scaffold) and the implementation plans in docs/superpowers/plans/. Per-session detail lives in wiki/log.md (which supersedes the deprecated claude-progress.md) — log.md is a sink, not a source, so it is not in `sources:`.
 summary: Chronology of agent sessions — high-level milestones, with raw detail in wiki/log.md.
 ---
 
