@@ -176,6 +176,13 @@ interface Translations {
         description: string;
       }[];
     };
+    faq: {
+      title: string;
+      questions: {
+        q: string;
+        a: string;
+      }[];
+    };
   };
 }
 
@@ -370,6 +377,31 @@ const translations: Record<Language, Translations> = {
           },
         ],
       },
+      faq: {
+        title: 'Câu hỏi thường gặp',
+        questions: [
+          {
+            q: 'SanBayGo có mất phí không?',
+            a: 'Không. SanBayGo hoàn toàn miễn phí sử dụng. Chúng tôi không thu phí, không yêu cầu đăng ký, và không lưu trữ dữ liệu cá nhân của bạn.',
+          },
+          {
+            q: 'Xe buýt có đúng giờ không?',
+            a: 'Giờ xe buýt trong ứng dụng là lịch trình chính thức. Trong giờ cao điểm (7-9h sáng, 5-7h tối), xe có thể chậm 10-20 phút. Chúng tôi khuyến nghị đến điểm bắt xe sớm 15 phút.',
+          },
+          {
+            q: 'Tôi nên chọn xe buýt hay Grab?',
+            a: 'Xe buýt rẻ hơn nhiều (15.000-50.000đ) nhưng cần thời gian. Grab nhanh hơn nhưng giá cao hơn và phụ thuộc vào tắc đường. SanBayGo hiển thị cả hai để bạn quyết định dựa trên thời gian và ngân sách.',
+          },
+          {
+            q: 'Làm sao bắt được Grab tại sân bay?',
+            a: 'Sau khi nhấn \'Đặt Grab\', bạn sẽ được chuyển đến ứng dụng Grab. Tại sân bay, điểm đón có thể cách sảnh 50-200m — đi theo biển chỉ dẫn hoặc hỏi nhân viên.',
+          },
+          {
+            q: 'Ứng dụng có hỗ trợ tiếng Anh không?',
+            a: 'Có. Nhấn nút \'EN\' trên thanh điều hướng để chuyển sang tiếng Anh. Toàn bộ giao diện và kết quả đều được dịch.',
+          },
+        ],
+      },
     },
   },
   en: {
@@ -560,6 +592,31 @@ const translations: Record<Language, Translations> = {
             number: '3',
             label: 'Choose and go',
             description: 'Book Grab or head to the bus stop',
+          },
+        ],
+      },
+      faq: {
+        title: 'Frequently Asked Questions',
+        questions: [
+          {
+            q: 'Is SanBayGo free?',
+            a: 'Yes, SanBayGo is completely free to use. We charge no fees, require no registration, and store no personal data.',
+          },
+          {
+            q: 'Do buses run on schedule?',
+            a: 'The schedule in the app reflects official times. During peak hours (7-9 AM, 5-7 PM), buses may be delayed 10-20 minutes. We recommend arriving at the bus stop 15 minutes early.',
+          },
+          {
+            q: 'Should I choose bus or Grab?',
+            a: 'Buses are much cheaper (15,000-50,000 VND) but take longer. Grab is faster but more expensive and affected by traffic. SanBayGo shows both options so you can decide based on time and budget.',
+          },
+          {
+            q: 'How do I catch a Grab at the airport?',
+            a: 'After tapping \'Book Grab\', you will be redirected to the Grab app. At the airport, the pickup point may be 50-200m from the terminal — follow the signs or ask staff.',
+          },
+          {
+            q: 'Does the app support English?',
+            a: 'Yes. Tap the \'EN\' button on the navigation bar to switch to English. The entire interface and results will be translated.',
           },
         ],
       },
