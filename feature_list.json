@@ -416,7 +416,8 @@
       "status": "passing",
       "evidence": [
         "7240ead",
-        "bfc2a69"
+        "bfc2a69",
+        "3400581"
       ],
       "tests": [
         "web/__tests__/components/Landing/Hero.test.tsx",

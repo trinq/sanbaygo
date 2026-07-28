@@ -10,8 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(process.cwd(), 'src'),
-      '@core': resolve(coreRoot, 'index.ts'),
-      '@core/': `${coreRoot}/`,
+    '@core/': `${coreRoot}/`,
       '@design-system': resolve(process.cwd(), '..', 'design-system', 'tokens', 'index.ts'),
       '@design-system/': resolve(process.cwd(), '..', 'design-system') + '/',
     },
