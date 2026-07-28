@@ -5,6 +5,7 @@ import { Pill } from './Pill';
 import { BenefitChips } from './BenefitChips';
 import { SocialProof } from './SocialProof';
 import { Footer } from './Footer';
+import { HowItWorks } from './HowItWorks';
 
 export function Hero({ children }: { children?: ReactNode }) {
   const { t } = useLanguage();
@@ -43,6 +44,7 @@ export function Hero({ children }: { children?: ReactNode }) {
                 <p className="mt-4 max-w-xl text-lg text-ink-soft">{t.landing.subtitle}</p>
                 <SocialProof />
                 <BenefitChips />
+                <HowItWorks />
               </div>
               <div className="lg:col-span-5">
                 {children ?? (

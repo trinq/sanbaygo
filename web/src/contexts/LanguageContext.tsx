@@ -168,6 +168,14 @@ interface Translations {
     legalSupport: string;
     navBrand: string;
     navBrandAccent: string;
+    howItWorks: {
+      title: string;
+      steps: {
+        number: string;
+        label: string;
+        description: string;
+      }[];
+    };
   };
 }
 
@@ -342,6 +350,26 @@ const translations: Record<Language, Translations> = {
       legalSupport: 'Hỗ trợ',
       navBrand: 'SanBayGo',
       navBrandAccent: 'Go',
+      howItWorks: {
+        title: 'Cách hoạt động',
+        steps: [
+          {
+            number: '1',
+            label: 'Nhập giờ đáp',
+            description: 'Chọn sân bay, nhà ga và giờ máy bay đáp',
+          },
+          {
+            number: '2',
+            label: 'Xem ngay kết quả',
+            description: 'So sánh xe buýt và Grab — giá, thời gian, chuyến tiếp theo',
+          },
+          {
+            number: '3',
+            label: 'Chọn và di chuyển',
+            description: 'Nhấn đặt Grab hoặc đến điểm bắt xe buýt',
+          },
+        ],
+      },
     },
   },
   en: {
@@ -515,6 +543,26 @@ const translations: Record<Language, Translations> = {
       legalSupport: 'Support',
       navBrand: 'SanBay',
       navBrandAccent: 'Go',
+      howItWorks: {
+        title: 'How It Works',
+        steps: [
+          {
+            number: '1',
+            label: 'Enter arrival time',
+            description: 'Select airport, terminal, and flight arrival time',
+          },
+          {
+            number: '2',
+            label: 'See results instantly',
+            description: 'Compare bus and Grab — price, time, next departure',
+          },
+          {
+            number: '3',
+            label: 'Choose and go',
+            description: 'Book Grab or head to the bus stop',
+          },
+        ],
+      },
     },
   },
 };
