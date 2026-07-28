@@ -13,6 +13,8 @@ export function FAQ() {
           <div key={i} className="rounded-xl border border-surface-border bg-white">
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              aria-expanded={openIndex === i}
+              aria-controls={`faq-answer-${i}`}
               className="flex w-full items-center justify-between p-5 text-left font-medium text-ink"
             >
               {item.q}
@@ -21,12 +23,13 @@ export function FAQ() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             {openIndex === i && (
-              <div className="border-t border-surface-border px-5 pb-5 pt-4 text-ink-soft">
+              <div id={`faq-answer-${i}`} className="border-t border-surface-border px-5 pb-5 pt-4 text-ink-soft">
                 {item.a}
               </div>
             )}

@@ -114,10 +114,12 @@ interface Translations {
     privacy: {
       title: string;
       content: string;
+      back: string;
     };
     terms: {
       title: string;
       content: string;
+      back: string;
     };
   };
   layout: {
@@ -313,10 +315,12 @@ const translations: Record<Language, Translations> = {
       privacy: {
         title: 'Chính sách bảo mật',
         content: 'SanBayGo không lưu trữ, thu thập, hoặc chia sẻ bất kỳ dữ liệu cá nhân nào của bạn. Ứng dụng chỉ sử dụng thông tin bạn nhập (giờ đáp, sân bay, điểm đến) để tính toán và hiển thị kết quả trong phiên làm việc hiện tại. Không có cookie, không có analytics, không có theo dõi.',
+        back: '← Quay về trang chủ',
       },
       terms: {
         title: 'Điều khoản sử dụng',
         content: 'SanBayGo là công cụ tham khảo miễn phí. Thông tin lịch trình xe buýt và ước tính giá Grab được cung cấp như tham khảo và có thể không chính xác hoàn toàn. Người dùng chịu trách nhiệm kiểm tra thông tin trực tiếp với đơn vị vận tải trước khi di chuyển. SanBayGo không chịu trách nhiệm về bất kỳ tổn thất nào phát sinh từ việc sử dụng ứng dụng.',
+        back: '← Quay về trang chủ',
       },
     },
     layout: {
@@ -540,10 +544,12 @@ const translations: Record<Language, Translations> = {
       privacy: {
         title: 'Privacy Policy',
         content: 'SanBayGo does not store, collect, or share any of your personal data. The app only uses the information you enter (arrival time, airport, destination) to calculate and display results within the current session. No cookies, no analytics, no tracking.',
+        back: '← Back to home',
       },
       terms: {
         title: 'Terms of Service',
         content: 'SanBayGo is a free reference tool. Bus schedule information and Grab price estimates are provided for reference only and may not be entirely accurate. Users are responsible for verifying information directly with the transportation provider before traveling. SanBayGo is not liable for any losses arising from the use of the application.',
+        back: '← Back to home',
       },
     },
     layout: {
