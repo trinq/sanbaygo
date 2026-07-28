@@ -4,6 +4,7 @@ import { useLandingForm } from '../../hooks/useLandingForm';
 import { Hero } from './Hero';
 import { SearchCard } from './SearchCard';
 import { FAQ } from './FAQ';
+import { Footer } from './Footer';
 
 interface LandingPageProps {
   onSearch: (formData: ArrivalFormData, result: ArrivalResult) => void;
@@ -49,6 +50,7 @@ export function LandingPage({ onSearch }: LandingPageProps) {
         />
       </Hero>
       <FAQ />
+      <Footer />
     </>
   );
 }

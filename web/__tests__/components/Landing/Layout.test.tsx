@@ -1,15 +1,16 @@
 import { render } from '@testing-library/react';
 import { LanguageProvider } from '../../../src/contexts/LanguageContext';
-import { Hero } from '../../../src/components/Landing/Hero';
+import { LandingPage } from '../../../src/components/Landing/LandingPage';
 
-describe('Landing layout (sticky footer)', () => {
+const noop = () => {};
+
+describe('Landing layout (footer at page bottom)', () => {
   it('outer page wrapper uses min-h-screen + flex + flex-col so the footer can sit at the bottom', () => {
     const { container } = render(
       <LanguageProvider>
-        <Hero />
+        <LandingPage onSearch={noop} />
       </LanguageProvider>,
     );
-    // First child of the rendered tree is the outer wrapper.
     const outer = container.firstElementChild;
     expect(outer).toBeTruthy();
     const cls = outer?.className ?? '';
@@ -21,21 +22,19 @@ describe('Landing layout (sticky footer)', () => {
   it('main content area uses flex-1 so it pushes the footer to the bottom on short pages', () => {
     const { container } = render(
       <LanguageProvider>
-        <Hero />
+        <LandingPage onSearch={noop} />
       </LanguageProvider>,
     );
-    // The "main" region wraps Nav + the hero grid section; it should carry flex-1.
-    // Match the nearest <div> carrying max-w-7xl (the hero container's parent in the new layout).
     const main = container.querySelector<HTMLElement>('main, [data-testid="landing-main"]');
     expect(main).toBeTruthy();
     const cls = main?.className ?? '';
     expect(cls).toMatch(/flex-1/);
   });
 
-  it('footer is rendered as a normal flow element (NOT fixed / NOT absolute)', () => {
+  it('footer is rendered as a normal flow element at the bottom of the page (NOT fixed / NOT absolute)', () => {
     const { container } = render(
       <LanguageProvider>
-        <Hero />
+        <LandingPage onSearch={noop} />
       </LanguageProvider>,
     );
     const footer = container.querySelector('footer');

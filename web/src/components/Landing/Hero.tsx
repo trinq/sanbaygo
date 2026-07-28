@@ -4,7 +4,6 @@ import { Nav } from './Nav';
 import { Pill } from './Pill';
 import { BenefitChips } from './BenefitChips';
 import { SocialProof } from './SocialProof';
-import { Footer } from './Footer';
 import { HowItWorks } from './HowItWorks';
 
 export function Hero({ children }: { children?: ReactNode }) {
@@ -75,7 +74,6 @@ export function Hero({ children }: { children?: ReactNode }) {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     </div>
   );

@@ -44,16 +44,4 @@ describe('Hero', () => {
     expect(screen.getByText('Miễn phí')).toBeTruthy();
     expect(screen.getByText('Không cần tải app, không cần đăng ký')).toBeTruthy();
   });
-
-  it('renders the footer', () => {
-    render(
-      <LanguageProvider>
-        <Hero />
-      </LanguageProvider>,
-    );
-    expect(screen.getByText(/Cách đơn giản nhất/i)).toBeTruthy();
-    expect(screen.getByText('Điều khoản')).toBeTruthy();
-    expect(screen.getByText('Bảo mật')).toBeTruthy();
-    expect(screen.getByText('Hỗ trợ')).toBeTruthy();
-  });
 });
