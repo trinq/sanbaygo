@@ -200,3 +200,20 @@ export interface TripCalculationResponse {
     isPeakHour: boolean;
   };
 }
+
+// ── Bus Route Map types ──────────────────────────────────────────────
+
+export interface BusStop {
+  id: string;
+  name: string;
+  type: 'hub' | 'regular' | 'terminal';
+  position: { x: number; y: number };
+  labelPos: 'top' | 'bottom' | 'left' | 'right';
+}
+
+export interface BusRouteMap {
+  routeNumber: string;
+  outboundStops: BusStop[];
+  returnStops: BusStop[];
+  destinationToStopId: Record<string, string>;
+}

@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { Icon } from '../Icon';
 import { RouteMap } from '../RouteMap';
-import { BUS_152_STOPS } from '../RouteMap/Bus152Stops';
+import { BUS_152_MAP } from '@core/data/route-maps/bus152';
 import { BUS_109_STOPS } from '../RouteMap/Bus109Stops';
 import { BUS_86_STOPS } from '../RouteMap/Bus86Stops';
 import { CountdownTimer } from './CountdownTimer';
@@ -75,44 +74,38 @@ export function ResultPage({ onBack, formData, result }: ResultPageProps) {
       ? BUS_109_STOPS
       : busRouteNumber === '86'
         ? BUS_86_STOPS
-        : BUS_152_STOPS;
+        : { outbound: BUS_152_MAP.outboundStops, return: BUS_152_MAP.returnStops };
 
   // Destination → bus stop ID mapping for RouteMap highlight
   // Maps destination IDs to stop IDs. Each bus route has its own stop IDs.
   const getDestinationStopId = (dest: string | null): string | undefined => {
     if (!dest) return undefined;
-    const mapping109: Record<string, string> = {
-      'ga-t3': 'ga-t3',
-      'q1': 'ben-xe-buýt-sg',
-    };
-    const mapping86: Record<string, string> = {
-      'han-t1': 'ga-t1',
-      'han-t2': 'ga-t2',
-      'old-quarter': 'ga-hà-nội',
-      'hoan-kiem': 'ga-hà-nội',
-      'dong-da': 'ga-hà-nội',
-      'ba-dinh': 'ga-hà-nội',
-      'cau-giay': 'ga-hà-nội',
-      'other': 'ga-hà-nội',
-    };
-    const mapping152: Record<string, string> = {
-      'ben-thanh': 'ben-thanh',
-      'le-lai': 'le-lai',
-      'tran-hung-dao': 'tran-hung-dao',
-      'nguyen-van-cu': 'nguyen-van-cu',
-      'san-bay-tsn': 'san-bay-tsn',
-      'q1': 'ben-thanh',
-      'q3': 'ben-thanh',
-      'q5': 'ben-thanh',
-      'binh-thanh': 'ben-thanh',
-      'phu-nhuan': 'ben-thanh',
-    };
-    const mapping = busRouteNumber === '109'
-      ? mapping109
-      : busRouteNumber === '86'
-        ? mapping86
-        : mapping152;
-    return mapping[dest];
+    // For Bus 152, use the structured mapping from core
+    if (busRouteNumber === '152') {
+      return BUS_152_MAP.destinationToStopId[dest];
+    }
+    // For other buses, use inline mappings
+    if (busRouteNumber === '109') {
+      const mapping109: Record<string, string> = {
+        'ga-t3': 'ga-t3',
+        'q1': 'ben-xe-buýt-sg',
+      };
+      return mapping109[dest];
+    }
+    if (busRouteNumber === '86') {
+      const mapping86: Record<string, string> = {
+        'han-t1': 'ga-t1',
+        'han-t2': 'ga-t2',
+        'old-quarter': 'ga-hà-nội',
+        'hoan-kiem': 'ga-hà-nội',
+        'dong-da': 'ga-hà-nội',
+        'ba-dinh': 'ga-hà-nội',
+        'cau-giay': 'ga-hà-nội',
+        'other': 'ga-hà-nội',
+      };
+      return mapping86[dest];
+    }
+    return undefined;
   };
 
   return (

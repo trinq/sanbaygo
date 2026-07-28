@@ -6,3 +6,4 @@ export { SGN_GRAB_ESTIMATE } from './grabEstimates/sgn';
 export { DESTINATIONS, DESTINATIONS_BY_AIRPORT } from './destinations';
 export { NOI_BAI_AIRPORT, AIRPORTS, AIRPORT_LIST } from './airport';
 export { SGN_AIRPORT } from './airports/sgn';
+export * from './route-maps';
