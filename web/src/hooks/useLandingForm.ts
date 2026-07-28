@@ -35,6 +35,7 @@ export function useLandingForm() {
   const [people, setPeopleRaw] = useState(1);
   const [carryOn, setCarryOnRaw] = useState(false);
   const [checked, setCheckedRaw] = useState(false);
+  const [flightType, setFlightTypeRaw] = useState<FlightType>('domestic');
 
   const setArrivalTime = useCallback((time: string) => {
     if (!TIME_FORMAT.test(time)) return;
@@ -47,11 +48,30 @@ export function useLandingForm() {
     setDestinationRaw(null);
   }, []);
 
-  const setTerminal = useCallback((id: TerminalId) => setTerminalRaw(id), []);
+  const setTerminal = useCallback((id: TerminalId) => {
+    setTerminalRaw(id);
+    setDestinationRaw(null);
+    const term = AIRPORTS[airport ?? '']?.terminals.find(t => t.id === id);
+    setFlightTypeRaw(term?.flightTypes[0] ?? term?.type ?? 'domestic');
+  }, [airport]);
   const setDestination = useCallback((id: string) => setDestinationRaw(id), []);
   const setPeople = useCallback((n: number) => setPeopleRaw(clamp(n, 1, 10)), []);
   const setCarryOn = useCallback((v: boolean) => setCarryOnRaw(v), []);
   const setChecked = useCallback((v: boolean) => setCheckedRaw(v), []);
+  const setFlightType = useCallback((v: FlightType) => setFlightTypeRaw(v), []);
+
+  const flightTypeOptions: FlightType[] = useMemo(() => {
+    if (!airport || !terminal) return [];
+    const term = AIRPORTS[airport].terminals.find(t => t.id === terminal);
+    if (!term) return [];
+    return term.flightTypes;
+  }, [airport, terminal]);
+
+  const showFlightTypeSelector = useMemo(() => {
+    return flightTypeOptions.length > 1;
+  }, [flightTypeOptions]);
+
+
 
   const terminalOptions: Terminal[] = useMemo(() => {
     if (!airport) return [];
@@ -70,9 +90,10 @@ export function useLandingForm() {
 
   const buildArrivalFormData = useCallback((): ArrivalFormData | null => {
     if (!airport || !terminal || !destination) return null;
-
-    const terminalData = AIRPORTS[airport].terminals.find((t) => t.id === terminal);
-    const flightType: FlightType = terminalData?.flightTypes[0] ?? terminalData?.type ?? 'domestic';
+    const term = AIRPORTS[airport].terminals.find(t => t.id === terminal);
+    const resolvedFlightType: FlightType = flightTypeOptions.length === 1
+      ? (term?.type ?? 'domestic')
+      : flightType;
 
     return {
       arrivalTime,
@@ -80,9 +101,9 @@ export function useLandingForm() {
       terminal,
       baggage: DEFAULT_BAGGAGE,
       destination,
-      flightType,
+      flightType: resolvedFlightType,
     };
-  }, [arrivalTime, airport, terminal, destination]);
+  }, [arrivalTime, airport, terminal, destination, flightType, flightTypeOptions]);
 
   const reset = useCallback(() => {
     setArrivalTimeRaw(DEFAULT_ARRIVAL_TIME);
@@ -102,6 +123,10 @@ export function useLandingForm() {
     people,
     carryOn,
     checked,
+    flightType,
+    setFlightType,
+    showFlightTypeSelector,
+    flightTypeOptions,
     setArrivalTime,
     setAirport,
     setTerminal,

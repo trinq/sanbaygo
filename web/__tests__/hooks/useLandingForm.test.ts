@@ -128,4 +128,101 @@ describe('useLandingForm', () => {
     expect(result.current.destination).toBeNull();
     expect(result.current.people).toBe(1);
   });
+
+  describe('flightType state', () => {
+    it('defaults to domestic', () => {
+      const { result } = renderHook(() => useLandingForm());
+      expect(result.current.flightType).toBe('domestic');
+    });
+
+    it('shows selector when terminal has both domestic and international', () => {
+      const { result } = renderHook(() => useLandingForm());
+      act(() => {
+        result.current.setAirport('tan-son-nhat');
+      });
+      act(() => {
+        result.current.setTerminal('SGN-T3');
+      });
+      expect(result.current.showFlightTypeSelector).toBe(true);
+      expect(result.current.flightTypeOptions).toEqual(['domestic', 'international']);
+    });
+
+    it('hides selector when terminal has only one flight type', () => {
+      const { result } = renderHook(() => useLandingForm());
+      act(() => {
+        result.current.setAirport('tan-son-nhat');
+      });
+      act(() => {
+        result.current.setTerminal('SGN-T1');
+      });
+      expect(result.current.showFlightTypeSelector).toBe(false);
+      expect(result.current.flightTypeOptions).toEqual(['domestic']);
+    });
+
+    it('buildArrivalFormData uses flightType state when selector shown', () => {
+      const { result } = renderHook(() => useLandingForm());
+      act(() => {
+        result.current.setAirport('tan-son-nhat');
+      });
+      act(() => {
+        result.current.setTerminal('SGN-T3');
+      });
+      act(() => {
+        result.current.setDestination('q1');
+      });
+      act(() => {
+        result.current.setFlightType('international');
+      });
+      const formData = result.current.buildArrivalFormData();
+      expect(formData?.flightType).toBe('international');
+    });
+
+    it('buildArrivalFormData uses terminal.type when selector hidden (SGN-T1)', () => {
+      const { result } = renderHook(() => useLandingForm());
+      act(() => {
+        result.current.setAirport('tan-son-nhat');
+      });
+      act(() => {
+        result.current.setTerminal('SGN-T1');
+      });
+      act(() => {
+        result.current.setDestination('q1');
+      });
+      const formData = result.current.buildArrivalFormData();
+      expect(formData?.flightType).toBe('domestic');
+    });
+
+    it('buildArrivalFormData uses terminal.type when selector hidden (SGN-T2)', () => {
+      const { result } = renderHook(() => useLandingForm());
+      act(() => {
+        result.current.setAirport('tan-son-nhat');
+      });
+      act(() => {
+        result.current.setTerminal('SGN-T2');
+      });
+      act(() => {
+        result.current.setDestination('q1');
+      });
+      const formData = result.current.buildArrivalFormData();
+      expect(formData?.flightType).toBe('international');
+    });
+
+    it('changing terminal resets flightType to terminal default', () => {
+      const { result } = renderHook(() => useLandingForm());
+      act(() => {
+        result.current.setAirport('tan-son-nhat');
+      });
+      act(() => {
+        result.current.setTerminal('SGN-T3');
+      });
+      act(() => {
+        result.current.setFlightType('international');
+      });
+      expect(result.current.flightType).toBe('international');
+      act(() => {
+        result.current.setTerminal('SGN-T1');
+      });
+      expect(result.current.flightType).toBe('domestic');
+    });
+  });
 });
