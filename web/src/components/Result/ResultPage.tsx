@@ -294,12 +294,7 @@ export function ResultPage({ onBack, formData, result }: ResultPageProps) {
         </div>
 
         {/* ── Secondary option: Ride-hail ── */}
-        <a
-          className={styles.secondaryCard}
-          href="#"
-          onClick={(e) => e.preventDefault()}
-          aria-label="Gọi Grab hoặc Taxi công nghệ"
-        >
+        <div className={styles.secondaryCard} aria-label="Gọi Grab hoặc Taxi công nghệ">
           <div className={styles.secondaryInner}>
             <div className={styles.secondaryLeft}>
               <div className={styles.secondaryIcon}>
@@ -326,13 +321,18 @@ export function ResultPage({ onBack, formData, result }: ResultPageProps) {
                 <div className={styles.secondaryPriceLabel}>Giá tham khảo</div>
                 <div className={styles.secondaryPriceValue}>~ {grabPriceFormatted}</div>
               </div>
-              <button type="button" className={styles.secondaryCta}>
+              <a
+                href="https://www.grab.com/vn/en/transport/advance-booking/?utm_source=sanbaygo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.secondaryCta}
+              >
                 <NavigationIcon />
-                Mở ứng dụng
-              </button>
+                Mở Grab
+              </a>
             </div>
           </div>
-        </a>
+        </div>
       </main>
     </div>
   );
