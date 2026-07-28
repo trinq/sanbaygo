@@ -113,7 +113,7 @@ Open `feature_list.json`. Locate the closing `]` of the `features` array. Insert
 ,
 {
   "id": "web-bus-departure-countdown",
-  "description": "Bus card on ResultPage shows 'Còn khoảng X phút' under the departure time when the Catchable Trip is between 0 and 60 minutes away (rounded down to whole minutes). Hidden when no Catchable Trip exists, when more than 60 minutes remain, or after the departure time has passed. Updates every minute via setInterval; does not recompute the ArrivalResult.",
+  "description": "Bus card on ResultPage shows 'Còn khoảng X phút' under the departure time when the Catchable Trip is between 0 and 120 minutes away (rounded down to whole minutes). Hidden when no Catchable Trip exists, when more than 120 minutes remain, or after the departure time has passed. Updates every minute via setInterval; does not recompute the ArrivalResult.",
   "status": "passing",
   "evidence": [
     "e9fe6aa"
@@ -202,8 +202,8 @@ Expected: HEAD is the new commit, listing the 5 staged files. No other files.
 |---|---|
 | Component lives at `web/src/components/Result/CountdownTimer.tsx` | Committed in `e9fe6aa` — Step 1 verifies |
 | Format `Còn khoảng X phút` (per brief, MVP) | `CountdownTimer.tsx` line 62 — Step 1 verifies |
-| Visible only when ≤ 60 minutes remain | `VISIBLE_WINDOW_MINUTES = 60` + check at line 57 — Step 1 verifies |
-| Hidden when no trip, when past departure, when > 60 min | Three early-return branches — Step 1 verifies |
+| Visible only when ≤ 120 minutes remain | `VISIBLE_WINDOW_MINUTES = 120` + check at line 57 — Step 1 verifies |
+| Hidden when no trip, when past departure, when > 120 min | Three early-return branches — Step 1 verifies |
 | Tick rate 60 000 ms | `TICK_MS = 60_000` — Step 1 verifies |
 | Cleanup interval on unmount | `return () => clearInterval(id)` — Step 1 + Step 3 verifies no warnings |
 | Props `trip: BusTrip \| null` | Verified in Step 2 |

@@ -459,7 +459,7 @@
     },
     {
       "id": "web-bus-departure-countdown",
-      "description": "Bus card on ResultPage shows 'Còn khoảng X phút' under the departure time when the Catchable Trip is between 0 and 60 minutes away (rounded down to whole minutes). Hidden when no Catchable Trip exists, when more than 60 minutes remain, or after the departure time has passed. Updates every minute via setInterval; does not recompute the ArrivalResult.",
+      "description": "Bus card on ResultPage shows 'Còn khoảng X phút' under the departure time when the Catchable Trip is between 0 and 120 minutes away (rounded down to whole minutes). Hidden when no Catchable Trip exists, when more than 120 minutes remain, or after the departure time has passed. Updates every minute via setInterval; does not recompute the ArrivalResult.",
       "status": "passing",
       "evidence": [
         "e9fe6aa"

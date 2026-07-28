@@ -17,11 +17,11 @@ Thêm component `CountdownTimer` hiển thị dòng `Còn khoảng X phút` tron
 - **Trigger**: `trip` (từ `result.bus.trip`) tồn tại và không null.
 - **Hiển thị khi**:
   - `trip.departureTime` ở tương lai, **và**
-  - còn **≤ 60 phút** đến `trip.departureTime`.
+  - còn **≤ 120 phút** đến `trip.departureTime`.
 - **Ẩn khi**:
   - không có `trip` (tức `result.bus.available === false`, hoặc `reason ∈ {no_service, too_late, missed_last}`),
   - **hoặc** đã qua `trip.departureTime`,
-  - **hoặc** còn hơn 60 phút.
+  - **hoặc** còn hơn 120 phút.
 - **Format**: `Còn khoảng X phút` (làm tròn xuống theo phút). Khi còn <1 phút nhưng chưa tới giờ khởi hành, hiển thị `Còn khoảng 0 phút` cho tới khi đạt ngưỡng ẩn.
 - **Cập nhật**: `setInterval` 1 phút (60 000 ms). Component re-render mỗi tick; giá trị hiển thị chỉ thay đổi khi sang phút mới (vì số phút làm tròn xuống từ `Date.now()`).
 - **Cleanup**: clear interval khi component unmount hoặc khi `trip` đổi từ có sang không.
