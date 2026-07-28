@@ -13,11 +13,27 @@ export function Hero({ children }: { children?: ReactNode }) {
     <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#e6eff6]">
       {/* ── Hero background — Figma blur stack (5 layers) ── */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <img
-          src="/hero.jpg"
-          alt="Đường phố hiện đại"
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.85] mix-blend-overlay"
-        />
+        <picture>
+          <source
+            media="(max-width: 480px)"
+            srcSet="/hero-480w.webp"
+            type="image/webp"
+          />
+          <source
+            media="(max-width: 960px)"
+            srcSet="/hero-960w.webp"
+            type="image/webp"
+          />
+          <source
+            srcSet="/hero-1920w.webp"
+            type="image/webp"
+          />
+          <img
+            src="/hero.jpg"
+            alt="Đường phố hiện đại"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.85] mix-blend-overlay"
+          />
+        </picture>
         {/* Gradient trái → phải (desktop): hòa tan hero vào nội dung */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/10 md:w-2/3" />
         {/* Gradient trên → dưới (mobile): fade cho stacked layout */}
