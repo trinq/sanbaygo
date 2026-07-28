@@ -10,7 +10,7 @@ Trên `ResultPage` hiện tại, khi `result.bus.trip` tồn tại, người dù
 
 ## Solution
 
-Thêm component `CountdownTimer` hiển thị dòng `Còn X phút Y giây` trong bước “Lên xe / Khởi hành” của timeline trong thẻ xe buýt. Bộ đếm chỉ làm mới hiển thị; không gọi lại logic tính toán.
+Thêm component `CountdownTimer` hiển thị dòng `Còn khoảng X phút` trong bước “Lên xe / Khởi hành” của timeline trong thẻ xe buýt. Bộ đếm chỉ làm mới hiển thị; không gọi lại logic tính toán.
 
 ## Behavior
 
@@ -22,8 +22,8 @@ Thêm component `CountdownTimer` hiển thị dòng `Còn X phút Y giây` trong
   - không có `trip` (tức `result.bus.available === false`, hoặc `reason ∈ {no_service, too_late, missed_last}`),
   - **hoặc** đã qua `trip.departureTime`,
   - **hoặc** còn hơn 60 phút.
-- **Format**: `Còn X phút Y giây` (tiếng Việt, dấu cách chuẩn). Khi `X = 0`: hiển thị `Còn 0 phút Y giây` cho tới khi đạt ngưỡng ẩn (giờ khởi hành đã tới hoặc vượt qua).
-- **Cập nhật**: `setInterval` 1 phút (60 000 ms). Re-render chỉ khi giá trị hiển thị thay đổi (so sánh số phút + số giây với state trước).
+- **Format**: `Còn khoảng X phút` (làm tròn xuống theo phút). Khi còn <1 phút nhưng chưa tới giờ khởi hành, hiển thị `Còn khoảng 0 phút` cho tới khi đạt ngưỡng ẩn.
+- **Cập nhật**: `setInterval` 1 phút (60 000 ms). Component re-render mỗi tick; giá trị hiển thị chỉ thay đổi khi sang phút mới (vì số phút làm tròn xuống từ `Date.now()`).
 - **Cleanup**: clear interval khi component unmount hoặc khi `trip` đổi từ có sang không.
 - **Đồng hồ nguồn**: `Date.now()` của thiết bị. Không phụ thuộc timezone server. (MVP không cần hiển thị timezone vì cả form lẫn `departureTime` đều dùng giờ local của thiết bị.)
 
@@ -73,7 +73,7 @@ Sửa:
 
 ## Tests
 
-- Component render `Còn X phút Y giây` khi mock `Date.now()` cho thời điểm cách `trip.departureTime` 30 phút.
+- Component render `Còn khoảng X phút` khi mock `Date.now()` cho thời điểm cách `trip.departureTime` 30 phút.
 - Component ẩn (không có text `Còn`) khi mock `Date.now()` cho thời điểm cách `trip.departureTime` 2 giờ.
 - Component ẩn khi mock `Date.now()` đã vượt qua `trip.departureTime`.
 - Component ẩn khi prop `trip = null` (caller truyền null thay vì có điều kiện bên ngoài — linh hoạt cho test edge case). Lưu ý: `BusTrip` không thể null trong type thật, nhưng component có thể nhận `trip: BusTrip | null` để caller không cần wrap điều kiện.

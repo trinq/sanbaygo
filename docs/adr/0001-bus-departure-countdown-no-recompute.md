@@ -20,5 +20,5 @@ Chọn (a). `Bus Departure Countdown` được tính từ `Date.now()` đến `t
 ## Consequences
 
 - Kết quả session là bất biến. Người dùng cần cập nhật phải submit lại form.
-- `ResultPage` không cần `setInterval` gọi `calculateTrip`, chỉ cần timer để re-render phần hiển thị `Còn X phút Y giây`.
+- `ResultPage` không cần `setInterval` gọi `calculateTrip`, chỉ cần timer để re-render phần hiển thị `Còn khoảng X phút`.
 - Khi bổ sung nguồn realtime (GTFS-RT, flight tracking) trong tương lai, quyết định này sẽ cần được review lại — lúc đó `Bus Departure Countdown` có thể chuyển từ "đếm tới chuyến đã chọn" sang "đếm tới chuyến thực tế đang đến", và có thể cần tách thành hai khái niệm riêng trong `CONTEXT.md`.
