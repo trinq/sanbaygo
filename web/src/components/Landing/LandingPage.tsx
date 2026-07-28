@@ -31,12 +31,15 @@ export function LandingPage({ onSearch }: LandingPageProps) {
         people={form.people}
         carryOn={form.carryOn}
         checked={form.checked}
+        flightType={form.flightType}
+        showFlightTypeSelector={form.showFlightTypeSelector}
         terminalOptions={form.terminalOptions}
         destinationOptions={form.destinationOptions}
         onArrivalTimeChange={form.setArrivalTime}
         onAirportChange={form.setAirport}
         onTerminalChange={form.setTerminal}
         onDestinationChange={form.setDestination}
+        onFlightTypeChange={form.setFlightType}
         onPeopleChange={form.setPeople}
         onCarryOnChange={form.setCarryOn}
         onCheckedChange={form.setChecked}

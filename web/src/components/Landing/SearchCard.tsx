@@ -4,6 +4,7 @@ import { TimePicker } from './TimePicker';
 import { AirportPicker } from './AirportPicker';
 import { TerminalPicker } from './TerminalPicker';
 import { DestinationChips } from './DestinationChips';
+import { FlightTypeSelector } from './FlightTypeSelector';
 import { Stepper } from './Stepper';
 import { CTAButton } from './CTAButton';
 import { BaggageChips } from './BaggageChips';
@@ -16,12 +17,15 @@ export function SearchCard({
   people,
   carryOn,
   checked,
+  flightType,
+  showFlightTypeSelector,
   terminalOptions,
   destinationOptions,
   onArrivalTimeChange,
   onAirportChange,
   onTerminalChange,
   onDestinationChange,
+  onFlightTypeChange,
   onPeopleChange,
   onCarryOnChange,
   onCheckedChange,
@@ -44,6 +48,12 @@ export function SearchCard({
             value={terminal}
             options={terminalOptions}
             onChange={onTerminalChange}
+          />
+        )}
+        {showFlightTypeSelector && (
+          <FlightTypeSelector
+            value={flightType}
+            onChange={onFlightTypeChange}
           />
         )}
         {airport && (
