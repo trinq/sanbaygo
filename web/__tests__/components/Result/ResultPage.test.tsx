@@ -87,7 +87,7 @@ const sgnResult: ArrivalResult = {
   },
   grab: {
     available: true,
-    priceEstimate: '90000 - 150000 VND',
+    priceEstimate: '100000 - 180000 VND',
     travelTime: { early: '14:55', late: '15:05', minutesRange: { min: 25, max: 35 } },
   },
   direction: {
