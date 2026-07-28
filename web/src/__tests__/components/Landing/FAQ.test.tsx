@@ -1,6 +1,7 @@
+/// <reference types="@testing-library/jest-dom" />
 import { render, screen, fireEvent } from '@testing-library/react';
-import { FAQ } from '../FAQ';
-import { LanguageProvider } from '../../contexts/LanguageContext';
+import { FAQ } from '../../../components/Landing/FAQ';
+import { LanguageProvider } from '../../../contexts/LanguageContext';
 
 describe('FAQ', () => {
   it('renders all 5 questions', () => {
