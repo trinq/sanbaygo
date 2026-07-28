@@ -46,12 +46,14 @@ export function useLandingForm() {
     setAirportRaw(id);
     setTerminalRaw(null);
     setDestinationRaw(null);
+    setFlightTypeRaw('domestic');
   }, []);
 
   const setTerminal = useCallback((id: TerminalId) => {
     setTerminalRaw(id);
     setDestinationRaw(null);
-    const term = AIRPORTS[airport ?? '']?.terminals.find(t => t.id === id);
+    if (!airport) return;
+    const term = AIRPORTS[airport].terminals.find((t: Terminal) => t.id === id);
     setFlightTypeRaw(term?.flightTypes[0] ?? term?.type ?? 'domestic');
   }, [airport]);
   const setDestination = useCallback((id: string) => setDestinationRaw(id), []);
@@ -70,8 +72,6 @@ export function useLandingForm() {
   const showFlightTypeSelector = useMemo(() => {
     return flightTypeOptions.length > 1;
   }, [flightTypeOptions]);
-
-
 
   const terminalOptions: Terminal[] = useMemo(() => {
     if (!airport) return [];
@@ -113,6 +113,7 @@ export function useLandingForm() {
     setPeopleRaw(1);
     setCarryOnRaw(false);
     setCheckedRaw(false);
+    setFlightTypeRaw('domestic');
   }, []);
 
   return {
