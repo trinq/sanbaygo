@@ -1,34 +1,39 @@
 import { useState } from 'react';
 import { LandingPage } from './components/Landing';
 import { ResultPage } from './components/Result';
+import { Privacy } from './pages/Privacy';
 import { LanguageProvider } from './contexts/LanguageContext';
 import type { ArrivalResult, ArrivalFormData } from '@core';
 
+type Page = 'home' | 'result' | 'privacy';
+
 export default function App() {
-  const [showResult, setShowResult] = useState(false);
+  const [page, setPage] = useState<Page>('home');
   const [tripResult, setTripResult] = useState<ArrivalResult | null>(null);
   const [tripFormData, setTripFormData] = useState<ArrivalFormData | null>(null);
 
   const handleSearch = (formData: ArrivalFormData, result: ArrivalResult) => {
     setTripFormData(formData);
     setTripResult(result);
-    setShowResult(true);
+    setPage('result');
   };
 
   const handleBack = () => {
-    setShowResult(false);
+    setPage('home');
     setTripResult(null);
     setTripFormData(null);
   };
 
   return (
     <LanguageProvider>
-      {showResult && tripResult && tripFormData ? (
+      {page === 'result' && tripResult && tripFormData ? (
         <ResultPage
           onBack={handleBack}
           formData={tripFormData}
           result={tripResult}
         />
+      ) : page === 'privacy' ? (
+        <Privacy />
       ) : (
         <LandingPage onSearch={handleSearch} />
       )}

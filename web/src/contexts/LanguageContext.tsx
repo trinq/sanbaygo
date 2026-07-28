@@ -110,6 +110,12 @@ interface Translations {
   destinations: {
     [key: string]: string;
   };
+  pages: {
+    privacy: {
+      title: string;
+      content: string;
+    };
+  };
   layout: {
     brand: string;
     sidebar: {
@@ -298,6 +304,12 @@ const translations: Record<Language, Translations> = {
       'ba-dinh': 'Quận Ba Đình',
       'cau-giay': 'Quận Cầu Giấy',
       'other': 'Khu vực khác',
+    },
+    pages: {
+      privacy: {
+        title: 'Chính sách bảo mật',
+        content: 'SanBayGo không lưu trữ, thu thập, hoặc chia sẻ bất kỳ dữ liệu cá nhân nào của bạn. Ứng dụng chỉ sử dụng thông tin bạn nhập (giờ đáp, sân bay, điểm đến) để tính toán và hiển thị kết quả trong phiên làm việc hiện tại. Không có cookie, không có analytics, không có theo dõi.',
+      },
     },
     layout: {
       brand: 'SanBayGo',
@@ -515,6 +527,12 @@ const translations: Record<Language, Translations> = {
       'ba-dinh': 'Ba Dinh District',
       'cau-giay': 'Cau Giay District',
       'other': 'Other areas',
+    },
+    pages: {
+      privacy: {
+        title: 'Privacy Policy',
+        content: 'SanBayGo does not store, collect, or share any of your personal data. The app only uses the information you enter (arrival time, airport, destination) to calculate and display results within the current session. No cookies, no analytics, no tracking.',
+      },
     },
     layout: {
       brand: 'SanBayGo',
