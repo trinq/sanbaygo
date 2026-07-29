@@ -1,15 +1,16 @@
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { LanguageProvider } from '../../../src/contexts/LanguageContext';
 import { LandingPage } from '../../../src/components/Landing/LandingPage';
-
-const noop = () => {};
 
 describe('Landing layout (footer at page bottom)', () => {
   it('outer page wrapper uses min-h-screen + flex + flex-col so the footer can sit at the bottom', () => {
     const { container } = render(
-      <LanguageProvider>
-        <LandingPage onSearch={noop} />
-      </LanguageProvider>,
+      <MemoryRouter>
+        <LanguageProvider>
+          <LandingPage />
+        </LanguageProvider>
+      </MemoryRouter>,
     );
     const outer = container.firstElementChild;
     expect(outer).toBeTruthy();
@@ -21,9 +22,11 @@ describe('Landing layout (footer at page bottom)', () => {
 
   it('main content area uses flex-1 so it pushes the footer to the bottom on short pages', () => {
     const { container } = render(
-      <LanguageProvider>
-        <LandingPage onSearch={noop} />
-      </LanguageProvider>,
+      <MemoryRouter>
+        <LanguageProvider>
+          <LandingPage />
+        </LanguageProvider>
+      </MemoryRouter>,
     );
     const main = container.querySelector<HTMLElement>('main, [data-testid="landing-main"]');
     expect(main).toBeTruthy();
@@ -33,9 +36,11 @@ describe('Landing layout (footer at page bottom)', () => {
 
   it('footer is rendered as a normal flow element at the bottom of the page (NOT fixed / NOT absolute)', () => {
     const { container } = render(
-      <LanguageProvider>
-        <LandingPage onSearch={noop} />
-      </LanguageProvider>,
+      <MemoryRouter>
+        <LanguageProvider>
+          <LandingPage />
+        </LanguageProvider>
+      </MemoryRouter>,
     );
     const footer = container.querySelector('footer');
     expect(footer).toBeTruthy();

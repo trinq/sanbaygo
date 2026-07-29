@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { PAGE_META, DEFAULT_META, type MetaConfig } from '../../seo/metaConfig';
+import { PAGE_META, DEFAULT_META } from '../../seo/metaConfig';
 
 type Props = {
   path: string;
@@ -30,15 +30,15 @@ export function SEOHelmet({ path }: Props) {
       {/* Hreflang */}
       {meta.alternateEN && (
         <>
-          <link rel="alternate" hreflang="en" href={meta.alternateEN} />
-          <link rel="alternate" hreflang="x-default" href={meta.alternateEN} />
+          <link rel="alternate" hrefLang="en" href={meta.alternateEN} />
+          <link rel="alternate" hrefLang="x-default" href={meta.alternateEN} />
         </>
       )}
       {meta.alternateVI && (
-        <link rel="alternate" hreflang="vi" href={meta.alternateVI} />
+        <link rel="alternate" hrefLang="vi" href={meta.alternateVI} />
       )}
-      <link rel="alternate" hreflang="en" href="https://frylane.com/" />
-      <link rel="alternate" hreflang="vi" href="https://frylane.com/vi/" />
+      <link rel="alternate" hrefLang="en" href="https://frylane.com/" />
+      <link rel="alternate" hrefLang="vi" href="https://frylane.com/vi/" />
     </Helmet>
   );
 }

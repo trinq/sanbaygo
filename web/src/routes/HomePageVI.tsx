@@ -4,7 +4,7 @@ import { LanguageProvider } from '../contexts/LanguageContext';
 
 export function HomePageVI() {
   return (
-    <LanguageProvider initialLocale="vi">
+    <LanguageProvider>
       <SEOHelmet path="/vi/" />
       <LandingPage />
     </LanguageProvider>

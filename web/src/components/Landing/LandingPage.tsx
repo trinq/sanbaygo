@@ -1,4 +1,4 @@
-import type { ArrivalFormData, ArrivalResult } from '@core';
+import { useNavigate } from 'react-router-dom';
 import { calculateTrip as calculateResult } from '@core';
 import { useLandingForm } from '../../hooks/useLandingForm';
 import { Hero } from './Hero';
@@ -6,11 +6,8 @@ import { SearchCard } from './SearchCard';
 import { FAQ } from './FAQ';
 import { Footer } from './Footer';
 
-interface LandingPageProps {
-  onSearch: (formData: ArrivalFormData, result: ArrivalResult) => void;
-}
-
-export function LandingPage({ onSearch }: LandingPageProps) {
+export function LandingPage() {
+  const navigate = useNavigate();
   const form = useLandingForm();
 
   const handleSubmit = () => {
@@ -20,7 +17,17 @@ export function LandingPage({ onSearch }: LandingPageProps) {
     const calculation = calculateResult(formData);
     if (!calculation) return;
 
-    onSearch(formData, calculation);
+    // Build URL search params for the result page
+    const params = new URLSearchParams({
+      airport: formData.airportId === 'noi-bai' ? 'HAN' : 'SGN',
+      flightTime: formData.arrivalTime,
+      terminal: formData.terminal ?? '',
+      destination: formData.destination ?? '',
+      busAvailable: String(calculation.bus.available),
+      grabPrice: calculation.grab.priceEstimate.replace('₫', ''),
+    });
+
+    navigate(`/ket-qua?${params.toString()}`);
   };
 
   return (
