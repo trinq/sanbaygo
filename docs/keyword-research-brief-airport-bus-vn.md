@@ -4,7 +4,7 @@
 > **Ngách (niche):** Hướng dẫn so sánh và lựa chọn xe buýt / Grab / taxi đi từ sân bay (HAN, SGN) về trung tâm thành phố — phục vụ **khách du lịch quốc tế (tiếng Anh) là primary**, **người Việt nội địa (tiếng Việt) là secondary**.
 > **Đối tượng chính (lean_intl):** 60% international travelers (EN-first, mobile 85%+, nhạy cảm scam risk, không biết bus exists); 40% domestic VN (đã quen bus, cần schedule + giá).
 > **Phạm vi ngân sách:** Chỉ dùng công cụ **free**. Không mua Ahrefs/SEMrush ở giai đoạn này.
-> **Domain & deployment:** `frylane.com` (international-facing, đã chốt trong `docs/superpowers/specs/2026-07-29-rename-brand-frylane-design.md`); `sanbaygo.app` là domain thứ cấp cho app Vietnamese UI.
+> **Domain & deployment:** `frylane.com` là domain duy nhất — EN ở root, VI ở `/vi/…`. Đã chốt trong `docs/superpowers/specs/2026-07-29-rename-brand-frylane-design.md`.
 > **Reality check:** Site là SPA hiện chỉ 1 landing page + 1 result page — chưa có URL routing thật. Ưu tiên content cho **5–7 route-detail pages** (Bus 86 schedule, Bus 109, Bus 152, Grab vs Bus, SGN scam safety) trước khi mở rộng pillar.
 > **Cảnh báo minh bạch:** Search-volume thật cho từ khóa niche cụ thể (ví dụ `bus 86 hanoi fare`) chỉ truy cập được qua **Google Ads account** (Keyword Planner trả về range). Trong brief này, các con số volume là **ước tính hợp lý** tổng hợp từ nhiều nguồn (`adtargeting.io`, `keywordplanner.vn`, Google Trends tương quan), không phải Google Keyword Planner trực tiếp. Verify lại trong Google Ads account của bạn trước khi đầu tư content.
 
@@ -46,7 +46,7 @@ Mỗi phương pháp dưới đây được ít nhất **2 nguồn 2025–2026**
 | Có 3–5 competitor EN (travelfish, theculturetrip, vietnamcoracle) | #7 (Content Gap, `site:.com`) + #1 |
 | Content informational / FAQ / "scam warning" cho intl | #3 (PAA EN) + #8 (Reddit EN) |
 | Niche du lịch có season (Tết, hè, lễ + west travelers peak) | #5 (Trends 5-year view, multi-region) + #4 (GKP monthly range) |
-| Content tiếng Việt cho `sanbaygo.app` (secondary audience) | #2 (Autocomplete region=VN) + #6 (Ubersuggest VN) |
+| Content tiếng Việt trên `frylane.com/vi` (secondary audience) | #2 (Autocomplete region=VN) + #6 (Ubersuggest VN) |
 
 ---
 
@@ -229,7 +229,7 @@ Dựa trên fact rằng `frylane.com` là **site mới, solo founder, $0 budget,
 **Content language strategy:**
 
 - **Content tiếng Anh (URL `/en/...` hoặc path root `frylane.com/...`):** Tất cả #1–#20. Append prefix `en` không cần thiết vì default là EN; VN là secondary locale.
-- **Content tiếng Việt (URL `/vi/...` hoặc subdomain `sanbaygo.app`):** #21–#23 (3 keywords VN). Đặt trên `sanbaygo.app` để tách hẳn brand positioning — intl khách vào `frylane.com` thấy EN, VN khách vào `sanbaygo.app` thấy VI.
+- **Content tiếng Việt (URL `/vi/...`):** #21–#23 (3 keywords VN). Đặt tại `frylane.com/vi` — EN ở root, VI ở `/vi/…`.
 - **Không bao giờ** mix 2 ngôn ngữ trong 1 page. Google Hreflang giữa hai.
 
 **Bốn loại content map rõ:**
@@ -263,7 +263,6 @@ Dựa trên fact rằng `frylane.com` là **site mới, solo founder, $0 budget,
 
 - [ ] Verify `frylane.com` trên **Google Search Console** (DNS TXT record, mất 10 phút)
 - [ ] Verify `frylane.com` trên **Google Analytics 4** (cùng lúc với GSC)
-- [ ] Verify `sanbaygo.app` (nếu dùng cho VN audience) — GSC riêng, hoặc cùng domain property với URL prefix
 - [ ] Mở **Google Ads account** free (chỉ cần thẻ visa không charge), unlock Google Keyword Planner
 - [ ] Tạo **Google Sheet** "frylane keyword research" với 8 cột: Keyword | Lang (EN/VN) | Source | Cluster | Intent | Volume | Notes | Priority (Tier 1/2/3)
 
@@ -418,4 +417,4 @@ Mọi nguồn dưới đây đã được verify accessible ngày 2026-07-29.
 
 > **Lưu ý kết thúc:** Brief này là **điểm khởi đầu**, không phải điểm kết thúc. Sau khi `frylane.com` có 30+ page index được Google (~30 ngày), chạy lại **Method #1 (GSC 4-filter)** để có data thật thay vì estimate. Cập nhật volume + KD trong Sheet mỗi tháng. Mỗi quý, scan niche expansion (Da Nang airport, Phu Quoc airport, etc.) qua **Method #2 (Autocomplete)**.
 >
-> **lean_intl commitment (từ 2026-07-29):** Khi viết content mới, **mặc định viết tiếng Anh trước**, trừ khi keyword rõ ràng là VN-only (vd `xe buýt sân bay nội bài`). Nội dung EN đi trên `frylane.com`, nội dung VN trên `sanbaygo.app`. Đừng mix 2 ngôn ngữ trong 1 page. Google Hreflang giữa hai.
+> **lean_intl commitment (từ 2026-07-29):** Khi viết content mới, **mặc định viết tiếng Anh trước**, trừ khi keyword rõ ràng là VN-only (vd `xe buýt sân bay nội bài`). Nội dung EN ở root `frylane.com`, VI ở `/vi/…`. Đừng mix 2 ngôn ngữ trong 1 page. Google Hreflang giữa hai.

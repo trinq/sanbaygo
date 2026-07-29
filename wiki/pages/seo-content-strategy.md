@@ -16,10 +16,9 @@ summary: frylane.com targets international travelers (EN) as primary audience, w
 **lean_intl** — international English-speaking travellers are the primary target
 (≈ 60% of SEO effort), with Vietnamese domestic users as secondary (≈ 40%).
 
-This is not a permanent lock-in; it reflects the current marketing stage: an
-English-facing domain (`frylane.com`) plus a Vietnamese-facing one
-(`sanbaygo.app`) allow both audiences to land in the right language without
-mixing on one page.
+`frylane.com` is the single domain for all audiences. Both EN and VI content
+live here, distinguished via URL prefix (`/vi/…`) or browser Accept-Language
+detection. Never mix languages on one page. Google Hreflang manages the split.
 
 ## Why intl primary
 
@@ -42,16 +41,16 @@ shifted the weight:
    attracts the audience more likely to use Grab or convertible affiliate
    links (Klook, 12Go) if that lane opens later.
 
-## Content language split
+## Content language strategy
 
-| Domain | Audience | Language | Priority |
-|--------|----------|----------|----------|
-| `frylane.com` | International travellers (EN) | English | Primary |
-| `sanbaygo.app` | Vietnamese domestic | Vietnamese | Secondary |
+Single domain: `frylane.com`. Language split via URL prefix or Accept-Language.
 
-Rule: **never mix languages on one page.** Google Hreflang distinguishes the
-two. Default route is English; Vietnamese is a locale variant, not the other
-way around.
+| URL path | Audience | Language | Priority |
+|----------|---------|----------|----------|
+| `/` (root) | International travellers | English | Primary |
+| `/vi/…` | Vietnamese domestic | Vietnamese | Secondary |
+
+Rule: **never mix languages on one page.** Google Hreflang manages EN/VI split.
 
 ## Keyword tier targets (from brief)
 
@@ -82,7 +81,7 @@ way around.
 - `hanoi airport to hoan kiem lake`
 - All Tier 3 posts require 6–12 months of link-building before ranking.
 
-### Vietnamese (on `sanbaygo.app`, Tier 1 only)
+### Vietnamese content (Tier 1, URL `/vi/…`)
 
 - `xe buýt sân bay nội bài`
 - `tuyến 86 nội bài giờ`
@@ -119,8 +118,8 @@ way around.
 
 ## Relationship to other wiki pages
 
-- [project-overview](./project-overview.md): `frylane.com` is the international face;
-  `sanbaygo.app` is the domestic face. This page documents that split.
+- [project-overview](./project-overview.md): `frylane.com` is the sole domain.
+  Both EN (root) and VI (`/vi/…`) content lives here, documented by this page.
 - [decisions](./decisions.md): the frylane rename and domain strategy are recorded
   as decisions; this page is the SEO/content execution layer on top of those
   decisions.
@@ -131,7 +130,7 @@ way around.
 
 - [ ] Wire React Router (seo-ads-plan §3.1) to enable per-keyword URL routing —
   without it, all 23 target keywords compete for 1 page.
-- [ ] Set up GSC property for `frylane.com` and `sanbaygo.app` separately.
-- [ ] Write the 3 Tier 1 VN keyword pages on `sanbaygo.app` after EN pages land.
+- [ ] Set up GSC property for `frylane.com`.
+- [ ] Write the 3 Tier 1 VN keyword pages at `/vi/…` after EN pages land.
 - [ ] Evaluate affiliate links (Klook, 12Go) on `frylane.com` for the
   `vietnam airport transfer booking` keyword cluster.

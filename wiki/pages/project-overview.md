@@ -30,10 +30,10 @@ sequence of decisions:
 3. Is there a bus I can still catch, or did I just miss the last one?
 4. If no bus, what's the realistic Grab/Xanh SM/Be option?
 
-SanBayGo answers all four, **in Vietnamese** on `sanbaygo.app` (the domestic
-UI) and **in English** on `frylane.com` (the international-facing domain).
-The lean_intl audience posture makes English the default language; see
-[seo-content-strategy](./seo-content-strategy.md) for the full language split.
+SanBayGo answers all four — **in English** at `frylane.com` (the sole
+domain, serving both intl and VN audiences via EN root and `/vi/…` locale).
+The lean_intl audience posture makes English the default; see
+[seo-content-strategy](./seo-content-strategy.md) for the full language strategy.
 
 The airport-express bus is **prioritised** over ride-hail (cheaper, fixed price,
 dedicated lane).
