@@ -10,8 +10,12 @@ export type PageChangefreq =
 export type PageRegistryEntry = {
   /** Path relative to domain root, no trailing slash except for root '/'. */
   path: string;
-  /** ISO date (YYYY-MM-DD) for <lastmod>. Use build-time date by default. */
-  lastmod: string;
+  /**
+   * ISO date (YYYY-MM-DD) for <lastmod>.
+   * Optional — when omitted, the sitemap generator falls back to the build-time
+   * date so the field stays "always fresh" without manual drift.
+   */
+  lastmod?: string;
   /** If this page has a counterpart in the other language, its path here. */
   alternatePath?: string;
   /** Search-engine priority 0.0–1.0. Defaults to 0.5. */
@@ -24,14 +28,12 @@ export type PageRegistryEntry = {
 export const PAGE_REGISTRY: PageRegistryEntry[] = [
   {
     path: '/',
-    lastmod: '2026-07-30',
     priority: 1.0,
     changefreq: 'weekly',
     alternatePath: '/vi/',
   },
   {
     path: '/vi/',
-    lastmod: '2026-07-30',
     priority: 0.9,
     changefreq: 'weekly',
     alternatePath: '/',
@@ -39,14 +41,12 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
 
   {
     path: '/bus-86-hanoi-airport',
-    lastmod: '2026-07-30',
     priority: 0.8,
     changefreq: 'monthly',
     alternatePath: '/vi/tuyen-86-noi-bai',
   },
   {
     path: '/vi/tuyen-86-noi-bai',
-    lastmod: '2026-07-30',
     priority: 0.8,
     changefreq: 'monthly',
     alternatePath: '/bus-86-hanoi-airport',
@@ -54,28 +54,24 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
 
   {
     path: '/bus-109-saigon-airport',
-    lastmod: '2026-07-30',
     priority: 0.8,
     changefreq: 'monthly',
     alternatePath: '/vi/tuyen-109-tan-son-nhat',
   },
   {
     path: '/vi/tuyen-109-tan-son-nhat',
-    lastmod: '2026-07-30',
     priority: 0.8,
     changefreq: 'monthly',
     alternatePath: '/bus-109-saigon-airport',
   },
   {
     path: '/bus-152-saigon-fare',
-    lastmod: '2026-07-30',
     priority: 0.8,
     changefreq: 'monthly',
     alternatePath: '/vi/tuyen-152-tan-son-nhat',
   },
   {
     path: '/vi/tuyen-152-tan-son-nhat',
-    lastmod: '2026-07-30',
     priority: 0.8,
     changefreq: 'monthly',
     alternatePath: '/bus-152-saigon-fare',
@@ -83,14 +79,12 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
 
   {
     path: '/airport-scam-vietnam-taxi',
-    lastmod: '2026-07-30',
     priority: 0.7,
     changefreq: 'monthly',
     alternatePath: '/vi/xe-lo-gio-sanh-bay-viet-nam',
   },
   {
     path: '/vi/xe-lo-gio-sanh-bay-viet-nam',
-    lastmod: '2026-07-30',
     priority: 0.7,
     changefreq: 'monthly',
     alternatePath: '/airport-scam-vietnam-taxi',
@@ -98,13 +92,11 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
 
   {
     path: '/privacy',
-    lastmod: '2026-07-30',
     priority: 0.3,
     changefreq: 'yearly',
   },
   {
     path: '/terms',
-    lastmod: '2026-07-30',
     priority: 0.3,
     changefreq: 'yearly',
   },

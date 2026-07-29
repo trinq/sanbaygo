@@ -53,4 +53,14 @@ describe('generateSitemap', () => {
     expect(expandedSitemap).toContain('<loc>https://frylane.com/another-article</loc>');
     expect(expandedSitemap).not.toBe(sitemap);
   });
+
+  it('defaults lastmod to the build-time date when entry omits it', () => {
+    const stubNow = new Date('2026-07-30T12:34:56.000Z');
+    const entryWithoutLastmod: PageRegistryEntry = { path: '/fresh' };
+
+    const sitemap = generateSitemap([entryWithoutLastmod], undefined, stubNow);
+
+    expect(sitemap).toContain('<lastmod>2026-07-30</lastmod>');
+    expect(sitemap).toContain('<loc>https://frylane.com/fresh</loc>');
+  });
 });

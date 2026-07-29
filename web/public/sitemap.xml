@@ -3,83 +3,83 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://frylane.com/</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://frylane.com/vi/</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/"/>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://frylane.com/bus-86-hanoi-airport</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/tuyen-86-noi-bai"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/tuyen-86-noi-bai"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://frylane.com/vi/tuyen-86-noi-bai</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/bus-86-hanoi-airport"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/bus-86-hanoi-airport"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://frylane.com/bus-109-saigon-airport</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/tuyen-109-tan-son-nhat"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/tuyen-109-tan-son-nhat"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://frylane.com/vi/tuyen-109-tan-son-nhat</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/bus-109-saigon-airport"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/bus-109-saigon-airport"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://frylane.com/bus-152-saigon-fare</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/tuyen-152-tan-son-nhat"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/tuyen-152-tan-son-nhat"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://frylane.com/vi/tuyen-152-tan-son-nhat</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/bus-152-saigon-fare"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/bus-152-saigon-fare"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://frylane.com/airport-scam-vietnam-taxi</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam</loc>
-    <lastmod>2026-07-30</lastmod>
-<xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/airport-scam-vietnam-taxi"/>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/airport-scam-vietnam-taxi"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://frylane.com/privacy</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://frylane.com/terms</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-07-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
