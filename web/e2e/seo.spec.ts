@@ -21,6 +21,37 @@ test.describe('SEO Routes', () => {
     expect(canonical).toContain('bus-86-hanoi-airport');
   });
 
+  test('VI bus-86 article page loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/tuyen-86-noi-bai`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Tuyến.*86|Nội Bài.*86/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('tuyen-86-noi-bai');
+  });
+
+  test('VI bus-86 page has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/tuyen-86-noi-bai`, { waitUntil: 'networkidle' });
+    const headHtml = await page.evaluate(() => document.head.innerHTML);
+    const hreflangLinks = headHtml.match(/<link[^>]*hreflang[^>]*>/g) || [];
+    expect(hreflangLinks.length).toBeGreaterThan(1);
+    expect(headHtml).toContain('hreflang="vi"');
+    expect(headHtml).toContain('hreflang="en"');
+  });
+
+  test('VI bus-86 page does NOT fall back to homepage content', async ({ page }) => {
+    await page.goto(`${BASE}/vi/tuyen-86-noi-bai`, { waitUntil: 'networkidle' });
+    await page.waitForLoadState('domcontentloaded');
+    const h1 = page.locator('h1');
+    await expect(h1).toBeVisible();
+    const h1Text = await h1.textContent();
+    expect(h1Text).not.toContain('Chỉ cần nhập giờ đáp');
+  });
+
+  test('VI bus-86 page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/tuyen-86-noi-bai`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/bus-86-hanoi-airport"]');
+    await expect(enLink).toBeVisible();
+  });
+
   test('vi homepage has Vietnamese title', async ({ page }) => {
     await page.goto(`${BASE}/vi/`, { waitUntil: 'networkidle' });
     await expect(page).toHaveTitle(/Xe buýt|Frylane/);
