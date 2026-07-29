@@ -47,7 +47,7 @@ function ResultRoute() {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p>Unable to calculate trip. Please go back and try again.</p>
-        <button onClick={handleBack} className="ml-4 text-green-600 underline">
+        <button onClick={handleBack} className="ml-4 text-primary underline">
           ← Go back
         </button>
       </div>
