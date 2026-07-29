@@ -12,6 +12,22 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-29 — Drop sanbaygo.app; frylane.com is sole domain
+- Sources touched: `app.json`, `wiki/pages/seo-content-strategy.md`,
+  `wiki/pages/project-overview.md`, `wiki/pages/decisions.md`, `wiki/index.md`,
+  `docs/keyword-research-brief-airport-bus-vn.md`.
+- Wiki pages touched: `seo-content-strategy`, `project-overview`, `decisions`,
+  `index` (all `last_verified` still 2026-07-29; sources unchanged for pages
+  that merely had stale domain references removed).
+- Lint status: clean (9/9 pages, 0 issues).
+- Commit: `dd52d9c` — `feat: drop sanbaygo.app — frylane.com is the sole domain`.
+- Summary: `app.json` scheme `sanbaygo` → `frylane`; all wiki/docs
+  references to `sanbaygo.app` as a separate domain removed; single-domain
+  policy (EN root + VI `/vi/…`) now consistent across codebase.
+- Context: decision to drop `sanbaygo.app` confirmed by user mid-session; user
+  wants ALL traffic on `frylane.com`. `app.json` bundle ID (`com.sanbaygo.app`)
+  unchanged (already deployed to App/Play Store).
+
 ## 2026-07-29 — Initial wiki scaffold + lint + diagram
 - Wiki pages created: all 8 seed pages (`project-overview`, `architecture`,
   `domain-model`, `data-sources`, `sessions-history`, `decisions`,
