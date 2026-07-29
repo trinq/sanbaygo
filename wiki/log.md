@@ -19,12 +19,13 @@ One entry per session. Newest at the top. Format:
   `web/__tests__/lib/generate-sitemap.test.ts` (new),
   `web/vite.config.mts` (added `frylane-sitemap` plugin loading registry
   via esbuild + writing `public/` + `dist/` on `closeBundle`),
-  `web/public/sitemap.xml` (regenerated), `web/dist/sitemap.xml` (regenerated),
-  `feature_list.json`, `session-handoff.md`.
+  `web/public/sitemap.xml` (regenerated), `web/dist/sitemap.xml` (regenerated).
 - Wiki pages touched: none.
 - Lint status: 0 errors, 4 C1 staleness warnings (expected — feature_list.json, plans modified).
-- TDD cycle: `generate-sitemap.test.ts` RED (3 cases, `Could not locate module @/seo/generateSitemap`) → registry + generator GREEN (3/3 pass) → Vite plugin wired → add-entry round-trip 12→13→12 verified. Verification: web tsc --noEmit exit 0, web jest 122 (3 new green + 4 pre-existing Bus86Page reds unchanged), Playwright seo.spec.ts 28/28, root RN 168/168, root tsc 0.
+- TDD cycle: `generate-sitemap.test.ts` RED (4 cases, `Could not locate module @/seo/generateSitemap`) → registry + generator GREEN (4/4 pass) → Vite plugin wired → add-entry round-trip 12→13→12 verified. Verification: web tsc --noEmit exit 0, web jest 4/4 generate-sitemap (added build-time-default test), Playwright seo.spec.ts 28/28, root RN 168/168, root tsc 0.
 - Approach: Vite build hook (recommended option in brief) — runs only on `npm run build`, leaves dev server untouched.
+- Review fixes (a643857): build-time lastmod via `now` param (was per-route hardcoded), `hreflangFor` edge case (`/vi-foo` no longer matches), `xhtml:link` 4-space indent, trailing newlines.
+- Commits: `9ae46dc`, `a643857`.
 
 ## 2026-07-30 — Phase 0 kw-0-comparison-layout: ComparisonArticleLayout + shared FAQ module
 - Sources touched: `web/src/components/Layout/ComparisonArticleLayout.tsx`,

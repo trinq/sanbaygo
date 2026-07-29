@@ -66,14 +66,16 @@
   - Vite build hook `closeBundle` loads registry via esbuild → writes
     `web/public/sitemap.xml` + `web/dist/sitemap.xml` from `web/src/seo/pageRegistry.ts`
   - Pure `generateSitemap()` (xml escaping + xhtml:link hreflang + defaults) with
-    3 jest tests (urlset structure, alternatePath hreflang, add-entry semantics)
+    4 jest tests (urlset structure, alternatePath hreflang, add-entry semantics,
+    build-time lastmod default)
   - 12 routes seeded matching `web/src/App.tsx` (homepage, /vi/, bus 86/109/152
     EN+VI, scam EN+VI, privacy, terms)
-  - Verification: web tsc --noEmit exit 0, web jest 122 (3 new green + 4
-    pre-existing Bus86Page reds unchanged), web Playwright seo.spec.ts 28/28,
-    root RN 168/168, root tsc 0
-  - Add-entry round-trip verified: 12 → 13 (added `/tmp-add-entry-rebuild-check`)
-    → 12 (reverted).
+  - Review fixes (a643857): build-time lastmod via `now` param, hreflangFor
+    edge case, xhtml:link indent, trailing newlines
+  - Verification: web tsc --noEmit exit 0, web jest 4/4 generate-sitemap, web
+    Playwright seo.spec.ts 28/28, root RN 168/168
+  - Add-entry round-trip verified: 12 → 13 → 12
+  - Commits: `9ae46dc`, `a643857`
 
 ## Still Broken or Unverified
 
@@ -82,24 +84,31 @@
 - web/__tests__/routes/articles/Bus86Page.{exit-time,scam-warning}.test.tsx — 4 pre-existing RED
   tests (TDD-RED per AGENTS.md); these will turn green as kw-13/kw-17 implement Bus86Page updates
 - Untracked: docs/superpowers/plans/2026-07-29-seo-domain-setup.md, research/
-- Dev server (pid 14508) running on port 5173
-- Branch is 36 commits ahead of origin/main; push needed
+- Dev server (pid 14508) running on port 5173 (serves previous build's public/sitemap.xml)
+- Branch is 39 commits ahead of origin/main; push needed
+- BusArticleConfig.scheduleCount is now dormant — flagged for follow-up cleanup
+- Sitemap dev-mode freshness: npm run dev does NOT regenerate sitemap.xml
+  (only npm run build does). Long-lived dev sessions may serve stale sitemap.
 
 ## Next Best Action
 
-1. **kw-0-comparison-layout PASSING** — unblocks kw-13/kw-5/kw-6/kw-7 (all use ComparisonArticleLayout)
-2. Next ticket: `kw-13-bus-109-vs-152` (Tier 1, KD 18, lowest KD quick-win)
-3. Run `npm run wiki:lint` and fix any drift flagged by C1 staleness
-4. Schedule cleanup of dormant `BusArticleConfig.scheduleCount` field (out of scope here)
-5. Push branch to origin and consider opening PR
+1. **Phase 0 complete** — both kw-0-comparison-layout + kw-0-sitemap-auto PASSING
+2. Phase 0 remaining (process, not code): `kw-0-gsc-setup` (GSC + GA4 + Google Ads
+   account setup — requires human DNS action), `kw-0-keyword-sheet` (CSV)
+3. Phase 1 next: `kw-13-bus-109-vs-152` (Tier 1, KD 18, lowest KD quick-win)
+4. Run `npm run wiki:lint` and fix any drift flagged by C1 staleness
+5. Schedule cleanup of dormant `BusArticleConfig.scheduleCount` field
+6. Push branch to origin and consider opening PR
 
 ## Commands
 
 ```bash
-# Verify Phase 0
+# Verify Phase 0 complete
 cd web && npx tsc --noEmit
 cd web && npx jest __tests__/components/Layout/ComparisonArticleLayout.test.tsx
+cd web && npx jest __tests__/lib/generate-sitemap.test.ts
 cd web && npx playwright test e2e/seo.spec.ts --project=chromium
+cd web && npm run build
 npm test
 
 # Wiki lint
