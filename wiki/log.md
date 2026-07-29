@@ -12,6 +12,30 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-30 — Phase 0 kw-0-comparison-layout: ComparisonArticleLayout + shared FAQ module
+- Sources touched: `web/src/components/Layout/ComparisonArticleLayout.tsx`,
+  `web/src/components/Layout/shared/FAQ.tsx`,
+  `web/src/components/Layout/AirportArticleLayout.tsx`,
+  `web/__tests__/components/Layout/ComparisonArticleLayout.test.tsx`,
+  `feature_list.json`, `.superpowers/sdd/progress.md`,
+  `docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md`.
+- Wiki pages touched: none (no infra concept-page changes).
+- Lint status: 0 errors, 4 C1 staleness warnings (expected — feature_list.json, plans modified).
+- TDD cycle: ComparisonArticleLayout.test.tsx RED (14 cases, module missing)
+  → ComparisonArticleLayout.tsx + shared/FAQ.tsx GREEN (14/14 pass)
+  → review flagged 2 Important (FAQ dedupe, intro required vs conditional)
+  → 004dae5 fixed both + minor trailing-newlines. Verification: web
+  tsc --noEmit exit 0 (3 pre-existing TS6133 errors gone), jest
+  ComparisonArticleLayout 14/14, playwright seo.spec.ts 28/28,
+  root RN 168/168. Side-effect: BusArticleConfig.scheduleCount is
+  now dormant — flagged for follow-up cleanup.
+- Commits: `a23350d` (impl), `004dae5` (review fixes).
+- Pre-session commits (WIP preservation): `136dd52` (linear MCP),
+  `35f772f` (kw-* plan), `3b5623b` (exit time + BusGuides),
+  `9d8db4c` (TDD-RED for kw-13/kw-17).
+
+---
+
 ## 2026-07-29 — Wire missing SEO routes + sitemap.xml update
 - Sources touched: `web/public/sitemap.xml`, `web/e2e/seo.spec.ts`.
 - Wiki pages touched: none.

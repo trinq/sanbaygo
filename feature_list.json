@@ -507,10 +507,10 @@
       "platform": "web",
       "title": "Create ComparisonArticleLayout for #5/#6/#7/#13",
       "user_visible_behavior": "New ComparisonArticleLayout component exists at web/src/components/Layout/ComparisonArticleLayout.tsx with ComparisonArticleConfig shape accepting: heading, intro, options[] ({name, priceRange, durationRange, pros[], cons[], bestFor}), comparison table, CTA. Mirrors AirportArticleLayout pattern so comparison articles can be built test-first.",
-      "status": "pending",
+      "status": "passing",
       "verification": "1. cd web && npx tsc --noEmit → exit 0\n2. cd web && npx playwright test --project=chromium → all pass\n3. Verify ComparisonArticleConfig type exists and is exported\n4. Verify a smoke comparison page renders without errors",
-      "evidence": "",
-      "notes": "Phase 0 infra — unblocks kw-5, kw-6, kw-7, kw-13. Plan: docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md"
+      "evidence": "Commits a23350d (impl) + 004dae5 (review fixes: shared/FAQ.tsx consumption in AirportArticleLayout, intro optional, scheduleCount dormant). Verification: web tsc --noEmit exit 0, jest ComparisonArticleLayout 14/14 pass, playwright seo.spec.ts 28/28 pass, root RN 168/168 pass. Plan: docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md",
+      "notes": "Phase 0 infra — unblocks kw-5, kw-6, kw-7, kw-13. Reviewer flagged 2 Important (FAQ dedupe, intro required vs conditional) + 5 Minor — all resolved. Minor follow-up: BusArticleConfig.scheduleCount is now a dormant config field (accepted but ignored); either wire into schedule UI or remove from config + 6 callers."
     },
     {
       "id": "kw-0-sitemap-auto",

@@ -7,6 +7,7 @@
 | seo-helmet-provider | passing | 2026-07-29 |
 | seo-playwright-e2e | passing | 2026-07-29 |
 | seo-review-fixes | passing | 2026-07-29 |
+| kw-0-comparison-layout | passing | 2026-07-30 |
 
 ## Changes This Session
 
@@ -53,42 +54,50 @@
   - Registered route before `/vi/*` wildcard
   - 2 new E2E tests added (H1 is Bus 86 article, EN link visible)
   - All 28 SEO E2E tests pass
+- **2026-07-30 (this session):** Phase 0 — kw-0-comparison-layout
+  - Preserved WIP (4 commits: linear MCP, kw-* plan, exit time + BusGuides, TDD-RED)
+  - `ComparisonArticleLayout` component + `shared/FAQ.tsx` + 14-case test suite
+  - Review flagged 2 Important (FAQ dedupe, intro required vs conditional) — fixed in 004dae5
+  - Side effect: 3 pre-existing TS6133 errors in AirportArticleLayout cleared (FAQ dedupe)
+  - ScheduleCount now dormant — flagged for follow-up
+  - Commits: `136dd52`, `35f772f`, `3b5623b`, `9d8db4c`, `a23350d`, `004dae5`
 
 ## Still Broken or Unverified
 
 - web/e2e/landing-flow.spec.ts — pre-existing failures (out of scope for SEO plan)
 - web/e2e/ is gitignored; seo.spec.ts was force-added (`git add -f`)
+- web/__tests__/routes/articles/Bus86Page.{exit-time,scam-warning}.test.tsx — 4 pre-existing RED
+  tests (TDD-RED per AGENTS.md); these will turn green as kw-13/kw-17 implement Bus86Page updates
 - Untracked: docs/superpowers/plans/2026-07-29-seo-domain-setup.md, research/
 - Dev server (pid 14508) running on port 5173
+- Branch is 36 commits ahead of origin/main; push needed
 
 ## Next Best Action
 
-1. Run `npm run wiki:lint` and fix any issues
-2. Verify 7/7 SEO E2E tests pass: `cd web && npx playwright test seo.spec.ts --project=chromium`
-3. Push feature/seo-domain-setup to remote
-4. Create PR or merge to main
-5. Remaining caveat from Task 7 review (minor, not blocking): hardcoded baggage/flightType
-   in ResultRoute URL parsing — now fixed, baggage/flightType passed from LandingPage
+1. **kw-0-comparison-layout PASSING** — unblocks kw-13/kw-5/kw-6/kw-7 (all use ComparisonArticleLayout)
+2. Next ticket: `kw-13-bus-109-vs-152` (Tier 1, KD 18, lowest KD quick-win)
+3. Run `npm run wiki:lint` and fix any drift flagged by C1 staleness
+4. Schedule cleanup of dormant `BusArticleConfig.scheduleCount` field (out of scope here)
+5. Push branch to origin and consider opening PR
 
 ## Commands
 
 ```bash
-# Verify TypeScript
-npx tsc --noEmit
-
-# Run SEO E2E tests (chromium only)
-cd web && npx playwright test seo.spec.ts --project=chromium
-
-# Full test suite
-cd web && npm test
+# Verify Phase 0
+cd web && npx tsc --noEmit
+cd web && npx jest __tests__/components/Layout/ComparisonArticleLayout.test.tsx
+cd web && npx playwright test e2e/seo.spec.ts --project=chromium
+npm test
 
 # Wiki lint
 npm run wiki:lint
+
+# Start kw-13 (next ticket) — subagent-driven-development
 ```
 
 ## Context
 
-- **Branch:** feature/seo-domain-setup
+- **Branch:** main
 - **Project:** Frylane (brand rename from SanBayGo)
 - **Domain:** frylane.com (single domain, EN root + VI /vi/…)
-- **Plan:** docs/superpowers/plans/2026-07-29-seo-domain-setup.md
+- **Plan:** docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md
