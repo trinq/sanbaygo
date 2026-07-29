@@ -27,7 +27,7 @@ export interface ComparisonArticleConfig {
   /** Vietnamese subtitle below H1 */
   subtitle: string;
   /** Optional intro paragraph (Vietnamese) */
-  intro: string;
+  intro?: string;
   /** Comparison options — must contain ≥ 2 entries */
   options: ComparisonOption[];
   /** Optional verdict / bottom-line callout shown after the comparison table */

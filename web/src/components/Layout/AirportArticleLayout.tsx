@@ -4,6 +4,7 @@ import { SEOHelmet } from '../SEO';
 import { SearchCard } from '../Landing/SearchCard';
 import { useLandingForm } from '../../hooks/useLandingForm';
 import { ArticleLayout } from './ArticleLayout';
+import { FAQSection, FAQSchema, type FAQItem } from './shared/FAQ';
 
 export interface BusArticleConfig {
   /** SEO Helmet path, e.g. "/bus-86-hanoi-airport" */
@@ -32,7 +33,7 @@ export interface BusArticleConfig {
   /** Pickup location hint shown below exit-time section */
   pickupHint?: string;
   /** FAQ items — each has a Vietnamese question and answer */
-  faqItems: Array<{ q: string; a: string }>;
+  faqItems: FAQItem[];
   /** Path to the counterpart language page — used for the language switcher link in nav.
    *  e.g. EN page: "/vi/tuyen-86-noi-bai", VI page: "/bus-86-hanoi-airport" */
   alternatePath?: string;
@@ -203,12 +204,10 @@ function StopsSection({ stops }: { stops: Array<{ name: string; address: string 
 function ScheduleSection({
   bus,
   frequency,
-  scheduleCount,
   dataSource,
 }: {
   bus: BusRoute;
   frequency: string;
-  scheduleCount: number;
   dataSource: string;
 }) {
   const departures =
@@ -266,55 +265,6 @@ function ScheduleSection({
   );
 }
 
-function FAQSection({ items, bus }: { items: Array<{ q: string; a: string }>; bus: BusRoute }) {
-  const fare = bus.ticketPrice.toLocaleString();
-
-  return (
-    <section className="mb-12">
-      <h2 className="text-2xl font-bold text-ink mb-4">Câu hỏi thường gặp</h2>
-      <div className="space-y-4">
-        {items.map((item, i) => (
-          <details key={i} className="rounded-xl border border-surface-border bg-white">
-            <summary className="cursor-pointer p-5 font-medium text-ink list-none flex items-center justify-between">
-              {item.q}
-              <svg className="h-5 w-5 text-ink-soft shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </summary>
-            <div className="border-t border-surface-border px-5 pb-5 pt-4 text-ink-soft">
-              {item.a}
-            </div>
-          </details>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function FAQSchema({ items, bus }: { items: Array<{ q: string; a: string }>; bus: BusRoute }) {
-  const mainEntity = items.map((item) => ({
-    '@type': 'Question' as const,
-    name: item.q,
-    acceptedAnswer: {
-      '@type': 'Answer' as const,
-      text: item.a,
-    },
-  }));
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity,
-        }),
-      }}
-    />
-  );
-}
-
 export function AirportArticleLayout({ config }: Props) {
   const {
     seoPath,
@@ -327,7 +277,6 @@ export function AirportArticleLayout({ config }: Props) {
     stops,
     frequency,
     grabPriceRange,
-    scheduleCount,
     dataSource,
     pickupHint,
     faqItems,
@@ -358,7 +307,6 @@ export function AirportArticleLayout({ config }: Props) {
           <ScheduleSection
             bus={bus}
             frequency={frequency}
-            scheduleCount={scheduleCount}
             dataSource={dataSource}
           />
           <StopsSection stops={stops} />
@@ -366,10 +314,10 @@ export function AirportArticleLayout({ config }: Props) {
           <TravelTimeSection bus={bus} />
           <ExitTimeSection summary={bus.exitTimeSummary} pickupHint={pickupHint} />
           <GrabAlternativeSection priceRange={grabPriceRange} />
-          <FAQSection items={faqItems} bus={bus} />
+          <FAQSection items={faqItems} />
         </div>
 
-        <FAQSchema items={faqItems} bus={bus} />
+        <FAQSchema items={faqItems} />
       </ArticleLayout>
     </>
   );
