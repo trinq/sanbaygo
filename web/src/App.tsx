@@ -7,7 +7,8 @@ import { Bus86Page } from './routes/articles/Bus86Page';
 import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { ResultPage } from './components/Result';
-import type { ArrivalResult, ArrivalFormData, AirportId, TerminalId } from '@core';
+import type { ArrivalResult, ArrivalFormData, AirportId, TerminalId, BaggageType, FlightType } from '@core';
+import { calculateTrip } from '@core/calculate-trip';
 
 function ResultRoute() {
   const [searchParams] = useSearchParams();
@@ -19,42 +20,39 @@ function ResultRoute() {
   };
   const airportId: AirportId = airportIdMap[rawAirport] ?? 'noi-bai';
 
-  const rawTerminal = searchParams.get('terminal');
-  const terminal: TerminalId | null = (rawTerminal as TerminalId) ?? null;
+  const rawTerminal = searchParams.get('terminal') as TerminalId | null;
+  const rawBaggage = searchParams.get('baggage') as BaggageType | null;
+  const rawFlightType = searchParams.get('flightType') as FlightType | null;
 
   const flightTime = searchParams.get('flightTime') ?? '14:30';
   const destination = searchParams.get('destination') ?? 'old-quarter';
-  const busAvailable = searchParams.get('busAvailable') === 'true';
-  const grabPrice = searchParams.get('grabPrice') ?? '250,000 – 350,000';
+  const flightType: FlightType = rawFlightType ?? 'domestic';
 
   const formData: ArrivalFormData = {
     airportId,
     arrivalTime: flightTime,
     destination,
-    terminal,
-    baggage: 'carry_on',
-    flightType: 'domestic',
+    terminal: rawTerminal,
+    baggage: rawBaggage,
+    flightType,
   };
 
-  const result: ArrivalResult = {
-    bus: {
-      available: busAvailable,
-      reason: busAvailable ? undefined : 'too_late',
-    },
-    grab: {
-      available: true,
-      priceEstimate: `${grabPrice}₫`,
-      travelTime: {
-        early: '35 min',
-        late: '55 min',
-        minutesRange: { min: 35, max: 55 },
-      },
-    },
-  };
+  const result: ArrivalResult | null = calculateTrip(formData);
 
   const handleBack = () => {
     window.history.back();
   };
+
+  if (!result) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p>Unable to calculate trip. Please go back and try again.</p>
+        <button onClick={handleBack} className="ml-4 text-green-600 underline">
+          ← Go back
+        </button>
+      </div>
+    );
+  }
 
   return <ResultPage onBack={handleBack} formData={formData} result={result} />;
 }

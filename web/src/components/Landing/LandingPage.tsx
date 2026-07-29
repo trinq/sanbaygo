@@ -23,8 +23,8 @@ export function LandingPage() {
       flightTime: formData.arrivalTime,
       terminal: formData.terminal ?? '',
       destination: formData.destination ?? '',
-      busAvailable: String(calculation.bus.available),
-      grabPrice: calculation.grab.priceEstimate.replace('₫', ''),
+      baggage: formData.baggage ?? 'carry_on',
+      flightType: formData.flightType,
     });
 
     navigate(`/ket-qua?${params.toString()}`);

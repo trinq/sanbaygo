@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Allow: /vi/
 
 # Sitemap
 Sitemap: https://frylane.com/sitemap.xml

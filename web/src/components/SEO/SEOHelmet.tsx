@@ -27,7 +27,10 @@ export function SEOHelmet({ path }: Props) {
       <meta name="twitter:title" content={meta.twitterTitle ?? meta.ogTitle ?? meta.title} />
       <meta name="twitter:description" content={meta.twitterDescription ?? meta.ogDescription ?? meta.description} />
 
-      {/* Hreflang */}
+      {/* Hreflang — self-reference + counterpart (required by Google spec) */}
+      {/* Self-reference: this page declares its own language */}
+      <link rel="alternate" hrefLang={path.startsWith('/vi') ? 'vi' : 'en'} href={`https://frylane.com${path}`} />
+      {/* Counterpart: the other-language version of this page */}
       {meta.alternateEN && (
         <>
           <link rel="alternate" hrefLang="en" href={meta.alternateEN} />
@@ -37,8 +40,6 @@ export function SEOHelmet({ path }: Props) {
       {meta.alternateVI && (
         <link rel="alternate" hrefLang="vi" href={meta.alternateVI} />
       )}
-      <link rel="alternate" hrefLang="en" href="https://frylane.com/" />
-      <link rel="alternate" hrefLang="vi" href="https://frylane.com/vi/" />
     </Helmet>
   );
 }

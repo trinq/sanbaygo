@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+// Run with: npx playwright test seo.spec.ts --project=chromium
+// (firefox/webkit not yet verified against dev server in CI)
+
 test.describe('SEO Routes', () => {
   const BASE = 'http://localhost:5173';
 

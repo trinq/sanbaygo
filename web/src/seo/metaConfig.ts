@@ -45,7 +45,7 @@ export const PAGE_META: Record<string, MetaConfig> = {
     alternateEN: 'https://frylane.com/bus-86-hanoi-airport',
   },
   '/bus-109-saigon-airport': {
-    title: 'Bus 109 Saigon Airport — Schedule, VND 20,000 Fare (2025)',
+    title: 'Bus 109 Saigon Airport — Schedule, VND 20,000 Fare (2026)',
     description: 'Take Bus 109 from Tan Son Nhat Airport (T1/T3) to Saigon Downtown. VND 20,000 fare, 30-50 min, runs 05:00–23:00. Includes exit time calculator.',
     keywords: 'bus 109 saigon airport, tansonnhat bus 109, bus 109 schedule, saigon airport bus',
     canonical: 'https://frylane.com/bus-109-saigon-airport',
@@ -66,7 +66,7 @@ export const PAGE_META: Record<string, MetaConfig> = {
     alternateVI: 'https://frylane.com/vi/tuyen-152-tan-son-nhat',
   },
   '/airport-scam-vietnam-taxi': {
-    title: 'Airport Taxi Scams in Vietnam (2025) — How to Avoid Them',
+    title: 'Airport Taxi Scams in Vietnam (2026) — How to Avoid Them',
     description: 'Complete guide to avoiding taxi and ride-hail scams at Vietnam airports. Learn about common schemes, Grab safety tips, and how locals travel cheap.',
     keywords: 'airport scam vietnam, taxi scam saigon, airport taxi safety vietnam, grab safe airport hanoi',
     canonical: 'https://frylane.com/airport-scam-vietnam-taxi',
