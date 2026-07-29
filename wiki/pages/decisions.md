@@ -41,6 +41,12 @@ or moved into an ADR.
 - **"No backend" MVP** (AGENTS.md). *Conflicts with* CONTEXT.md's
   "Backend: Next.js API Routes, Database: Supabase, Deployment: Vercel."
   See "Open contradictions" below.
+- **lean_intl audience posture** (2026-07-29). `frylane.com` targets
+  international English-speaking travellers as primary (≈ 60%); Vietnamese
+  domestic is secondary (≈ 40%). Content split: EN on `frylane.com`, VI on
+  `sanbaygo.app`. Not yet formalised as an ADR. See
+  [seo-content-strategy](./seo-content-strategy.md) for keyword tiers and
+  execution notes.
 
 ## Open contradictions
 

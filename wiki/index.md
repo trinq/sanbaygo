@@ -16,6 +16,7 @@ flags pages whose sources have drifted since `last_verified`.
 | [decisions](./pages/decisions.md) | Index of ADRs and other project decisions, with links to the raw decision records. |
 | [conventions](./pages/conventions.md) | Coding, naming, UI-language (Vietnamese), commit, and PR conventions. |
 | [tooling](./pages/tooling.md) | Build/test/lint commands, deployment scripts, and CI. |
+| [seo-content-strategy](./pages/seo-content-strategy.md) | SEO keyword targets and content language split — frylane.com (EN intl primary) vs sanbaygo.app (VN secondary). |
 
 ## Logs
 
