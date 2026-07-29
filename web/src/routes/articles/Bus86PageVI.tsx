@@ -34,9 +34,12 @@ const FAQ_ITEMS = [
 ];
 
 export function Bus86PageVI() {
+  const schedule =
+    BUS_86.scheduleSource.kind === 'explicit' ? BUS_86.scheduleSource.departures : [];
+
   const config: BusArticleConfig = {
     seoPath: '/vi/tuyen-86-noi-bai',
-    h1En: 'Tuyến xe buýt 86 — Sân bay Nội Bài đến Phố Cổ Hà Nội',
+    h1En: 'Tuyến xe buýt 86 — Sân bay Nội Bài đến Phố cổ Hà Nội',
     categoryLabel: 'Xe buýt sân bay Hà Nội',
     subtitle: `VND ${BUS_86.ticketPrice.toLocaleString()} · ${BUS_86.operatingHours.start}–${BUS_86.operatingHours.end} · Mỗi 15–20 phút`,
     bus: BUS_86,
@@ -45,9 +48,7 @@ export function Bus86PageVI() {
     stops: STOPS,
     frequency: '15–20 phút',
     grabPriceRange: 'VND 250,000–350,000',
-    scheduleCount: BUS_86.scheduleSource.kind === 'explicit'
-      ? BUS_86.scheduleSource.departures.length
-      : 0,
+    scheduleCount: schedule.length,
     dataSource: 'Hanoi Public Transport Center (tramdep.vn)',
     pickupHint: 'Bus 86 dừng tại T1 Cổng A1 (tầng đến, cột 12) và T2 Cổng A1 (cột 14).',
     faqItems: FAQ_ITEMS,
