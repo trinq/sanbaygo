@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /vi/
+
+# Sitemap
+Sitemap: https://frylane.com/sitemap.xml
+
+# Crawl-delay (optional, be nice to shared host)
+Crawl-delay: 1
