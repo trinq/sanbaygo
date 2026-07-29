@@ -1,35 +1,26 @@
-import { Helmet } from 'react-helmet-async';
+import { SEOHelmet } from '../components/SEO';
 import { BUS_86 } from '@core/data/busSchedule';
+
+const STOPS = [
+  { name: 'Sân bay Nội Bài – Ga T1, Cổng A1', address: 'Tầng 1 sảnh đến, đối diện cột 12' },
+  { name: 'Sân bay Nội Bài – Ga T2, Cổng A1', address: 'Tầng 1 sảnh đến, đối diện cột 14' },
+  { name: 'Cầu Nhật Tân', address: 'Qua cầu Nhật Tân' },
+  { name: 'Đại lộ Thăng Long', address: 'Đại lộ Thăng Long, quận Bắc Từ Liêm' },
+  { name: 'Phố cổ Hà Nội', address: 'Khu phố cổ, quận Hoàn Kiếm' },
+];
 
 export function Bus86Page() {
   const schedule = BUS_86.scheduleSource.kind === 'explicit'
     ? BUS_86.scheduleSource.departures
     : [];
 
-  const stops = [
-    { name: 'Sân bay Nội Bài – Cổng A1, Tầng 1', address: 'Ga quốc tế T1, đối diện cột 12' },
-    { name: 'Cầu Nhật Tân', address: 'Qua cầu Nhật Tân' },
-    { name: 'Đại lộ Thăng Long', address: 'Đại lộ Thăng Long' },
-    { name: 'Hoàng Mai', address: 'Quận Hoàng Mai' },
-    { name: 'Phố Nào Đó – Khu phố cổ', address: 'Khu phố cổ Hà Nội' },
-  ];
+  const fare = BUS_86.ticketPrice.toLocaleString();
+  const startTime = BUS_86.operatingHours.start;
+  const endTime = BUS_86.operatingHours.end;
 
   return (
     <>
-      <Helmet>
-        <title>Bus 86 — Sân bay Nội Bài đến Phố Cổ | Frylane</title>
-        <meta
-          name="description"
-          content="Xe buýt 86 từ sân bay Nội Bài đến khu phố cổ Hà Nội. Giá VND 35,000, thời gian 45–60 phút, khởi hành mỗi 15–20 phút từ 05:00–23:00. Tính thời gian đón xe ngay."
-        />
-        <meta name="keywords" content="bus 86 hanoi airport, xe buýt 86 nội bài, bus 86 noi bai, transportation hanoi airport" />
-        <link rel="canonical" href="https://frylane.com/articles/bus-86-hanoi-airport" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://frylane.com/articles/bus-86-hanoi-airport" />
-        <meta property="og:title" content="Bus 86 — Sân bay Nội Bài đến Phố Cổ Hà Nội" />
-        <meta property="og:description" content="VND 35,000 · 45–60 min · Mỗi 15–20 phút · 05:00–23:00. Tất cả giờ khởi hành Bus 86 tại đây." />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Helmet>
+      <SEOHelmet path="/bus-86-hanoi-airport" />
 
       <div className="min-h-screen bg-white">
         {/* Hero */}
@@ -42,7 +33,7 @@ export function Bus86Page() {
               Bus 86 — Sân bay Nội Bài đến Khu phố cổ Hà Nội
             </h1>
             <p className="text-lg opacity-90">
-              VND 35,000 · 45–60 phút · Mỗi 15–20 phút · 05:00–23:00
+              VND {fare} · {startTime}–{endTime} · Mỗi 15–20 phút
             </p>
           </div>
         </header>
@@ -79,11 +70,11 @@ export function Bus86Page() {
                 </thead>
                 <tbody>
                   <tr className="border-b border-gray-100">
-                    <td className="py-3 px-2">{BUS_86.operatingHours.start}</td>
-                    <td className="py-3 px-2">{BUS_86.operatingHours.end}</td>
+                    <td className="py-3 px-2">{startTime}</td>
+                    <td className="py-3 px-2">{endTime}</td>
                     <td className="py-3 px-2">15–20 phút</td>
                     <td className="py-3 px-2 font-medium text-green-600">
-                      VND {BUS_86.ticketPrice.toLocaleString()}
+                      VND {fare}
                     </td>
                   </tr>
                 </tbody>
@@ -104,7 +95,7 @@ export function Bus86Page() {
             </details>
 
             <p className="text-sm text-gray-500 mt-2">
-              Nguồn: Hanoi Public Transport Center (tramdep.vn). Xác minh lần cuối: tháng 7/2025.
+              Nguồn: Hanoi Public Transport Center (tramdep.vn). Xác minh lần cuối: tháng 7/2026.
             </p>
           </section>
 
@@ -112,7 +103,7 @@ export function Bus86Page() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-4">Các điểm dừng</h2>
             <div className="space-y-3">
-              {stops.map((stop, i) => (
+              {STOPS.map((stop, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-700 text-sm flex items-center justify-center font-medium">
                     {i + 1}
@@ -124,6 +115,32 @@ export function Bus86Page() {
                 </div>
               ))}
             </div>
+          </section>
+
+          {/* Travel Time Info */}
+          <section className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-12">
+            <h2 className="text-xl font-bold mb-3">Thời gian di chuyển</h2>
+            <p className="text-gray-700">
+              Thời gian di chuyển từ sân bay Nội Bài đến trung tâm Hà Nội:
+            </p>
+            <ul className="mt-3 space-y-2">
+              <li className="flex items-center gap-2">
+                <span className="inline-block bg-green-100 text-green-700 text-sm px-2 py-1 rounded">
+                  Bình thường
+                </span>
+                <span>
+                  {BUS_86.travelTime.normal.min}–{BUS_86.travelTime.normal.max} phút
+                </span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="inline-block bg-red-100 text-red-700 text-sm px-2 py-1 rounded">
+                  Giờ cao điểm (7–9 sáng, 5–7 tối)
+                </span>
+                <span>
+                  {BUS_86.travelTime.peak.min}–{BUS_86.travelTime.peak.max} phút
+                </span>
+              </li>
+            </ul>
           </section>
 
           {/* Grab Alternative */}
@@ -154,7 +171,7 @@ export function Bus86Page() {
                     name: 'Xe buýt 86 từ sân bay Nội Bài giá bao nhiêu?',
                     acceptedAnswer: {
                       '@type': 'Answer',
-                      text: 'Xe buýt 86 có giá VND 35,000 một chuyến từ sân bay Nội Bài đến khu phố cổ Hà Nội.',
+                      text: `Xe buýt 86 có giá VND ${fare} một chuyến từ sân bay Nội Bài đến trung tâm Hà Nội.`,
                     },
                   },
                   {
@@ -162,7 +179,7 @@ export function Bus86Page() {
                     name: 'Xe buýt 86 từ Nội Bài đến trung tâm thành phố mất bao lâu?',
                     acceptedAnswer: {
                       '@type': 'Answer',
-                      text: 'Hành trình mất khoảng 45–60 phút tùy thuộc vào tình trạng giao thông.',
+                      text: `Hành trình mất khoảng ${BUS_86.travelTime.normal.min}–${BUS_86.travelTime.normal.max} phút bình thường, hoặc ${BUS_86.travelTime.peak.min}–${BUS_86.travelTime.peak.max} phút vào giờ cao điểm (7–9 sáng, 5–7 tối).`,
                     },
                   },
                   {
@@ -170,7 +187,7 @@ export function Bus86Page() {
                     name: 'Xe buýt 86 dừng ở đâu tại sân bay Nội Bài?',
                     acceptedAnswer: {
                       '@type': 'Answer',
-                      text: 'Xe buýt 86 dừng tại Tầng 1 sảnh đến cổng A1 của sân bay Nội Bài, đối diện cột 12 (Ga T1).',
+                      text: 'Xe buýt 86 dừng tại Tầng 1 sảnh đến cổng A1 của cả hai nhà ga T1 và T2 tại sân bay Nội Bài.',
                     },
                   },
                   {
@@ -178,7 +195,7 @@ export function Bus86Page() {
                     name: 'Xe buýt 86 chạy mấy giờ?',
                     acceptedAnswer: {
                       '@type': 'Answer',
-                      text: 'Xe buýt 86 chạy từ 05:00 đến 23:00 hàng ngày, khởi hành mỗi 15–20 phút.',
+                      text: `Xe buýt 86 chạy từ ${startTime} đến ${endTime} hàng ngày, khởi hành mỗi 15–20 phút.`,
                     },
                   },
                   {
@@ -198,7 +215,7 @@ export function Bus86Page() {
         {/* Footer */}
         <footer className="border-t border-gray-200 py-8 text-center text-sm text-gray-500">
           <p>
-            Cập nhật lần cuối: tháng 7/2025 · Nguồn: Hanoi Public Transport Center
+            Cập nhật lần cuối: tháng 7/2026 · Nguồn: Hanoi Public Transport Center
           </p>
           <p className="mt-1">
             <a href="/" className="text-green-600 hover:underline">
