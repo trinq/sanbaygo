@@ -475,20 +475,30 @@
       "description": "Remove duplicate HelmetProvider from main.tsx (already provided in App.tsx). Fix broken Bus86Page.tsx import path '../components/SEO' → '../../components/SEO'.",
       "status": "passing",
       "evidence": [
-        "31b2bc8"
+        "5f935f8"
       ],
       "tests": []
     },
     {
       "id": "seo-playwright-e2e",
-      "description": "Playwright E2E tests for SEO routes: titles, meta tags, canonical, hreflang, FAQ schema, robots.txt, sitemap.xml. All 7 tests pass on chromium.",
+      "description": "Playwright E2E tests for SEO routes: titles, meta tags, canonical, hreflang (self-ref + counterpart), FAQ schema, robots.txt, sitemap.xml. All 7 tests pass on chromium.",
       "status": "passing",
       "evidence": [
-        "a31fc21"
+        "6f8a05b",
+        "9734052"
       ],
       "tests": [
         "web/e2e/seo.spec.ts"
       ]
+    },
+    {
+      "id": "seo-review-fixes",
+      "description": "Addressed code review: self-referencing hreflang (Google spec), removed unreachable sitemap entry, wired ResultRoute to calculateTrip, added lastmod, removed redundant Allow/vi, updated years to 2026, removed redundant LanguageProvider wrapper.",
+      "status": "passing",
+      "evidence": [
+        "6f8a05b"
+      ],
+      "tests": []
     }
   ]
 }

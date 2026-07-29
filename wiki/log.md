@@ -12,6 +12,31 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-29 — Code review fixes: hreflang, sitemap, ResultRoute wiring
+- Sources touched: `web/src/components/SEO/SEOHelmet.tsx`, `web/public/sitemap.xml`,
+  `web/public/robots.txt`, `web/src/seo/metaConfig.ts`, `web/src/App.tsx`,
+  `web/src/components/Landing/LandingPage.tsx`, `web/src/routes/HomePageVI.tsx`,
+  `web/e2e/seo.spec.ts`.
+- Wiki pages touched: none.
+- Lint status: not run this session (committed without lint; verify before push).
+- Commits on feature/seo-domain-setup:
+  - `6f8a05b` fix: address code review findings — hreflang, sitemap, ResultRoute, meta
+  - `37c087b` docs: mark SEO E2E and import fix features complete
+- Bugs fixed from code review:
+  1. SEOHelmet: self-referencing hreflang (Google spec requires every page to
+     declare its own language) + removed unconditional homepage hreflang (was
+     breaking hreflang on non-homepage routes)
+  2. sitemap.xml: added lastmod dates, removed unreachable /vi/tuyen-86-noi-bai
+  3. App.tsx: wired ResultRoute to calculateTrip() for real results (was
+     hardcoded); added baggage + flightType URL params; null guard
+  4. LandingPage: passes baggage + flightType in result page URL
+  5. HomePageVI: removed redundant LanguageProvider (App.tsx provides it)
+  6. metaConfig.ts: updated year to 2026 on Bus 109 and Scam pages
+  7. robots.txt: removed redundant Allow: /vi/
+  8. seo.spec.ts: chromium-only comment
+- E2E: 7/7 SEO tests pass (chromium)
+- TypeScript: clean (tsc --noEmit)
+
 ## 2026-07-29 — Drop sanbaygo.app; frylane.com is sole domain
 - Sources touched: `app.json`, `wiki/pages/seo-content-strategy.md`,
   `wiki/pages/project-overview.md`, `wiki/pages/decisions.md`, `wiki/index.md`,
