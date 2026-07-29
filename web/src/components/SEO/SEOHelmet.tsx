@@ -1,0 +1,44 @@
+import { Helmet } from 'react-helmet-async';
+import { PAGE_META, DEFAULT_META, type MetaConfig } from '../../seo/metaConfig';
+
+type Props = {
+  path: string;
+};
+
+export function SEOHelmet({ path }: Props) {
+  const meta = PAGE_META[path] ?? DEFAULT_META;
+
+  return (
+    <Helmet>
+      <title>{meta.title}</title>
+      <meta name="description" content={meta.description} />
+      {meta.keywords && <meta name="keywords" content={meta.keywords} />}
+      {meta.canonical && <link rel="canonical" href={meta.canonical} />}
+
+      {/* Open Graph */}
+      <meta property="og:type" content="website" />
+      {meta.ogUrl && <meta property="og:url" content={meta.ogUrl} />}
+      <meta property="og:title" content={meta.ogTitle ?? meta.title} />
+      <meta property="og:description" content={meta.ogDescription ?? meta.description} />
+      {meta.ogImage && <meta property="og:image" content={meta.ogImage} />}
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={meta.twitterTitle ?? meta.ogTitle ?? meta.title} />
+      <meta name="twitter:description" content={meta.twitterDescription ?? meta.ogDescription ?? meta.description} />
+
+      {/* Hreflang */}
+      {meta.alternateEN && (
+        <>
+          <link rel="alternate" hreflang="en" href={meta.alternateEN} />
+          <link rel="alternate" hreflang="x-default" href={meta.alternateEN} />
+        </>
+      )}
+      {meta.alternateVI && (
+        <link rel="alternate" hreflang="vi" href={meta.alternateVI} />
+      )}
+      <link rel="alternate" hreflang="en" href="https://frylane.com/" />
+      <link rel="alternate" hreflang="vi" href="https://frylane.com/vi/" />
+    </Helmet>
+  );
+}
