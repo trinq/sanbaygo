@@ -12,6 +12,20 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+---
+## 2026-07-30 — Phase 0 kw-0-sitemap-auto: auto-generated sitemap from registry
+- Sources touched: `web/src/seo/pageRegistry.ts` (new),
+  `web/src/seo/generateSitemap.ts` (new),
+  `web/__tests__/lib/generate-sitemap.test.ts` (new),
+  `web/vite.config.mts` (added `frylane-sitemap` plugin loading registry
+  via esbuild + writing `public/` + `dist/` on `closeBundle`),
+  `web/public/sitemap.xml` (regenerated), `web/dist/sitemap.xml` (regenerated),
+  `feature_list.json`, `session-handoff.md`.
+- Wiki pages touched: none.
+- Lint status: 0 errors, 4 C1 staleness warnings (expected — feature_list.json, plans modified).
+- TDD cycle: `generate-sitemap.test.ts` RED (3 cases, `Could not locate module @/seo/generateSitemap`) → registry + generator GREEN (3/3 pass) → Vite plugin wired → add-entry round-trip 12→13→12 verified. Verification: web tsc --noEmit exit 0, web jest 122 (3 new green + 4 pre-existing Bus86Page reds unchanged), Playwright seo.spec.ts 28/28, root RN 168/168, root tsc 0.
+- Approach: Vite build hook (recommended option in brief) — runs only on `npm run build`, leaves dev server untouched.
+
 ## 2026-07-30 — Phase 0 kw-0-comparison-layout: ComparisonArticleLayout + shared FAQ module
 - Sources touched: `web/src/components/Layout/ComparisonArticleLayout.tsx`,
   `web/src/components/Layout/shared/FAQ.tsx`,

@@ -8,6 +8,7 @@
 | seo-playwright-e2e | passing | 2026-07-29 |
 | seo-review-fixes | passing | 2026-07-29 |
 | kw-0-comparison-layout | passing | 2026-07-30 |
+| kw-0-sitemap-auto | passing | 2026-07-30 |
 
 ## Changes This Session
 
@@ -61,6 +62,18 @@
   - Side effect: 3 pre-existing TS6133 errors in AirportArticleLayout cleared (FAQ dedupe)
   - ScheduleCount now dormant — flagged for follow-up
   - Commits: `136dd52`, `35f772f`, `3b5623b`, `9d8db4c`, `a23350d`, `004dae5`
+- **2026-07-30 (this session):** Phase 0 — kw-0-sitemap-auto
+  - Vite build hook `closeBundle` loads registry via esbuild → writes
+    `web/public/sitemap.xml` + `web/dist/sitemap.xml` from `web/src/seo/pageRegistry.ts`
+  - Pure `generateSitemap()` (xml escaping + xhtml:link hreflang + defaults) with
+    3 jest tests (urlset structure, alternatePath hreflang, add-entry semantics)
+  - 12 routes seeded matching `web/src/App.tsx` (homepage, /vi/, bus 86/109/152
+    EN+VI, scam EN+VI, privacy, terms)
+  - Verification: web tsc --noEmit exit 0, web jest 122 (3 new green + 4
+    pre-existing Bus86Page reds unchanged), web Playwright seo.spec.ts 28/28,
+    root RN 168/168, root tsc 0
+  - Add-entry round-trip verified: 12 → 13 (added `/tmp-add-entry-rebuild-check`)
+    → 12 (reverted).
 
 ## Still Broken or Unverified
 

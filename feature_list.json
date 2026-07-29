@@ -519,10 +519,10 @@
       "platform": "web",
       "title": "Auto-generate sitemap.xml at build time from page registry",
       "user_visible_behavior": "web/public/sitemap.xml is generated from a single page registry (web/src/seo/pageRegistry.ts) listing {path, lastmod, alternatePath?, priority, changefreq}. Adding a new article updates sitemap on next build — no manual drift.",
-      "status": "pending",
-      "verification": "1. cd web && npm run build → sitemap.xml matches registry\n2. cd web && npx tsc --noEmit → exit 0\n3. Verify all current 11 routes have correct entries\n4. Test: add new entry to registry → rebuild → sitemap.xml contains new entry",
-      "evidence": "",
-      "notes": "Phase 0 infra — prevents stale sitemap. Replaces manual web/public/sitemap.xml."
+      "status": "passing",
+      "verification": "1. cd web && npm run build → sitemap.xml matches registry\n2. cd web && npx tsc --noEmit → exit 0\n3. Verify all current 12 routes have correct entries\n4. Test: add new entry to registry → rebuild → sitemap.xml contains new entry",
+      "evidence": "Commit (TBD — see session report). Vite build hook `closeBundle` in web/vite.config.mts compiles web/src/seo/pageRegistry.ts via esbuild and writes sitemap.xml to web/public/ + web/dist/. generateSitemap() is a pure function with 3 jest tests covering urlset structure, alternatePath hreflang, and add-entry semantics. Verification: web tsc --noEmit exit 0; web jest 122 (3 new + 115 prior, 4 pre-existing Bus86Page reds unchanged); web/dist/sitemap.xml + web/public/sitemap.xml each have 12 <url> blocks; add-entry round-trip 12→13→12; Playwright seo.spec.ts 28/28; root RN 168/168. Plan: docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md",
+      "notes": "Phase 0 infra — prevents stale sitemap. Replaces manual web/public/sitemap.xml. Approach: Vite build hook (recommended option in brief)."
     },
     {
       "id": "kw-0-gsc-setup",
