@@ -29,16 +29,16 @@ export function SEOHelmet({ path }: Props) {
 
       {/* Hreflang — self-reference + counterpart (required by Google spec) */}
       {/* Self-reference: this page declares its own language */}
-      <link rel="alternate" hreflang={path.startsWith('/vi') ? 'vi' : 'en'} href={`https://frylane.com${path}`} />
+      <link rel="alternate" hrefLang={path.startsWith('/vi') ? 'vi' : 'en'} href={`https://frylane.com${path}`} />
       {/* Counterpart: the other-language version of this page */}
       {meta.alternateEN && (
-        <link rel="alternate" hreflang="en" href={meta.alternateEN} />
-      )}
-      {meta.alternateEN && (
-        <link rel="alternate" hreflang="x-default" href={meta.alternateEN} />
+        <>
+          <link rel="alternate" hrefLang="en" href={meta.alternateEN} />
+          <link rel="alternate" hrefLang="x-default" href={meta.alternateEN} />
+        </>
       )}
       {meta.alternateVI && (
-        <link rel="alternate" hreflang="vi" href={meta.alternateVI} />
+        <link rel="alternate" hrefLang="vi" href={meta.alternateVI} />
       )}
     </Helmet>
   );

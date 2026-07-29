@@ -45,8 +45,8 @@ export const PAGE_META: Record<string, MetaConfig> = {
     alternateEN: 'https://frylane.com/bus-86-hanoi-airport',
   },
   '/bus-109-saigon-airport': {
-    title: 'Bus 109 Saigon Airport — Schedule, VND 20,000 Fare (2026)',
-    description: 'Take Bus 109 from Tan Son Nhat Airport (T1/T3) to Saigon Downtown. VND 20,000 fare, 30-50 min, runs 05:00–23:00. Includes exit time calculator.',
+    title: 'Bus 109 Saigon Airport — Schedule, VND 15,000 Fare (2026)',
+    description: 'Take Bus 109 from Tan Son Nhat Airport (T3) to Saigon Downtown. VND 15,000 fare, 30-45 min, runs 05:30–22:00. Electric bus. Includes exit time calculator.',
     keywords: 'bus 109 saigon airport, tansonnhat bus 109, bus 109 schedule, saigon airport bus',
     canonical: 'https://frylane.com/bus-109-saigon-airport',
     alternateVI: 'https://frylane.com/vi/tuyen-109-tan-son-nhat',
@@ -59,11 +59,18 @@ export const PAGE_META: Record<string, MetaConfig> = {
     alternateEN: 'https://frylane.com/bus-109-saigon-airport',
   },
   '/bus-152-saigon-fare': {
-    title: 'Bus 152 Saigon Airport — VND 6,000 Fare (Cheapest Option)',
-    description: 'Bus 152 from Tan Son Nhat Airport to Saigon city center for only VND 6,000. The cheapest airport bus in Vietnam. Schedule, stops, and travel tips.',
+    title: 'Bus 152 Saigon Airport — VND 5,000 Fare (Cheapest Option)',
+    description: 'Bus 152 from Tan Son Nhat Airport (T1/T2) to Saigon city center for only VND 5,000. The cheapest airport bus in Vietnam. Schedule, stops, and travel tips.',
     keywords: 'bus 152 saigon, bus 152 fare, saigon airport bus 152, cheapest airport bus vietnam',
     canonical: 'https://frylane.com/bus-152-saigon-fare',
     alternateVI: 'https://frylane.com/vi/tuyen-152-tan-son-nhat',
+  },
+  '/vi/tuyen-152-tan-son-nhat': {
+    title: 'Tuyến xe buýt 152 sân bay Tân Sơn Nhất — Giá 5.000đ',
+    description: 'Xe buýt 152 từ sân bay Tân Sơn Nhất (T1/T2) vào trung tâm Sài Gòn chỉ với 5.000đ. Tuyến xe buýt sân bay rẻ nhất Việt Nam.',
+    keywords: 'tuyến 152, xe buýt 152 sân bay tân sơn nhất, xe buýt rẻ nhất việt nam',
+    canonical: 'https://frylane.com/vi/tuyen-152-tan-son-nhat',
+    alternateEN: 'https://frylane.com/bus-152-saigon-fare',
   },
   '/airport-scam-vietnam-taxi': {
     title: 'Airport Taxi Scams in Vietnam (2026) — How to Avoid Them',
@@ -71,6 +78,13 @@ export const PAGE_META: Record<string, MetaConfig> = {
     keywords: 'airport scam vietnam, taxi scam saigon, airport taxi safety vietnam, grab safe airport hanoi',
     canonical: 'https://frylane.com/airport-scam-vietnam-taxi',
     alternateVI: 'https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam',
+  },
+  '/vi/xe-lo-gio-sanh-bay-viet-nam': {
+    title: 'Xe lừa đảo tại sân bay Việt Nam — Cách phòng tránh',
+    description: 'Hướng dẫn đầy đủ cách tránh lừa đảo taxi tại sân bay Nội Bài và Tân Sơn Nhất. Mẹo sử dụng Grab an toàn và so sánh giá thật.',
+    keywords: 'xe lừa đảo sân bay việt nam, taxi sân bay, an toàn sân bay hà nội, an toàn sân bay sài gòn',
+    canonical: 'https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam',
+    alternateEN: 'https://frylane.com/airport-scam-vietnam-taxi',
   },
   '/privacy': {
     title: 'Privacy Policy — Frylane',

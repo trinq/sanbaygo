@@ -31,6 +31,7 @@ export const BUS_109: BusRoute = {
       '17:30', '18:15', '19:00', '19:45', '20:30', '21:15', '22:00',
     ],
   },
+  exitTimeSummary: '15–25 phút cho hành khách nội địa (T3) · 20–35 phút cho hành khách quốc tế (T3)',
 };
 
 export const BUS_152: BusRoute = {
@@ -78,4 +79,5 @@ export const BUS_152: BusRoute = {
       '19:00', '19:20', '19:40', '20:00', '20:20', '20:40', '21:00', '21:20', '21:40', '22:00',
     ],
   },
+  exitTimeSummary: '15–25 phút cho hành khách nội địa (T1) · 45–75 phút cho hành khách quốc tế (T2)',
 };

@@ -28,4 +28,5 @@ export const BUS_86: BusRoute = {
     kind: 'explicit',
     departures: BUS_86_SCHEDULE,
   },
+  exitTimeSummary: '20–35 phút cho hành khách nội địa · 45–75 phút cho hành khách quốc tế',
 };

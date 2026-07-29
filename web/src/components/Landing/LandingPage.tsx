@@ -5,6 +5,7 @@ import { Hero } from './Hero';
 import { SearchCard } from './SearchCard';
 import { FAQ } from './FAQ';
 import { Footer } from './Footer';
+import { BusGuides } from './BusGuides';
 
 export function LandingPage() {
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ export function LandingPage() {
           onSubmit={handleSubmit}
         />
       </Hero>
+      <BusGuides />
       <FAQ />
       <Footer />
     </>

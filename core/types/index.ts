@@ -44,6 +44,11 @@ export interface BusRoute {
   };
   pickupPoints: PickupPoint[];
   scheduleSource: ScheduleSource;
+  /**
+   * Human-readable exit time estimate for article pages.
+   * E.g. "45–75 phút cho hành khách quốc tế" or "20–35 phút cho hành khách nội địa".
+   */
+  exitTimeSummary?: string;
 }
 
 export interface DestinationPoint {
