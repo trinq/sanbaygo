@@ -12,6 +12,66 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-29 — Wire missing SEO routes + sitemap.xml update
+- Sources touched: `web/public/sitemap.xml`, `web/e2e/seo.spec.ts`.
+- Wiki pages touched: none.
+- Lint status: clean (9/9 pages, 0 issues).
+- TDD cycle: sitemap content test added → RED (6 URLs missing) → sitemap updated
+  with all 12 entries (bus-86 VI, bus-109 EN+VI, bus-152 EN+VI, scam EN+VI)
+  → all 18 SEO E2E tests pass.
+
+---
+
+## 2026-07-29 — URL-based language switcher on article pages
+- Sources touched: `web/src/components/Landing/Nav.tsx`,
+  `web/src/components/Layout/ArticleLayout.tsx`,
+  `web/src/components/Layout/AirportArticleLayout.tsx`,
+  `web/src/routes/articles/Bus86Page.tsx`,
+  `web/src/routes/articles/Bus109Page.tsx`,
+  `web/src/routes/articles/Bus109PageVI.tsx`,
+  `web/src/routes/articles/Bus152Page.tsx`,
+  `web/src/routes/articles/Bus152PageVI.tsx`,
+  `web/src/pages/ScamPage.tsx`,
+  `web/src/pages/ScamPageVI.tsx`.
+- Wiki pages touched: none.
+- Lint status: clean.
+- TDD cycle: 8 ArticleNav tests written → RED (no links, toggle present) →
+  ArticleLayout + Nav updated with `languageSwitchPath` prop → all 26 SEO tests pass.
+
+---
+
+## 2026-07-29 — Bus86PageVI fix
+- Sources touched: `web/src/routes/articles/Bus86PageVI.tsx`,
+  `web/src/App.tsx`, `web/e2e/seo.spec.ts`.
+- Wiki pages touched: none.
+- Lint status: clean.
+- TDD cycle: 2 new tests added (`/vi/tuyen-86-noi-bai` renders article, VI
+  bus-86 has EN counterpart link) → RED (H1 was homepage, no EN link) →
+  created `Bus86PageVI` mirroring `Bus86Page`, registered route before
+  `/vi/*` wildcard → all 28 SEO tests pass.
+
+---
+
+## 2026-07-29 — Wire missing SEO routes + AirportArticleLayout refactor
+- Sources touched: `core/types/index.ts`, `core/data/busSchedule.ts`,
+  `core/data/busSchedules/sgn.ts`,
+  `web/src/components/Layout/AirportArticleLayout.tsx` (new),
+  `web/src/routes/articles/Bus86Page.tsx`, `web/src/routes/articles/Bus109Page.tsx`,
+  `web/src/routes/articles/Bus152Page.tsx`, `web/src/routes/articles/Bus109PageVI.tsx` (new),
+  `web/src/routes/articles/Bus152PageVI.tsx` (new),
+  `web/src/pages/ScamPage.tsx` (new), `web/src/pages/ScamPageVI.tsx` (new),
+  `web/src/App.tsx`, `web/src/seo/metaConfig.ts`, `web/e2e/seo.spec.ts`.
+- Wiki pages touched: none.
+- Lint status: clean (9/9 pages, 0 issues).
+- TDD cycle: 10 new failing tests added → 2 failures due to missing metaConfig entries
+  for `/vi/tuyen-152-tan-son-nhat` and `/vi/xe-lo-gio-sanh-bay-viet-nam` → fixed
+  metaConfig → all 17 SEO E2E tests pass.
+- Key bugs found: (1) ScamPage/ScamPageVI had wrong import path `../../components`
+  instead of `../components`; (2) VI article pages missing from `PAGE_META`
+  (SEOHelmet fell back to DEFAULT_META = wrong title).
+
+---
+
 ## 2026-07-29 — Code review fixes: hreflang, sitemap, ResultRoute wiring
 - Sources touched: `web/src/components/SEO/SEOHelmet.tsx`, `web/public/sitemap.xml`,
   `web/public/robots.txt`, `web/src/seo/metaConfig.ts`, `web/src/App.tsx`,
@@ -36,6 +96,21 @@ One entry per session. Newest at the top. Format:
   8. seo.spec.ts: chromium-only comment
 - E2E: 7/7 SEO tests pass (chromium)
 - TypeScript: clean (tsc --noEmit)
+
+## 2026-07-29 — Extract AirportArticleLayout shared component for bus route articles
+- Sources touched: `core/types/index.ts`, `core/data/busSchedule.ts`,
+  `core/data/busSchedules/sgn.ts`, `web/src/components/Layout/AirportArticleLayout.tsx`,
+  `web/src/routes/articles/Bus86Page.tsx`, `web/src/routes/articles/Bus109Page.tsx`,
+  `web/src/routes/articles/Bus152Page.tsx`.
+- Wiki pages touched: none.
+- Lint status: clean (9/9 pages, 0 issues).
+- Summary: Added `exitTimeSummary?: string` to `BusRoute` type; populated data for
+  all 3 bus routes. Created `AirportArticleLayout` component that renders all
+  sections in order: Hero (EN H1), SearchCTA, Schedule, Stops, ScamWarning,
+  TravelTime, ExitTime, GrabAlternative, FAQ, FAQSchema. Refactored all 3
+  article pages to use the shared component. Bus109Page and Bus152Page now have
+  all sections that Bus86Page had (exit time, scam warning, Grab link to
+  grab.com). TypeScript compiles clean.
 
 ## 2026-07-29 — Drop sanbaygo.app; frylane.com is sole domain
 - Sources touched: `app.json`, `wiki/pages/seo-content-strategy.md`,
