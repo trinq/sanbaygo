@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@mseep/linear-mcp"],
+      "env": {
+        "LINEAR_API_KEY": "lin_api_KvjwTjBC3zITQvayF9Z90vMdDaUqWw8m4kfrP9a5"
+      }
+    }
+  }
+}
