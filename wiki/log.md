@@ -28,6 +28,32 @@ One entry per session. Newest at the top. Format:
   wants ALL traffic on `frylane.com`. `app.json` bundle ID (`com.sanbaygo.app`)
   unchanged (already deployed to App/Play Store).
 
+## 2026-07-29 — SEO domain setup: router wiring + Bus86Page + robots.txt + sitemap + E2E
+- Sources touched: `web/src/App.tsx`, `web/src/routes/articles/Bus86Page.tsx`,
+  `web/src/seo/metaConfig.ts`, `web/public/robots.txt`, `web/public/sitemap.xml`,
+  `web/e2e/seo.spec.ts`, `web/src/main.tsx`.
+- Wiki pages touched: none (new SEO features not yet documented in wiki).
+- Lint status: not run this session (deferred to next session per AGENTS.md workflow).
+- Commits (feature/seo-domain-setup):
+  - `5bec5ea` feat: replace state-based routing with react-router-dom v6
+  - `769b0c6` feat: create Bus86Page SEO article with schedule, stops, FAQ schema
+  - `b4fcb93` feat: create SEOHelmet component with dynamic meta and hreflang
+  - `ff40ff4` feat: add HelmetProvider and remove hardcoded meta from index.html
+  - `22e398a` feat: add SEO meta configuration for all routes
+  - `125fb19` deps: add react-router-dom and react-helmet-async
+  - `db813c1` feat: create HomePage and HomePageVI route components
+  - `11ea8a5` fix: correct Bus86Page data from static data sources
+  - `71f8b59` feat: add robots.txt and sitemap.xml with hreflang
+  - `a31fc21` fix: add seo.spec.ts E2E tests
+  - `31b2bc8` fix: correct Bus86Page import path and remove duplicate HelmetProvider
+- Bugs caught and fixed:
+  - Bus86Page.tsx had wrong import path `'../components/SEO'` (500 error on route)
+  - main.tsx had duplicate HelmetProvider (already in App.tsx)
+  - .gitignore has `web/e2e/` — seo.spec.ts force-added with `git add -f`
+- E2E: 7/7 SEO tests pass (chromium); landing-flow.spec.ts pre-existing failures
+- Task 7 review caveats resolved: `initialLocale` removal is fine (LanguageProvider
+  defaults to `'vi'`); hreflang for Bus 86 is correctly configured in metaConfig.ts
+
 ## 2026-07-29 — Initial wiki scaffold + lint + diagram
 - Wiki pages created: all 8 seed pages (`project-overview`, `architecture`,
   `domain-model`, `data-sources`, `sessions-history`, `decisions`,
