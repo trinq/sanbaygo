@@ -1,4 +1,4 @@
-import { SEOHelmet } from '../components/SEO';
+import { SEOHelmet } from '../../components/SEO';
 import { BUS_86 } from '@core/data/busSchedule';
 
 const STOPS = [
