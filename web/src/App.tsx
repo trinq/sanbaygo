@@ -15,6 +15,8 @@ import { Bus109Vs152Page } from './routes/articles/Bus109Vs152Page';
 import { Bus109Vs152PageVI } from './routes/articles/Bus109Vs152PageVI';
 import { GrabVsBusPage } from './routes/articles/GrabVsBusPage';
 import { GrabVsBusPageVI } from './routes/articles/GrabVsBusPageVI';
+import { CheapestHanPage } from './routes/articles/CheapestHanPage';
+import { CheapestHanPageVI } from './routes/articles/CheapestHanPageVI';
 import { LateNightBusPage } from './routes/articles/LateNightBusPage';
 import { GrabSafePage } from './routes/articles/GrabSafePage';
 import { LuggageFeePage } from './routes/articles/LuggageFeePage';
@@ -102,6 +104,8 @@ export default function App() {
             <Route path="/is-grab-safe-hanoi-airport" element={<GrabSafePage />} />
             <Route path="/airport-bus-luggage-fee-vietnam" element={<LuggageFeePage />} />
             <Route path="/vi/phi-hanh-ly-xe-buyt-san-bay" element={<LuggageFeePageVI />} />
+            <Route path="/cheapest-way-hanoi-airport" element={<CheapestHanPage />} />
+            <Route path="/vi/cach-re-nhat-san-bay-noi-bai" element={<CheapestHanPageVI />} />
             <Route path="/vi/*" element={<HomePageVI />} />
             <Route path="*" element={<HomePage />} />
           </Routes>

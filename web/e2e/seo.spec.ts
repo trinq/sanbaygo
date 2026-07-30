@@ -544,6 +544,86 @@ test.describe('SEO Routes', () => {
     expect(links).toBeGreaterThan(0);
   });
 
+  // ── kw-5-cheapest-han: cheapest way from Hanoi Airport (2026) ──────────────
+
+  test('cheapest way hanoi airport loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-hanoi-airport`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Hanoi Airport: Bus vs Grab.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('cheapest-way-hanoi-airport');
+  });
+
+  test('cheapest way hanoi airport has FAQ schema with 7 questions', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-hanoi-airport`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(7);
+  });
+
+  test('cheapest way hanoi airport has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-hanoi-airport`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('cheapest way hanoi airport has internal links', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-hanoi-airport`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href^="/"]').all();
+    const internalLinks = [];
+    for (const link of links) {
+      const href = await link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        internalLinks.push(href);
+      }
+    }
+    expect(internalLinks.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test('VI cheapest way hanoi airport loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-re-nhat-san-bay-noi-bai`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Cách rẻ|Sân bay Nội Bài/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('cach-re-nhat-san-bay-noi-bai');
+  });
+
+  test('VI cheapest way hanoi airport has FAQ schema with 7 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-re-nhat-san-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(7);
+  });
+
+  test('VI cheapest way hanoi airport has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-re-nhat-san-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN cheapest way hanoi airport page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-hanoi-airport`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/cach-re-nhat-san-bay-noi-bai"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI cheapest way hanoi airport page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-re-nhat-san-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/cheapest-way-hanoi-airport"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains cheapest way hanoi airport routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('cheapest-way-hanoi-airport');
+    expect(content).toContain('cach-re-nhat-san-bay-noi-bai');
+  });
+
   // ── Article vs Homepage fallback ─────────────────────────────────────────
 
   test('/vi/tuyen-86-noi-bai renders dedicated article, not homepage', async ({ page }) => {

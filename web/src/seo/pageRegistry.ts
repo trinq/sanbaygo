@@ -149,6 +149,18 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     changefreq: 'monthly',
     alternatePath: '/airport-bus-luggage-fee-vietnam',
   },
+  {
+    path: '/cheapest-way-hanoi-airport',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/vi/cach-re-nhat-san-bay-noi-bai',
+  },
+  {
+    path: '/vi/cach-re-nhat-san-bay-noi-bai',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/cheapest-way-hanoi-airport',
+  },
 
   {
     path: '/privacy',

@@ -136,6 +136,22 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/airport-bus-luggage-fee-vietnam',
     alternateVI: 'https://frylane.com/vi/phi-hanh-ly-xe-buyt-san-bay',
   },
+  '/cheapest-way-hanoi-airport': {
+    title: 'Hanoi Airport: Bus vs Grab — Cheapest Route (2026)',
+    description:
+      'Compare 5 transport options from Noi Bai Airport to Hanoi city center: Bus 17 (VND 7,000), Bus 90 (VND 9,000), Bus 86 (VND 50,000), Grab (VND 200,000–300,000), and Taxi (VND 300,000–500,000). Full cost and time comparison for 2026.',
+    keywords: 'cheapest way from hanoi airport, noibai cheapest transport, hanoi airport bus 17, bus 90 hanoi airport, hanoi airport grab vs bus, hanoi airport taxi cost',
+    canonical: 'https://frylane.com/cheapest-way-hanoi-airport',
+    alternateVI: 'https://frylane.com/vi/cach-re-nhat-san-bay-noi-bai',
+  },
+  '/vi/cach-re-nhat-san-bay-noi-bai': {
+    title: 'Sân bay Nội Bài: Cách rẻ nhất về thành phố (2026)',
+    description:
+      'So sánh 5 phương tiện từ sân bay Nội Bài về trung tâm Hà Nội: xe buýt 17 (7.000đ), xe buýt 90 (9.000đ), xe buýt 86 (50.000đ), Grab (200.000–300.000đ) và taxi (300.000–500.000đ). So sánh chi phí và thời gian đầy đủ năm 2026.',
+    keywords: 'cách rẻ nhất từ sân bay nội bài, xe buýt 17 nội bài, xe buýt 90 nội bài, so sánh grab xe buýt sân bay nội bài',
+    canonical: 'https://frylane.com/vi/cach-re-nhat-san-bay-noi-bai',
+    alternateEN: 'https://frylane.com/cheapest-way-hanoi-airport',
+  },
   '/vi/xe-lo-gio-sanh-bay-viet-nam': {
     title: 'Xe lừa đảo tại sân bay Việt Nam — Cách phòng tránh',
     description: 'Hướng dẫn đầy đủ cách tránh lừa đảo taxi tại sân bay Nội Bài và Tân Sơn Nhất. Mẹo sử dụng Grab an toàn và so sánh giá thật.',
