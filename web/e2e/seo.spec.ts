@@ -373,6 +373,73 @@ test.describe('SEO Routes', () => {
     }
   });
 
+  // ── Luggage fee article (kw-16-luggage-fee) ───────────────────────────────
+
+  test('luggage fee article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/airport-bus-luggage-fee-vietnam`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Vietnam Airport Bus Luggage Fees.*Bus 86.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('airport-bus-luggage-fee-vietnam');
+  });
+
+  test('luggage fee article has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/airport-bus-luggage-fee-vietnam`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('luggage fee article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/airport-bus-luggage-fee-vietnam`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN luggage fee page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/airport-bus-luggage-fee-vietnam`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/phi-hanh-ly-xe-buyt-san-bay"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI luggage fee article loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/phi-hanh-ly-xe-buyt-san-bay`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Phi hành lý|Xe buýt sân bay/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('phi-hanh-ly-xe-buyt-san-bay');
+  });
+
+  test('VI luggage fee article has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/phi-hanh-ly-xe-buyt-san-bay`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('VI luggage fee article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/phi-hanh-ly-xe-buyt-san-bay`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('VI luggage fee page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/phi-hanh-ly-xe-buyt-san-bay`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/airport-bus-luggage-fee-vietnam"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains luggage fee routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('airport-bus-luggage-fee-vietnam');
+    expect(content).toContain('phi-hanh-ly-xe-buyt-san-bay');
+  });
+
   // ── Article vs Homepage fallback ─────────────────────────────────────────
 
   test('/vi/tuyen-86-noi-bai renders dedicated article, not homepage', async ({ page }) => {
