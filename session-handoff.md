@@ -9,6 +9,8 @@
 | seo-review-fixes | passing | 2026-07-29 |
 | kw-0-comparison-layout | passing | 2026-07-30 |
 | kw-0-sitemap-auto | passing | 2026-07-30 |
+| kw-13-bus-109-vs-152 | passing | 2026-07-30 |
+| kw-18-8pm-arrival | passing | 2026-07-30 |
 
 ## Changes This Session
 

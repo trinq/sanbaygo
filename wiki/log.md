@@ -12,6 +12,24 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-30 — Task 9 kw-18-8pm-arrival: Phase 1 Tier 1 long-tail article — EN-only
+- Sources touched: `web/src/routes/articles/LateNightBusPage.tsx` (new),
+  `web/src/seo/metaConfig.ts` (added 1 entry, no alternateVI),
+  `web/src/App.tsx` (added 1 route, EN only),
+  `web/src/seo/pageRegistry.ts` (added 1 entry),
+  `web/e2e/seo.spec.ts` (added 2 Playwright SEO tests),
+  `feature_list.json` (status → passing).
+- Wiki pages touched: none.
+- Lint status: 0 errors, not run (no wiki pages modified).
+- Commits: `ca09b5c` (impl), `e0f2c6d` (feature_list marking).
+- Title: "8 PM at Hanoi Airport: Is the Bus Still Running? (2026)" — 53 chars ✅
+- TDD cycle: seo.spec.ts 2 tests RED (404 + no FAQ schema) → LateNightBusPage
+  + wiring GREEN (2/2 pass). Full suite: tsc --noEmit exit 0, 119/123 jest (4
+  pre-existing Bus86Page failures), 42 playwright (39 pass, 3 pre-existing landing-flow).
+- Layout: AirportArticleLayout with BUS_86 data, 5 EN FAQ items (JSON-LD FAQPage),
+  internal links to /bus-86-hanoi-airport (via pickupHint) + /airport-scam-vietnam-taxi
+  (via ScamWarningSection). EN-only (no VI mirror, no alternatePath).
+
 ## 2026-07-30 — Task 8 kw-13-bus-109-vs-152: Phase 1 Tier 1 article — EN + VI
 - Sources touched: `web/src/routes/articles/Bus109Vs152Page.tsx` (new),
   `web/src/routes/articles/Bus109Vs152PageVI.tsx` (new),
