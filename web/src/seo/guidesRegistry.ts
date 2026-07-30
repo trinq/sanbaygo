@@ -83,7 +83,7 @@ export function humanizeArticleId(id: string): string {
 }
 
 /** Resolve a guide's display title from PAGE_META, falling back to a humanized articleId. */
-export function resolveGuideTitle(entry: GuideEntry, _locale: 'vi' | 'en'): string {
+export function resolveGuideTitle(entry: GuideEntry): string {
   const meta = PAGE_META[entry.href];
   if (meta) return meta.title;
   return humanizeArticleId(entry.articleId);
@@ -91,10 +91,15 @@ export function resolveGuideTitle(entry: GuideEntry, _locale: 'vi' | 'en'): stri
 
 /** Resolve a guide's description from PAGE_META, falling back to an empty string. */
 export function resolveGuideDescription(entry: GuideEntry): string {
-  return PAGE_META[entry.href]?.description ?? '';
+  const meta = PAGE_META[entry.href];
+  if (meta) return meta.description;
+  return '';
 }
 
-/** Group entries by hub. Returns an object keyed by hub with the matching entries. */
+/**
+ * Group entries by hub. Returns an object keyed by hub with the matching entries.
+ * Returns plain mutable arrays so callers can locally sort/filter; the registry export itself is `ReadonlyArray`.
+ */
 export function groupByHub(
   entries: ReadonlyArray<GuideEntry>,
 ): Record<GuideEntry['hub'], GuideEntry[]> {

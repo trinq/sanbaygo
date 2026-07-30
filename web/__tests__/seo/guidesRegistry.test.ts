@@ -79,7 +79,7 @@ describe('resolveGuideTitle', () => {
   it('returns PAGE_META[href].title for an entry where meta exists', () => {
     const entry = GUIDES_REGISTRY.find((e) => e.href === '/bus-86-hanoi-airport');
     expect(entry).toBeDefined();
-    const title = resolveGuideTitle(entry!, 'vi');
+    const title = resolveGuideTitle(entry!);
     expect(title).toBe(PAGE_META['/bus-86-hanoi-airport'].title);
   });
 
@@ -90,7 +90,7 @@ describe('resolveGuideTitle', () => {
       hub: 'HN' as const,
       order: 99,
     };
-    expect(resolveGuideTitle(missingMetaEntry, 'vi')).toBe('Grab Vs Bus');
+    expect(resolveGuideTitle(missingMetaEntry)).toBe('Grab Vs Bus');
   });
 });
 
