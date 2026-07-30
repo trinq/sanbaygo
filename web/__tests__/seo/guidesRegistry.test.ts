@@ -10,8 +10,8 @@ import {
 } from '@/seo/guidesRegistry';
 
 describe('GUIDES_REGISTRY', () => {
-  it('exports exactly 33 entries', () => {
-    expect(GUIDES_REGISTRY).toHaveLength(33);
+  it('exports exactly 34 entries', () => {
+    expect(GUIDES_REGISTRY).toHaveLength(34);
   });
 
   it('every entry href exists in PAGE_META', () => {
@@ -20,9 +20,9 @@ describe('GUIDES_REGISTRY', () => {
     }
   });
 
-  it('groups into HN: 18, SG: 8, CROSS: 7', () => {
+  it('groups into HN: 19, SG: 8, CROSS: 7', () => {
     const grouped = groupByHub(GUIDES_REGISTRY);
-    expect(grouped.HN).toHaveLength(18);
+    expect(grouped.HN).toHaveLength(19);
     expect(grouped.SG).toHaveLength(8);
     expect(grouped.CROSS).toHaveLength(7);
   });

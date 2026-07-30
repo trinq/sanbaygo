@@ -23,6 +23,7 @@ export const GUIDES_REGISTRY: ReadonlyArray<GuideEntry> = [
   { articleId: 'noibai-t2-exit',     href: '/noibai-t2-exit-time',                   hub: 'HN', order: 3 },
   { articleId: 'noibai-t2-exit',     href: '/vi/thoi-gian-ra-cuong-t2-noi-bai',      hub: 'HN', order: 3 },
   { articleId: 'late-night-bus',     href: '/hanoi-airport-late-night-bus',          hub: 'HN', order: 4 },
+  { articleId: 'tuyen-86-gio',     href: '/vi/tuyen-86-noi-bai-gio',                hub: 'HN', order: 4 },
   { articleId: 'late-night-transfer', href: '/hanoi-airport-late-night-transfer',   hub: 'HN', order: 5 },
   { articleId: 'late-night-transfer', href: '/vi/di-chuyen-dem-khuya-san-bay-noi-bai', hub: 'HN', order: 5 },
   { articleId: 'first-time',         href: '/noibai-airport-first-time-guide',       hub: 'HN', order: 6 },
