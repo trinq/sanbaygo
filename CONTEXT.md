@@ -22,7 +22,7 @@ App giúp người đi từ sân bay về thành phố nắm rõ lịch trình x
   - Route 109 — chỉ T3 (xe điện Phương Trang FUTA, 15,000 VND regular / 7,000 VND student, 05:30–22:00, headway 40–45 min) — KHÔNG đón tại T1/T2, hành khách T1/T2 phải dùng TIA shuttle miễn phí nội bộ hoặc đón tuyến 152
   - Route 152 — T1/T2 (Làn B curbside):
     - **T1 (ga quốc nội cũ)**: cột B06–B09 (ra sảnh đến, đi thẳng ra Làn B).
-    - **T2 (ga quốc tế)**: **đối diện Cột số 4 và Cột số 5** sảnh đến quốc tế — ra cửa sảnh đến, đi thẳng qua Làn A (xe cá nhân) để sang Làn B. Có biển chỉ dẫn xe buýt công cộng màu vàng/xanh. Khu vực này cũng là nơi **shuttle bus miễn phí** nội bộ T1↔T2↔T3 đón khách (chưa model trong app).
+    - **T2 (ga quốc tế)**: **đối diện cột 12 và cột 13** sảnh đến quốc tế — ra cửa sảnh đến, đi thẳng qua Làn A (xe cá nhân) để sang Làn B. Có biển chỉ dẫn xe buýt công cộng màu vàng/xanh. Khu vực này cũng là nơi **shuttle bus miễn phí** nội bộ T1↔T2↔T3 đón khách (chưa model trong app).
     - 5,000 VND regular / 3,000 VND student, 05:00–22:00, headway ~12-20 min
     - Phương Trang (FUTA City Bus), xe buýt điện
 - Grab/Xe công nghệ pickup tại SGN (research 2026-07-27 từ mia.vn, vnexpress, be.com.vn, grab.com/vn):

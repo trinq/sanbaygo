@@ -69,16 +69,13 @@ describe('SGN bus routes', () => {
       expect(BUS_152.ticketPrice).toBe(5000);
     });
 
-    it('SGN-T2 pickup is at Làn B, opposite pillars 4 and 5 of international arrival', () => {
-      // Source: SGN-T2 ground-floor research 2026-07-27.
-      // All buses at SGN-T2 (including inter-terminal shuttles) stop at
-      // Làn B — across the Làn A private-vehicle lane, opposite pillars 4
-      // and 5 of the international arrival hall. Look for the yellow/blue
-      // public-bus sign. The previous "Làn B gần sảnh đến quốc tế" string
-      // was too vague — users did not know how to find the actual stop.
+    it('SGN-T2 pickup is at Làn B, opposite cột 12 and cột 13 of international arrival', () => {
+      // Source: SGN-T2 ground-floor research 2026-07-31.
+      // The verified pickup location is opposite cột 12 and cột 13;
+      // keep this exact string aligned with the data and user-facing guidance.
       const t2 = BUS_152.pickupPoints.find((p) => p.terminalId === 'SGN-T2');
       expect(t2?.location).toBe(
-        'Làn B, đối diện Cột số 4 và Cột số 5 sảnh đến quốc tế',
+        'Làn B, đối diện cột 12 và cột 13 sảnh đến quốc tế',
       );
     });
   });

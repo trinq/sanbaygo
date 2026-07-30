@@ -1,5 +1,5 @@
 ---
-last_verified: 2026-07-29
+last_verified: 2026-07-31
 sources:
   - path: CONTEXT.md
   - path: AGENTS.md
@@ -18,7 +18,8 @@ disputed, the version in `core/data/` wins (after triage).
 | File | Holds |
 |------|-------|
 | `core/data/airport.ts` | Noi Bai + Tan Son Nhat airport definitions, terminal IDs |
-| `core/data/busSchedule.ts` | Bus 86 (26 departures), Route 109, Route 152 |
+| `core/data/busSchedule.ts` | Bus 86 (26 departures) |
+| `core/data/busSchedules/sgn.ts` | Route 109, Route 152 |
 | `core/data/exitTimeEstimates.ts` | Exit-time matrix (terminal × baggage) |
 | `core/data/destinations.ts` | HAN + SGN destination points |
 | `core/data/grabEstimates.ts` | Static Grab/Xanh SM/Be estimates |
@@ -39,8 +40,7 @@ disputed, the version in `core/data/` wins (after triage).
     05:30–22:00, headway 40–45 min). Does NOT stop at T1/T2.
   - **Route 152** — T1/T2 (Làn B curbside).
     - T1 (old domestic): columns B06–B09, walk out to Làn B.
-    - T2 (international): **opposite columns 4 and 5** of the international
-      arrivals hall; cross Làn A to reach Làn B.
+    - T2 (international): **đối diện cột 12 và cột 13 sảnh đến quốc tế**; cross Làn A to reach Làn B.
     - 5,000 / 3,000 VND student, 05:00–22:00, headway ~12–20 min.
     - Phương Trang (FUTA City Bus), electric bus.
 

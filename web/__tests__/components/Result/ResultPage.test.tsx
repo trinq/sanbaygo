@@ -66,7 +66,7 @@ const sgnRoute: BusRoute = {
   },
   pickupPoints: [
     { terminalId: 'SGN-T1', location: 'Làn B ga quốc nội, cột B06–B09' },
-    { terminalId: 'SGN-T2', location: 'Làn B, đối diện Cột số 4 và Cột số 5 sảnh đến quốc tế' },
+    { terminalId: 'SGN-T2', location: 'Làn B, đối diện cột 12 và cột 13 sảnh đến quốc tế' },
   ],
   scheduleSource: {
     kind: 'explicit',

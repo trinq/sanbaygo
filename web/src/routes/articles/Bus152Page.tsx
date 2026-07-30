@@ -4,7 +4,7 @@ import type { BusArticleConfig } from '../../components/Layout/AirportArticleLay
 
 const STOPS = [
   { name: 'Sân bay Tân Sơn Nhất – Ga T1, Cổng B', address: 'Làn B ga quốc nội, cột B06–B09' },
-  { name: 'Sân bay Tân Sơn Nhất – Ga T2, Cổng B', address: 'Làn B, đối diện Cột số 4 và Cột số 5 sảnh đến quốc tế' },
+  { name: 'Sân bay Tân Sơn Nhất – Ga T2, Cổng B', address: 'Làn B, đối diện cột 12 và cột 13 sảnh đến quốc tế' },
   { name: 'Trường Chinh', address: 'Quận Tân Bình, TP.HCM' },
   { name: 'Lăng Cha Cả', address: 'Quận Tân Bình, TP.HCM' },
   { name: 'Bến Thành', address: 'Quận 1, TP.HCM' },
@@ -21,7 +21,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Xe buýt 152 dừng ở đâu tại sân bay Tân Sơn Nhất?',
-    a: 'Xe buýt 152 đón tại Ga T1 (Làn B, cột B06–B09) và Ga T2 (Làn B, đối diện Cột số 4 và 5). Không đón tại T3.',
+    a: 'Xe buýt 152 đón tại Ga T1 (Làn B, cột B06–B09) và Ga T2 (Làn B, đối diện cột 12 và cột 13). Không đón tại T3.',
   },
   {
     q: 'Xe buýt 152 chạy mấy giờ?',
@@ -49,7 +49,7 @@ export function Bus152Page() {
       ? BUS_152.scheduleSource.departures.length
       : 0,
     dataSource: 'FUTA City Bus (Phương Trang)',
-    pickupHint: 'Bus 152 đón tại Ga T1 (Làn B, cột B06–B09) và Ga T2 (Làn B, cột 4–5).',
+    pickupHint: 'Bus 152 đón tại Ga T1 (Làn B, cột B06–B09) và Ga T2 (Làn B, cột 12–13).',
     faqItems: FAQ_ITEMS,
     alternatePath: '/vi/tuyen-152-tan-son-nhat',
   };
