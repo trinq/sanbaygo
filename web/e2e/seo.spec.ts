@@ -717,4 +717,84 @@ test.describe('SEO Routes', () => {
     const arrivalLabel = await page.locator('label:has-text("Arrival time")').count();
     expect(arrivalLabel).toBe(0);
   });
+
+  // ── kw-12-han-hoan-kiem: Hanoi Airport to Hoan Kiem Lake ─────────────────
+
+  test('hoan kiem article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-to-hoan-kiem-lake`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Hoan Kiem.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('hanoi-airport-to-hoan-kiem-lake');
+  });
+
+  test('hoan kiem article has FAQ schema with 6 questions', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-to-hoan-kiem-lake`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(6);
+  });
+
+  test('hoan kiem article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-to-hoan-kiem-lake`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('hoan kiem article has internal links', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-to-hoan-kiem-lake`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href^="/"]').all();
+    const internalLinks = [];
+    for (const link of links) {
+      const href = await link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        internalLinks.push(href);
+      }
+    }
+    expect(internalLinks.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test('VI hoan kiem article loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/san-bay-noi-bai-den-ho-hoan-kiem`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Hoàn Kiếm|Sân bay Nội Bài/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('san-bay-noi-bai-den-ho-hoan-kiem');
+  });
+
+  test('VI hoan kiem article has FAQ schema with 6 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/san-bay-noi-bai-den-ho-hoan-kiem`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(6);
+  });
+
+  test('VI hoan kiem article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/san-bay-noi-bai-den-ho-hoan-kiem`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN hoan kiem page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-to-hoan-kiem-lake`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/san-bay-noi-bai-den-ho-hoan-kiem"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI hoan kiem page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/san-bay-noi-bai-den-ho-hoan-kiem`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/hanoi-airport-to-hoan-kiem-lake"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains hoan kiem routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('hanoi-airport-to-hoan-kiem-lake');
+    expect(content).toContain('san-bay-noi-bai-den-ho-hoan-kiem');
+  });
 });

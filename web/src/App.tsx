@@ -19,6 +19,8 @@ import { CheapestHanPage } from './routes/articles/CheapestHanPage';
 import { CheapestHanPageVI } from './routes/articles/CheapestHanPageVI';
 import { CheapestSgnPage } from './routes/articles/CheapestSgnPage';
 import { CheapestSgnPageVI } from './routes/articles/CheapestSgnPageVI';
+import { HanToHoanKiemPage } from './routes/articles/HanToHoanKiemPage';
+import { HanToHoanKiemPageVI } from './routes/articles/HanToHoanKiemPageVI';
 import { LateNightBusPage } from './routes/articles/LateNightBusPage';
 import { GrabSafePage } from './routes/articles/GrabSafePage';
 import { LuggageFeePage } from './routes/articles/LuggageFeePage';
@@ -110,6 +112,8 @@ export default function App() {
             <Route path="/vi/cach-re-nhat-san-bay-noi-bai" element={<CheapestHanPageVI />} />
             <Route path="/cheapest-way-saigon-airport-district-1" element={<CheapestSgnPage />} />
             <Route path="/vi/cach-re-nhat-san-bay-sai-gon" element={<CheapestSgnPageVI />} />
+            <Route path="/hanoi-airport-to-hoan-kiem-lake" element={<HanToHoanKiemPage />} />
+            <Route path="/vi/san-bay-noi-bai-den-ho-hoan-kiem" element={<HanToHoanKiemPageVI />} />
             <Route path="/vi/*" element={<HomePageVI />} />
             <Route path="*" element={<HomePage />} />
           </Routes>

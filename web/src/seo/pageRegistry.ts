@@ -173,6 +173,18 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     changefreq: 'monthly',
     alternatePath: '/cheapest-way-saigon-airport-district-1',
   },
+  {
+    path: '/hanoi-airport-to-hoan-kiem-lake',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/vi/san-bay-noi-bai-den-ho-hoan-kiem',
+  },
+  {
+    path: '/vi/san-bay-noi-bai-den-ho-hoan-kiem',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/hanoi-airport-to-hoan-kiem-lake',
+  },
 
   {
     path: '/privacy',

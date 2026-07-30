@@ -168,6 +168,22 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/cach-re-nhat-san-bay-sai-gon',
     alternateEN: 'https://frylane.com/cheapest-way-saigon-airport-district-1',
   },
+  '/hanoi-airport-to-hoan-kiem-lake': {
+    title: 'Hanoi Airport to Hoan Kiem: 4 Routes (2026)',
+    description:
+      'Compare 4 transport options from Noi Bai Airport to Hoan Kiem Lake: Bus 86 (VND 50,000, 60–80 min), Bus 17 (VND 7,000, 55–70 min), Grab (VND 150,000–250,000, 30–45 min), and Taxi (VND 250,000–400,000, 30–40 min). Full cost and time comparison for 2026.',
+    keywords: 'hanoi airport to hoan kiem lake, noibai airport transport, bus 86 hoan kiem, grab hoan kiem, hoan kiem lake transport',
+    canonical: 'https://frylane.com/hanoi-airport-to-hoan-kiem-lake',
+    alternateVI: 'https://frylane.com/vi/san-bay-noi-bai-den-ho-hoan-kiem',
+  },
+  '/vi/san-bay-noi-bai-den-ho-hoan-kiem': {
+    title: 'Sân bay Nội Bài đến Hồ Hoàn Kiếm: 4 Cách đi (2026)',
+    description:
+      'So sánh 4 phương tiện từ sân bay Nội Bài đến Hồ Hoàn Kiếm: xe buýt 86 (50.000đ, 60–80 phút), xe buýt 17 (7.000đ, 55–70 phút), Grab (150.000–250.000đ, 30–45 phút) và taxi (250.000–400.000đ, 30–40 phút). So sánh chi phí và thời gian năm 2026.',
+    keywords: 'sân bay nội bài đến hồ hoàn kiếm, xe buýt 86 hồ hoàn kiếm, grab hồ hoàn kiếm, đi lại sân bay nội bài hồ hoàn kiếm',
+    canonical: 'https://frylane.com/vi/san-bay-noi-bai-den-ho-hoan-kiem',
+    alternateEN: 'https://frylane.com/hanoi-airport-to-hoan-kiem-lake',
+  },
   '/vi/xe-lo-gio-sanh-bay-viet-nam': {
     title: 'Xe lừa đảo tại sân bay Việt Nam — Cách phòng tránh',
     description: 'Hướng dẫn đầy đủ cách tránh lừa đảo taxi tại sân bay Nội Bài và Tân Sơn Nhất. Mẹo sử dụng Grab an toàn và so sánh giá thật.',
