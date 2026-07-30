@@ -100,6 +100,13 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/noibai-t2-exit-time',
     alternateVI: 'https://frylane.com/vi/thoi-gian-ra-cuong-t2-noi-bai',
   },
+  '/is-grab-safe-hanoi-airport': {
+    title: 'Is Grab Safe at Hanoi Airport? Reddit Verdict (2026)',
+    description:
+      'Is Grab safe at Noi Bai Airport (HAN)? Yes. Real Reddit travelers confirm it is safe, cheaper than taxis, and trackable. Full guide with pickup tips, safety steps, and fares.',
+    keywords: 'grab safe hanoi airport, noibai grab, grab airport hanoi, hanoi airport grab safe, grab vs taxi hanoi airport',
+    canonical: 'https://frylane.com/is-grab-safe-hanoi-airport',
+  },
   '/hanoi-airport-late-night-bus': {
     title: '8 PM at Hanoi Airport: Is the Bus Still Running? (2026)',
     description:

@@ -440,6 +440,29 @@ test.describe('SEO Routes', () => {
     expect(content).toContain('phi-hanh-ly-xe-buyt-san-bay');
   });
 
+  // ── Grab safe Reddit trust article (kw-14-grab-safe-reddit) ────────────────
+
+  test('grab safe article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/is-grab-safe-hanoi-airport`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Is Grab Safe at Hanoi Airport\?.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('is-grab-safe-hanoi-airport');
+  });
+
+  test('grab safe article has FAQ schema with 5 questions', async ({ page }) => {
+    await page.goto(`${BASE}/is-grab-safe-hanoi-airport`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(5);
+  });
+
+  test('grab safe article has internal links', async ({ page }) => {
+    await page.goto(`${BASE}/is-grab-safe-hanoi-airport`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href*="bus-86"]').count();
+    expect(links).toBeGreaterThan(0);
+  });
+
   // ── Article vs Homepage fallback ─────────────────────────────────────────
 
   test('/vi/tuyen-86-noi-bai renders dedicated article, not homepage', async ({ page }) => {

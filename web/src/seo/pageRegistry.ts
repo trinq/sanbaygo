@@ -102,6 +102,11 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     changefreq: 'monthly',
   },
   {
+    path: '/is-grab-safe-hanoi-airport',
+    priority: 0.7,
+    changefreq: 'monthly',
+  },
+  {
     path: '/noibai-t2-exit-time',
     priority: 0.8,
     changefreq: 'monthly',
