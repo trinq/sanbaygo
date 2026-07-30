@@ -12,6 +12,14 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-30 — Task 17 kw-15-late-night-han: Late night transfer Hanoi Airport (22:00–05:00) EN + VI
+- Sources touched: `web/src/routes/articles/LateNightHanPage.tsx`, `web/src/routes/articles/LateNightHanPageVI.tsx`, `web/src/seo/metaConfig.ts`, `web/src/App.tsx`, `web/src/seo/pageRegistry.ts`, `web/e2e/seo.spec.ts`, `web/public/sitemap.xml`
+- Wiki pages touched: none
+- Lint status: N/A (no wiki changes)
+- Commit: `9914814` — feat: kw-15-late-night-han — Late Night Hanoi Airport Transfer (2026); `e32f938` — docs: update feature_list.json kw-15-late-night-han status to passing
+
+---
+
 ## 2026-07-30 — Task 16 kw-12-han-hoan-kiem: Phase 2 Hanoi Airport to Hoan Kiem Lake destination article
 - Sources touched: `web/src/routes/articles/HanToHoanKiemPage.tsx` (new, EN),
   `web/src/routes/articles/HanToHoanKiemPageVI.tsx` (new, VI),
