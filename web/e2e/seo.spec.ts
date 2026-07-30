@@ -213,25 +213,25 @@ test.describe('SEO Routes', () => {
 
   test('EN bus-86 page has link to VI counterpart', async ({ page }) => {
     await page.goto(`${BASE}/bus-86-hanoi-airport`, { waitUntil: 'networkidle' });
-    const viLink = page.locator('nav a[href="/vi/tuyen-86-noi-bai"]');
+    const viLink = page.locator('nav a[href="/vi/tuyen-86-noi-bai"]').first();
     await expect(viLink).toBeVisible();
   });
 
   test('EN bus-109 page has link to VI counterpart', async ({ page }) => {
     await page.goto(`${BASE}/bus-109-saigon-airport`, { waitUntil: 'networkidle' });
-    const viLink = page.locator('nav a[href="/vi/tuyen-109-tan-son-nhat"]');
+    const viLink = page.locator('nav a[href="/vi/tuyen-109-tan-son-nhat"]').first();
     await expect(viLink).toBeVisible();
   });
 
   test('EN bus-152 page has link to VI counterpart', async ({ page }) => {
     await page.goto(`${BASE}/bus-152-saigon-fare`, { waitUntil: 'networkidle' });
-    const viLink = page.locator('nav a[href="/vi/tuyen-152-tan-son-nhat"]');
+    const viLink = page.locator('nav a[href="/vi/tuyen-152-tan-son-nhat"]').first();
     await expect(viLink).toBeVisible();
   });
 
   test('EN scam page has link to VI counterpart', async ({ page }) => {
     await page.goto(`${BASE}/airport-scam-vietnam-taxi`, { waitUntil: 'networkidle' });
-    const viLink = page.locator('nav a[href="/vi/xe-lo-gio-sanh-bay-viet-nam"]');
+    const viLink = page.locator('nav a[href="/vi/xe-lo-gio-sanh-bay-viet-nam"]').first();
     await expect(viLink).toBeVisible();
   });
 
