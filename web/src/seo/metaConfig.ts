@@ -93,6 +93,13 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/airport-scam-vietnam-taxi',
     alternateVI: 'https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam',
   },
+  '/hanoi-airport-late-night-bus': {
+    title: '8 PM at Hanoi Airport: Is the Bus Still Running? (2026)',
+    description:
+      'Is the bus still running at Hanoi Airport at 8 PM? Yes — Bus 86 runs until 22:15. Complete guide: last bus time, Grab options after midnight, night travel safety tips.',
+    keywords: '8pm hanoi airport bus, noibai airport late night bus, last bus from noibai, hanoi airport transport after dark',
+    canonical: 'https://frylane.com/hanoi-airport-late-night-bus',
+  },
   '/vi/xe-lo-gio-sanh-bay-viet-nam': {
     title: 'Xe lừa đảo tại sân bay Việt Nam — Cách phòng tránh',
     description: 'Hướng dẫn đầy đủ cách tránh lừa đảo taxi tại sân bay Nội Bài và Tân Sơn Nhất. Mẹo sử dụng Grab an toàn và so sánh giá thật.',

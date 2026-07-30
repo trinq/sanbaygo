@@ -235,6 +235,23 @@ test.describe('SEO Routes', () => {
     await expect(viLink).toBeVisible();
   });
 
+  // ── Late night bus article (kw-18-8pm-arrival) ──────────────────────────────────
+
+  test('late night bus article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-late-night-bus`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/8 PM.*Hanoi Airport.*Bus Still Running.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('hanoi-airport-late-night-bus');
+  });
+
+  test('late night bus has FAQ schema with 5 questions', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-late-night-bus`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(5);
+  });
+
   test('VI bus-109 page has link to EN counterpart', async ({ page }) => {
     await page.goto(`${BASE}/vi/tuyen-109-tan-son-nhat`, { waitUntil: 'networkidle' });
     const enLink = page.locator('nav a[href="/bus-109-saigon-airport"]');

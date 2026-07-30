@@ -97,6 +97,11 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     alternatePath: '/vi/xe-lo-gio-sanh-bay-viet-nam',
   },
   {
+    path: '/hanoi-airport-late-night-bus',
+    priority: 0.7,
+    changefreq: 'monthly',
+  },
+  {
     path: '/vi/xe-lo-gio-sanh-bay-viet-nam',
     priority: 0.7,
     changefreq: 'monthly',
