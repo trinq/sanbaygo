@@ -206,6 +206,22 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/phi-hanh-ly-xe-buyt-san-bay',
     alternateEN: 'https://frylane.com/airport-bus-luggage-fee-vietnam',
   },
+  '/hanoi-airport-late-night-transfer': {
+    title: 'Hanoi Airport Late Night: Grab, Taxi, Hotel Transfer (2026)',
+    description:
+      'Arriving at Noi Bai Airport (HAN) between 22:00 and 05:00? Bus 86 has stopped. Complete guide to Grab (VND 300,000–450,000, 1.5x–2x night surcharge), Mai Linh Taxi (hotline 024 38 61 61 61), hotel pickup, and sleeping at the airport.',
+    keywords: 'hanoi airport late night transfer, noibai airport midnight, night transfer noibai, grab noibai night, taxi noibai airport',
+    canonical: 'https://frylane.com/hanoi-airport-late-night-transfer',
+    alternateVI: 'https://frylane.com/vi/di-chuyen-dem-khuya-san-bay-noi-bai',
+  },
+  '/vi/di-chuyen-dem-khuya-san-bay-noi-bai': {
+    title: 'Đi lại đêm khuya từ sân bay Nội Bài: Grab, Taxi, Đưa đón khách sạn (2026)',
+    description:
+      'Đến sân bay Nội Bài (HAN) từ 22:00 đến 05:00? Xe buýt 86 đã dừng. Hướng dẫn đầy đủ về Grab (300.000đ–450.000đ, phụ phí ban đêm 1,5×–2×), Taxi Mai Linh (hotline 024 38 61 61 61), đưa đón khách sạn và ở lại sân bay.',
+    keywords: 'đi lại đêm khuya sân bay nội bài, grab đêm nội bài, taxi đêm sân bay nội bài, di chuyển nửa đêm nội bài',
+    canonical: 'https://frylane.com/vi/di-chuyen-dem-khuya-san-bay-noi-bai',
+    alternateEN: 'https://frylane.com/hanoi-airport-late-night-transfer',
+  },
   '/privacy': {
     title: 'Privacy Policy — Frylane',
     description: 'Frylane privacy policy. We do not collect personal data. No cookies, no tracking.',

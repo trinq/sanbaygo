@@ -115,6 +115,18 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     changefreq: 'monthly',
   },
   {
+    path: '/hanoi-airport-late-night-transfer',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/vi/di-chuyen-dem-khuya-san-bay-noi-bai',
+  },
+  {
+    path: '/vi/di-chuyen-dem-khuya-san-bay-noi-bai',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/hanoi-airport-late-night-transfer',
+  },
+  {
     path: '/is-grab-safe-hanoi-airport',
     priority: 0.7,
     changefreq: 'monthly',

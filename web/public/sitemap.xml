@@ -99,6 +99,20 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://frylane.com/hanoi-airport-late-night-transfer</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/di-chuyen-dem-khuya-san-bay-noi-bai"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://frylane.com/vi/di-chuyen-dem-khuya-san-bay-noi-bai</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/hanoi-airport-late-night-transfer"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://frylane.com/is-grab-safe-hanoi-airport</loc>
     <lastmod>2026-07-30</lastmod>
     <changefreq>monthly</changefreq>

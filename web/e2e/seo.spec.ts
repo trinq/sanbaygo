@@ -797,4 +797,84 @@ test.describe('SEO Routes', () => {
     expect(content).toContain('hanoi-airport-to-hoan-kiem-lake');
     expect(content).toContain('san-bay-noi-bai-den-ho-hoan-kiem');
   });
+
+  // ── kw-15-late-night-han: Late Night Hanoi Airport Transfer (22:00–05:00) ──
+
+  test('late night hanoi transfer article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-late-night-transfer`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Hanoi Airport Late Night.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('hanoi-airport-late-night-transfer');
+  });
+
+  test('late night hanoi transfer has FAQ schema with 6 questions', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-late-night-transfer`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(6);
+  });
+
+  test('late night hanoi transfer has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-late-night-transfer`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('late night hanoi transfer has internal links', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-late-night-transfer`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href^="/"]').all();
+    const internalLinks = [];
+    for (const link of links) {
+      const href = await link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        internalLinks.push(href);
+      }
+    }
+    expect(internalLinks.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test('VI late night hanoi transfer article loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/di-chuyen-dem-khuya-san-bay-noi-bai`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/di chuyển|Mới Bài|khuya/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('di-chuyen-dem-khuya-san-bay-noi-bai');
+  });
+
+  test('VI late night hanoi transfer has FAQ schema with 6 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/di-chuyen-dem-khuya-san-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(6);
+  });
+
+  test('VI late night hanoi transfer has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/di-chuyen-dem-khuya-san-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN late night hanoi transfer page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/hanoi-airport-late-night-transfer`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/di-chuyen-dem-khuya-san-bay-noi-bai"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI late night hanoi transfer page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/di-chuyen-dem-khuya-san-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/hanoi-airport-late-night-transfer"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains late night hanoi transfer routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('hanoi-airport-late-night-transfer');
+    expect(content).toContain('di-chuyen-dem-khuya-san-bay-noi-bai');
+  });
 });
