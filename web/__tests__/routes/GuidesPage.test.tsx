@@ -280,31 +280,51 @@ describe('GuidesPage', () => {
     });
   });
 
-  describe('Subtitle from PAGE_META', () => {
-    it('renders the EN subtitle from PAGE_META["/guides"].subtitle when path is /guides (default VI)', async () => {
+  describe('Language switch URL pair', () => {
+    /**
+     * Asserts the URL-pair semantics: the EN page's <a> switch link points to
+     * /vi/guides, and the VI page's <a> switch link points to /guides. This
+     * guards against the language-derived no-op bug where a VI user on
+     * /guides could click "English" and stay on /guides.
+     */
+    it('passes languageSwitchPath="/vi/guides" when rendered at /guides', async () => {
       const { container } = renderGuidesPage({ path: '/guides' });
       await waitFor(() => {
-        const subtitleEls = Array.from(
-          container.querySelectorAll('p.text-ink-soft.mb-10'),
-        );
-        expect(subtitleEls).toHaveLength(1);
-        expect(subtitleEls[0].textContent).toBe(PAGE_META['/guides'].subtitle);
+        const switchLink = container.querySelector('a[href="/vi/guides"]');
+        expect(switchLink).not.toBeNull();
       });
+    });
+
+    it('passes languageSwitchPath="/guides" when rendered at /vi/guides', async () => {
+      const { container } = renderGuidesPage({ path: '/vi/guides' });
+      await waitFor(() => {
+        const switchLink = container.querySelector('a[href="/guides"]');
+        expect(switchLink).not.toBeNull();
+      });
+    });
+  });
+
+  describe('Subtitle from PAGE_META', () => {
+    it('renders the EN subtitle from PAGE_META["/guides"].subtitle when path is /guides (default VI)', async () => {
+      renderGuidesPage({ path: '/guides' });
+      await waitFor(() =>
+        expect(
+          screen.getByText(PAGE_META['/guides'].subtitle),
+        ).toBeInTheDocument(),
+      );
     });
 
     it('renders the VI subtitle from PAGE_META["/vi/guides"].subtitle when path is /vi/guides', async () => {
-      const { container } = renderGuidesPage({ path: '/vi/guides' });
-      await waitFor(() => {
-        const subtitleEls = Array.from(
-          container.querySelectorAll('p.text-ink-soft.mb-10'),
-        );
-        expect(subtitleEls).toHaveLength(1);
-        expect(subtitleEls[0].textContent).toBe(PAGE_META['/vi/guides'].subtitle);
-      });
+      renderGuidesPage({ path: '/vi/guides' });
+      await waitFor(() =>
+        expect(
+          screen.getByText(PAGE_META['/vi/guides'].subtitle),
+        ).toBeInTheDocument(),
+      );
     });
 
     it('omits the subtitle <p> when the path has no PAGE_META entry (optional field)', () => {
-      const { container } = render(
+      render(
         <HelmetProvider>
           <MemoryRouter initialEntries={['/some/arbitrary/path']}>
             <LanguageProvider>
@@ -313,10 +333,12 @@ describe('GuidesPage', () => {
           </MemoryRouter>
         </HelmetProvider>,
       );
-      const subtitleEls = Array.from(
-        container.querySelectorAll('p.text-ink-soft.mb-10'),
-      );
-      expect(subtitleEls).toHaveLength(0);
+      expect(
+        screen.queryByText('All Frylane guides on airport buses and Grab — grouped by city.'),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText('Tất cả hướng dẫn Frylane về xe buýt và Grab từ sân bay — sắp xếp theo thành phố.'),
+      ).not.toBeInTheDocument();
     });
   });
 

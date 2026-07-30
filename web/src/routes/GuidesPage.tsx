@@ -99,7 +99,11 @@ export function GuidesPage({ registry = GUIDES_REGISTRY }: GuidesPageProps) {
   return (
     <>
       <SEOHelmet path={location.pathname} />
-      <ArticleLayout languageSwitchPath={language === 'vi' ? '/guides' : '/vi/guides'}>
+      <ArticleLayout
+        languageSwitchPath={
+          location.pathname.startsWith('/vi') ? '/guides' : '/vi/guides'
+        }
+      >
         <div className="bg-white py-16 px-4 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <h1 className="text-4xl font-bold text-ink mb-2">{h1}</h1>
@@ -115,7 +119,7 @@ export function GuidesPage({ registry = GUIDES_REGISTRY }: GuidesPageProps) {
   );
 }
 
-/** Thin VI wrapper per the brief — same component, language context flips content. */
+/** Same component as GuidesPage; the language context (which defaults to VI in LanguageProvider) flips content. */
 export function GuidesPageVI() {
   return <GuidesPage />;
 }
