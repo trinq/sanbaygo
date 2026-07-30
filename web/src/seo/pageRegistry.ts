@@ -253,6 +253,18 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     priority: 0.3,
     changefreq: 'yearly',
   },
+  {
+    path: '/guides',
+    priority: 0.7,
+    changefreq: 'monthly',
+    alternatePath: '/vi/guides',
+  },
+  {
+    path: '/vi/guides',
+    priority: 0.7,
+    changefreq: 'monthly',
+    alternatePath: '/guides',
+  },
 ];
 
 export const SITE_ORIGIN = 'https://frylane.com';

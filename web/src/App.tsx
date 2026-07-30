@@ -34,6 +34,7 @@ import { GrabSafePage } from './routes/articles/GrabSafePage';
 import { GrabNoiBaiGiaPageVI } from './routes/articles/GrabNoiBaiGiaPageVI';
 import { LuggageFeePage } from './routes/articles/LuggageFeePage';
 import { LuggageFeePageVI } from './routes/articles/LuggageFeePageVI';
+import { GuidesPage, GuidesPageVI } from './routes/GuidesPage';
 import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { ScamPage } from './pages/ScamPage';
@@ -132,6 +133,8 @@ export default function App() {
             <Route path="/vi/cach-di-tu-sanh-bay-noi-bai" element={<HowToGetHanPageVI />} />
             <Route path="/bus-from-airport-to-city" element={<AirportBusPillarPage />} />
             <Route path="/vi/xe-buyt-san-bay-ve-trung-tam" element={<AirportBusPillarPageVI />} />
+            <Route path="/guides" element={<GuidesPage />} />
+            <Route path="/vi/guides" element={<GuidesPageVI />} />
             <Route path="/vi/*" element={<HomePageVI />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
