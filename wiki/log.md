@@ -12,6 +12,14 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-30 — Task 18 kw-19-noibai-first-time: First-timer Noi Bai Airport guide EN + VI
+- Sources touched: `web/src/routes/articles/NoibaiFirstTimePage.tsx`, `web/src/routes/articles/NoibaiFirstTimePageVI.tsx`, `web/src/App.tsx`, `web/src/seo/metaConfig.ts`, `web/src/seo/pageRegistry.ts`, `web/e2e/seo.spec.ts`, `web/public/sitemap.xml`, `feature_list.json`
+- Wiki pages touched: none (no wiki pages reference these new routes yet)
+- Lint status: not run (content-only changes, no wiki drift)
+- Commits: `0c35d0a` feat: kw-19-noibai-first-time, `0999225` docs: feature_list.json update
+
+---
+
 ## 2026-07-30 — Task 17 kw-15-late-night-han: Late night transfer Hanoi Airport (22:00–05:00) EN + VI
 - Sources touched: `web/src/routes/articles/LateNightHanPage.tsx`, `web/src/routes/articles/LateNightHanPageVI.tsx`, `web/src/seo/metaConfig.ts`, `web/src/App.tsx`, `web/src/seo/pageRegistry.ts`, `web/e2e/seo.spec.ts`, `web/public/sitemap.xml`
 - Wiki pages touched: none
