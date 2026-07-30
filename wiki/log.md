@@ -12,7 +12,25 @@ One entry per session. Newest at the top. Format:
 
 ---
 
----
+## 2026-07-30 — Task 8 kw-13-bus-109-vs-152: Phase 1 Tier 1 article — EN + VI
+- Sources touched: `web/src/routes/articles/Bus109Vs152Page.tsx` (new),
+  `web/src/routes/articles/Bus109Vs152PageVI.tsx` (new),
+  `web/src/seo/metaConfig.ts` (added 2 entries),
+  `web/src/App.tsx` (added 2 routes),
+  `web/src/seo/pageRegistry.ts` (added 2 entries, sitemap auto-update),
+  `web/src/components/SEO/SEOHelmet.tsx` (bugfix: removed Fragment wrapper
+  from alternateEN links — react-helmet-async drops hreflang tags when a
+  Fragment wraps multiple links),
+  `web/e2e/seo.spec.ts` (added 9 Playwright SEO tests),
+  `web/public/sitemap.xml` (regenerated via `npm run build`, 14 entries),
+  `feature_list.json` (status → passing).
+- Wiki pages touched: none.
+- Lint status: 0 errors, not run (no wiki pages modified).
+- TDD cycle: seo.spec.ts 9 tests RED (routes 404, sitemap empty) → page
+  components + wiring GREEN (37/37 Playwright pass).
+- Bugfix: SEOHelmet Fragment wrapper — affects ALL articles with alternateEN
+  hreflang. Fix applied here as incidental improvement.
+- Commits: `aad899b`.
 ## 2026-07-30 — Phase 0 kw-0-sitemap-auto: auto-generated sitemap from registry
 - Sources touched: `web/src/seo/pageRegistry.ts` (new),
   `web/src/seo/generateSitemap.ts` (new),
