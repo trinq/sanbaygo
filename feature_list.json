@@ -669,9 +669,9 @@
       "platform": "web",
       "title": "Article: grab nội bài giá bao nhiêu 2026 (KD 32, Tier 2, VI-only)",
       "user_visible_behavior": "VI page at /vi/grab-noi-bai-gia-bao-nhieu. Title: 'Grab Nội Bài giá bao nhiêu 2026? Cập nhật theo quận'. Pricing breakdown by destination district: Hoàn Kiếm, Ba Đình, Cầu Giấy, Đống Đa, Hai Bà Trưng, Tây Hồ, Long Biên. Surcharge tips. FAQ schema (6 Qs).",
-      "status": "pending",
-      "verification": "1. Playwright SEO test passes\n2. ≥6 district price entries with reasonable ranges\n3. Year mentioned in title (2026)\n4. cd web && npx tsc --noEmit → exit 0",
-      "evidence": "",
+      "status": "passing",
+      "verification": "1. Playwright SEO test passes (5/5 tests green)\n2. 7 district price entries with reasonable ranges\n3. Year mentioned in title (2026) — 48 chars total\n4. cd web && npx tsc --noEmit → exit 0\n5. All 136 Playwright tests pass\n6. FAQ schema with 6 questions\n7. 4 internal links to existing articles",
+      "evidence": "Commit ba5f442 — feat: add GrabNoiBaiGiaPageVI article (kw-23-grab-noi-bai-gia)",
       "notes": "Tier 2 KD 32 — VN pricing page. Update yearly."
     },
     {
