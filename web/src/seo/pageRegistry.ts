@@ -102,10 +102,22 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     changefreq: 'monthly',
   },
   {
+    path: '/noibai-t2-exit-time',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/vi/thoi-gian-ra-cuong-t2-noi-bai',
+  },
+  {
     path: '/vi/xe-lo-gio-sanh-bay-viet-nam',
     priority: 0.7,
     changefreq: 'monthly',
     alternatePath: '/airport-scam-vietnam-taxi',
+  },
+  {
+    path: '/vi/thoi-gian-ra-cuong-t2-noi-bai',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/noibai-t2-exit-time',
   },
 
   {

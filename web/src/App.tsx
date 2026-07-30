@@ -5,6 +5,8 @@ import { HomePage } from './routes/HomePage';
 import { HomePageVI } from './routes/HomePageVI';
 import { Bus86Page } from './routes/articles/Bus86Page';
 import { Bus86PageVI } from './routes/articles/Bus86PageVI';
+import { ExitTimePage } from './routes/articles/ExitTimePage';
+import { ExitTimePageVI } from './routes/articles/ExitTimePageVI';
 import { Bus109Page } from './routes/articles/Bus109Page';
 import { Bus152Page } from './routes/articles/Bus152Page';
 import { Bus109PageVI } from './routes/articles/Bus109PageVI';
@@ -82,10 +84,12 @@ export default function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/ket-qua" element={<ResultRoute />} />
             <Route path="/vi/tuyen-86-noi-bai" element={<Bus86PageVI />} />
+            <Route path="/vi/thoi-gian-ra-cuong-t2-noi-bai" element={<ExitTimePageVI />} />
             <Route path="/vi/tuyen-109-tan-son-nhat" element={<Bus109PageVI />} />
             <Route path="/vi/tuyen-152-tan-son-nhat" element={<Bus152PageVI />} />
             <Route path="/vi/xe-lo-gio-sanh-bay-viet-nam" element={<ScamPageVI />} />
             <Route path="/bus-109-vs-152-tan-son-nhat" element={<Bus109Vs152Page />} />
+            <Route path="/noibai-t2-exit-time" element={<ExitTimePage />} />
             <Route path="/vi/xe-buyt-109-vs-152-tan-son-nhat" element={<Bus109Vs152PageVI />} />
             <Route path="/hanoi-airport-late-night-bus" element={<LateNightBusPage />} />
             <Route path="/vi/*" element={<HomePageVI />} />

@@ -276,6 +276,83 @@ test.describe('SEO Routes', () => {
     await expect(enLink).toBeVisible();
   });
 
+  // ── Exit time article (kw-17-t2-exit-time) ─────────────────────────────────
+
+  test('exit time article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-t2-exit-time`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Noi Bai T2.*2026/);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('noibai-t2-exit-time');
+  });
+
+  test('exit time article has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-t2-exit-time`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('exit time article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-t2-exit-time`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('exit time article has interactive calculator', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-t2-exit-time`, { waitUntil: 'networkidle' });
+    // Calculator must render with at least one interactive input
+    const calculator = page.locator('[data-testid="exit-time-calculator"]');
+    await expect(calculator).toBeVisible();
+    // Check for terminal selector (label in English version)
+    const terminalLabel = page.locator('legend', { hasText: 'Terminal' });
+    await expect(terminalLabel).toBeVisible();
+  });
+
+  test('VI exit time article loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/thoi-gian-ra-cuong-t2-noi-bai`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Thời gian.*T2.*Nội Bài/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('thoi-gian-ra-cuong-t2-noi-bai');
+  });
+
+  test('VI exit time article has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/thoi-gian-ra-cuong-t2-noi-bai`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('VI exit time article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/thoi-gian-ra-cuong-t2-noi-bai`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN exit time page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-t2-exit-time`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/thoi-gian-ra-cuong-t2-noi-bai"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI exit time page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/thoi-gian-ra-cuong-t2-noi-bai`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/noibai-t2-exit-time"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains exit time routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('noibai-t2-exit-time');
+    expect(content).toContain('thoi-gian-ra-cuong-t2-noi-bai');
+  });
+
   test('article pages do NOT have toggle button (EN/VN)', async ({ page }) => {
     const articlePages = [
       '/bus-86-hanoi-airport',

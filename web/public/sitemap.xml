@@ -79,11 +79,31 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://frylane.com/hanoi-airport-late-night-bus</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://frylane.com/noibai-t2-exit-time</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/thoi-gian-ra-cuong-t2-noi-bai"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/airport-scam-vietnam-taxi"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://frylane.com/vi/thoi-gian-ra-cuong-t2-noi-bai</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/noibai-t2-exit-time"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://frylane.com/privacy</loc>

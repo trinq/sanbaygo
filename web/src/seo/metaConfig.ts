@@ -93,6 +93,13 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/airport-scam-vietnam-taxi',
     alternateVI: 'https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam',
   },
+  '/noibai-t2-exit-time': {
+    title: 'Noi Bai T2 International Exit Time: How Long to Get Out (2026)',
+    description: 'Estimate your exit time from Noi Bai T2 International Airport (HAN). Calculator covers immigration, baggage claim, and walk to bus stop. Real data from Frylane.',
+    keywords: 'noibai t2 exit time, how long to exit noibai airport, noibai t2 immigration time, exit noibai airport',
+    canonical: 'https://frylane.com/noibai-t2-exit-time',
+    alternateVI: 'https://frylane.com/vi/thoi-gian-ra-cuong-t2-noi-bai',
+  },
   '/hanoi-airport-late-night-bus': {
     title: '8 PM at Hanoi Airport: Is the Bus Still Running? (2026)',
     description:
@@ -106,6 +113,13 @@ export const PAGE_META: Record<string, MetaConfig> = {
     keywords: 'xe lừa đảo sân bay việt nam, taxi sân bay, an toàn sân bay hà nội, an toàn sân bay sài gòn',
     canonical: 'https://frylane.com/vi/xe-lo-gio-sanh-bay-viet-nam',
     alternateEN: 'https://frylane.com/airport-scam-vietnam-taxi',
+  },
+  '/vi/thoi-gian-ra-cuong-t2-noi-bai': {
+    title: 'Thời gian ra khỏi nhà ga T2 quốc tế Nội Bài (2026)',
+    description: 'Ước tính thời gian ra khỏi nhà ga T2 sân bay Nội Bài (HAN). Công cụ tính bao gồm kiểm tra hộ chiếu, nhận hành lý và đi bộ đến điểm đón xe buýt. Dữ liệu thực từ Frylane.',
+    keywords: 'thời gian ra t2 nội bài, ra khỏi sân bay nội bài bao lâu, t2 nội bài kiểm tra hộ chiếu',
+    canonical: 'https://frylane.com/vi/thoi-gian-ra-cuong-t2-noi-bai',
+    alternateEN: 'https://frylane.com/noibai-t2-exit-time',
   },
   '/privacy': {
     title: 'Privacy Policy — Frylane',
