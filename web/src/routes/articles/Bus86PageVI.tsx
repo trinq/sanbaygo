@@ -55,5 +55,17 @@ export function Bus86PageVI() {
     alternatePath: '/bus-86-hanoi-airport',
   };
 
-  return <AirportArticleLayout config={config} />;
+  return (
+    <>
+      <AirportArticleLayout config={config} />
+      <nav className="max-w-3xl mx-auto px-4 pb-8 text-sm text-ink-soft">
+        Related:{' '}
+        <a href="/vi/tuyen-86-noi-bai-gio" className="text-primary underline">Lịch xe buýt 86 Nội Bài</a>
+        {' · '}
+        <a href="/vi/di-chuyen-dem-khuya-san-bay-noi-bai" className="text-primary underline">Đi lại đêm khuya</a>
+        {' · '}
+        <a href="/vi/cach-re-nhat-san-bay-noi-bai" className="text-primary underline">Cách rẻ nhất về thành phố</a>
+      </nav>
+    </>
+  );
 }

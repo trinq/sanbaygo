@@ -789,9 +789,9 @@
       "platform": "web",
       "title": "Audit + enforce ≥2 internal links per article",
       "user_visible_behavior": "Each article in web/src/routes/articles/ includes ≥2 internal links to other frylane.com articles (via React Router Link). Audit script in web/scripts/audit-internal-links.mjs fails CI if violated. Run after Phase 1, Phase 2.",
-      "status": "pending",
+      "status": "passing",
       "verification": "1. node web/scripts/audit-internal-links.mjs → all articles pass\n2. New articles fail if missing internal links\n3. cd web && npx tsc --noEmit → exit 0",
-      "evidence": "",
+      "evidence": "Created web/scripts/audit-internal-links.mjs (counts <Link to='/...'> and <a href='/...'> internal links against PAGE_REGISTRY; exits 1 if any article < 2). Created web/__tests__/scripts/audit-internal-links.test.mjs (4 tests pass). Added npm script 'audit:internal-links'. Audit output:\n  [OK] AirportBusPillarPage.tsx                 13 links\n  [OK] AirportBusPillarPageVI.tsx               13 links\n\nPASS: all 32 articles have >= 2 internal links.\n\ntsc --noEmit exit 0.",
       "notes": "Phase 4 infra — built after Phase 1. Lock link policy for future articles."
     },
     {

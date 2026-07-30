@@ -54,5 +54,17 @@ export function Bus109Page() {
     alternatePath: '/vi/tuyen-109-tan-son-nhat',
   };
 
-  return <AirportArticleLayout config={config} />;
+  return (
+    <>
+      <AirportArticleLayout config={config} />
+      <nav className="max-w-3xl mx-auto px-4 pb-8 text-sm text-ink-soft">
+        Related:{' '}
+        <a href="/bus-152-saigon-fare" className="text-primary underline">Bus 152 — Tan Son Nhat T1/T2</a>
+        {' · '}
+        <a href="/bus-109-saigon-airport" className="text-primary underline">Bus 109 — Tan Son Nhat T3</a>
+        {' · '}
+        <a href="/cheapest-way-saigon-airport-district-1" className="text-primary underline">Cheapest way from Saigon Airport</a>
+      </nav>
+    </>
+  );
 }

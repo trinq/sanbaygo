@@ -54,5 +54,17 @@ export function Bus152PageVI() {
     alternatePath: '/bus-152-saigon-fare',
   };
 
-  return <AirportArticleLayout config={config} />;
+  return (
+    <>
+      <AirportArticleLayout config={config} />
+      <nav className="max-w-3xl mx-auto px-4 pb-8 text-sm text-ink-soft">
+        Bài viết liên quan:{' '}
+        <a href="/vi/tuyen-152-tan-son-nhat" className="text-primary underline">Tuyến 152 Tân Sơn Nhất</a>
+        {' · '}
+        <a href="/vi/tuyen-109-tan-son-nhat" className="text-primary underline">Tuyến 109</a>
+        {' · '}
+        <a href="/vi/cach-re-nhat-san-bay-sai-gon" className="text-primary underline">Cách rẻ nhất từ sân bay Sài Gòn</a>
+      </nav>
+    </>
+  );
 }

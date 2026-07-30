@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "test": "node --no-warnings --experimental-vm-modules node_modules/.bin/jest --config jest.config.js",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "audit:internal-links": "node scripts/audit-internal-links.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

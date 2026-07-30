@@ -7,6 +7,7 @@ export default {
   testMatch: [
     '<rootDir>/__tests__/**/*.test.ts',
     '<rootDir>/__tests__/**/*.test.tsx',
+    '<rootDir>/__tests__/**/*.test.mjs',
   ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {

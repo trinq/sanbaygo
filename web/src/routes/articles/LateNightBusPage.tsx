@@ -55,5 +55,17 @@ export function LateNightBusPage() {
     ],
   };
 
-  return <AirportArticleLayout config={config} />;
+  return (
+    <>
+      <AirportArticleLayout config={config} />
+      <nav className="max-w-3xl mx-auto px-4 pb-8 text-sm text-ink-soft">
+        Related:{' '}
+        <a href="/hanoi-airport-late-night-bus" className="text-primary underline">Is Bus 86 running at 8 PM?</a>
+        {' · '}
+        <a href="/airport-scam-vietnam-taxi" className="text-primary underline">Vietnam airport taxi scams</a>
+        {' · '}
+        <a href="/grab-vs-bus-hanoi-airport" className="text-primary underline">Grab vs Bus 86 comparison</a>
+      </nav>
+    </>
+  );
 }

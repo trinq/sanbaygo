@@ -120,5 +120,17 @@ export function HanToHoanKiemPage() {
     alternatePath: '/vi/san-bay-noi-bai-den-ho-hoan-kiem',
   };
 
-  return <ComparisonArticleLayout config={config} />;
+  return (
+    <>
+      <ComparisonArticleLayout config={config} />
+      <nav className="max-w-3xl mx-auto px-4 pb-8 text-sm text-ink-soft">
+        Related:{' '}
+        <a href="/bus-86-hanoi-airport" className="text-primary underline">Bus 86 — Hanoi Airport to Old Quarter</a>
+        {' · '}
+        <a href="/cheapest-way-hanoi-airport" className="text-primary underline">Cheapest way from Hanoi Airport</a>
+        {' · '}
+        <a href="/grab-vs-bus-hanoi-airport" className="text-primary underline">Grab vs Bus 86 comparison</a>
+      </nav>
+    </>
+  );
 }

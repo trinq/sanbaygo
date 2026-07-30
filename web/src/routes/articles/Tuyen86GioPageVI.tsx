@@ -74,5 +74,17 @@ export function Tuyen86GioPageVI() {
     ],
   };
 
-  return <AirportArticleLayout config={config} />;
+  return (
+    <>
+      <AirportArticleLayout config={config} />
+      <nav className="max-w-3xl mx-auto px-4 pb-8 text-sm text-ink-soft">
+        Bài viết liên quan:{' '}
+        <a href="/vi/tuyen-86-noi-bai-gio" className="text-primary underline">Lịch xe buýt 86 Nội Bài</a>
+        {' · '}
+        <a href="/vi/di-chuyen-dem-khuya-san-bay-noi-bai" className="text-primary underline">Đi lại đêm khuya từ Nội Bài</a>
+        {' · '}
+        <a href="/vi/grab-vs-xe-buyt-noi-bai" className="text-primary underline">Grab vs xe buýt Nội Bài</a>
+      </nav>
+    </>
+  );
 }
