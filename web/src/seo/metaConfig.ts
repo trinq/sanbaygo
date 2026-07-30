@@ -107,6 +107,14 @@ export const PAGE_META: Record<string, MetaConfig> = {
     keywords: '8pm hanoi airport bus, noibai airport late night bus, last bus from noibai, hanoi airport transport after dark',
     canonical: 'https://frylane.com/hanoi-airport-late-night-bus',
   },
+  '/airport-bus-luggage-fee-vietnam': {
+    title: 'Vietnam Airport Bus Luggage Fees: Bus 86 / 109 / 152 (2026)',
+    description:
+      'All Vietnam airport buses (Bus 86, 109, 152) are free for standard carry-on luggage. Oversized bags may incur a small fee. Full comparison of luggage allowance, oversized rules, and fees for 2026.',
+    keywords: 'airport bus luggage fee vietnam, bus 86 luggage, bus 109 luggage, bus 152 luggage, noibai airport bus luggage, tansonnhat airport bus luggage',
+    canonical: 'https://frylane.com/airport-bus-luggage-fee-vietnam',
+    alternateVI: 'https://frylane.com/vi/phi-hanh-ly-xe-buyt-san-bay',
+  },
   '/vi/xe-lo-gio-sanh-bay-viet-nam': {
     title: 'Xe lừa đảo tại sân bay Việt Nam — Cách phòng tránh',
     description: 'Hướng dẫn đầy đủ cách tránh lừa đảo taxi tại sân bay Nội Bài và Tân Sơn Nhất. Mẹo sử dụng Grab an toàn và so sánh giá thật.',
@@ -120,6 +128,14 @@ export const PAGE_META: Record<string, MetaConfig> = {
     keywords: 'thời gian ra t2 nội bài, ra khỏi sân bay nội bài bao lâu, t2 nội bài kiểm tra hộ chiếu',
     canonical: 'https://frylane.com/vi/thoi-gian-ra-cuong-t2-noi-bai',
     alternateEN: 'https://frylane.com/noibai-t2-exit-time',
+  },
+  '/vi/phi-hanh-ly-xe-buyt-san-bay': {
+    title: 'Phí hành lý xe buýt sân bay Việt Nam: Tuyến 86 / 109 / 152 (2026)',
+    description:
+      'Tất cả xe buýt sân bay Việt Nam (Tuyến 86, 109, 152) đều miễn phí cho hành lý xách tay tiêu chuẩn. Vali cồng kềnh có thể bị tính phụ phí nhỏ. So sánh đầy đủ hạn mức hành lý, quy định vali lớn cho năm 2026.',
+    keywords: 'phí hành lý xe buýt sân bay việt nam, hành lý xe buýt 86, xe buýt 109 hành lý, xe buýt 152 hành lý',
+    canonical: 'https://frylane.com/vi/phi-hanh-ly-xe-buyt-san-bay',
+    alternateEN: 'https://frylane.com/airport-bus-luggage-fee-vietnam',
   },
   '/privacy': {
     title: 'Privacy Policy — Frylane',

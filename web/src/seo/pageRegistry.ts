@@ -119,6 +119,18 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     changefreq: 'monthly',
     alternatePath: '/noibai-t2-exit-time',
   },
+  {
+    path: '/airport-bus-luggage-fee-vietnam',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/vi/phi-hanh-ly-xe-buyt-san-bay',
+  },
+  {
+    path: '/vi/phi-hanh-ly-xe-buyt-san-bay',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/airport-bus-luggage-fee-vietnam',
+  },
 
   {
     path: '/privacy',

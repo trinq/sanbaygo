@@ -106,6 +106,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://frylane.com/airport-bus-luggage-fee-vietnam</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/phi-hanh-ly-xe-buyt-san-bay"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://frylane.com/vi/phi-hanh-ly-xe-buyt-san-bay</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/airport-bus-luggage-fee-vietnam"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://frylane.com/privacy</loc>
     <lastmod>2026-07-30</lastmod>
     <changefreq>yearly</changefreq>
