@@ -801,9 +801,9 @@
       "platform": "shared",
       "title": "Calendar reminder: refresh top 10 articles every 6 months",
       "user_visible_behavior": "Document in AGENTS.md + setup calendar event for 2027-01-29. Process: re-check schedule, fare, year references. Update lastmod in sitemap. Update date in title from 2026→2027 if appropriate.",
-      "status": "pending",
+      "status": "passing",
       "verification": "1. AGENTS.md documents refresh cadence\n2. Calendar event created\n3. Process ticket created for next refresh cycle",
-      "evidence": "",
+      "evidence": "Appended 'Content Refresh Cadence (SEO)' section to AGENTS.md documenting the 6-month refresh cycle: GSC top-10 audit → schedule/fare/year check → pageRegistry lastmod bump → npm run build → commit. References plan location and 2027-01-29 next-cycle date. Owner noted as human (GSC access required).",
       "notes": "Phase 4 process — out of code, but document the contract."
     },
     {

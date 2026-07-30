@@ -175,3 +175,24 @@ MVP is fully client-side:
 - No authentication
 - No data persistence
 - Static data only
+
+## Content Refresh Cadence (SEO)
+
+Per the keyword research plan (`docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md` §kw-0-content-refresh-cadence), every 6 months refresh the top 10 SEO articles by GSC impressions.
+
+**Cycle (every 6 months, next = 2027-01-29):**
+
+1. Run `web/` build to get the latest page registry: `npm run build`.
+2. Open Google Search Console → Performance → Search results. Filter by Page = top 10 articles by Impressions (last 90 days).
+3. For each top-10 article, re-check:
+   - **Schedule accuracy** (Bus 86 / 109 / 152 departures vs. `core/data/busSchedule.ts`).
+   - **Fare accuracy** (vs. `core/data/grabEstimates.ts` and current operator pricing).
+   - **Year reference in title** (e.g., `(2026)` → `(2027)` if calendar year has turned).
+   - **Internal links** — add NEW sibling articles if any have been shipped since last refresh.
+4. Update the article's `lastmod` field in `web/src/seo/pageRegistry.ts` (use today's date).
+5. Run `npm run build` to regenerate `web/public/sitemap.xml` and `web/dist/sitemap.xml`.
+6. Commit: `docs(kw-0-refresh): refresh top-10 articles for 2027-Q1`.
+
+**Owner:** human (GSC access required for the actual perf data).
+
+**Calendar entry:** set a recurring event for 2027-01-29, then every 6 months thereafter.
