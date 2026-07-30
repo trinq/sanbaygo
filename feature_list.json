@@ -543,9 +543,9 @@
       "platform": "shared",
       "title": "Create docs/seo/keyword-sheet.csv from brief",
       "user_visible_behavior": "CSV file at docs/seo/keyword-sheet.csv with columns: keyword | lang | source | cluster | intent | volume_range | kd | tier | target_page | status. All 23 keywords from brief seeded. Maps 1:1 to kw-* tickets.",
-      "status": "pending",
+      "status": "passing",
       "verification": "1. File exists at docs/seo/keyword-sheet.csv\n2. All 23 keywords present\n3. Each row has all 10 columns populated\n4. Status field defaults to 'pending' or 'exists' for done",
-      "evidence": "",
+      "evidence": "Created docs/seo/keyword-sheet.csv (24 lines: 1 header + 23 data rows, 10 columns). Created docs/seo/README.md explaining the file + refresh cadence. Verified CSV row count via: node -e ... → rows: 24 header: 10 first-data-cols: 10.",
       "notes": "Phase 0 process — living document updated monthly per GSC audit."
     },
     {

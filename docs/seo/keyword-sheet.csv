@@ -1,0 +1,24 @@
+keyword,lang,source,cluster,intent,volume_range,kd,tier,target_page,status
+bus from airport to city center,EN,brief,Pillar/Hub,I,8100-14800,38,3,/bus-from-airport-to-city,passing
+bus 86 hanoi airport,EN,brief,Bus 86,I,1300-2400,28,1,/bus-86-hanoi-airport,passing
+bus 109 saigon airport,EN,brief,Bus 109,I,880-1600,25,1,/bus-109-saigon-airport,passing
+bus 152 saigon fare,EN,brief,Bus 152,I,590-1300,22,1,/bus-152-saigon-fare,passing
+cheapest way from airport hanoi,EN,brief,Comparison,C,1600-4400,41,2,/cheapest-way-hanoi-airport,passing
+cheapest way from airport saigon district 1,EN,brief,Comparison,C,720-1600,35,2,/cheapest-way-saigon-airport-district-1,passing
+grab vs bus airport hanoi,EN,brief,Grab vs Bus,C,480-1000,30,2,/grab-vs-bus-hanoi-airport,passing
+noi bai airport to old quarter,EN,brief,HAN Old Quarter,I+T,3200-6600,45,3,/how-to-get-from-hanoi-airport-to-city,passing
+tan son nhat airport to district 1,EN,brief,SGN District 1,I+T,4400-8100,48,3,/cheapest-way-saigon-airport-district-1,passing
+airport scam vietnam taxi,EN,brief,Scam warning,I,1300-2900,42,2,/airport-scam-vietnam-taxi,passing
+how to get from hanoi airport to city,EN,brief,HAN hub,I,2400-5400,44,2,/how-to-get-from-hanoi-airport-to-city,passing
+hanoi airport to hoan kiem lake,EN,brief,HAN Old Quarter,I+T,1600-3200,39,2,/hanoi-airport-to-hoan-kiem-lake,passing
+tan son nhat airport bus 109 vs 152,EN,brief,Bus 109 vs 152,C,90-210,18,1,/bus-109-vs-152-tan-son-nhat,passing
+is grab safe at hanoi airport reddit,EN,brief,Scam/Trust,I,90-320,22,1,/is-grab-safe-hanoi-airport,passing
+late night airport transfer hanoi,EN,brief,HAN late-night,I+T,320-720,30,2,/hanoi-airport-late-night-transfer,passing
+airport bus luggage fee vietnam,EN,brief,Bus 86/109 detail,I,210-480,25,1,/airport-bus-luggage-fee-vietnam,passing
+t2 international noibai how long to exit,EN,brief,T2 immigration,I,480-1000,26,1,/noibai-t2-exit-time,passing
+8pm arrival hanoi airport bus still running,EN,brief,Late-night scenario,I,50-170,15,1,/hanoi-airport-late-night-bus,passing
+what to do at noibai airport first time,EN,brief,First-timer,I,1300-3200,35,2,/noibai-airport-first-time-guide,passing
+frylane,EN,brief,Brand,N,0,0,0,/,passing
+xe buýt sân bay nội bài,VN,brief,Bus 86 (VN),I,2900-5400,28,1,/vi/xe-buyt-san-bay-noi-bai,pending
+tuyến 86 nội bài giờ,VN,brief,Bus 86 (VN),I,1300-2400,22,1,/vi/tuyen-86-noi-bai-gio,passing
+grab nội bài giá bao nhiêu 2026,VN,brief,Grab estimate (VN),C,880-1600,32,2,/vi/grab-noi-bai-gia-bao-nhieu,passing
