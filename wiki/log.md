@@ -12,6 +12,14 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-30 — /guides listing page + homepage CTA (kw from spec, shipped via SDD)
+- Sources touched: `web/src/seo/guidesRegistry.ts` (new), `web/src/seo/metaConfig.ts`, `web/src/seo/pageRegistry.ts`, `web/src/routes/GuidesPage.tsx` (new), `web/src/App.tsx`, `web/src/components/Landing/BusGuides.tsx`, `web/public/sitemap.xml`, `web/__tests__/seo/guidesRegistry.test.ts` (new), `web/__tests__/routes/GuidesPage.test.tsx` (new), `docs/superpowers/specs/2026-07-30-guides-listing-page.md`, `.gitignore`
+- Wiki pages touched: none (lint pass required — see handoff)
+- Lint status: not run (deferred — wiki/pages/seo.md and wiki/pages/data-sources.md will trigger C1 staleness after this session)
+- Commits: `a77b554` `dba4943` `76b3d6f` `0883e92` `3918ca2` `7a05a22` `f5ef7d4` `9de8b4e` `cdc0666` `235912e`
+- Merged to main: `cdc0666` (no-ff merge commit) + `235912e` (gitignore chore)
+- Plan: `docs/superpowers/specs/2026-07-30-guides-listing-page.md`
+
 ## 2026-07-30 — Task 19 kw-11-how-to-get-han: HAN hub page (EN + VI, 6 options, 7 FAQ)
 - Sources touched: `web/src/routes/articles/HowToGetHanPage.tsx`, `web/src/routes/articles/HowToGetHanPageVI.tsx`, `web/src/App.tsx`, `web/src/seo/metaConfig.ts`, `web/src/seo/pageRegistry.ts`, `web/e2e/seo.spec.ts`, `web/public/sitemap.xml`, `feature_list.json`.
 - Sources read for context: `wiki/README.md`, `wiki/index.md`, `AGENTS.md`, `feature_list.json`, `task-19-brief.md`, `ArticleLayout.tsx`, `NoibaiFirstTimePage.tsx`, `metaConfig.ts`, `pageRegistry.ts`, `App.tsx`, `seo.spec.ts`.
