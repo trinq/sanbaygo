@@ -533,7 +533,7 @@
       "user_visible_behavior": "DNS TXT record added for GSC verification. GA4 tracking ID added to web/index.html. Google Ads account created (no campaigns). Document process in docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md and AGENTS.md.",
       "status": "pending",
       "verification": "1. GSC shows frylane.com as verified property\n2. GA4 dashboard receives test event from local dev\n3. Google Ads account accessible, Keyword Planner unlocked\n4. Process documented for next agent",
-      "evidence": "",
+      "evidence": "Documented in docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md 'Appendix: How to complete kw-0-gsc-setup' — 4-step runbook (GSC verify, GA4 setup, Google Ads account, CSV volume update). Steps require DNS, Google account, and credit card; explicitly out of agent scope. Status remains pending until user reports steps complete.",
       "notes": "Phase 0 process — per brief §6 Day 1. One-time human action required."
     },
     {

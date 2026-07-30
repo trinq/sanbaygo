@@ -236,3 +236,72 @@ git commit -m "feat(kw): <keyword> — Tier <N>, KD <KD>, EN+VI"
 **3. Hybrid** — do Phase 0 inline (small), then subagent-drive Phase 1+
 
 Which approach?
+---
+
+## Appendix: How to complete `kw-0-gsc-setup` (human-only, 60 min)
+
+This ticket is **not** implementable by an agent. The user must complete it manually. Estimated time: 60 minutes total. Required: Google account (any), DNS access for `frylane.com`, credit card (NOT charged) for Google Ads.
+
+### Step 1 — Verify `frylane.com` on Google Search Console (15 min)
+
+1. Go to [search.google.com/search-console](https://search.google.com/search-console).
+2. Click **Add property → URL prefix** → enter `https://frylane.com`.
+3. Choose verification method: **HTML tag** (easiest).
+4. Copy the meta tag Google gives you, e.g.:
+   ```html
+   <meta name="google-site-verification" content="abc123XYZ" />
+   ```
+5. Open `web/index.html` and paste the tag inside `<head>`. Save.
+6. Run `npm run build` and deploy `web/dist/` to `frylane.com` (Vercel/Netlify auto-deploy if set up).
+7. Back in GSC, click **Verify**. Should pass within 60 seconds.
+8. Submit `sitemap.xml` URL: in GSC sidebar → **Sitemaps** → paste `https://frylane.com/sitemap.xml` → Submit.
+
+### Step 2 — Set up Google Analytics 4 (15 min)
+
+1. Go to [analytics.google.com](https://analytics.google.com).
+2. Click **Admin → Create Account** → name "Frylane" → click **Create**.
+3. Click **Create Property** → name "frylane.com" → timezone "Vietnam" → currency "VND" → Create.
+4. Choose platform: **Web** → enter `https://frylane.com` → copy the **Measurement ID** (format `G-XXXXXXXXXX`).
+5. Open `web/index.html` and paste inside `<head>`:
+   ```html
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-XXXXXXXXXX');
+   </script>
+   ```
+6. Deploy. Verify in GA4 **Realtime** tab that 1 active user appears (your own visit).
+
+### Step 3 — Create Google Ads account (10 min, no campaigns)
+
+1. Go to [ads.google.com](https://ads.google.com).
+2. Click **Start now** → sign in with the same Google account as GSC.
+3. Click **Switch to Expert mode** → **Create account without a campaign**.
+4. Set country "Vietnam", timezone "Vietnam", currency "VND".
+5. Enter billing info (credit card — **NOT charged** because we won't run campaigns).
+6. Once in the Google Ads dashboard, navigate to **Tools → Keyword Planner**.
+7. Click **Discover new keywords** → enter a seed (`bus from airport to city center`) → view volume range.
+8. **Repeat for the top 10 keywords from `docs/seo/keyword-sheet.csv`.** Update the `volume_range` column in the CSV with the verified Google data.
+
+### Step 4 — Mark `kw-0-gsc-setup` complete in `feature_list.json`
+
+Once all 3 steps above are done, edit `feature_list.json`:
+
+- Find the `kw-0-gsc-setup` entry.
+- Set `"status": "passing"`.
+- Replace `"evidence": ""` with:
+  ```
+  GSC verified via HTML tag (added to web/index.html, deployed). GA4 measurement ID G-XXXXXXXXXX added to web/index.html. Google Ads account created, Keyword Planner unlocked. Volume ranges for top-10 keywords updated in docs/seo/keyword-sheet.csv.
+  ```
+
+Commit:
+```bash
+git add web/index.html docs/seo/keyword-sheet.csv feature_list.json
+git commit -m "docs(kw-0-gsc-setup): GSC + GA4 + Google Ads verified"
+```
+
+### Why this isn't automated
+
+Adding `<meta name="google-site-verification">` to `web/index.html` is technically possible, but the **verification token** is a secret value that proves you control the domain. The agent must not hardcode it into the repo. The Google Ads account creation is genuinely a human-only flow (requires a credit card, billing setup, and acceptance of Google Ads terms).
