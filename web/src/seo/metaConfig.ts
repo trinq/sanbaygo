@@ -238,6 +238,22 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/noi-bai-lan-dau-di',
     alternateEN: 'https://frylane.com/noibai-airport-first-time-guide',
   },
+  '/how-to-get-from-hanoi-airport-to-city': {
+    title: 'How to Get from Hanoi Airport to City Center (2026)',
+    description:
+      '6 transport options from Noi Bai Airport to central Hanoi compared: Bus 17 (VND 7,000), Bus 90 (VND 9,000), Bus 86 (VND 50,000), Grab (VND 200,000–300,000), Taxi (VND 300,000–500,000), and Private Transfer (VND 400,000–800,000). Full cost and time comparison with hub links to all child articles.',
+    keywords: 'how to get from hanoi airport to city center, noibai airport transport, hanoi airport bus, hanoi airport grab, hanoi airport taxi, cheapest way hanoi airport',
+    canonical: 'https://frylane.com/how-to-get-from-hanoi-airport-to-city',
+    alternateVI: 'https://frylane.com/vi/cach-di-tu-sanh-bay-noi-bai',
+  },
+  '/vi/cach-di-tu-sanh-bay-noi-bai': {
+    title: 'Cách đi từ Sân bay Nội Bài về Trung tâm (2026)',
+    description:
+      'So sánh 6 phương tiện từ sân bay Nội Bài về trung tâm Hà Nội: xe buýt 17 (7.000đ), xe buýt 90 (9.000đ), xe buýt 86 (50.000đ), Grab (200.000–300.000đ), taxi (300.000–500.000đ), xe đưa đón riêng (400.000–800.000đ). So sánh chi phí và thời gian đầy đủ.',
+    keywords: 'cách đi từ sân bay nội bài về trung tâm, di chuyển sân bay nội bài, xe buýt sân bay nội bài, grab sân bay nội bài, taxi sân bay nội bài, cách rẻ nhất sân bay nội bài',
+    canonical: 'https://frylane.com/vi/cach-di-tu-sanh-bay-noi-bai',
+    alternateEN: 'https://frylane.com/how-to-get-from-hanoi-airport-to-city',
+  },
   '/privacy': {
     title: 'Privacy Policy — Frylane',
     description: 'Frylane privacy policy. We do not collect personal data. No cookies, no tracking.',

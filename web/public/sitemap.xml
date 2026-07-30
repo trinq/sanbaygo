@@ -210,6 +210,20 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://frylane.com/how-to-get-from-hanoi-airport-to-city</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/cach-di-tu-sanh-bay-noi-bai"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://frylane.com/vi/cach-di-tu-sanh-bay-noi-bai</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/how-to-get-from-hanoi-airport-to-city"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://frylane.com/privacy</loc>
     <lastmod>2026-07-30</lastmod>
     <changefreq>yearly</changefreq>

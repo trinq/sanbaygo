@@ -212,6 +212,19 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
   },
 
   {
+    path: '/how-to-get-from-hanoi-airport-to-city',
+    priority: 0.9,
+    changefreq: 'monthly',
+    alternatePath: '/vi/cach-di-tu-sanh-bay-noi-bai',
+  },
+  {
+    path: '/vi/cach-di-tu-sanh-bay-noi-bai',
+    priority: 0.9,
+    changefreq: 'monthly',
+    alternatePath: '/how-to-get-from-hanoi-airport-to-city',
+  },
+
+  {
     path: '/privacy',
     priority: 0.3,
     changefreq: 'yearly',

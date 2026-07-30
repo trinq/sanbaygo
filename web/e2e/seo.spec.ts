@@ -959,4 +959,85 @@ test.describe('SEO Routes', () => {
     expect(content).toContain('noibai-airport-first-time-guide');
     expect(content).toContain('noi-bai-lan-dau-di');
   });
+
+  // ── kw-11-how-to-get-han: How to Get from Hanoi Airport to City Center ─────
+
+  test('how to get hanoi airport article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/how-to-get-from-hanoi-airport-to-city`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/How to Get from Hanoi Airport to City.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('how-to-get-from-hanoi-airport-to-city');
+  });
+
+  test('how to get hanoi airport has FAQ schema with 7 questions', async ({ page }) => {
+    await page.goto(`${BASE}/how-to-get-from-hanoi-airport-to-city`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(7);
+  });
+
+  test('how to get hanoi airport has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/how-to-get-from-hanoi-airport-to-city`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('how to get hanoi airport is hub page with links to child articles', async ({ page }) => {
+    await page.goto(`${BASE}/how-to-get-from-hanoi-airport-to-city`, { waitUntil: 'networkidle' });
+    const childLinks = [
+      '/bus-86-hanoi-airport',
+      '/grab-vs-bus-hanoi-airport',
+      '/cheapest-way-hanoi-airport',
+      '/hanoi-airport-to-hoan-kiem-lake',
+    ];
+    for (const childPath of childLinks) {
+      const link = page.locator(`a[href="${childPath}"]`).first();
+      await expect(link).toBeVisible();
+    }
+  });
+
+  test('VI how to get hanoi airport article loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-di-tu-sanh-bay-noi-bai`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Cách đi|Sân bay Nội Bài/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('cach-di-tu-sanh-bay-noi-bai');
+  });
+
+  test('VI how to get hanoi airport has FAQ schema with 7 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-di-tu-sanh-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(7);
+  });
+
+  test('VI how to get hanoi airport has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-di-tu-sanh-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN how to get hanoi airport page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/how-to-get-from-hanoi-airport-to-city`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/cach-di-tu-sanh-bay-noi-bai"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI how to get hanoi airport page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-di-tu-sanh-bay-noi-bai`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/how-to-get-from-hanoi-airport-to-city"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains how to get hanoi airport routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('how-to-get-from-hanoi-airport-to-city');
+    expect(content).toContain('cach-di-tu-sanh-bay-noi-bai');
+  });
 });
