@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { SEOHelmet } from '../components/SEO';
 import { ArticleLayout } from '../components/Layout/ArticleLayout';
 import { useLanguage } from '../contexts/LanguageContext';
+import { PAGE_META } from '../seo/metaConfig';
 import {
   DEFAULT_LOCALE_TITLE,
   GUIDES_REGISTRY,
@@ -18,10 +19,10 @@ type Hub = GuideEntry['hub'];
 const HUB_ORDER: ReadonlyArray<Hub> = ['HN', 'SG', 'CROSS'];
 
 /** Per-hub badge color tokens. HN/blue and SG/orange match BusGuides.tsx. */
-const HUB_BADGE: Record<Hub, { bg: string; text: string; label: { vi: string; en: string } }> = {
-  HN: { bg: 'bg-blue-100', text: 'text-blue-700', label: { vi: 'Hà Nội', en: 'Hanoi' } },
-  SG: { bg: 'bg-orange-100', text: 'text-orange-700', label: { vi: 'TP.HCM', en: 'Ho Chi Minh City' } },
-  CROSS: { bg: 'bg-slate-100', text: 'text-slate-700', label: { vi: 'Khác', en: 'Other' } },
+const HUB_BADGE_CLASSES: Record<Hub, { bg: string; text: string }> = {
+  HN: { bg: 'bg-blue-100', text: 'text-blue-700' },
+  SG: { bg: 'bg-orange-100', text: 'text-orange-700' },
+  CROSS: { bg: 'bg-slate-100', text: 'text-slate-700' },
 };
 
 interface GuidesPageProps {
@@ -30,10 +31,11 @@ interface GuidesPageProps {
 }
 
 function GuideCard({ entry }: { entry: GuideEntry }) {
+  const { language } = useLanguage();
   const title = resolveGuideTitle(entry);
   const description = resolveGuideDescription(entry);
-  const badge = HUB_BADGE[entry.hub];
-  const badgeText = badge.label.vi; // language-agnostic label: same city name in both
+  const badge = HUB_BADGE_CLASSES[entry.hub];
+  const badgeText = HUB_LABEL[language][entry.hub];
 
   return (
     <a
@@ -80,6 +82,8 @@ export function GuidesPage({ registry = GUIDES_REGISTRY }: GuidesPageProps) {
   const location = useLocation();
   const { language } = useLanguage();
   const h1 = DEFAULT_LOCALE_TITLE[language];
+  const meta = PAGE_META[location.pathname];
+  const subtitle = meta?.subtitle;
 
   // Group + sort within each hub by `order` ascending.
   const grouped = useMemo(() => {
@@ -99,11 +103,7 @@ export function GuidesPage({ registry = GUIDES_REGISTRY }: GuidesPageProps) {
         <div className="bg-white py-16 px-4 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <h1 className="text-4xl font-bold text-ink mb-2">{h1}</h1>
-            <p className="text-ink-soft mb-10">
-              {language === 'vi'
-                ? 'Tất cả hướng dẫn Frylane về xe buýt và Grab từ sân bay — sắp xếp theo thành phố.'
-                : 'All Frylane guides on airport buses and Grab — grouped by city.'}
-            </p>
+            {subtitle && <p className="text-ink-soft mb-10">{subtitle}</p>}
 
             {HUB_ORDER.map((hub) => (
               <HubSection key={hub} hub={hub} entries={grouped[hub]} />

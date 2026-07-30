@@ -280,6 +280,134 @@ describe('GuidesPage', () => {
     });
   });
 
+  describe('Subtitle from PAGE_META', () => {
+    it('renders the EN subtitle from PAGE_META["/guides"].subtitle when path is /guides (default VI)', async () => {
+      const { container } = renderGuidesPage({ path: '/guides' });
+      await waitFor(() => {
+        const subtitleEls = Array.from(
+          container.querySelectorAll('p.text-ink-soft.mb-10'),
+        );
+        expect(subtitleEls).toHaveLength(1);
+        expect(subtitleEls[0].textContent).toBe(PAGE_META['/guides'].subtitle);
+      });
+    });
+
+    it('renders the VI subtitle from PAGE_META["/vi/guides"].subtitle when path is /vi/guides', async () => {
+      const { container } = renderGuidesPage({ path: '/vi/guides' });
+      await waitFor(() => {
+        const subtitleEls = Array.from(
+          container.querySelectorAll('p.text-ink-soft.mb-10'),
+        );
+        expect(subtitleEls).toHaveLength(1);
+        expect(subtitleEls[0].textContent).toBe(PAGE_META['/vi/guides'].subtitle);
+      });
+    });
+
+    it('omits the subtitle <p> when the path has no PAGE_META entry (optional field)', () => {
+      const { container } = render(
+        <HelmetProvider>
+          <MemoryRouter initialEntries={['/some/arbitrary/path']}>
+            <LanguageProvider>
+              <GuidesPage />
+            </LanguageProvider>
+          </MemoryRouter>
+        </HelmetProvider>,
+      );
+      const subtitleEls = Array.from(
+        container.querySelectorAll('p.text-ink-soft.mb-10'),
+      );
+      expect(subtitleEls).toHaveLength(0);
+    });
+  });
+
+  describe('Badge text from HUB_LABEL (cross-language regression)', () => {
+    /**
+     * Locks down the language-leak bug found in Task 2 review:
+     * the badge must read from `HUB_LABEL[language][hub]`, not a hardcoded `vi` value.
+     */
+    function renderGuidesPageWithLang({
+      path,
+      lang,
+    }: {
+      path: string;
+      lang: 'vi' | 'en';
+    }) {
+      function LanguageSwitcher() {
+        const { setLanguage } = useLanguage();
+        useEffect(() => {
+          setLanguage(lang);
+        }, [lang, setLanguage]);
+        return null;
+      }
+      return render(
+        <HelmetProvider>
+          <MemoryRouter initialEntries={[path]}>
+            <LanguageProvider>
+              <LanguageSwitcher />
+              <GuidesPage />
+            </LanguageProvider>
+          </MemoryRouter>
+        </HelmetProvider>,
+      );
+    }
+
+    it('badge text on an HN card reads from HUB_LABEL[language].HN — VI shows "Hà Nội"', async () => {
+      const { container } = renderGuidesPageWithLang({ path: '/guides', lang: 'vi' });
+      await waitFor(() => {
+        const hnLink = container.querySelector(
+          'a[href="/bus-86-hanoi-airport"]',
+        ) as HTMLAnchorElement | null;
+        expect(hnLink).not.toBeNull();
+        const badge = hnLink!.querySelector('span');
+        expect(badge?.textContent).toBe(HUB_LABEL.vi.HN);
+        expect(badge?.textContent).toBe('Hà Nội');
+      });
+    });
+
+    it('badge text on an HN card reads from HUB_LABEL[language].HN — EN shows "Hanoi" (regression: not VI)', async () => {
+      const { container } = renderGuidesPageWithLang({ path: '/guides', lang: 'en' });
+      await waitFor(() => {
+        const hnLink = container.querySelector(
+          'a[href="/bus-86-hanoi-airport"]',
+        ) as HTMLAnchorElement | null;
+        expect(hnLink).not.toBeNull();
+        const badge = hnLink!.querySelector('span');
+        expect(badge?.textContent).toBe(HUB_LABEL.en.HN);
+        expect(badge?.textContent).toBe('Hanoi');
+        // Negative assertion: VI text must NOT leak into the EN locale.
+        expect(badge?.textContent).not.toBe('Hà Nội');
+      });
+    });
+
+    it('badge text on an SG card reads from HUB_LABEL[language].SG — EN shows "Ho Chi Minh City"', async () => {
+      const { container } = renderGuidesPageWithLang({ path: '/guides', lang: 'en' });
+      await waitFor(() => {
+        const sgLink = container.querySelector(
+          'a[href="/bus-109-saigon-airport"]',
+        ) as HTMLAnchorElement | null;
+        expect(sgLink).not.toBeNull();
+        const badge = sgLink!.querySelector('span');
+        expect(badge?.textContent).toBe(HUB_LABEL.en.SG);
+        expect(badge?.textContent).toBe('Ho Chi Minh City');
+        expect(badge?.textContent).not.toBe('TP.HCM');
+      });
+    });
+
+    it('badge text on an CROSS card reads from HUB_LABEL[language].CROSS — EN shows "Other"', async () => {
+      const { container } = renderGuidesPageWithLang({ path: '/guides', lang: 'en' });
+      await waitFor(() => {
+        const crossLink = container.querySelector(
+          'a[href="/airport-bus-luggage-fee-vietnam"]',
+        ) as HTMLAnchorElement | null;
+        expect(crossLink).not.toBeNull();
+        const badge = crossLink!.querySelector('span');
+        expect(badge?.textContent).toBe(HUB_LABEL.en.CROSS);
+        expect(badge?.textContent).toBe('Other');
+        expect(badge?.textContent).not.toBe('Khác');
+      });
+    });
+  });
+
   describe('Resolver integrations (sanity)', () => {
     it('resolveGuideTitle matches PAGE_META title for the first HN entry', () => {
       const entry = GUIDES_REGISTRY.find((e) => e.href === '/bus-86-hanoi-airport');
