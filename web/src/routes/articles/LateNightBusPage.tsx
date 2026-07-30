@@ -49,6 +49,10 @@ export function LateNightBusPage() {
     dataSource: 'Hanoi Public Transport Center (tramdep.vn)',
     pickupHint: 'Bus 86 picks up at T1 Gate A1 (arrivals, pillar 12) and T2 Gate A1 (pillar 14).',
     faqItems: FAQ_ITEMS,
+    relatedArticles: [
+      { label: 'Bus 86 — Hanoi Airport to Old Quarter', href: '/bus-86-hanoi-airport' },
+      { label: 'Airport Taxi Scams in Vietnam: How to Avoid Them', href: '/airport-scam-vietnam-taxi' },
+    ],
   };
 
   return <AirportArticleLayout config={config} />;

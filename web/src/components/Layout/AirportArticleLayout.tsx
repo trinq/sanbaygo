@@ -37,6 +37,8 @@ export interface BusArticleConfig {
   /** Path to the counterpart language page — used for the language switcher link in nav.
    *  e.g. EN page: "/vi/tuyen-86-noi-bai", VI page: "/bus-86-hanoi-airport" */
   alternatePath?: string;
+  /** Internal article links to show at the bottom of the page */
+  relatedArticles?: Array<{ label: string; href: string }>;
 }
 
 interface Props {
@@ -265,6 +267,23 @@ function ScheduleSection({
   );
 }
 
+function RelatedArticlesSection({ articles }: { articles: Array<{ label: string; href: string }> }) {
+  return (
+    <section className="border-t border-surface-border pt-8 mt-12">
+      <h2 className="text-lg font-semibold text-ink mb-3">Bài viết liên quan</h2>
+      <ul className="space-y-2">
+        {articles.map((article) => (
+          <li key={article.href}>
+            <a href={article.href} className="text-primary underline hover:text-primary/80">
+              {article.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export function AirportArticleLayout({ config }: Props) {
   const {
     seoPath,
@@ -281,6 +300,7 @@ export function AirportArticleLayout({ config }: Props) {
     pickupHint,
     faqItems,
     alternatePath,
+    relatedArticles,
   } = config;
 
   return (
@@ -315,6 +335,7 @@ export function AirportArticleLayout({ config }: Props) {
           <ExitTimeSection summary={bus.exitTimeSummary} pickupHint={pickupHint} />
           <GrabAlternativeSection priceRange={grabPriceRange} />
           <FAQSection items={faqItems} />
+          {relatedArticles && <RelatedArticlesSection articles={relatedArticles} />}
         </div>
 
         <FAQSchema items={faqItems} />
