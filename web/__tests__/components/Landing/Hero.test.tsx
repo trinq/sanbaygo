@@ -1,13 +1,16 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { LanguageProvider } from '../../../src/contexts/LanguageContext';
 import { Hero } from '../../../src/components/Landing/Hero';
 
 describe('Hero', () => {
   it('renders the headline', () => {
     render(
-      <LanguageProvider>
-        <Hero />
-      </LanguageProvider>,
+      <MemoryRouter>
+        <LanguageProvider>
+          <Hero />
+        </LanguageProvider>
+      </MemoryRouter>,
     );
     // Headline is wrapped in an <h1>; chip text is in a <div> — restrict to h1.
     const headline = screen.getByRole('heading', { level: 1 });
@@ -16,18 +19,22 @@ describe('Hero', () => {
 
   it('renders the tagline pill', () => {
     render(
-      <LanguageProvider>
-        <Hero />
-      </LanguageProvider>,
+      <MemoryRouter>
+        <LanguageProvider>
+          <Hero />
+        </LanguageProvider>
+      </MemoryRouter>,
     );
     expect(screen.getByText(/Dịch vụ xe đưa đón sân bay/i)).toBeTruthy();
   });
 
   it('renders 3 benefit chips', () => {
     render(
-      <LanguageProvider>
-        <Hero />
-      </LanguageProvider>,
+      <MemoryRouter>
+        <LanguageProvider>
+          <Hero />
+        </LanguageProvider>
+      </MemoryRouter>,
     );
     // Benefit chips use capitalised titles; the headline is lowercase.
     expect(screen.getByText('Nhanh nhất')).toBeTruthy();
@@ -37,9 +44,11 @@ describe('Hero', () => {
 
   it('renders social proof', () => {
     render(
-      <LanguageProvider>
-        <Hero />
-      </LanguageProvider>,
+      <MemoryRouter>
+        <LanguageProvider>
+          <Hero />
+        </LanguageProvider>
+      </MemoryRouter>,
     );
     expect(screen.getByText('Miễn phí')).toBeTruthy();
     expect(screen.getByText('Không cần tải app, không cần đăng ký')).toBeTruthy();

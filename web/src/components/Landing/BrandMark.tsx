@@ -1,9 +1,14 @@
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export function BrandMark() {
   const { t } = useLanguage();
   return (
-    <div className="flex items-center gap-2">
+    <Link
+      to="/"
+      aria-label="Frylane — go to homepage"
+      className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+    >
       <svg
         width="32"
         height="32"
@@ -22,6 +27,6 @@ export function BrandMark() {
         {t.landing.navBrand}
         <span className="text-primary">{t.landing.navBrandAccent}</span>
       </span>
-    </div>
+    </Link>
   );
 }
