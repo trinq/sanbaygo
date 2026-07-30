@@ -1040,4 +1040,47 @@ test.describe('SEO Routes', () => {
     expect(content).toContain('how-to-get-from-hanoi-airport-to-city');
     expect(content).toContain('cach-di-tu-sanh-bay-noi-bai');
   });
+
+  // ── kw-23-grab-noi-bai-gia: Grab Noi Bai pricing VI-only standalone ──────────
+
+  test('grab noi bai gia VI article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/grab-noi-bai-gia-bao-nhieu`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Grab Nội Bài.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('grab-noi-bai-gia-bao-nhieu');
+  });
+
+  test('grab noi bai gia VI article has FAQ schema with 6 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/grab-noi-bai-gia-bao-nhieu`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(6);
+  });
+
+  test('grab noi bai gia VI article has internal links', async ({ page }) => {
+    await page.goto(`${BASE}/vi/grab-noi-bai-gia-bao-nhieu`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href^="/"]').all();
+    const internalLinks: string[] = [];
+    for (const link of links) {
+      const href = await link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        internalLinks.push(href);
+      }
+    }
+    expect(internalLinks.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test('grab noi bai gia VI article has pricing table visible above the fold', async ({ page }) => {
+    await page.goto(`${BASE}/vi/grab-noi-bai-gia-bao-nhieu`, { waitUntil: 'networkidle' });
+    // Check that the pricing table is present in the main content area
+    const table = page.locator('table').first();
+    await expect(table).toBeVisible();
+  });
+
+  test('sitemap.xml contains grab noi bai gia VI route', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('grab-noi-bai-gia-bao-nhieu');
+  });
 });

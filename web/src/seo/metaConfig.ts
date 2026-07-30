@@ -254,6 +254,12 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/cach-di-tu-sanh-bay-noi-bai',
     alternateEN: 'https://frylane.com/how-to-get-from-hanoi-airport-to-city',
   },
+  '/vi/grab-noi-bai-gia-bao-nhieu': {
+    title: 'Grab Nội Bài giá bao nhiêu 2026? Cập nhật theo quận',
+    description: 'Bảng giá Grab từ sân bay Nội Bài (HAN) về các quận trung tâm Hà Nội 2026. Giá 130.000đ–300.000đ (xe 4 chỗ), 230.000đ–400.000đ (xe 7 chỗ). Không surge, không bất ngờ.',
+    keywords: 'grab nội bài giá, grab nội bài bao nhiêu, giá grab sân bay nội bài, grab từ nội bài về trung tâm, grab noi bai gia 2026',
+    canonical: 'https://frylane.com/vi/grab-noi-bai-gia-bao-nhieu',
+  },
   '/privacy': {
     title: 'Privacy Policy — Frylane',
     description: 'Frylane privacy policy. We do not collect personal data. No cookies, no tracking.',

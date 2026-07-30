@@ -225,6 +225,12 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
   },
 
   {
+    path: '/vi/grab-noi-bai-gia-bao-nhieu',
+    priority: 0.8,
+    changefreq: 'monthly',
+  },
+
+  {
     path: '/privacy',
     priority: 0.3,
     changefreq: 'yearly',
