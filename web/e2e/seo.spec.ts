@@ -446,6 +446,8 @@ test.describe('SEO Routes', () => {
       '/vi/tuyen-86-noi-bai',
       '/vi/xe-buyt-109-vs-152-tan-son-nhat',
       '/vi/xe-lo-gio-sanh-bay-viet-nam',
+      '/noibai-airport-first-time-guide',
+      '/vi/noi-bai-lan-dau-di',
     ];
     for (const path of articlePages) {
       await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });
@@ -876,5 +878,85 @@ test.describe('SEO Routes', () => {
     const content = await page.content();
     expect(content).toContain('hanoi-airport-late-night-transfer');
     expect(content).toContain('di-chuyen-dem-khuya-san-bay-noi-bai');
+  });
+
+  // ── kw-19-noibai-first-time: First time at Noi Bai Airport ──────────────────
+
+  test('noibai first time article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-airport-first-time-guide`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/First Time at Noi Bai Airport.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('noibai-airport-first-time-guide');
+  });
+
+  test('noibai first time article has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-airport-first-time-guide`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('noibai first time article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-airport-first-time-guide`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('noibai first time article has internal links', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-airport-first-time-guide`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href^="/"]').all();
+    const internalLinks = [];
+    for (const link of links) {
+      const href = await link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        internalLinks.push(href);
+      }
+    }
+    expect(internalLinks.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test('VI noibai first time article loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/noi-bai-lan-dau-di`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Nội Bài|lần đầu|sân bay/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('noi-bai-lan-dau-di');
+  });
+
+  test('VI noibai first time article has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/noi-bai-lan-dau-di`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('VI noibai first time article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/noi-bai-lan-dau-di`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN noibai first time page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/noibai-airport-first-time-guide`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/noi-bai-lan-dau-di"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI noibai first time page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/noi-bai-lan-dau-di`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/noibai-airport-first-time-guide"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains noibai first time routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('noibai-airport-first-time-guide');
+    expect(content).toContain('noi-bai-lan-dau-di');
   });
 });

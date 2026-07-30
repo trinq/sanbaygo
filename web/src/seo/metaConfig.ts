@@ -214,6 +214,14 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/hanoi-airport-late-night-transfer',
     alternateVI: 'https://frylane.com/vi/di-chuyen-dem-khuya-san-bay-noi-bai',
   },
+  '/noibai-airport-first-time-guide': {
+    title: 'First Time at Noi Bai Airport: Arrival Guide (2026)',
+    description:
+      'First time at Noi Bai Airport (HAN)? Step-by-step arrival guide: immigration, baggage claim, SIM card desk, ATM, Bus 86 stop location, Grab pickup, and taxi safety. Everything you need from wheels-down to leaving the terminal.',
+    keywords: 'first time noibai airport, noibai airport arrival guide, hanoi airport first visitor, what to do at noibai airport, noibai airport immigration, noibai airport bus 86',
+    canonical: 'https://frylane.com/noibai-airport-first-time-guide',
+    alternateVI: 'https://frylane.com/vi/noi-bai-lan-dau-di',
+  },
   '/vi/di-chuyen-dem-khuya-san-bay-noi-bai': {
     title: 'Đi lại đêm khuya từ sân bay Nội Bài: Grab, Taxi, Đưa đón khách sạn (2026)',
     description:
@@ -221,6 +229,14 @@ export const PAGE_META: Record<string, MetaConfig> = {
     keywords: 'đi lại đêm khuya sân bay nội bài, grab đêm nội bài, taxi đêm sân bay nội bài, di chuyển nửa đêm nội bài',
     canonical: 'https://frylane.com/vi/di-chuyen-dem-khuya-san-bay-noi-bai',
     alternateEN: 'https://frylane.com/hanoi-airport-late-night-transfer',
+  },
+  '/vi/noi-bai-lan-dau-di': {
+    title: 'Lần đầu đến sân bay Nội Bài: Hướng dẫn sân bay (2026)',
+    description:
+      'Lần đầu đến sân bay Nội Bài (HAN)? Hướng dẫn đến từng bước: kiểm tra hộ chiếu, nhận hành lý, quầy SIM, ATM, điểm đón xe buýt 86, điểm đón Grab và an toàn taxi. Mọi thứ bạn cần từ lúc hạ cánh đến khi rời nhà ga.',
+    keywords: 'lần đầu sân bay nội bài, hướng dẫn đến sân bay nội bài, sân bay nội bài lần đầu, làm gì ở sân bay nội bài, kiểm tra hộ chiếu nội bài, xe buýt 86 sân bay nội bài',
+    canonical: 'https://frylane.com/vi/noi-bai-lan-dau-di',
+    alternateEN: 'https://frylane.com/noibai-airport-first-time-guide',
   },
   '/privacy': {
     title: 'Privacy Policy — Frylane',

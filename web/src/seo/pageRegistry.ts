@@ -199,6 +199,19 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
   },
 
   {
+    path: '/noibai-airport-first-time-guide',
+    priority: 0.9,
+    changefreq: 'monthly',
+    alternatePath: '/vi/noi-bai-lan-dau-di',
+  },
+  {
+    path: '/vi/noi-bai-lan-dau-di',
+    priority: 0.9,
+    changefreq: 'monthly',
+    alternatePath: '/noibai-airport-first-time-guide',
+  },
+
+  {
     path: '/privacy',
     priority: 0.3,
     changefreq: 'yearly',
