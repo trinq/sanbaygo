@@ -5,6 +5,7 @@ import { HomePage } from './routes/HomePage';
 import { HomePageVI } from './routes/HomePageVI';
 import { Bus86Page } from './routes/articles/Bus86Page';
 import { Bus86PageVI } from './routes/articles/Bus86PageVI';
+import { Tuyen86GioPageVI } from './routes/articles/Tuyen86GioPageVI';
 import { ExitTimePage } from './routes/articles/ExitTimePage';
 import { ExitTimePageVI } from './routes/articles/ExitTimePageVI';
 import { Bus109Page } from './routes/articles/Bus109Page';
@@ -105,6 +106,7 @@ export default function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/ket-qua" element={<ResultRoute />} />
             <Route path="/vi/tuyen-86-noi-bai" element={<Bus86PageVI />} />
+            <Route path="/vi/tuyen-86-noi-bai-gio" element={<Tuyen86GioPageVI />} />
             <Route path="/vi/thoi-gian-ra-cuong-t2-noi-bai" element={<ExitTimePageVI />} />
             <Route path="/vi/tuyen-109-tan-son-nhat" element={<Bus109PageVI />} />
             <Route path="/vi/tuyen-152-tan-son-nhat" element={<Bus152PageVI />} />

@@ -1174,4 +1174,48 @@ test.describe('SEO Routes', () => {
     const content = await page.content();
     expect(content).toContain('grab-noi-bai-gia-bao-nhieu');
   });
+
+  // ── kw-22-tuyen-86-gio: VI schedule-detail page for Bus 86 (KD 22) ──────────
+
+  test('tuyen-86-noi-bai-gio VI article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/tuyen-86-noi-bai-gio`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Lịch xe buýt 86.*2026/);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('tuyen-86-noi-bai-gio');
+  });
+
+  test('tuyen-86-noi-bai-gio VI article has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/tuyen-86-noi-bai-gio`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('tuyen-86-noi-bai-gio VI article has hreflang EN tag pointing to bus-86', async ({ page }) => {
+    await page.goto(`${BASE}/vi/tuyen-86-noi-bai-gio`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    const enHref = await page.locator('link[hreflang="en"]').first().getAttribute('href');
+    expect(enHref).toContain('bus-86-hanoi-airport');
+  });
+
+  test('tuyen-86-noi-bai-gio VI article has internal links to other articles', async ({ page }) => {
+    await page.goto(`${BASE}/vi/tuyen-86-noi-bai-gio`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href^="/"]').all();
+    const internalLinks: string[] = [];
+    for (const link of links) {
+      const href = await link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        internalLinks.push(href);
+      }
+    }
+    expect(internalLinks.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test('sitemap.xml contains tuyen-86-noi-bai-gio VI route', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('tuyen-86-noi-bai-gio');
+  });
 });

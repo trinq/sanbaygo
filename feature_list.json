@@ -632,11 +632,11 @@
       "area": "content",
       "platform": "web",
       "title": "Article: tuyến 86 nội bài giờ (KD 22, Tier 1, VI-only standalone)",
-      "user_visible_behavior": "VI page at /vi/tuyen-86-noi-bai-gio. Title: 'Tuyến 86 Nội Bài giờ chạy: Lịch trình 26 chuyến/ngày (2026)'. Schedule-focused table with all 26 departures. Internal CTA mở app SanBayGo. FAQ schema (6 Qs). Distinct from existing /vi/tuyen-86-noi-bai (overview) — this is schedule-detail.",
-      "status": "pending",
-      "verification": "1. Playwright SEO test passes\n2. Schedule table shows all 26 departures\n3. Distinct canonical from /vi/tuyen-86-noi-bai (no duplicate)\n4. cd web && npx tsc --noEmit → exit 0",
-      "evidence": "",
-      "notes": "Tier 1 KD 22 — VN audience primary. Standalone article for long-tail VN query. Brief: '#22 — Schedule-focused, table-friendly'."
+      "user_visible_behavior": "VI page at /vi/tuyen-86-noi-bai-gio. Title: 'Lịch xe buýt 86 Nội Bài — Giờ khởi hành (2026)' (47 chars). Schedule-focused page using AirportArticleLayout, lists 26 departures from BUS_86.scheduleSource.departures. FAQ schema (8 Qs). EN hreflang → /bus-86-hanoi-airport.",
+      "status": "passing",
+      "verification": "1. Playwright SEO test passes (title, FAQ 8 Qs, hreflang EN→bus-86, internal links ≥2, sitemap)\n2. Schedule shows all 26 departures\n3. Distinct canonical from /vi/tuyen-86-noi-bai\n4. cd web && npx tsc --noEmit → exit 0",
+      "evidence": "TDD RED commit a3fdba6 (5 Playwright SEO tests fail until implementation); GREEN commit adds Tuyen86GioPageVI.tsx + metaConfig + App.tsx route + pageRegistry + guidesRegistry. Title 47 chars. FAQ 8 questions. EN hreflang paired. 26 departures rendered from BUS_86.scheduleSource.departures.",
+      "notes": "Tier 1 KD 22 — VN audience primary. Standalone article for long-tail VN query. Reuses AirportArticleLayout per brief — schedule table is rendered via the layout's ScheduleSection which collapses/expands all 26 departures."
     },
     {
       "id": "kw-21-xe-buyt-noi-bai",

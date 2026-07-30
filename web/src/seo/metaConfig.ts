@@ -50,6 +50,15 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/tuyen-86-noi-bai',
     alternateEN: 'https://frylane.com/bus-86-hanoi-airport',
   },
+  '/vi/tuyen-86-noi-bai-gio': {
+    title: 'Lịch xe buýt 86 Nội Bài — Giờ khởi hành (2026)',
+    subtitle: 'Tất cả 26 chuyến trong ngày của tuyến 86 Nội Bài — Hà Nội.',
+    keywords: 'tuyến 86 nội bài giờ, lịch xe buýt 86, giờ khởi hành bus 86',
+    description:
+      'Lịch xe buýt 86 Nội Bài 2026: 26 chuyến/ngày từ 06:40 đến 22:15, mỗi 15–20 phút. Bao gồm giờ chuyến cuối và giờ cao điểm.',
+    canonical: 'https://frylane.com/vi/tuyen-86-noi-bai-gio',
+    alternateEN: 'https://frylane.com/bus-86-hanoi-airport',
+  },
   '/bus-109-saigon-airport': {
     title: 'Bus 109 Saigon Airport — Schedule, VND 15,000 Fare (2026)',
     description: 'Take Bus 109 from Tan Son Nhat Airport (T3) to Saigon Downtown. VND 15,000 fare, 30-45 min, runs 05:30–22:00. Electric bus. Includes exit time calculator.',

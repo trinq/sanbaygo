@@ -51,6 +51,12 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     changefreq: 'monthly',
     alternatePath: '/bus-86-hanoi-airport',
   },
+  {
+    path: '/vi/tuyen-86-noi-bai-gio',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/bus-86-hanoi-airport',
+  },
 
   {
     path: '/bus-109-saigon-airport',
