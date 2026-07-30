@@ -81,6 +81,7 @@ const LABELS = {
     duration: 'Di chuyển',
     frequency: 'Tần suất',
     cta: 'Xem hướng dẫn đầy đủ',
+    viewAll: 'Xem tất cả hướng dẫn',
   },
   en: {
     title: 'Airport Bus Route Guide',
@@ -89,6 +90,7 @@ const LABELS = {
     duration: 'Duration',
     frequency: 'Frequency',
     cta: 'View full guide',
+    viewAll: 'View all guides',
   },
 };
 
@@ -96,6 +98,7 @@ export function BusGuides() {
   const { language } = useLanguage();
   const buses = BUS_GUIDES[language];
   const labels = LABELS[language];
+  const guidesHref = language === 'vi' ? '/vi/guides' : '/guides';
 
   return (
     <section className="bg-white py-16 px-4 lg:px-8 relative z-10">
@@ -154,6 +157,23 @@ export function BusGuides() {
               </span>
             </a>
           ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <a
+            href={guidesHref}
+            className="inline-flex items-center text-sm font-semibold text-primary hover:underline"
+          >
+            {labels.viewAll}
+            <svg
+              className="ml-1 h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
