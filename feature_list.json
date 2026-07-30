@@ -815,7 +815,7 @@
       "user_visible_behavior": "Quick QA pass: open /vi/ on frylane.com, complete form, verify 'Còn khoảng X phút' countdown appears on VI side with correct Vietnamese phrasing. Bug fix if broken.",
       "status": "passing",
       "verification": "1. Manual test: VI form → VI result → countdown appears\n2. Phrasing matches Vietnamese format\n3. cd web && npx tsc --noEmit → exit 0",
-      "evidence": "Added 1 Playwright test to web/e2e/seo.spec.ts that loads /vi/ket-qua/ with flightTime=14:00 (Bus 86 14:50 → 30 min countdown) and asserts [data-testid='countdown-timer'] is visible with text matching /Còn khoảng/. Test passes on chromium. tsc --noEmit exit 0. END-TO-END parity confirmed for VI side. Note: also added /vi/ket-qua route to web/src/App.tsx (was missing — EN/VI parity gap).",
+      "evidence": "Added 1 Playwright test to web/e2e/seo.spec.ts that loads /vi/ket-qua/ with flightTime computed dynamically as `now + 60 min` (so the catchable bus lands inside both Bus 86's service window and CountdownTimer's 120-min visible window regardless of wall-clock), and asserts [data-testid='countdown-timer'] is visible with text matching /Còn khoảng/. Test passes on chromium (153 passed (49.2s) for the full seo.spec.ts). tsc --noEmit exit 0. END-TO-END parity confirmed for VI side. Note: also added /vi/ket-qua route to web/src/App.tsx (was missing — EN/VI parity gap, was falling through to /vi/* catch-all → HomePageVI). URL params adjusted from brief's verbatim values to real domain IDs (`HAN-T1` uppercase, `carry_on` underscore) — see inline NOTE in the test for full rationale.",
       "notes": "Phase 4 quick QA — existing feature (web-bus-departure-countdown) parity check."
     }
   ]
