@@ -52,6 +52,9 @@ test-results/
 # (broken links inside .scratch/ are intentional — not for repo)
 .scratch/
 
+# Git worktrees — local isolated workspaces for parallel feature work
+.worktrees/
+
 # Playwright (pre-existing, generated test artifacts — not committed)
 web/e2e/
 web/playwright-report/
