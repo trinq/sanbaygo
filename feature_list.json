@@ -705,9 +705,9 @@
       "platform": "web",
       "title": "Article: hanoi airport to hoan kiem lake (KD 39, Tier 2)",
       "user_visible_behavior": "EN page at /hanoi-airport-to-hoan-kiem-lake and VI mirror at /vi/san-bay-noi-bai-den-ho-hoan-kiem. Title: 'Hanoi Airport to Hoan Kiem Lake: 4 Routes Compared (2026)'. 4 routes with step-by-step: Bus 86 (cheapest), Bus 17, Grab (fastest), Private transfer. Each with time + cost + steps. FAQ schema (6 Qs).",
-      "status": "pending",
-      "verification": "1. Playwright SEO test passes\n2. 4 distinct routes compared\n3. Cross-link to /bus-86-hanoi-airport and /grab-vs-bus-hanoi-airport (when #7 done)\n4. cd web && npx tsc --noEmit → exit 0",
-      "evidence": "",
+      "status": "passing",
+      "verification": "1. Playwright SEO test passes\n2. 4 distinct routes compared\n3. Cross-link to /bus-86-hanoi-airport and /grab-vs-bus-hanoi-airport\n4. cd web && npx tsc --noEmit → exit 0",
+      "evidence": "101/101 Playwright tests pass. 10 new hoan kiem tests: title, FAQ (6 Qs), hreflang, internal links, nav links, sitemap. TDD-RED (8 failures) → TDD-GREEN (10 passes). Commit 568b081.",
       "notes": "Tier 2 KD 39 — destination-specific deep page. Sub-page of /noi-bai-airport-to-old-quarter."
     },
     {
