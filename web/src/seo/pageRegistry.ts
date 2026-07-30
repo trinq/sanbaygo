@@ -78,6 +78,19 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
   },
 
   {
+    path: '/bus-109-vs-152-tan-son-nhat',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/vi/xe-buyt-109-vs-152-tan-son-nhat',
+  },
+  {
+    path: '/vi/xe-buyt-109-vs-152-tan-son-nhat',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/bus-109-vs-152-tan-son-nhat',
+  },
+
+  {
     path: '/airport-scam-vietnam-taxi',
     priority: 0.7,
     changefreq: 'monthly',

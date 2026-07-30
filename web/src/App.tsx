@@ -9,6 +9,8 @@ import { Bus109Page } from './routes/articles/Bus109Page';
 import { Bus152Page } from './routes/articles/Bus152Page';
 import { Bus109PageVI } from './routes/articles/Bus109PageVI';
 import { Bus152PageVI } from './routes/articles/Bus152PageVI';
+import { Bus109Vs152Page } from './routes/articles/Bus109Vs152Page';
+import { Bus109Vs152PageVI } from './routes/articles/Bus109Vs152PageVI';
 import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { ScamPage } from './pages/ScamPage';
@@ -82,6 +84,8 @@ export default function App() {
             <Route path="/vi/tuyen-109-tan-son-nhat" element={<Bus109PageVI />} />
             <Route path="/vi/tuyen-152-tan-son-nhat" element={<Bus152PageVI />} />
             <Route path="/vi/xe-lo-gio-sanh-bay-viet-nam" element={<ScamPageVI />} />
+            <Route path="/bus-109-vs-152-tan-son-nhat" element={<Bus109Vs152Page />} />
+            <Route path="/vi/xe-buyt-109-vs-152-tan-son-nhat" element={<Bus109Vs152PageVI />} />
             <Route path="/vi/*" element={<HomePageVI />} />
             <Route path="*" element={<HomePage />} />
           </Routes>

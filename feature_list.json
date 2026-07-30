@@ -554,11 +554,17 @@
       "area": "content",
       "platform": "web",
       "title": "Article: tan son nhat airport bus 109 vs 152 (KD 18, Tier 1)",
-      "user_visible_behavior": "EN page at /tan-son-nhat-bus-109-vs-152 and VI mirror at /vi/tuyen-109-vs-152-tan-son-nhat. Uses ComparisonArticleLayout. Title: 'Bus 109 vs 152: Saigon Airport — Which Should You Take? (2026)'. Comparison table: fare, schedule, comfort, luggage, electric/diesel, who-each-is-for. FAQ schema (6 Qs). Internal links to /bus-109-saigon-airport, /bus-152-saigon-fare, /airport-scam-vietnam-taxi.",
-      "status": "pending",
-      "verification": "1. Playwright SEO test passes (title, description, canonical, hreflang, FAQ schema)\n2. cd web && npx tsc --noEmit → exit 0\n3. Above-the-fold mobile (375px) shows comparison verdict in 3 lines without scroll\n4. Both EN + VI live",
-      "evidence": "",
-      "notes": "Tier 1 quick-win — KD 18, lowest of all new articles. Per brief: 'quick-win vì KD thấp'. Recommend starting here after Phase 0."
+      "user_visible_behavior": "EN page at /bus-109-vs-152-tan-son-nhat and VI mirror at /vi/xe-buyt-109-vs-152-tan-son-nhat. Uses ComparisonArticleLayout. Title: 'Bus 109 vs 152: Saigon Airport — Which Should You Take? (2026)'. Comparison table: fare, schedule, comfort, luggage, electric/diesel, who-each-is-for. FAQ schema (6 Qs). Internal links to /bus-109-saigon-airport, /bus-152-saigon-fare, /airport-scam-vietnam-taxi.",
+      "status": "passing",
+      "verification": "1. Playwright SEO test passes (title, description, canonical, hreflang, FAQ schema)\n2. cd web && npx tsc --noEmit → exit 0\n3. Above-the-fold mobile (375px) shows comparison verdict in 3 lines without scroll\n4. Both EN + VI live\n5. Playwright seo.spec.ts 37/37 pass (new bus-109-vs-152 tests: 9/9)\n6. Sitemap auto-generated with 14 entries including new routes",
+      "evidence": [
+        "tsc --noEmit exit 0",
+        "Playwright seo.spec.ts 37/37 pass",
+        "sitemap.xml regenerated with bus-109-vs-152-tan-son-nhat and vi/xe-buyt-109-vs-152-tan-son-nhat",
+        "ComparisonArticleLayout 6 FAQ items, pros/cons table, verdict callout",
+        "fix(SEOHelmet): removed fragment wrapper from alternateEN links for react-helmet-async compatibility"
+      ],
+      "notes": "Tier 1 quick-win — KD 18, lowest of all new articles. Per brief: 'quick-win vì KD thấp'. Recommend starting here after Phase 0. Bugfix: SEOHelmet fragment wrapper prevented react-helmet-async from rendering multiple hreflang links from a single alternateEN entry."
     },
     {
       "id": "kw-17-t2-exit-time",

@@ -142,6 +142,73 @@ test.describe('SEO Routes', () => {
     expect(hreflangVI).toBeGreaterThan(0);
   });
 
+  // ── Bus 109 vs 152 comparison article ─────────────────────────────────────
+
+  test('bus-109-vs-152 article page loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/bus-109-vs-152-tan-son-nhat`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Bus 109 vs 152/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('bus-109-vs-152-tan-son-nhat');
+  });
+
+  test('bus-109-vs-152 has FAQ schema', async ({ page }) => {
+    await page.goto(`${BASE}/bus-109-vs-152-tan-son-nhat`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(6);
+  });
+
+  test('bus-109-vs-152 has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/bus-109-vs-152-tan-son-nhat`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('vi bus-109-vs-152 article page loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/xe-buyt-109-vs-152-tan-son-nhat`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/109.*152/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('xe-buyt-109-vs-152-tan-son-nhat');
+  });
+
+  test('vi bus-109-vs-152 has FAQ schema', async ({ page }) => {
+    await page.goto(`${BASE}/vi/xe-buyt-109-vs-152-tan-son-nhat`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(6);
+  });
+
+  test('vi bus-109-vs-152 has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/xe-buyt-109-vs-152-tan-son-nhat`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN bus-109-vs-152 page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/bus-109-vs-152-tan-son-nhat`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/xe-buyt-109-vs-152-tan-son-nhat"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI bus-109-vs-152 page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/xe-buyt-109-vs-152-tan-son-nhat`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/bus-109-vs-152-tan-son-nhat"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains bus-109-vs-152 routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('bus-109-vs-152-tan-son-nhat');
+    expect(content).toContain('xe-buyt-109-vs-152-tan-son-nhat');
+  });
+
   // ── ArticleNav language switcher ─────────────────────────────────────────
 
   test('EN bus-86 page has link to VI counterpart', async ({ page }) => {
@@ -197,9 +264,12 @@ test.describe('SEO Routes', () => {
       '/bus-86-hanoi-airport',
       '/bus-109-saigon-airport',
       '/bus-152-saigon-fare',
+      '/bus-109-vs-152-tan-son-nhat',
       '/airport-scam-vietnam-taxi',
       '/vi/tuyen-109-tan-son-nhat',
       '/vi/tuyen-152-tan-son-nhat',
+      '/vi/tuyen-86-noi-bai',
+      '/vi/xe-buyt-109-vs-152-tan-son-nhat',
       '/vi/xe-lo-gio-sanh-bay-viet-nam',
     ];
     for (const path of articlePages) {

@@ -72,6 +72,20 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/tuyen-152-tan-son-nhat',
     alternateEN: 'https://frylane.com/bus-152-saigon-fare',
   },
+  '/bus-109-vs-152-tan-son-nhat': {
+    title: 'Bus 109 vs 152: Tan Son Nhat Airport — Which Should You Take? (2026)',
+    description: 'Compare Bus 109 vs Bus 152 from Tan Son Nhat Airport. Bus 152 is VND 5,000 (cheapest in Vietnam), Bus 109 is VND 15,000 electric. Full fare, schedule, comfort, and luggage comparison for 2026.',
+    keywords: 'bus 109 vs 152 saigon, tansonnhat bus 109 vs 152, bus 109 vs 152 fare, saigon airport bus comparison',
+    canonical: 'https://frylane.com/bus-109-vs-152-tan-son-nhat',
+    alternateVI: 'https://frylane.com/vi/xe-buyt-109-vs-152-tan-son-nhat',
+  },
+  '/vi/xe-buyt-109-vs-152-tan-son-nhat': {
+    title: 'So sánh xe buýt 109 và 152: Tân Sơn Nhất — Nên chọn tuyến nào? (2026)',
+    description: 'So sánh xe buýt 109 và 152 từ sân bay Tân Sơn Nhất. Xe buýt 152 giá 5.000đ (rẻ nhất Việt Nam), xe buýt 109 giá 15.000đ (xe buýt điện). So sánh đầy đủ về giá, lịch trình, tiện nghi, hành lý năm 2026.',
+    keywords: 'xe buýt 109 vs 152, so sánh xe buýt sân bay tân sơn nhất, xe buýt 109 152 giá nào rẻ hơn',
+    canonical: 'https://frylane.com/vi/xe-buyt-109-vs-152-tan-son-nhat',
+    alternateEN: 'https://frylane.com/bus-109-vs-152-tan-son-nhat',
+  },
   '/airport-scam-vietnam-taxi': {
     title: 'Airport Taxi Scams in Vietnam (2026) — How to Avoid Them',
     description: 'Complete guide to avoiding taxi and ride-hail scams at Vietnam airports. Learn about common schemes, Grab safety tips, and how locals travel cheap.',
