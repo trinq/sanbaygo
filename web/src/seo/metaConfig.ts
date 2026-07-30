@@ -152,6 +152,22 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/cach-re-nhat-san-bay-noi-bai',
     alternateEN: 'https://frylane.com/cheapest-way-hanoi-airport',
   },
+  '/cheapest-way-saigon-airport-district-1': {
+    title: 'Saigon Airport to District 1: 5 Options Ranked (2026)',
+    description:
+      'Compare 5 transport options from Tan Son Nhat Airport to Saigon District 1: Bus 152 (VND 5,000), Bus 109 (VND 15,000), Grab (VND 200,000–300,000), Taxi (VND 200,000–350,000), and Hotel Transfer (VND 300,000–500,000). Full cost and time comparison for 2026.',
+    keywords: 'cheapest way from saigon airport district 1, tansonnhat airport bus 152, bus 109 saigon airport, saigon airport grab cost, saigon airport taxi fare',
+    canonical: 'https://frylane.com/cheapest-way-saigon-airport-district-1',
+    alternateVI: 'https://frylane.com/vi/cach-re-nhat-san-bay-sai-gon',
+  },
+  '/vi/cach-re-nhat-san-bay-sai-gon': {
+    title: 'Sân bay Sài Gòn: Cách rẻ nhất về Quận 1 (2026)',
+    description:
+      'So sánh 5 phương tiện từ sân bay Tân Sơn Nhất về Quận 1 Sài Gòn: xe buýt 152 (5.000đ), xe buýt 109 (15.000đ), Grab (200.000–300.000đ), taxi (200.000–350.000đ) và dịch vụ đưa đón khách sạn (300.000–500.000đ). So sánh chi phí và thời gian đầy đủ năm 2026.',
+    keywords: 'cách rẻ nhất từ sân bay sài gòn quận 1, xe buýt 152 tân sơn nhất, xe buýt 109 sân bay sài gòn, grab sân bay tân sơn nhất',
+    canonical: 'https://frylane.com/vi/cach-re-nhat-san-bay-sai-gon',
+    alternateEN: 'https://frylane.com/cheapest-way-saigon-airport-district-1',
+  },
   '/vi/xe-lo-gio-sanh-bay-viet-nam': {
     title: 'Xe lừa đảo tại sân bay Việt Nam — Cách phòng tránh',
     description: 'Hướng dẫn đầy đủ cách tránh lừa đảo taxi tại sân bay Nội Bài và Tân Sơn Nhất. Mẹo sử dụng Grab an toàn và so sánh giá thật.',

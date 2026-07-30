@@ -624,6 +624,86 @@ test.describe('SEO Routes', () => {
     expect(content).toContain('cach-re-nhat-san-bay-noi-bai');
   });
 
+  // ── kw-6-cheapest-sgn: cheapest way from Saigon Airport to District 1 ─────
+
+  test('cheapest way saigon airport to district 1 loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-saigon-airport-district-1`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Saigon Airport to District 1.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('cheapest-way-saigon-airport-district-1');
+  });
+
+  test('cheapest way saigon airport has FAQ schema with 7 questions', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-saigon-airport-district-1`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(7);
+  });
+
+  test('cheapest way saigon airport has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-saigon-airport-district-1`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('cheapest way saigon airport has internal links', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-saigon-airport-district-1`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href^="/"]').all();
+    const internalLinks = [];
+    for (const link of links) {
+      const href = await link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        internalLinks.push(href);
+      }
+    }
+    expect(internalLinks.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test('VI cheapest way saigon airport loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-re-nhat-san-bay-sai-gon`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Cách rẻ|Sân bay Sài Gòn|Tân Sơn Nhất/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('cach-re-nhat-san-bay-sai-gon');
+  });
+
+  test('VI cheapest way saigon airport has FAQ schema with 7 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-re-nhat-san-bay-sai-gon`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(7);
+  });
+
+  test('VI cheapest way saigon airport has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-re-nhat-san-bay-sai-gon`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN cheapest way saigon airport page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/cheapest-way-saigon-airport-district-1`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/cach-re-nhat-san-bay-sai-gon"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI cheapest way saigon airport page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/cach-re-nhat-san-bay-sai-gon`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/cheapest-way-saigon-airport-district-1"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains cheapest way saigon airport routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('cheapest-way-saigon-airport-district-1');
+    expect(content).toContain('cach-re-nhat-san-bay-sai-gon');
+  });
+
   // ── Article vs Homepage fallback ─────────────────────────────────────────
 
   test('/vi/tuyen-86-noi-bai renders dedicated article, not homepage', async ({ page }) => {

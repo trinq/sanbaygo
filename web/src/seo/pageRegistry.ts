@@ -161,6 +161,18 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
     changefreq: 'monthly',
     alternatePath: '/cheapest-way-hanoi-airport',
   },
+  {
+    path: '/cheapest-way-saigon-airport-district-1',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/vi/cach-re-nhat-san-bay-sai-gon',
+  },
+  {
+    path: '/vi/cach-re-nhat-san-bay-sai-gon',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/cheapest-way-saigon-airport-district-1',
+  },
 
   {
     path: '/privacy',
