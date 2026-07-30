@@ -260,6 +260,22 @@ export const PAGE_META: Record<string, MetaConfig> = {
     keywords: 'grab nội bài giá, grab nội bài bao nhiêu, giá grab sân bay nội bài, grab từ nội bài về trung tâm, grab noi bai gia 2026',
     canonical: 'https://frylane.com/vi/grab-noi-bai-gia-bao-nhieu',
   },
+  '/bus-from-airport-to-city': {
+    title: 'Airport Bus to City: HAN + SGN + Da Nang Guide (2026)',
+    description:
+      'Complete guide to airport buses from all 3 major Vietnam airports to city center. Compare routes, fares, and travel times: Hanoi (Noi Bai / HAN), Saigon (Tan Son Nhat / SGN), and Da Nang. Buses from VND 5,000 to VND 50,000.',
+    keywords: 'airport bus to city center, bus from airport to city, vietnam airport bus, noibai airport bus, tansonnhat airport bus, danang airport bus, bus 86 hanoi, bus 109 saigon, bus 152 saigon',
+    canonical: 'https://frylane.com/bus-from-airport-to-city',
+    alternateVI: 'https://frylane.com/vi/xe-buyt-san-bay-ve-trung-tam',
+  },
+  '/vi/xe-buyt-san-bay-ve-trung-tam': {
+    title: 'Xe buýt sân bay về trung tâm: Hà Nội + Sài Gòn + Đà Nẵng (2026)',
+    description:
+      'Hướng dẫn đầy đủ xe buýt sân bay từ cả 3 sân bay lớn của Việt Nam về trung tâm. So sánh lộ trình, giá vé và thời gian: Hà Nội (Nội Bài / HAN), Sài Gòn (Tân Sơn Nhất / SGN) và Đà Nẵng. Xe buýt từ 5.000đ đến 50.000đ.',
+    keywords: 'xe buýt sân bay về trung tâm, xe buýt sân bay việt nam, xe buýt nội bài, xe buýt tân sơn nhất, xe buýt đà nẵng, tuyến 86, tuyến 109, tuyến 152',
+    canonical: 'https://frylane.com/vi/xe-buyt-san-bay-ve-trung-tam',
+    alternateEN: 'https://frylane.com/bus-from-airport-to-city',
+  },
   '/privacy': {
     title: 'Privacy Policy — Frylane',
     description: 'Frylane privacy policy. We do not collect personal data. No cookies, no tracking.',

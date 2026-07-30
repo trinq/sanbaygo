@@ -1041,6 +1041,97 @@ test.describe('SEO Routes', () => {
     expect(content).toContain('cach-di-tu-sanh-bay-noi-bai');
   });
 
+  // ── kw-1-pillar: Airport Bus Pillar (master hub) ──────────────────────────────
+
+  test('airport bus pillar loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/bus-from-airport-to-city`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Airport Bus to City.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('bus-from-airport-to-city');
+  });
+
+  test('airport bus pillar has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/bus-from-airport-to-city`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('airport bus pillar has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/bus-from-airport-to-city`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('airport bus pillar links to 6+ child articles', async ({ page }) => {
+    await page.goto(`${BASE}/bus-from-airport-to-city`, { waitUntil: 'networkidle' });
+    const childPaths = [
+      '/bus-86-hanoi-airport',
+      '/bus-109-saigon-airport',
+      '/bus-152-saigon-fare',
+      '/grab-vs-bus-hanoi-airport',
+      '/airport-bus-luggage-fee-vietnam',
+      '/airport-scam-vietnam-taxi',
+    ];
+    for (const childPath of childPaths) {
+      const link = page.locator(`a[href="${childPath}"]`).first();
+      await expect(link).toBeVisible();
+    }
+  });
+
+  test('airport bus pillar covers all 3 airports', async ({ page }) => {
+    await page.goto(`${BASE}/bus-from-airport-to-city`, { waitUntil: 'networkidle' });
+    const bodyText = await page.locator('main').textContent();
+    expect(bodyText).toMatch(/Hanoi|Noi Bai|HAN/);
+    expect(bodyText).toMatch(/Saigon|Tan Son Nhat|SGN/);
+    expect(bodyText).toMatch(/Da Nang|DNA/);
+  });
+
+  test('VI airport bus pillar loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/xe-buyt-san-bay-ve-trung-tam`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Xe buýt.*sân bay.*trung tâm.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('xe-buyt-san-bay-ve-trung-tam');
+  });
+
+  test('VI airport bus pillar has FAQ schema with 8 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/xe-buyt-san-bay-ve-trung-tam`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(8);
+  });
+
+  test('VI airport bus pillar has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/xe-buyt-san-bay-ve-trung-tam`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN airport bus pillar page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/bus-from-airport-to-city`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/xe-buyt-san-bay-ve-trung-tam"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI airport bus pillar page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/xe-buyt-san-bay-ve-trung-tam`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/bus-from-airport-to-city"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains airport bus pillar routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('bus-from-airport-to-city');
+    expect(content).toContain('xe-buyt-san-bay-ve-trung-tam');
+  });
+
   // ── kw-23-grab-noi-bai-gia: Grab Noi Bai pricing VI-only standalone ──────────
 
   test('grab noi bai gia VI article loads with correct title', async ({ page }) => {

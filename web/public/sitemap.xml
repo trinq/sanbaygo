@@ -230,6 +230,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://frylane.com/bus-from-airport-to-city</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://frylane.com/vi/xe-buyt-san-bay-ve-trung-tam"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://frylane.com/vi/xe-buyt-san-bay-ve-trung-tam</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://frylane.com/bus-from-airport-to-city"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://frylane.com/privacy</loc>
     <lastmod>2026-07-30</lastmod>
     <changefreq>yearly</changefreq>

@@ -225,6 +225,19 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
   },
 
   {
+    path: '/bus-from-airport-to-city',
+    priority: 0.95,
+    changefreq: 'monthly',
+    alternatePath: '/vi/xe-buyt-san-bay-ve-trung-tam',
+  },
+  {
+    path: '/vi/xe-buyt-san-bay-ve-trung-tam',
+    priority: 0.95,
+    changefreq: 'monthly',
+    alternatePath: '/bus-from-airport-to-city',
+  },
+
+  {
     path: '/vi/grab-noi-bai-gia-bao-nhieu',
     priority: 0.8,
     changefreq: 'monthly',
