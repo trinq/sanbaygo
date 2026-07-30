@@ -728,10 +728,10 @@
       "area": "content",
       "platform": "web",
       "title": "Article: cheapest way from airport hanoi (KD 41, Tier 2)",
-      "user_visible_behavior": "EN page at /cheapest-way-hanoi-airport and VI mirror at /vi/cach-re-nhat-san-bay-noi-bai. Title: 'Cheapest Way from Hanoi Airport: Bus, Grab, Taxi Ranked (2026)'. 5 options ranked: Bus 86 (50K), Bus 17 (7K), Bus 90 (9K), Grab (200-300K), Taxi. Verdict: Bus 86 best balance. FAQ schema (7 Qs).",
-      "status": "pending",
+      "user_visible_behavior": "EN page at /cheapest-way-hanoi-airport and VI mirror at /vi/cach-re-nhat-san-bay-noi-bai. Title: 'Hanoi Airport: Bus vs Grab — Cheapest Route (2026)'. 5 options ranked: Bus 86 (50K), Bus 17 (7K), Bus 90 (9K), Grab (200-300K), Taxi. Verdict: Bus 86 best balance. FAQ schema (7 Qs).",
+      "status": "passing",
       "verification": "1. Playwright SEO test passes\n2. ≥5 options compared by price\n3. Bus 86 verdict explicit\n4. cd web && npx tsc --noEmit → exit 0",
-      "evidence": "",
+      "evidence": "Commit 478fc6d. 81/81 Playwright tests pass. 168/168 unit tests pass. tsc --noEmit exit 0. 10 new SEO tests added.",
       "notes": "Tier 2 KD 41 — depends on kw-0-comparison-layout. Pair with kw-6 and kw-7."
     },
     {
