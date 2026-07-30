@@ -12,6 +12,21 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-30 — Task 13 kw-7-grab-vs-bus-han: Phase 2 Grab vs Bus 86 comparison article
+- Sources touched: `web/src/routes/articles/GrabVsBusPage.tsx` (new, EN),
+  `web/src/routes/articles/GrabVsBusPageVI.tsx` (new, VI),
+  `web/src/seo/metaConfig.ts` (added 2 entries with bidirectional hreflang),
+  `web/src/App.tsx` (added 2 routes before /vi/* catch-all),
+  `web/src/seo/pageRegistry.ts` (added 2 entries with bidirectional alternatePath),
+  `web/public/sitemap.xml` (added 2 entries for Grab vs Bus routes),
+  `web/e2e/seo.spec.ts` (added 10 new Playwright tests),
+  `feature_list.json` (kw-7-grab-vs-bus-han → passing)
+- Wiki pages touched: none
+- Lint status: clean
+- Commit: 9114da77 — feat: add Grab vs Bus 86 Hanoi Airport comparison article (kw-7-grab-vs-bus-han)
+
+---
+
 ## 2026-07-30 — Task 10 kw-17-t2-exit-time: Phase 1 Tier 1 with interactive calculator
 - Sources touched: `web/src/components/ExitTimeCalculator.tsx` (new),
   `web/src/routes/articles/ExitTimePage.tsx` (new, EN),
