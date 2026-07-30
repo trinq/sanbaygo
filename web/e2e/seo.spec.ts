@@ -1218,4 +1218,35 @@ test.describe('SEO Routes', () => {
     const content = await page.content();
     expect(content).toContain('tuyen-86-noi-bai-gio');
   });
+
+  // ── Phase 4: kw-0-bus-departure-countdown-vi ──────────────────────────
+  // Verify the bus-departure countdown UI ("Còn khoảng X phút") renders
+  // on the VI side at /vi/ket-qua/, mirroring the EN side parity.
+
+  test('bus-departure countdown renders on VI side at /vi/ket-qua/', async ({ page }) => {
+    // Bus 86 departs at 14:50 daily; landing at 14:00 → 30 min until departure.
+    // NOTE: URL params adjusted from the brief's verbatim values. The brief's
+    // `terminal=han-t1`/`baggage=carry-on` did not match the real domain IDs
+    // (`HAN-T1`/`carry_on`) — App.tsx passes them through verbatim and
+    // calculateTrip() did an exact-match lookup that returned null. Likewise
+    // `flightTime=14:00` is far from real wall-clock, putting the catchable bus
+    // outside CountdownTimer's 120-min visible window — and arriving before
+    // Bus 86's 06:40 service start returns `no_service`. flightTime is set to
+    // ~60 min AFTER "now" so the catchable bus falls inside both the service
+    // window AND the 120-min countdown window during Bus 86 operating hours.
+    const flightTime = (() => {
+      const now = new Date();
+      const totalMinutes = now.getHours() * 60 + now.getMinutes() + 60;
+      const h = String(Math.floor(totalMinutes / 60) % 24).padStart(2, '0');
+      const m = String(totalMinutes % 60).padStart(2, '0');
+      return `${h}:${m}`;
+    })();
+    await page.goto(
+      `${BASE}/vi/ket-qua?airport=HAN&terminal=HAN-T1&baggage=carry_on&flightType=international&flightTime=${flightTime}&destination=hoan-kiem`,
+      { waitUntil: 'networkidle' },
+    );
+    const countdown = page.getByTestId('countdown-timer');
+    await expect(countdown).toBeVisible();
+    await expect(countdown).toContainText(/Còn khoảng/);
+  });
 });

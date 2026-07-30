@@ -137,6 +137,7 @@ export default function App() {
             <Route path="/vi/xe-buyt-san-bay-ve-trung-tam" element={<AirportBusPillarPageVI />} />
             <Route path="/guides" element={<GuidesPage />} />
             <Route path="/vi/guides" element={<GuidesPageVI />} />
+            <Route path="/vi/ket-qua" element={<ResultRoute />} />
             <Route path="/vi/*" element={<HomePageVI />} />
             <Route path="*" element={<HomePage />} />
           </Routes>

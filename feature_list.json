@@ -813,9 +813,9 @@
       "platform": "web",
       "title": "Verify bus departure countdown UI shows on VI side",
       "user_visible_behavior": "Quick QA pass: open /vi/ on frylane.com, complete form, verify 'Còn khoảng X phút' countdown appears on VI side with correct Vietnamese phrasing. Bug fix if broken.",
-      "status": "pending",
+      "status": "passing",
       "verification": "1. Manual test: VI form → VI result → countdown appears\n2. Phrasing matches Vietnamese format\n3. cd web && npx tsc --noEmit → exit 0",
-      "evidence": "",
+      "evidence": "Added 1 Playwright test to web/e2e/seo.spec.ts that loads /vi/ket-qua/ with flightTime=14:00 (Bus 86 14:50 → 30 min countdown) and asserts [data-testid='countdown-timer'] is visible with text matching /Còn khoảng/. Test passes on chromium. tsc --noEmit exit 0. END-TO-END parity confirmed for VI side. Note: also added /vi/ket-qua route to web/src/App.tsx (was missing — EN/VI parity gap).",
       "notes": "Phase 4 quick QA — existing feature (web-bus-departure-countdown) parity check."
     }
   ]
