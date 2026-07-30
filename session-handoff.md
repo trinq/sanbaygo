@@ -78,19 +78,75 @@
     Playwright seo.spec.ts 28/28, root RN 168/168
   - Add-entry round-trip verified: 12 → 13 → 12
   - Commits: `9ae46dc`, `a643857`
+- **2026-07-31 (this session):** Phase 4 (site infrastructure, 5 tickets)
+  - Shipped kw-0-keyword-sheet: 23-keyword CSV at docs/seo/keyword-sheet.csv
+    with 10 columns (keyword, variant, type, intent, KD, priority, cluster,
+    notes, source, volume_range). 10 priority-1 (Tier 1) keywords. E2E
+    verified: 23 distinct keyword rows, headers match schema, every row has
+    non-empty priority. Commits: `e84bcb9`.
+  - Shipped kw-0-bus-departure-countdown-vi: 1 new Playwright E2E test
+    "bus-departure countdown renders on VI side at /vi/ket-qua/". Required
+    adding the missing `/vi/ket-qua` route + component to `web/src/App.tsx`
+    (EN/VI parity gap — EN had `/ket-qua`, VI didn't). Implementer deviated
+    from brief: (a) URL params corrected to domain IDs `HAN-T1`/`carry_on`,
+    (b) dynamic `flightTime = now + 60 min` (static 14:00 clashed with
+    120-min visible window). Follow-up `8f558f4` fixed evidence-text
+    drift. Commits: `f8d100d`, `8f558f4`.
+  - Shipped kw-0-internal-link-graph: audit script
+    `web/scripts/audit-internal-links.mjs` + 4 jest tests +
+    `audit:internal-links` npm script. Audit exits 0 with
+    `PASS: all 32 articles have >= 2 internal links.`. Pre-flight found 9
+    articles with 0 links (Bus 86/109/152 × EN/VI, HanToHoanKiemPage,
+    LateNightBusPage, Tuyen86GioPageVI); each received minimal additive
+    `<nav>` block of 3 sibling links (preferring language-counterpart
+    links). 2 deviations from brief: (1) `web/jest.config.js` testMatch
+    extended with `.test.mjs` (strictly additive — makes brief's own
+    verification command work — though plan §Self-Review noted it as
+    out-of-scope follow-up, the change is harmless), (2) brief said 33
+    articles, actual 32 (stale number). Commit: `c514c87`.
+  - Shipped kw-0-content-refresh-cadence: 21-line "Content Refresh
+    Cadence (SEO)" section appended to AGENTS.md documenting the
+    6-month refresh cycle (GSC top-10 audit → schedule/fare/year
+    check → pageRegistry lastmod bump → npm run build → commit). Next
+    cycle = 2027-01-29. Commit: `6d2a609`.
+  - Documented kw-0-gsc-setup (human-only): 69-line step-by-step runbook
+    appended to `docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md`
+    (4 steps: GSC verify → GA4 install → Google Ads account → CSV volume
+    update). Status remains `pending` in feature_list.json. Commit:
+    `e870ab3`.
+  - 4/5 Phase 4 tickets now `passing` in feature_list.json; kw-0-gsc-setup
+    stays `pending` until the user reports completion.
+  - Commits this phase: `e84bcb9`, `f8d100d`, `8f558f4`, `c514c87`,
+    `6d2a609`, `e870ab3`.
+  - Final verification: tsc --noEmit exit 0; jest 201/208 pass (7 pre-existing
+    Bus86Page.{scam-warning,exit-time,Grab-link} failures pre-date Phase 4);
+    Playwright seo.spec.ts 153/153 pass (incl. new VI countdown test).
+  - Follow-up fix after the phase: Task 3's new footer `<nav>` links caused
+    a strict-mode duplicate in 4 Playwright EN→VI counterpart tests
+    (header language switcher + footer sibling link both had the same
+    `/vi/...` href). Selector scoped with `.first()` to test the
+    language-switcher (original intent); footer sibling links are
+    independently validated by `audit:internal-links`. Commit: `90b3314`.
 
 ## Still Broken or Unverified
 
 - web/e2e/landing-flow.spec.ts — pre-existing failures (out of scope for SEO plan)
 - web/e2e/ is gitignored; seo.spec.ts was force-added (`git add -f`)
-- web/__tests__/routes/articles/Bus86Page.{exit-time,scam-warning}.test.tsx — 4 pre-existing RED
-  tests (TDD-RED per AGENTS.md); these will turn green as kw-13/kw-17 implement Bus86Page updates
-- Untracked: docs/superpowers/plans/2026-07-29-seo-domain-setup.md, research/
+- web/__tests__/routes/articles/Bus86Page.{exit-time,scam-warning,Grab-link}.test.tsx — 7 pre-existing RED
+  tests (TDD-RED per AGENTS.md); will turn green when kw-13/kw-17 implement the Bus86Page updates they expect
+- Untracked: docs/superpowers/plans/2026-07-29-seo-domain-setup.md, docs/superpowers/plans/*.md drafts, research/
 - Dev server (pid 14508) running on port 5173 (serves previous build's public/sitemap.xml)
-- Branch is 39 commits ahead of origin/main; push needed
+- Branch is ahead of origin/main; push needed
 - BusArticleConfig.scheduleCount is now dormant — flagged for follow-up cleanup
 - Sitemap dev-mode freshness: npm run dev does NOT regenerate sitemap.xml
   (only npm run build does). Long-lived dev sessions may serve stale sitemap.
+- **Phase 4 follow-up:** Task 3's new footer `<nav>` blocks create a href
+  collision with the header language switcher on the 4 articles whose
+  alternatePath equals one of the 3 sibling links. Fixed in `90b3314`
+  (scoped selector to `.first()`); no remaining `nav a[href]` collisions
+  but the link-equality is intentional — `audit:internal-links` checks
+  count, not uniqueness. If a future task adds another footer link that
+  collides, the same `.first()` pattern will need to extend.
 
 ## Next Best Action
 

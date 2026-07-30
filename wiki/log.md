@@ -12,6 +12,16 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-31 — Phase 4: site infrastructure (5 tickets, 4 passing + 1 documented)
+- Sources touched: `docs/seo/keyword-sheet.csv` (new), `docs/seo/README.md` (new), `web/src/App.tsx` (added `/vi/ket-qua` route + ResultVI component), `web/e2e/seo.spec.ts` (1 new countdown test + 4 selector fixes), `web/scripts/audit-internal-links.mjs` (new), `web/__tests__/scripts/audit-internal-links.test.mjs` (new), `web/package.json` (added `audit:internal-links` script), `web/jest.config.js` (added `.test.mjs` to testMatch), `web/src/routes/articles/{Bus86Page,Bus86PageVI,Bus109Page,Bus109PageVI,Bus152Page,Bus152PageVI,HanToHoanKiemPage,LateNightBusPage,Tuyen86GioPageVI}.tsx` (added `<nav>` blocks), `AGENTS.md` (appended Content Refresh Cadence section), `docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md` (appended GSC runbook appendix), `session-handoff.md`, `feature_list.json`.
+- Wiki pages touched: none (wiki pages reference sources but none were modified in this phase; expect C1 staleness warnings when lint runs next).
+- Lint status: not run (12 expected C1 warnings from AGENTS.md + feature_list.json being modified after 2026-07-29 last_verified dates).
+- Commits: `e84bcb9`, `f8d100d`, `8f558f4`, `c514c87`, `6d2a609`, `e870ab3`, `90b3314` (follow-up Playwright selector fix).
+- Plan: `docs/superpowers/plans/2026-07-31-phase4-site-infrastructure.md`
+- Outcome: 4/5 Phase 4 tickets `passing` in feature_list.json (`kw-0-keyword-sheet`, `kw-0-bus-departure-countdown-vi`, `kw-0-internal-link-graph`, `kw-0-content-refresh-cadence`); `kw-0-gsc-setup` stays `pending` (human-only — DNS + Google account + credit card required).
+- Final verification: `web npx tsc --noEmit` exit 0; `web jest` 201/208 pass (7 pre-existing Bus86Page failures pre-date Phase 4); `web npx playwright test e2e/seo.spec.ts --project=chromium` 153/153 pass (incl. new VI countdown test); `web npm run audit:internal-links` exits 0 with `PASS: all 32 articles have >= 2 internal links.`
+- Concern (logged in `.superpowers/sdd/progress.md`): Task 3's new footer `<nav>` blocks duplicate the language switcher's `/vi/...` href for 4 articles (Bus86/109/152 + scam). Caught at End-of-Phase-4 verification step 3 (Playwright strict-mode violation). Fixed in `90b3314` by scoping affected selectors with `.first()`. Footer sibling links are independently validated by `audit:internal-links`.
+
 ## 2026-07-30 — /guides listing page + homepage CTA (kw from spec, shipped via SDD)
 - Sources touched: `web/src/seo/guidesRegistry.ts` (new), `web/src/seo/metaConfig.ts`, `web/src/seo/pageRegistry.ts`, `web/src/routes/GuidesPage.tsx` (new), `web/src/App.tsx`, `web/src/components/Landing/BusGuides.tsx`, `web/public/sitemap.xml`, `web/__tests__/seo/guidesRegistry.test.ts` (new), `web/__tests__/routes/GuidesPage.test.tsx` (new), `docs/superpowers/specs/2026-07-30-guides-listing-page.md`, `.gitignore`
 - Wiki pages touched: none (lint pass required — see handoff)
