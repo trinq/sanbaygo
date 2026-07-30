@@ -91,6 +91,19 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
   },
 
   {
+    path: '/grab-vs-bus-hanoi-airport',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/vi/grab-vs-xe-buyt-noi-bai',
+  },
+  {
+    path: '/vi/grab-vs-xe-buyt-noi-bai',
+    priority: 0.8,
+    changefreq: 'monthly',
+    alternatePath: '/grab-vs-bus-hanoi-airport',
+  },
+
+  {
     path: '/airport-scam-vietnam-taxi',
     priority: 0.7,
     changefreq: 'monthly',

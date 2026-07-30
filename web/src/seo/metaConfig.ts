@@ -86,6 +86,20 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/xe-buyt-109-vs-152-tan-son-nhat',
     alternateEN: 'https://frylane.com/bus-109-vs-152-tan-son-nhat',
   },
+  '/grab-vs-bus-hanoi-airport': {
+    title: 'Grab vs Bus 86: Hanoi Airport Cost & Time (2026)',
+    description: 'Compare Grab vs Bus 86 from Noi Bai Airport. Bus 86 costs VND 50,000 (50–75 min); Grab costs VND 200,000–300,000 (35–50 min). Full comparison: price, time, comfort, and safety for 2026.',
+    keywords: 'grab vs bus hanoi airport, noibai grab vs bus, grab bus airport hanoi, bus 86 vs grab noibai',
+    canonical: 'https://frylane.com/grab-vs-bus-hanoi-airport',
+    alternateVI: 'https://frylane.com/vi/grab-vs-xe-buyt-noi-bai',
+  },
+  '/vi/grab-vs-xe-buyt-noi-bai': {
+    title: 'Grab vs Bus 86 Nội Bài: So sánh Chi phí & Thời gian (2026)',
+    description: 'So sánh Grab vs xe buýt 86 từ sân bay Nội Bài. Xe buýt 86 giá 50.000đ (50–75 phút); Grab giá 200.000–300.000đ (35–50 phút). So sánh đầy đủ: giá, thời gian, tiện nghi, an toàn năm 2026.',
+    keywords: 'grab vs xe buýt nội bài, so sánh grab xe buýt sân bay nội bài, grab xe buýt 86',
+    canonical: 'https://frylane.com/vi/grab-vs-xe-buyt-noi-bai',
+    alternateEN: 'https://frylane.com/grab-vs-bus-hanoi-airport',
+  },
   '/airport-scam-vietnam-taxi': {
     title: 'Airport Taxi Scams in Vietnam (2026) — How to Avoid Them',
     description: 'Complete guide to avoiding taxi and ride-hail scams at Vietnam airports. Learn about common schemes, Grab safety tips, and how locals travel cheap.',

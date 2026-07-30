@@ -235,6 +235,87 @@ test.describe('SEO Routes', () => {
     await expect(viLink).toBeVisible();
   });
 
+  // ── Grab vs Bus Hanoi (kw-7-grab-vs-bus-han) ────────────────────────────
+
+  test('grab vs bus hanoi article loads with correct title', async ({ page }) => {
+    await page.goto(`${BASE}/grab-vs-bus-hanoi-airport`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Grab vs Bus 86.*Hanoi Airport.*2026/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('grab-vs-bus-hanoi-airport');
+  });
+
+  test('grab vs bus hanoi article has FAQ schema with 7 questions', async ({ page }) => {
+    await page.goto(`${BASE}/grab-vs-bus-hanoi-airport`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(7);
+  });
+
+  test('grab vs bus hanoi article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/grab-vs-bus-hanoi-airport`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('grab vs bus hanoi has internal links', async ({ page }) => {
+    await page.goto(`${BASE}/grab-vs-bus-hanoi-airport`, { waitUntil: 'networkidle' });
+    const links = await page.locator('a[href^="/"]').all();
+    const internalLinks = [];
+    for (const link of links) {
+      const href = await link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        internalLinks.push(href);
+      }
+    }
+    // Expect at least 2 internal links to existing articles
+    expect(internalLinks.length).toBeGreaterThanOrEqual(2);
+  });
+
+  test('VI grab vs bus hanoi article loads with Vietnamese title', async ({ page }) => {
+    await page.goto(`${BASE}/vi/grab-vs-xe-buyt-noi-bai`, { waitUntil: 'networkidle' });
+    await expect(page).toHaveTitle(/Grab.*Bus|xe buýt.*Grab|Grab.*xe buýt/i);
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toContain('grab-vs-xe-buyt-noi-bai');
+  });
+
+  test('VI grab vs bus hanoi article has FAQ schema with 7 questions', async ({ page }) => {
+    await page.goto(`${BASE}/vi/grab-vs-xe-buyt-noi-bai`, { waitUntil: 'networkidle' });
+    const faqSchema = await page.locator('script[type="application/ld+json"]').textContent();
+    const parsed = JSON.parse(faqSchema ?? '{}');
+    expect(parsed['@type']).toBe('FAQPage');
+    expect(parsed.mainEntity).toHaveLength(7);
+  });
+
+  test('VI grab vs bus hanoi article has hreflang tags', async ({ page }) => {
+    await page.goto(`${BASE}/vi/grab-vs-xe-buyt-noi-bai`, { waitUntil: 'networkidle' });
+    const hreflangEN = await page.locator('link[hreflang="en"]').count();
+    const hreflangVI = await page.locator('link[hreflang="vi"]').count();
+    expect(hreflangEN).toBeGreaterThan(0);
+    expect(hreflangVI).toBeGreaterThan(0);
+  });
+
+  test('EN grab vs bus hanoi page has link to VI counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/grab-vs-bus-hanoi-airport`, { waitUntil: 'networkidle' });
+    const viLink = page.locator('nav a[href="/vi/grab-vs-xe-buyt-noi-bai"]');
+    await expect(viLink).toBeVisible();
+  });
+
+  test('VI grab vs bus hanoi page has link to EN counterpart', async ({ page }) => {
+    await page.goto(`${BASE}/vi/grab-vs-xe-buyt-noi-bai`, { waitUntil: 'networkidle' });
+    const enLink = page.locator('nav a[href="/grab-vs-bus-hanoi-airport"]');
+    await expect(enLink).toBeVisible();
+  });
+
+  test('sitemap.xml contains grab vs bus hanoi routes', async ({ page }) => {
+    await page.goto(`${BASE}/sitemap.xml`);
+    const content = await page.content();
+    expect(content).toContain('grab-vs-bus-hanoi-airport');
+    expect(content).toContain('grab-vs-xe-buyt-noi-bai');
+  });
+
   // ── Late night bus article (kw-18-8pm-arrival) ──────────────────────────────────
 
   test('late night bus article loads with correct title', async ({ page }) => {
