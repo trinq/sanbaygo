@@ -12,6 +12,16 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-30 — Task 19 kw-11-how-to-get-han: HAN hub page (EN + VI, 6 options, 7 FAQ)
+- Sources touched: `web/src/routes/articles/HowToGetHanPage.tsx`, `web/src/routes/articles/HowToGetHanPageVI.tsx`, `web/src/App.tsx`, `web/src/seo/metaConfig.ts`, `web/src/seo/pageRegistry.ts`, `web/e2e/seo.spec.ts`, `web/public/sitemap.xml`, `feature_list.json`.
+- Sources read for context: `wiki/README.md`, `wiki/index.md`, `AGENTS.md`, `feature_list.json`, `task-19-brief.md`, `ArticleLayout.tsx`, `NoibaiFirstTimePage.tsx`, `metaConfig.ts`, `pageRegistry.ts`, `App.tsx`, `seo.spec.ts`.
+- Wiki pages touched: none (no wiki page claims these sources).
+- Lint status: clean.
+- Commit: `e88bab0` — `feat: kw-11-how-to-get-han — HAN hub page (EN + VI, 7 FAQ, 6 options)`. Follow-up commit: `e10f599` — `docs: update feature_list.json kw-11-how-to-get-han status to passing`.
+- Test results: 131/131 Playwright pass, 119/123 Jest (4 pre-existing failures unrelated to this ticket). TypeScript clean.
+
+---
+
 ## 2026-07-30 — Task 18 kw-19-noibai-first-time: First-timer Noi Bai Airport guide EN + VI
 - Sources touched: `web/src/routes/articles/NoibaiFirstTimePage.tsx`, `web/src/routes/articles/NoibaiFirstTimePageVI.tsx`, `web/src/App.tsx`, `web/src/seo/metaConfig.ts`, `web/src/seo/pageRegistry.ts`, `web/e2e/seo.spec.ts`, `web/public/sitemap.xml`, `feature_list.json`
 - Wiki pages touched: none (no wiki pages reference these new routes yet)
