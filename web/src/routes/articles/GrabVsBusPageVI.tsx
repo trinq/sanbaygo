@@ -36,6 +36,7 @@ export function GrabVsBusPageVI() {
   const config: ComparisonArticleConfig = {
     seoPath: '/vi/grab-vs-xe-buyt-noi-bai',
     h1En: 'Grab vs Bus 86: Hanoi Airport Cost & Time (2026)',
+    h1Vi: 'Grab vs Bus 86 Nội Bài: So sánh Chi phí (2026)',
     categoryLabel: 'So sánh phương tiện sân bay',
     subtitle: 'VND 50,000 · VND 200,000–300,000 · 35–75 phút · Chọn phương tiện nào?',
     intro:

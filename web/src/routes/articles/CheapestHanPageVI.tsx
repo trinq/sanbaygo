@@ -36,6 +36,7 @@ export function CheapestHanPageVI() {
   const config: ComparisonArticleConfig = {
     seoPath: '/vi/cach-re-nhat-san-bay-noi-bai',
     h1En: 'Hanoi Airport: Bus vs Grab — Cheapest Route (2026)',
+    h1Vi: 'Sân bay Nội Bài về trung tâm: Cách rẻ nhất (2026)',
     categoryLabel: 'So sánh phương tiện sân bay',
     subtitle: 'VND 7,000 · VND 50,000 · VND 200,000+ · Chọn phương tiện nào?',
     intro:

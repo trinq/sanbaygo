@@ -32,6 +32,7 @@ export function HanToHoanKiemPageVI() {
   const config: ComparisonArticleConfig = {
     seoPath: '/vi/san-bay-noi-bai-den-ho-hoan-kiem',
     h1En: 'Hanoi Airport to Hoan Kiem: 4 Routes (2026)',
+    h1Vi: 'Sân bay Nội Bài đến Hồ Hoàn Kiếm: 4 Tuyến (2026)',
     categoryLabel: 'So sánh phương tiện sân bay',
     subtitle: 'VND 7,000 · VND 50,000 · VND 150,000–250,000 · Đến Hồ Hoàn Kiếm',
     intro:

@@ -22,6 +22,8 @@ export interface ComparisonArticleConfig {
   seoPath: string;
   /** English H1 — e.g. "Grab vs Bus 86 Hanoi Airport" */
   h1En: string;
+  /** Vietnamese H1 — shown when browsing the VI mirror page (e.g. "Grab vs Bus 86 Nội Bài: So sánh Chi phí") */
+  h1Vi?: string;
   /** Vietnamese label above H1 (e.g. "So sánh phương tiện") */
   categoryLabel: string;
   /** Vietnamese subtitle below H1 */
@@ -172,6 +174,7 @@ export function ComparisonArticleLayout({ config }: Props) {
   const {
     seoPath,
     h1En,
+    h1Vi,
     categoryLabel,
     subtitle,
     intro,
@@ -192,7 +195,7 @@ export function ComparisonArticleLayout({ config }: Props) {
             <span className="text-sm font-medium uppercase tracking-wider opacity-80">
               {categoryLabel}
             </span>
-            <h1 className="text-4xl font-bold mt-2 mb-4">{h1En}</h1>
+            <h1 className="text-4xl font-bold mt-2 mb-4">{h1Vi ?? h1En}</h1>
             <p className="text-lg opacity-90">{subtitle}</p>
           </div>
         </header>

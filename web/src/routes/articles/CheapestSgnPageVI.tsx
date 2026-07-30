@@ -36,6 +36,7 @@ export function CheapestSgnPageVI() {
   const config: ComparisonArticleConfig = {
     seoPath: '/vi/cach-re-nhat-san-bay-sai-gon',
     h1En: 'Saigon Airport to District 1: 5 Options Ranked (2026)',
+    h1Vi: 'Sân bay Tân Sơn Nhất về Quận 1: 5 Phương tiện (2026)',
     categoryLabel: 'So sánh phương tiện sân bay',
     subtitle: 'VND 5,000 · VND 15,000 · VND 200,000+ · Chọn phương tiện nào?',
     intro:
