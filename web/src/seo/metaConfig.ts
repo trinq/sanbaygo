@@ -286,6 +286,20 @@ export const PAGE_META: Record<string, MetaConfig> = {
     description: 'Frylane terms of service. Free to use. No warranty.',
     canonical: 'https://frylane.com/terms',
   },
+  '/guides': {
+    title: 'Vietnam Airport Bus Guides — All Routes Compared (2026)',
+    description: 'Browse every Frylane airport bus guide: Hanoi (Noi Bai), Saigon (Tan Son Nhat), and cross-cutting tips. Compare fares, schedules, and routes.',
+    keywords: 'vietnam airport bus guides, frylane guides, airport bus articles',
+    canonical: 'https://frylane.com/guides',
+    alternateVI: 'https://frylane.com/vi/guides',
+  },
+  '/vi/guides': {
+    title: 'Hướng dẫn xe buýt sân bay Việt Nam — So sánh mọi tuyến (2026)',
+    description: 'Tổng hợp mọi hướng dẫn xe buýt sân bay từ Frylane: Hà Nội (Nội Bài), TP.HCM (Tân Sơn Nhất) và mẹo chung. So sánh giá, lịch trình và lộ trình.',
+    keywords: 'hướng dẫn xe buýt sân bay, bài viết frylane, hướng dẫn sân bay việt nam',
+    canonical: 'https://frylane.com/vi/guides',
+    alternateEN: 'https://frylane.com/guides',
+  },
 };
 
 export const DEFAULT_META: MetaConfig = {
