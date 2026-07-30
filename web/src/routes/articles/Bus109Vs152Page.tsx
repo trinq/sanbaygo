@@ -31,11 +31,11 @@ const FAQ_ITEMS = [
 export function Bus109Vs152Page() {
   const config: ComparisonArticleConfig = {
     seoPath: '/bus-109-vs-152-tan-son-nhat',
-    h1En: 'Bus 109 vs 152: Tan Son Nhat Airport — Which Should You Take? (2026)',
+    h1En: 'Bus 109 vs 152: Tan Son Nhat — Which to Take? (2026)',
     categoryLabel: 'So sánh xe buýt sân bay',
     subtitle: 'VND 5,000 · VND 15,000 · 25–70 phút · Chọn tuyến nào?',
     intro:
-      'Hai tuyến xe buýt công cộng phổ biến nhất từ sân bay Tân Sơn Nhất là Bus 109 và Bus 152. Bus 109 là xe buýt điện chạy từ T3 vào trung tâm; Bus 152 là xe buýt thường giá rẻ nhất Việt Nam, chạy từ T1/T2. Cả hai đều rẻ hơn Grab (VND 100,000–180,000) nhưng cần thời gian chờ. Dưới đây là so sánh chi tiết để bạn chọn đúng tuyến.',
+      'Hai tuyến xe buýt công cộng phổ biến nhất từ sân bay Tân Sơn Nhất là Bus 109 và Bus 152. Bus 109 là xe buýt điện chạy từ T3 vào trung tâm; Bus 152 là xe buýt thường giá rẻ nhất Việt Nam, chạy từ T1/T2. Cả hai đều rẻ hơn Grab (VND 100,000–180,000) nhưng cần thời gian chờ. Dưới đây là so sánh chi tiết để bạn chọn đúng tuyến. <a href="/bus-109-saigon-airport" className="text-primary underline">See full Bus 109 schedule →</a> <a href="/bus-152-saigon-fare" className="text-primary underline">See Bus 152 fare guide →</a>',
     options: [
       {
         name: 'Bus 109',

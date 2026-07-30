@@ -35,7 +35,7 @@ export function Bus109Vs152PageVI() {
     categoryLabel: 'So sánh xe buýt sân bay',
     subtitle: '5.000đ · 15.000đ · 25–70 phút · Chọn tuyến nào?',
     intro:
-      'Hai tuyến xe buýt công cộng phổ biến nhất từ sân bay Tân Sơn Nhất là Bus 109 và Bus 152. Bus 109 là xe buýt điện chạy từ T3 vào trung tâm; Bus 152 là xe buýt thường giá rẻ nhất Việt Nam, chạy từ T1/T2. Cả hai đều rẻ hơn Grab (100.000đ–180.000đ) nhưng cần thời gian chờ. Dưới đây là so sánh chi tiết để bạn chọn đúng tuyến.',
+      'Hai tuyến xe buýt công cộng phổ biến nhất từ sân bay Tân Sơn Nhất là Bus 109 và Bus 152. Bus 109 là xe buýt điện chạy từ T3 vào trung tâm; Bus 152 là xe buýt thường giá rẻ nhất Việt Nam, chạy từ T1/T2. Cả hai đều rẻ hơn Grab (100.000đ–180.000đ) nhưng cần thời gian chờ. Dưới đây là so sánh chi tiết để bạn chọn đúng tuyến. <a href="/vi/tuyen-109-tan-son-nhat" className="text-primary underline">Xem lịch xe buýt 109 đầy đủ →</a> <a href="/vi/tuyen-152-tan-son-nhat" className="text-primary underline">Xem hướng dẫn xe buýt 152 →</a>',
     options: [
       {
         name: 'Xe buýt 109',

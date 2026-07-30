@@ -73,7 +73,7 @@ export const PAGE_META: Record<string, MetaConfig> = {
     alternateEN: 'https://frylane.com/bus-152-saigon-fare',
   },
   '/bus-109-vs-152-tan-son-nhat': {
-    title: 'Bus 109 vs 152: Tan Son Nhat Airport — Which Should You Take? (2026)',
+    title: 'Bus 109 vs 152: Tan Son Nhat — Which to Take? (2026)',
     description: 'Compare Bus 109 vs Bus 152 from Tan Son Nhat Airport. Bus 152 is VND 5,000 (cheapest in Vietnam), Bus 109 is VND 15,000 electric. Full fare, schedule, comfort, and luggage comparison for 2026.',
     keywords: 'bus 109 vs 152 saigon, tansonnhat bus 109 vs 152, bus 109 vs 152 fare, saigon airport bus comparison',
     canonical: 'https://frylane.com/bus-109-vs-152-tan-son-nhat',
