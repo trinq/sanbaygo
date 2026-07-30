@@ -12,6 +12,32 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-07-30 — Task 16 kw-12-han-hoan-kiem: Phase 2 Hanoi Airport to Hoan Kiem Lake destination article
+- Sources touched: `web/src/routes/articles/HanToHoanKiemPage.tsx` (new, EN),
+  `web/src/routes/articles/HanToHoanKiemPageVI.tsx` (new, VI),
+  `web/src/seo/metaConfig.ts` (added 2 entries with bidirectional hreflang),
+  `web/src/App.tsx` (added 2 routes before /vi/* catch-all),
+  `web/src/seo/pageRegistry.ts` (added 2 entries with bidirectional alternatePath),
+  `web/public/sitemap.xml` (rebuilt via vite build),
+  `web/e2e/seo.spec.ts` (added 10 new Playwright tests),
+  `feature_list.json` (status → passing)
+- Wiki pages touched: none
+- Lint status: clean
+- Commits: 568b081 — feat: add kw-12-han-hoan-kiem; 03ca8f9 — docs: mark passing
+
+
+- Sources touched: `web/src/routes/articles/CheapestSgnPage.tsx` (new, EN),
+  `web/src/routes/articles/CheapestSgnPageVI.tsx` (new, VI),
+  `web/src/seo/metaConfig.ts` (added 2 entries with bidirectional hreflang),
+  `web/src/App.tsx` (added 2 routes before /vi/* catch-all),
+  `web/src/seo/pageRegistry.ts` (added 2 entries with bidirectional alternatePath),
+  `web/public/sitemap.xml` (added 2 entries for cheapest SGN routes),
+  `web/e2e/seo.spec.ts` (added 10 new Playwright tests),
+  `feature_list.json` (kw-6-cheapest-sgn → passing)
+- Wiki pages touched: none
+- Lint status: clean
+- Commit: ff91fbc — feat(kw-6): cheapest way Saigon Airport District 1 comparison article (kw-6-cheapest-sgn)
+
 ## 2026-07-30 — Task 13 kw-7-grab-vs-bus-han: Phase 2 Grab vs Bus 86 comparison article
 - Sources touched: `web/src/routes/articles/GrabVsBusPage.tsx` (new, EN),
   `web/src/routes/articles/GrabVsBusPageVI.tsx` (new, VI),
