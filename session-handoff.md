@@ -11,9 +11,33 @@
 | kw-0-sitemap-auto | passing | 2026-07-30 |
 | kw-13-bus-109-vs-152 | passing | 2026-07-30 |
 | kw-18-8pm-arrival | passing | 2026-07-30 |
+| qua-43-bus-152-sgn-t2-pickup | passing | 2026-07-31 |
 
 ## Changes This Session
 
+- **2026-07-31 (this session):** QUA-43 — sync Bus 152 SGN-T2 pickup string
+  to "cột 12 và cột 13" (was incorrectly "Cột số 4 và Cột số 5")
+  - Plan + brief + report at `.superpowers/sdd/`
+  - 8 surfaces synced: `core/data/busSchedules/sgn.ts`,
+    `core/tests/data/busSchedules/sgn.test.ts`,
+    `web/__tests__/components/Result/ResultPage.test.tsx`,
+    `CONTEXT.md`, `wiki/pages/data-sources.md`,
+    `web/src/routes/articles/Bus152Page.tsx` + `Bus152PageVI.tsx`,
+    `docs/superpowers/plans/2026-07-31-qua-43-bus-152-sgn-t2-pickup.md`.
+  - Bus 86 deliberately untouched (HAN-T1 cột 12, HAN-T2 cột 14 — correct).
+  - Verification: tsc --noEmit exit 0; npm test 18/18 suites 168/168;
+    web ResultPage jest 17/17; npm run wiki:lint exit 0; repo-wide
+    `rg "Cột số 4 và Cột số 5 sảnh đến quốc tế"` = 0 matches.
+  - Mid-flight deviation: pre-flight scan missed 3 surfaces (Bus152Page,
+    Bus152PageVI, plan file); scope expanded 5→8 with user-approved D1.
+  - **Push to origin blocked:** GitHub secret scanning rejected due to
+    Linear API key committed in `.cursor/mcp.json:7` at commit `136dd522`.
+    Local branch ahead of `origin/main` by 100 commits; secret strategy
+    (A bypass link / B filter-repo / C rotate key) deferred to user.
+  - **Linear QUA-43 status:** `In Progress` (startedAt 2026-07-30T22:41Z).
+    User authorized closing in Linear UI despite blocked push; Linear
+    `Done` transition is user-only (MCP has no close-issue tool).
+  - Commit: `8bc869b`.
 - Fixed broken Bus86Page.tsx import: `'../components/SEO'` → `'../../components/SEO'` (was 500 on /bus-86-hanoi-airport)
 - Removed duplicate HelmetProvider from main.tsx (was already in App.tsx)
 - Added web/e2e/seo.spec.ts with 7 Playwright E2E tests (all passing)
@@ -141,12 +165,24 @@
 - Sitemap dev-mode freshness: npm run dev does NOT regenerate sitemap.xml
   (only npm run build does). Long-lived dev sessions may serve stale sitemap.
 - **Phase 4 follow-up:** Task 3's new footer `<nav>` blocks create a href
-  collision with the header language switcher on the 4 articles whose
-  alternatePath equals one of the 3 sibling links. Fixed in `90b3314`
-  (scoped selector to `.first()`); no remaining `nav a[href]` collisions
-  but the link-equality is intentional — `audit:internal-links` checks
-  count, not uniqueness. If a future task adds another footer link that
-  collides, the same `.first()` pattern will need to extend.
+ collision with the header language switcher on the 4 articles whose
+ alternatePath equals one of the 3 sibling links. Fixed in `90b3314`
+ (scoped selector to `.first()`); no remaining `nav a[href]` collisions
+ but the link-equality is intentional — `audit:internal-links` checks
+ count, not uniqueness. If a future task adds another footer link that
+ collides, the same `.first()` pattern will need to extend.
+- **Push blocked (carry over):** `git push origin main` rejected by GitHub
+ secret scanning. Linear API key was committed at `136dd522` in
+ `.cursor/mcp.json:7`. Three options to clear: (A) GitHub bypass link
+ (https://github.com/trinq/sanbaygo/security/secret-scanning/unblock-secret/3HFU6PICniwB93nOjy7uVoZ8BH6)
+ — one-shot, secret stays in history; (B) `git filter-repo` rewrite of
+ 100 commits — invasive, team re-clone; (C) rotate Linear API key in
+ Linear UI, update `.cursor/mcp.json` locally (no commit), push later.
+ User has not yet chosen. Local branch ahead of `origin/main` by 100 commits.
+- **QUA-43 stale comment (carry over):** `web/__tests__/components/Result/ResultPage.test.tsx:334`
+ still references the old pillar phrase (`Cột số 4 và Cột số 5`) as a
+ fixture pointer. Does not violate the verbatim `rg` check; documented
+ for a future hygiene pass.
 
 ## Next Best Action
 
@@ -154,9 +190,13 @@
 2. Phase 0 remaining (process, not code): `kw-0-gsc-setup` (GSC + GA4 + Google Ads
    account setup — requires human DNS action), `kw-0-keyword-sheet` (CSV)
 3. Phase 1 next: `kw-13-bus-109-vs-152` (Tier 1, KD 18, lowest KD quick-win)
-4. Run `npm run wiki:lint` and fix any drift flagged by C1 staleness
-5. Schedule cleanup of dormant `BusArticleConfig.scheduleCount` field
-6. Push branch to origin and consider opening PR
+4. **Resolve push block (carry-over from QUA-43 session):** user must pick
+   A/B/C for the Linear API key secret in `.cursor/mcp.json:7`. Until then,
+   no remote progress; all work is local-only.
+5. Run `npm run wiki:lint` and fix any drift flagged by C1 staleness
+6. Schedule cleanup of dormant `BusArticleConfig.scheduleCount` field
+7. **Linear housekeeping:** user should mark QUA-43 as `Done` in Linear UI
+   (status currently `In Progress`; agent cannot close issues via MCP).
 
 ## Commands
 

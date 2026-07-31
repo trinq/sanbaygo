@@ -363,3 +363,15 @@ One entry per session. Newest at the top. Format:
 - Commit: `7211c18` — `docs(seo): pivot keyword brief to lean_intl (EN primary 60%, VN secondary 40%)`.
 - Decisions deferred: not touched (the lean_intl pivot is a content/SEO scoping decision, not a domain model or architecture change — no ADR or wiki page needs migration).
 - Lưu ý kết thúc: file `research/domain-name-brief.md` vẫn untracked; brief mới là sản phẩm SEO content, không phải entity upstream.
+
+## 2026-07-31 — QUA-43: sync Bus 152 SGN-T2 pickup string to cột 12/13 (data + tests + CONTEXT + wiki + SEO articles)
+- Sources touched: `core/data/busSchedules/sgn.ts` (`BUS_152.pickupPoints` T2 entry + adjacent source comment), `core/tests/data/busSchedules/sgn.test.ts` (T2 contract assertion + comment), `web/__tests__/components/Result/ResultPage.test.tsx` (`sgnRoute` fixture T2 location), `CONTEXT.md` (Bus 152 → T2 bullet), `wiki/pages/data-sources.md` (Route 152 T2 bullet + file-inventory split + `last_verified` bump), `web/src/routes/articles/Bus152Page.tsx` + `Bus152PageVI.tsx` (SEO prose pillar numbers), `docs/superpowers/plans/2026-07-31-qua-43-bus-152-sgn-t2-pickup.md` (rephrased Out-of-Scope contrast example).
+- Wiki pages touched: `wiki/pages/data-sources.md` (Route 152 T2 bullet corrected; file-inventory split into `core/data/busSchedule.ts` for Bus 86 and `core/data/busSchedules/sgn.ts` for Routes 109 + 152; `last_verified` → `2026-07-31`).
+- Lint status: 0 errors, 14 warnings (all pre-existing on unrelated pages; no `C1 stale` for `data-sources.md`).
+- Commit: `8bc869b` — `fix(qua-43): sync Bus 152 SGN-T2 pickup string to cột 12/13 across data, tests, CONTEXT, wiki, SEO articles`. Linear: QUA-43.
+- Plan: `docs/superpowers/plans/2026-07-31-qua-43-bus-152-sgn-t2-pickup.md`.
+- Spec source: Linear QUA-43.
+- Outcome: Bus 152 SGN-T2 pickup string (`Làn B, đối diện cột 12 và cột 13 sảnh đến quốc tế`) is now consistent across data, 2 test files, working notes, 2 SEO articles, the plan file, and the wiki inventory. Bus 86 deliberately not touched (different terminal/pillar).
+- Verification: `npx tsc --noEmit` exit 0; `npm test` exit 0 (18/18 suites, 168/168 tests); `web npx jest --testPathPatterns="ResultPage"` 1/1 suite, 17/17 tests; `npm run wiki:lint` exit 0; repo-wide `rg "Cột số 4 và Cột số 5 sảnh đến quốc tế"` empty (zero matches).
+- Mid-flight deviation (user-approved D1): pre-flight scan missed `web/src/routes/articles/Bus152Page.tsx`, `Bus152PageVI.tsx`, and the plan file itself, which also encoded the wrong pillar numbers. Scope was expanded from 5 → 8 surfaces with explicit user consent (`AskQuestion`); plan + brief were regenerated; implementer resumed and committed the expanded set.
+- Known minor (logged, not fixed): stale inline comment fragment at `web/__tests__/components/Result/ResultPage.test.tsx:334` still references the old pillar phrase as a fixture pointer. Does not violate the verbatim `rg` check; documented for a future hygiene pass.
