@@ -12,6 +12,7 @@ export type GuideEntry = {
   articleId: string;
   hub: 'HN' | 'SG' | 'CROSS';
   order: number;
+  routeNumber?: string; // e.g. '86', '109', '152' — undefined for non-bus articles
 };
 
 export const GUIDES_REGISTRY: ReadonlyArray<GuideEntry> = [
@@ -81,6 +82,19 @@ export function humanizeArticleId(id: string): string {
     .filter((token) => token.length > 0)
     .map((token) => token.charAt(0).toUpperCase() + token.slice(1))
     .join(' ');
+}
+
+/**
+ * Map article IDs to bus route numbers.
+ * Returns undefined for non-bus articles.
+ */
+export function getRouteNumber(articleId: string): string | undefined {
+  const routeMap: Record<string, string> = {
+    'bus-86': '86',
+    'bus-109': '109',
+    'bus-152': '152',
+  };
+  return routeMap[articleId];
 }
 
 /** Resolve a guide's display title from PAGE_META, falling back to a humanized articleId. */
