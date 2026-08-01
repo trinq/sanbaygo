@@ -454,4 +454,100 @@ describe('GuidesPage', () => {
       expect(firstH2?.textContent).toBe(HUB_LABEL.vi.HN);
     });
   });
+
+  describe('Route number rendering (departure board)', () => {
+    it('bus-86 entry shows "86" in monospace font-mono', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/bus-86-hanoi-airport"]') as HTMLAnchorElement;
+      const routeSpan = link.querySelector('[data-testid="route-number"]');
+      expect(routeSpan).not.toBeNull();
+      expect(routeSpan!.textContent).toBe('86');
+      expect(routeSpan!.className).toMatch(/font-mono/);
+      expect(routeSpan!.className).toMatch(/font-bold/);
+    });
+
+    it('bus-109 entry shows "109" route number', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/bus-109-saigon-airport"]') as HTMLAnchorElement;
+      const routeSpan = link.querySelector('[data-testid="route-number"]');
+      expect(routeSpan?.textContent).toBe('109');
+    });
+
+    it('bus-152 entry shows "152" route number', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/bus-152-saigon-fare"]') as HTMLAnchorElement;
+      const routeSpan = link.querySelector('[data-testid="route-number"]');
+      expect(routeSpan?.textContent).toBe('152');
+    });
+
+    it('non-bus entry (luggage-fee) does NOT have route number column', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/airport-bus-luggage-fee-vietnam"]') as HTMLAnchorElement;
+      const routeSpan = link.querySelector('[data-testid="route-number"]');
+      expect(routeSpan).toBeNull();
+    });
+
+    it('non-bus entry (scam) does NOT have route number column', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/airport-scam-vietnam-taxi"]') as HTMLAnchorElement;
+      const routeSpan = link.querySelector('[data-testid="route-number"]');
+      expect(routeSpan).toBeNull();
+    });
+
+    it('non-bus entry (grab-vs-bus) does NOT have route number column', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/grab-vs-bus-hanoi-airport"]') as HTMLAnchorElement;
+      const routeSpan = link.querySelector('[data-testid="route-number"]');
+      expect(routeSpan).toBeNull();
+    });
+  });
+
+  describe('Row styling (departure board)', () => {
+    it('row uses flex layout with bottom border separator', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/bus-86-hanoi-airport"]') as HTMLAnchorElement;
+      expect(link.className).toMatch(/flex/);
+      expect(link.className).toMatch(/items-center/);
+      expect(link.className).toMatch(/justify-between/);
+      expect(link.className).toMatch(/border-b/);
+    });
+
+    it('row no longer uses rounded-2xl (card removed)', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/bus-86-hanoi-airport"]') as HTMLAnchorElement;
+      expect(link.className).not.toMatch(/rounded-2xl/);
+    });
+
+    it('row does not use shadow (replaced by divider)', () => {
+      const { container } = renderGuidesPage();
+      const link = container.querySelector('a[href="/bus-86-hanoi-airport"]') as HTMLAnchorElement;
+      expect(link.className).not.toMatch(/shadow/);
+    });
+  });
+
+  describe('Hub header styling (airport-style)', () => {
+    it('renders horizontal rule separator below each hub header', () => {
+      const { container } = renderGuidesPage();
+      const h2s = container.querySelectorAll('h2');
+      for (const h2 of h2s) {
+        const section = h2.closest('section');
+        expect(section?.querySelector('hr')).not.toBeNull();
+      }
+    });
+
+    it('header uses text-2xl font-bold tracking-tight', () => {
+      const { container } = renderGuidesPage();
+      const h2 = container.querySelector('h2') as HTMLHeadingElement;
+      expect(h2.className).toMatch(/text-2xl/);
+      expect(h2.className).toMatch(/font-bold/);
+      expect(h2.className).toMatch(/tracking-tight/);
+    });
+
+    it('HubSection uses flat list, not grid', () => {
+      const { container } = renderGuidesPage();
+      const guideList = container.querySelector('[data-guide-list]');
+      expect(guideList).not.toBeNull();
+      expect(guideList?.className).not.toMatch(/grid/);
+    });
+  });
 });

@@ -51,7 +51,10 @@ function GuideRow({ entry }: { entry: GuideEntry }) {
     >
       <div className="flex items-center gap-4 min-w-0">
         {routeNumber && (
-          <span className="font-mono font-bold text-ink text-lg w-12 shrink-0">
+          <span
+            data-testid="route-number"
+            className="font-mono font-bold text-ink text-lg w-12 shrink-0"
+          >
             {routeNumber}
           </span>
         )}
