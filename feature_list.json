@@ -675,6 +675,28 @@
       "notes": "Tier 2 KD 32 — VN pricing page. Update yearly."
     },
     {
+      "id": "kw-24-sgn-t3-bus-109",
+      "priority": 26,
+      "area": "content",
+      "platform": "web",
+      "title": "Article: does bus 109 stop at tan son nhat terminal 2 (Tier 4 quick)",
+      "user_visible_behavior": "EN page at /sgn-bus-109-t3-routing. Title 'Bus 109 at Tan Son Nhat: T3 Only — What About T1 & T2? (2026)' = 60 chars. ComparisonArticleLayout with 4 options (Bus 109 from T3, Free T1/T2 -> T3 shuttle + Bus 109, Bus 152, Grab/taxi). 6 FAQ questions. Verdict: 'If you arrive at T1 or T2, take the free shuttle first.' Internal links >= 2 (links to existing bus-109-saigon-airport, bus-152-saigon-fare, airport-scam-vietnam-taxi, plus forward-link to kw-25 sibling /sgn-t2-t3-shuttle). EN-only (no /vi/ mirror). Last verified 2026-08-02. Sources cited: CAAV T3 notice (2025-04-23), VOH Bus 109 change notice, Thaiest terminal shuttle guide.",
+      "status": "passing",
+      "evidence": [
+        "tsc --noEmit exit 0 (clean baseline before changes)",
+        "Playwright targeted kw-24 tests (3 of 3 pass): title regex /Bus 109.*Tan Son Nhat.*T3.*2026/ matched, FAQ schema JSON-LD present, internal links >= 2 (article has 3)",
+        "audit:internal-links PASS — new article detected with 3 links",
+        "npm run build exit 0 — Vite build succeeded",
+        "sitemap.xml regenerated with /sgn-bus-109-t3-routing entry (dist/sitemap.xml grep confirmed)",
+        "ComparisonArticleLayout ComparisonArticleConfig used with 4 options + 6 FAQ items, no layout component modified",
+        "EN-only — no /vi/ mirror, no alternatePath field in pageRegistry",
+        "Last verified: 2026-08-02 badge + footer source citation present in article intro (CAAV T3 notice 2025-04-23, VOH, Thaiest)",
+        "Volume + KD unverified — Tier 4 ships because competitive gap is operational, not search-volume-driven (per plan Risk section 3)"
+      ],
+      "tests": ["web/e2e/seo.spec.ts (3 new kw-24 tests written — see follow-up note)"],
+      "notes": "Tier 4 quick — freshest SGN news hook (Bus 109 moved to T3). Source: gap analysis research section D primary kw-24. Follow-up: web/e2e/ is gitignored (root .gitignore line 59), so seo.spec.ts modifications are local-only and NOT committed with this article. Targeted kw-24 tests pass locally; propose removing web/e2e/ from .gitignore in a separate ticket so future SEO tests ship with their articles. Also tracked separately: 2 PRE-EXISTING failures unrelated to kw-24 — (a) Playwright bus-departure countdown at /vi/ket-qua/ countdown-timer not visible, (b) Jest Bus86Page.test.tsx 'Grab link' query ambiguous. Both reproduced on clean working tree (kw-24 changes stashed, re-run, same failures). Proposed separate tickets: TI-001 (re-enable e2e/ gitignore), TI-002 (fix countdown VI), TI-003 (fix Bus86Page test brittleness)."
+    },
+    {
       "id": "kw-6-cheapest-sgn",
       "priority": 14,
       "area": "content",

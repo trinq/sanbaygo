@@ -12,6 +12,14 @@ One entry per session. Newest at the top. Format:
 
 ---
 
+## 2026-08-01 — Tier-4 Plan + kw-24 ship
+- Sources touched: `docs/research/2026-08-01-content-gap-analysis.md` (262 lines, 15 Tier-4 proposals), `docs/superpowers/plans/2026-08-01-tier4-content-expansion.md` (new plan, ~640 lines, 13 net-new tickets + 2 page-expansions + 2 cannibalization-rejected), `web/src/routes/articles/SgnBus109T3RoutingPage.tsx` (new Tier-4 quick article at `/sgn-bus-109-t3-routing`), `web/src/seo/{metaConfig,pageRegistry}.ts`, `web/src/App.tsx`, `web/public/sitemap.xml`, `feature_list.json`, `wiki/log.md`
+- Wiki pages touched: none yet (Tier-4 articles are SEO content, not wiki knowledge — wiki stays untouched)
+- Lint status: not yet run
+- Commit: pending — `feat(kw-24): does bus 109 stop at tan son nhat terminal 2 — Tier 4 quick`
+
+---
+
 ## 2026-07-31 — Phase 4: site infrastructure (5 tickets, 4 passing + 1 documented)
 - Sources touched: `docs/seo/keyword-sheet.csv` (new), `docs/seo/README.md` (new), `web/src/App.tsx` (added `/vi/ket-qua` route + ResultVI component), `web/e2e/seo.spec.ts` (1 new countdown test + 4 selector fixes), `web/scripts/audit-internal-links.mjs` (new), `web/__tests__/scripts/audit-internal-links.test.mjs` (new), `web/package.json` (added `audit:internal-links` script), `web/jest.config.js` (added `.test.mjs` to testMatch), `web/src/routes/articles/{Bus86Page,Bus86PageVI,Bus109Page,Bus109PageVI,Bus152Page,Bus152PageVI,HanToHoanKiemPage,LateNightBusPage,Tuyen86GioPageVI}.tsx` (added `<nav>` blocks), `AGENTS.md` (appended Content Refresh Cadence section), `docs/superpowers/plans/2026-07-29-keyword-research-ticket-breakdown.md` (appended GSC runbook appendix), `session-handoff.md`, `feature_list.json`.
 - Wiki pages touched: none (wiki pages reference sources but none were modified in this phase; expect C1 staleness warnings when lint runs next).
@@ -336,6 +344,8 @@ One entry per session. Newest at the top. Format:
 - E2E: 7/7 SEO tests pass (chromium); landing-flow.spec.ts pre-existing failures
 - Task 7 review caveats resolved: `initialLocale` removal is fine (LanguageProvider
   defaults to `'vi'`); hreflang for Bus 86 is correctly configured in metaConfig.ts
+
+- Shipped kw-24-sgn-t3-bus-109; sources cited at page footer.
 
 ## 2026-07-29 — Initial wiki scaffold + lint + diagram
 - Wiki pages created: all 8 seed pages (`project-overview`, `architecture`,

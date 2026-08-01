@@ -1249,4 +1249,26 @@ test.describe('SEO Routes', () => {
     await expect(countdown).toBeVisible();
     await expect(countdown).toContainText(/Còn khoảng/);
   });
+
+  // ── Tier 4: kw-24-sgn-t3-bus-109 ───────────────────────────────────────
+  test('kw-24-sgn-t3-bus-109 SEO meta', async ({ page }) => {
+    await page.goto(`${BASE}/sgn-bus-109-t3-routing`);
+    await expect(page).toHaveTitle(/Bus 109.*Tan Son Nhat.*T3.*2026/);
+  });
+
+  test('kw-24-sgn-t3-bus-109 FAQ schema present', async ({ page }) => {
+    await page.goto(`${BASE}/sgn-bus-109-t3-routing`);
+    const faqSchema = await page.locator('script[type="application/ld+json"]')
+      .evaluateAll((scripts) => scripts.some((script) => script.textContent?.includes('FAQPage')));
+    expect(faqSchema).toBe(true);
+  });
+
+  test('kw-24-sgn-t3-bus-109 internal links >= 2', async ({ page }) => {
+    await page.goto(`${BASE}/sgn-bus-109-t3-routing`);
+    const internalLinks = await page.locator('a[href^="/"]')
+      .filter({ hasNotText: /^English$/ })
+      .filter({ hasNotText: /^Tiếng Việt$/ })
+      .count();
+    expect(internalLinks).toBeGreaterThanOrEqual(2);
+  });
 });

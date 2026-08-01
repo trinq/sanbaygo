@@ -84,6 +84,12 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
   },
 
   {
+    path: '/sgn-bus-109-t3-routing',
+    priority: 0.7,
+    changefreq: 'monthly',
+    lastmod: '2026-08-02',
+  },
+  {
     path: '/bus-109-vs-152-tan-son-nhat',
     priority: 0.8,
     changefreq: 'monthly',

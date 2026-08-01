@@ -87,6 +87,13 @@ export const PAGE_META: Record<string, MetaConfig> = {
     canonical: 'https://frylane.com/vi/tuyen-152-tan-son-nhat',
     alternateEN: 'https://frylane.com/bus-152-saigon-fare',
   },
+  '/sgn-bus-109-t3-routing': {
+    title: 'Bus 109 at Tan Son Nhat: T3 Only — What About T1 & T2? (2026)',
+    description: "Bus 109 no longer stops at Tan Son Nhat T1/T2. If you arrive at T1 or T2, here's how to get to Bus 109's T3 stop — including a free inter-terminal shuttle.",
+    keywords: 'bus 109 terminal 3 tan son nhat, bus 109 t2, tan son nhat t3 shuttle',
+    canonical: 'https://frylane.com/sgn-bus-109-t3-routing',
+  },
+
   '/bus-109-vs-152-tan-son-nhat': {
     title: 'Bus 109 vs 152: Tan Son Nhat — Which to Take? (2026)',
     description: 'Compare Bus 109 vs Bus 152 from Tan Son Nhat Airport. Bus 152 is VND 5,000 (cheapest in Vietnam), Bus 109 is VND 15,000 electric. Full fare, schedule, comfort, and luggage comparison for 2026.',

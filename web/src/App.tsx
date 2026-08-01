@@ -14,6 +14,7 @@ import { Bus109PageVI } from './routes/articles/Bus109PageVI';
 import { Bus152PageVI } from './routes/articles/Bus152PageVI';
 import { Bus109Vs152Page } from './routes/articles/Bus109Vs152Page';
 import { Bus109Vs152PageVI } from './routes/articles/Bus109Vs152PageVI';
+import { SgnBus109T3RoutingPage } from './routes/articles/SgnBus109T3RoutingPage';
 import { GrabVsBusPage } from './routes/articles/GrabVsBusPage';
 import { GrabVsBusPageVI } from './routes/articles/GrabVsBusPageVI';
 import { CheapestHanPage } from './routes/articles/CheapestHanPage';
@@ -112,6 +113,7 @@ export default function App() {
             <Route path="/vi/tuyen-152-tan-son-nhat" element={<Bus152PageVI />} />
             <Route path="/vi/xe-lo-gio-sanh-bay-viet-nam" element={<ScamPageVI />} />
             <Route path="/bus-109-vs-152-tan-son-nhat" element={<Bus109Vs152Page />} />
+            <Route path="/sgn-bus-109-t3-routing" element={<SgnBus109T3RoutingPage />} />
             <Route path="/grab-vs-bus-hanoi-airport" element={<GrabVsBusPage />} />
             <Route path="/noibai-t2-exit-time" element={<ExitTimePage />} />
             <Route path="/vi/grab-vs-xe-buyt-noi-bai" element={<GrabVsBusPageVI />} />
