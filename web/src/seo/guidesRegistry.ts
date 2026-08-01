@@ -17,8 +17,8 @@ export type GuideEntry = {
 
 export const GUIDES_REGISTRY: ReadonlyArray<GuideEntry> = [
   // Hà Nội hub
-  { articleId: 'bus-86',             href: '/bus-86-hanoi-airport',                 hub: 'HN', order: 1 },
-  { articleId: 'bus-86',             href: '/vi/tuyen-86-noi-bai',                   hub: 'HN', order: 1 },
+  { articleId: 'bus-86',             href: '/bus-86-hanoi-airport',                 hub: 'HN', order: 1, routeNumber: getRouteNumber('bus-86') },
+  { articleId: 'bus-86',             href: '/vi/tuyen-86-noi-bai',                   hub: 'HN', order: 1, routeNumber: getRouteNumber('bus-86') },
   { articleId: 'grab-vs-bus',        href: '/grab-vs-bus-hanoi-airport',             hub: 'HN', order: 2 },
   { articleId: 'grab-vs-bus',        href: '/vi/grab-vs-xe-buyt-noi-bai',            hub: 'HN', order: 2 },
   { articleId: 'noibai-t2-exit',     href: '/noibai-t2-exit-time',                   hub: 'HN', order: 3 },
@@ -38,10 +38,10 @@ export const GUIDES_REGISTRY: ReadonlyArray<GuideEntry> = [
   { articleId: 'grab-noi-bai-gia',   href: '/vi/grab-noi-bai-gia-bao-nhieu',         hub: 'HN', order: 10 },
 
   // TP.HCM (SG) hub
-  { articleId: 'bus-109',            href: '/bus-109-saigon-airport',                 hub: 'SG', order: 1 },
-  { articleId: 'bus-109',            href: '/vi/tuyen-109-tan-son-nhat',              hub: 'SG', order: 1 },
-  { articleId: 'bus-152',            href: '/bus-152-saigon-fare',                    hub: 'SG', order: 2 },
-  { articleId: 'bus-152',            href: '/vi/tuyen-152-tan-son-nhat',              hub: 'SG', order: 2 },
+  { articleId: 'bus-109',            href: '/bus-109-saigon-airport',                 hub: 'SG', order: 1, routeNumber: getRouteNumber('bus-109') },
+  { articleId: 'bus-109',            href: '/vi/tuyen-109-tan-son-nhat',              hub: 'SG', order: 1, routeNumber: getRouteNumber('bus-109') },
+  { articleId: 'bus-152',            href: '/bus-152-saigon-fare',                    hub: 'SG', order: 2, routeNumber: getRouteNumber('bus-152') },
+  { articleId: 'bus-152',            href: '/vi/tuyen-152-tan-son-nhat',              hub: 'SG', order: 2, routeNumber: getRouteNumber('bus-152') },
   { articleId: 'bus-109-vs-152',     href: '/bus-109-vs-152-tan-son-nhat',            hub: 'SG', order: 3 },
   { articleId: 'bus-109-vs-152',     href: '/vi/xe-buyt-109-vs-152-tan-son-nhat',     hub: 'SG', order: 3 },
   { articleId: 'cheapest-sgn',       href: '/cheapest-way-saigon-airport-district-1', hub: 'SG', order: 4 },
