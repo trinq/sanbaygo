@@ -16,7 +16,7 @@ One entry per session. Newest at the top. Format:
 - Sources touched: `docs/research/2026-08-01-content-gap-analysis.md` (262 lines, 15 Tier-4 proposals), `docs/superpowers/plans/2026-08-01-tier4-content-expansion.md` (new plan, ~640 lines, 13 net-new tickets + 2 page-expansions + 2 cannibalization-rejected), `web/src/routes/articles/SgnBus109T3RoutingPage.tsx` (new Tier-4 quick article at `/sgn-bus-109-t3-routing`), `web/src/seo/{metaConfig,pageRegistry}.ts`, `web/src/App.tsx`, `web/public/sitemap.xml`, `feature_list.json`, `wiki/log.md`
 - Wiki pages touched: none yet (Tier-4 articles are SEO content, not wiki knowledge — wiki stays untouched)
 - Lint status: not yet run
-- Commit: pending — `feat(kw-24): does bus 109 stop at tan son nhat terminal 2 — Tier 4 quick`
+- Commit: `8764a5d` — `feat(kw-24): does bus 109 stop at tan son nhat terminal 2 — Tier 4 quick`
 
 ---
 
