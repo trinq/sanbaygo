@@ -8,8 +8,8 @@ import {
   DEFAULT_LOCALE_TITLE,
   GUIDES_REGISTRY,
   HUB_LABEL,
+  getRouteNumber,
   groupByHub,
-  resolveGuideDescription,
   resolveGuideTitle,
   type GuideEntry,
 } from '../seo/guidesRegistry';
@@ -25,37 +25,51 @@ const HUB_BADGE_CLASSES: Record<Hub, { bg: string; text: string }> = {
   CROSS: { bg: 'bg-slate-100', text: 'text-slate-700' },
 };
 
+/** Airport-style glyph shown next to each hub heading. */
+const HUB_EMOJI: Record<Hub, string> = {
+  HN: '✈',
+  SG: '✈',
+  CROSS: '✈',
+};
+
 interface GuidesPageProps {
   /** Optional override for testing — defaults to GUIDES_REGISTRY. */
   registry?: ReadonlyArray<GuideEntry>;
 }
 
-function GuideCard({ entry }: { entry: GuideEntry }) {
+function GuideRow({ entry }: { entry: GuideEntry }) {
   const { language } = useLanguage();
   const title = resolveGuideTitle(entry);
-  const description = resolveGuideDescription(entry);
   const badge = HUB_BADGE_CLASSES[entry.hub];
   const badgeText = HUB_LABEL[language][entry.hub];
+  const routeNumber = entry.routeNumber ?? getRouteNumber(entry.articleId);
 
   return (
     <a
       href={entry.href}
-      className="group block rounded-2xl border border-surface-border bg-white p-6 shadow-sm hover:shadow-md hover:border-primary/40 transition-all"
+      className="group flex items-center justify-between gap-4 py-4 border-b border-surface-border hover:bg-surface-bg/50 transition-colors"
     >
-      <div className="flex items-start justify-between mb-3">
-        <h3 className="font-bold text-lg text-ink group-hover:text-primary transition-colors">
+      <div className="flex items-center gap-4 min-w-0">
+        {routeNumber && (
+          <span className="font-mono font-bold text-ink text-lg w-12 shrink-0">
+            {routeNumber}
+          </span>
+        )}
+        <span className="text-base font-medium text-ink group-hover:text-primary transition-colors truncate">
           {title}
-        </h3>
+        </span>
+      </div>
+      <div className="flex items-center gap-3 shrink-0">
         <span
-          className={`text-xs font-semibold px-2 py-1 rounded-full shrink-0 ml-3 ${badge.bg} ${badge.text}`}
+          data-testid="hub-badge"
+          className={`text-xs font-semibold px-2 py-1 rounded-full ${badge.bg} ${badge.text}`}
         >
           {badgeText}
         </span>
+        <span className="text-ink-soft group-hover:text-primary group-hover:translate-x-0.5 transition-all">
+          →
+        </span>
       </div>
-
-      {description && (
-        <p className="text-sm text-ink-soft leading-relaxed">{description}</p>
-      )}
     </a>
   );
 }
@@ -63,14 +77,19 @@ function GuideCard({ entry }: { entry: GuideEntry }) {
 function HubSection({ hub, entries }: { hub: Hub; entries: GuideEntry[] }) {
   const { language } = useLanguage();
   const heading = HUB_LABEL[language][hub];
+  const emoji = HUB_EMOJI[hub];
 
   return (
     <section className="mb-12" data-hub={hub}>
-      <h2 className="text-2xl font-bold text-ink">{heading}</h2>
+      <header className="flex items-center gap-3 mb-6">
+        <h2 className="text-2xl font-bold text-ink tracking-tight">{heading}</h2>
+        <span aria-hidden="true" className="text-2xl">{emoji}</span>
+      </header>
+      <hr className="border-surface-border mb-2" />
       {entries.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div data-guide-list>
           {entries.map((entry) => (
-            <GuideCard key={`${entry.href}-${entry.articleId}`} entry={entry} />
+            <GuideRow key={`${entry.href}-${entry.articleId}`} entry={entry} />
           ))}
         </div>
       ) : null}

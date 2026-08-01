@@ -380,7 +380,7 @@ describe('GuidesPage', () => {
           'a[href="/bus-86-hanoi-airport"]',
         ) as HTMLAnchorElement | null;
         expect(hnLink).not.toBeNull();
-        const badge = hnLink!.querySelector('span');
+        const badge = hnLink!.querySelector('[data-testid="hub-badge"]');
         expect(badge?.textContent).toBe(HUB_LABEL.vi.HN);
         expect(badge?.textContent).toBe('Hà Nội');
       });
@@ -393,7 +393,7 @@ describe('GuidesPage', () => {
           'a[href="/bus-86-hanoi-airport"]',
         ) as HTMLAnchorElement | null;
         expect(hnLink).not.toBeNull();
-        const badge = hnLink!.querySelector('span');
+        const badge = hnLink!.querySelector('[data-testid="hub-badge"]');
         expect(badge?.textContent).toBe(HUB_LABEL.en.HN);
         expect(badge?.textContent).toBe('Hanoi');
         // Negative assertion: VI text must NOT leak into the EN locale.
@@ -408,7 +408,7 @@ describe('GuidesPage', () => {
           'a[href="/bus-109-saigon-airport"]',
         ) as HTMLAnchorElement | null;
         expect(sgLink).not.toBeNull();
-        const badge = sgLink!.querySelector('span');
+        const badge = sgLink!.querySelector('[data-testid="hub-badge"]');
         expect(badge?.textContent).toBe(HUB_LABEL.en.SG);
         expect(badge?.textContent).toBe('Ho Chi Minh City');
         expect(badge?.textContent).not.toBe('TP.HCM');
@@ -422,7 +422,7 @@ describe('GuidesPage', () => {
           'a[href="/airport-bus-luggage-fee-vietnam"]',
         ) as HTMLAnchorElement | null;
         expect(crossLink).not.toBeNull();
-        const badge = crossLink!.querySelector('span');
+        const badge = crossLink!.querySelector('[data-testid="hub-badge"]');
         expect(badge?.textContent).toBe(HUB_LABEL.en.CROSS);
         expect(badge?.textContent).toBe('Other');
         expect(badge?.textContent).not.toBe('Khác');
