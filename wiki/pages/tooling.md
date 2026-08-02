@@ -1,12 +1,11 @@
 ---
-last_verified: 2026-07-29
+last_verified: 2026-08-02
 sources:
   - path: package.json
   - path: AGENTS.md
   - path: init.sh
-  - path: scripts/deploy.sh
-  - path: docs/vps-deployment-guide.md
-sources_note: Build/test commands come from root package.json + AGENTS.md + init.sh. Deployment details from scripts/deploy.sh and docs/vps-deployment-guide.md.
+  - path: docs/adr/0004-cloudflare-pages.md
+sources_note: Build/test commands from root package.json + AGENTS.md + init.sh. Deployment details from ADR-0004 (Cloudflare Pages, supersedes ADR-0003).
 summary: Build, test, lint, deploy — every command and what it touches.
 ---
 
@@ -78,15 +77,35 @@ dependency.
 
 ## Deployment
 
-The project ships a `scripts/deploy.sh` script and a `.github/workflows/deploy.yml`
-workflow. Full operational details live in
-[docs/vps-deployment-guide.md](../../docs/vps-deployment-guide.md), which
-the deferred docs/ triage will reconcile against
-[docs/adr/0003-vps-deployment.md](../../docs/adr/0003-vps-deployment.md).
+**Cloudflare Pages** (per
+[ADR-0004](../../docs/adr/0004-cloudflare-pages.md), accepted 2026-08-02;
+supersedes
+[ADR-0003](../../docs/adr/0003-vps-deployment.md) — VPS deployment is
+decommissioned).
 
-The deployment path involves a VPS (per ADR 0003) rather than the Vercel
-mention in CONTEXT.md — another [contradiction](./decisions.md#open-contradictions)
-flagged for triage.
+- **Production URL**: `https://www.frylane.com/`
+- **Apex**: `https://frylane.com/` → 301 redirect to `www`
+- **Preview**: every push to `main` gets a per-commit preview URL
+  (`https://<hash>.sanbaygo.pages.dev`) for review before promotion.
+- **CI/CD**: GitHub webhook → Cloudflare Pages build worker runs
+  `cd web && npm ci && npm run build`, then atomic swap to a new
+  deployment. No GitHub Actions needed for deployment.
+- **Build config** (set in CF dashboard):
+  - Build command: `cd web && npm ci && npm run build`
+  - Output directory: `web/dist`
+  - Production branch: `main`
+  - Node version: 20
+- **Local verification** (mirror the CF build before pushing):
+  ```bash
+  cd web && npx tsc --noEmit && npm run build
+  ```
+- **DNS** (in Cloudflare dashboard for `frylane.com`):
+  - `www` CNAME → `sanbaygo.pages.dev` (Proxied)
+  - `@`   CNAME → `sanbaygo.pages.dev` (Proxied, CF flattens to A)
+  - Page Rule `frylane.com/*` → 301 redirect to `https://www.frylane.com/$1`
+
+The old `.github/workflows/deploy.yml` (VPS rsync) and
+`scripts/deploy.sh` are deleted. Do not reintroduce them.
 
 ## Config files
 

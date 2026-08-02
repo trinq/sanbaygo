@@ -1,8 +1,8 @@
 ---
-last_verified: 2026-07-29
+last_verified: 2026-08-02
 sources:
   - path: docs/adr
-sources_note: ADRs are the raw decision log; this page is an index. As of 2026-07-29 the adr/ folder contains 0002-seo-strategy.md and 0003-vps-deployment.md.
+sources_note: ADRs are the raw decision log; this page is an index. As of 2026-08-02 the adr/ folder contains 0002-seo-strategy.md, 0003-vps-deployment.md (superseded), and 0004-cloudflare-pages.md (accepted).
 summary: Index of ADRs and other project decisions, with raw-record links.
 ---
 
@@ -13,15 +13,22 @@ The project's decision log lives as ADRs in `docs/adr/`. This page is an
 
 ## ADRs
 
-| # | Title | File |
-|---|-------|------|
-| 0002 | SEO Strategy | [docs/adr/0002-seo-strategy.md](../../docs/adr/0002-seo-strategy.md) |
-| 0003 | VPS Deployment | [docs/adr/0003-vps-deployment.md](../../docs/adr/0003-vps-deployment.md) |
+| # | Title | Status | File |
+|---|-------|--------|------|
+| 0002 | SEO Strategy | accepted | [docs/adr/0002-seo-strategy.md](../../docs/adr/0002-seo-strategy.md) |
+| 0003 | VPS Deployment | **superseded** by 0004 (2026-08-02) | [docs/adr/0003-vps-deployment.md](../../docs/adr/0003-vps-deployment.md) |
+| 0004 | Cloudflare Pages Deployment | accepted (2026-08-02) | [docs/adr/0004-cloudflare-pages.md](../../docs/adr/0004-cloudflare-pages.md) |
 
-The `docs/adr/` folder appears to start at `0002`, not `0001`. The reason
-for the gap (e.g., is there a `0001-foo.md` that was deleted? was the
-numbering chosen to align with another system?) is **not documented** in
-this wiki and should be reconciled during the deferred docs/ triage.
+## Migration log
+
+- **2026-08-02** — Migrated from VPS (ADR-0003) to Cloudflare Pages (ADR-0004).
+  - Rationale: VPS edge latency ~50-80ms from Vietnam vs CF Pages <10ms;
+    eliminate ops burden (SSL renewal, security updates, monitoring);
+    atomic deploys; zero recurring cost.
+  - Domain: `www.frylane.com` (canonical) with apex `frylane.com` 301-redirect.
+  - CI: GitHub webhook → Cloudflare Pages build → atomic swap. GH Actions
+    VPS rsync workflow deleted.
+  - Live: `https://www.frylane.com/`
 
 ## Implicit decisions (encoded in AGENTS.md / CONTEXT.md but not in an ADR)
 
@@ -57,7 +64,10 @@ These are flagged for triage, **not** resolved here:
    Database: Supabase (PostgreSQL), Deployment: Vercel." The two
    documents cannot both be correct. Either the backend was added
    between sessions and `AGENTS.md` was not updated, or `CONTEXT.md`'s
-   tech-stack table is aspirational and was never built.
+   tech-stack table is aspirational and was never built. **Note 2026-08-02**:
+   ADR-0004 confirms deployment is Cloudflare Pages, NOT Vercel — so
+   CONTEXT.md's "Deployment: Vercel" line is stale regardless of backend
+   status.
 2. **Project structure.** `AGENTS.md`'s tree shows a flat layout
    (`app/`, `components/`, `calculation-engine/`, `data/`). The actual
    layout is a monorepo with `core/`, `web/`, `api/`, plus top-level
@@ -72,3 +82,5 @@ These are flagged for triage, **not** resolved here:
 - Reconcile the backend posture contradiction.
 - Refresh `AGENTS.md`'s project-structure diagram to match the actual
   monorepo layout.
+- Update `AGENTS.md` "Key Commands" / "Project Structure" to mention
+  Cloudflare Pages (replaces VPS deploy section).
