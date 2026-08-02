@@ -8,6 +8,9 @@
     },
     "linear": {
       "enabled": true
+    },
+    "cloudflare": {
+      "enabled": true
     }
   }
 }
